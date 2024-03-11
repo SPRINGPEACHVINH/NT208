@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html class>
+    <head>
+        <link rel="stylesheet" href="https://static.tkbcdn.com/dist-canary/tkbvn/css/shared/layoutv2-libs.css?v=4353">
+        <link rel="stylesheet" href="https://static.tkbcdn.com/dist-canary/tkbvn/css/shared/layoutv2.css?v=4353">
+        <link rel="stylesheet" href="https://static.tkbcdn.com/dist-canary/tkbvn/css/event/listv2.css?v=4353">
+        <style type="text/css">
+            .card-right-block {
+                width: 50px;
+                text-align: right;
+            }
+            .loading-screen {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #eee;
+                background-color: rgba(238, 238, 238, 0.9);
+                z-index: 100;
+            }
+            .loading-main {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            }
+
+            .loading-spinner {
+            position: relative;
+            }
+            .loading-spinner:before, .loading-spinner:after {
+            content: '';
+            position: relative;
+            display: block;
+            }
+            .loading-spinner:before {
+            -webkit-animation: spinner 2.5s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            animation: spinner 2.5s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            width: 60px;
+            height: 60px;
+            background-color: #9FCA51;
+            background-image: url(https://static.tkbcdn.com/site/global/content-v2/img/ticketbox-logo-200.png?v1);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            border-radius: 8px;
+            }
+            .loading-spinner:after {
+            -webkit-animation: shadow 2.5s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            animation: shadow 2.5s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            bottom: -.5em;
+            height: 7px;
+            border-radius: 50%;
+            background-color: #bbb;
+            }
+            @keyframes spinner {
+            50% {
+                -webkit-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+            100% {
+                -webkit-transform: scale(1) rotate(720deg);
+                -ms-transform: scale(1) rotate(720deg);
+                transform: scale(1) rotate(720deg);
+            }
+            }
+            @-webkit-keyframes spinner {
+            50% {
+                -webkit-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+            100% {
+                -webkit-transform: scale(1) rotate(720deg);
+                -ms-transform: scale(1) rotate(720deg);
+                transform: scale(1) rotate(720deg);
+            }
+            }
+            @keyframes shadow {
+            50% {
+                -webkit-transform: scale(0.5);
+                -ms-transform: scale(0.5);
+                transform: scale(0.5);
+                border-color: #e4e4e4;
+            }
+            }
+            @-webkit-keyframes shadow {
+            50% {
+                -webkit-transform: scale(0.5);
+                -ms-transform: scale(0.5);
+                transform: scale(0.5);
+                border-color: #e4e4e4;
+            }
+            }
+        </style>
+    </head>
+    <body id="page-top" data-spy="scroll">
+        <div id="content" class="snap-content box-shadow">
+            <div class="relative">
+                <div class="render-body w-100 overflow-hidden">
+                    <section id="eventlist" class="eventlist clearfix">
+                        <div class="filter-wrapper w-100">
+                            <div data-fixed="filter" data-top="#eventlist" data-bottom="#buyerhelper" class="filter bg-white ns-effect-bouncyflip">
+                                <div class="container color-6 clearfix">
+                                    <div class="col-sm-12 cs1-inp-group ">
+                                        <div class="row">
+                                            <div class="col-sm-3 filter-selector">
+                                                <div class="custome-select cs1-inp-select w-100">
+                                                    <span class="before-icon ello-location-1"></span>
+                                                    <select data-location="true" tabindex="94">
+                                                        <option value="">Tất cả địa điểm</option>
+                                                        <option value="ho-chi-minh">Hồ Chí Minh</option>
+                                                        <option value="ha-noi">Hà Nội</option>
+                                                        <option value="other-locations">Các địa điểm khác</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="filter-collapse col-sm-9">
+                                                <div class="row">
+                                                    <!-- kind of event -->
+                                                    <div class="col-sm-5 filter-selector">
+                                                        <div class="btn-group w-100 cs1-inp-dropdown">
+                                                            <span class="before-icon ello-th"></span>
+                                                            <span class="after-icon ello-down-dir"></span>
+                                                            <div class="dropdown-toggle overflow-hidden">
+                                                                <select name="kind" data-multiple-select="filter-e" multiple="" required="true" class="multiple-select form-control select2-hidden-accessible" tabindex="-1" aria-hidden="true" style>
+                                                                    <option value="Any" selected="">Tất cả loại sự kiện</option>
+                                                                    <optgroup label="Giải trí">
+                                                                        <option value="8">Nhạc sống</option>
+                                                                        <option value="9">Văn hóa nghệ thuật</option>
+                                                                        <option value="10">Sân khấu</option>
+                                                                        <option value="11">Nightlife</option>
+                                                                        <option value="12">Ngoài trời</option>
+                                                                        <option value="17">OnlineEvent</option>
+                                                                    </optgroup>
+                                                                    <optgroup label="Học hỏi">
+                                                                        <option value="2">Hội thảo</option>
+                                                                        <option value="4">Khóa học</option>
+                                                                    </optgroup>
+                                                                    <optgroup label="Các lĩnh vực khác">
+                                                                        <option value="3">Triển lãm</option>
+                                                                        <option value="5">Hội họp</option>
+                                                                        <option value="6">Thể thao</option>
+                                                                        <option value="7">Cộng đồng</option>
+                                                                        <option value="13">Vui chơi giải trí</option>
+                                                                    </optgroup>
+                                                                </select>
+                                                                <span class="select2 select2-container select2-container--default select2-container--below" dir="ltr" style="width: 222px;">
+                                                                    <span class="selection">
+                                                                        <span class="select2-selection select2-selection--multiple" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="95">
+                                                                            <ul class="select2-selection__rendered">
+                                                                                <li class="select2-selection__choice" title="Tất cả loại sự kiện">
+                                                                                    <span class="select2-selection__choice__remove" role="presentation">×</span>
+                                                                                    Tất cả loại sự kiện
+                                                                                </li>
+                                                                                <li class="select2-search select2-search--inline">
+                                                                                    <input class="select2-search__field" type="search" tabindex="-1" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" role="textbox" placeholder="" style="width: 0.75em;">
+                                                                                </li>
+                                                                            </ul>
+                                                                        </span>
+                                                                    </span>
+                                                                    <span class="dropdown-wrapper" aria-hidden="true"></span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- date range -->
+                                                    <div class="col-sm-4 filter-selector">
+                                                        <div class="btn-group w-100 cs1-inp-dropdown">
+                                                            <button class="dropdown-toggle overflow-hidden" type="button" data-toggle="dropdown" aria-expanded="false" tabindex="96">
+                                                                <span class="before-icon ello-calendar"></span>
+                                                                <span class="filter-rage-label" data-bind="label">Tất cả các ngày</span>
+                                                                <span class="after-icon ello-down-dir"></span>
+                                                            </button>
+                                                            <ul class="dropdown-menu" role="menu">
+                                                                <li date-date-filter-type="0" data-date-filter="true" data-date-value-to="">Tất cả các ngày</li>
+                                                                <li date-date-filter-type="1" data-date-filter="true" date-date-value-from="10/03/2024 5:00:00 PM" data-date-value-to="">Tất cả các ngày sắp tới</li>
+                                                                <li date-date-filter-type="2" data-date-filter="true" date-date-value-from="10/03/2024 5:00:00 PM" data-date-value-to="11/03/2024 4:59:59 PM">Hôm nay</li>
+                                                                <li date-date-filter-type="3" data-date-filter="true" date-date-value-from="11/03/2024 5:00:00 PM" data-date-value-to="12/03/2024 4:59:59 PM">Ngày mai</li>
+                                                                <li date-date-filter-type="4" data-date-filter="true" date-date-value-from="11/03/2024 5:00:00 PM" data-date-value-to="17/03/2024 4:59:59 PM">Tuần này</li>
+                                                                <li data-action="date-rage" data-prevent="close" class="li-custome-date">
+                                                                    <p>Ngày tháng tuỳ chọn</p>
+                                                                    <div class="cs1-inp-group dl-input-groups bg-white">
+                                                                        <div class="input-group datepicker-custom">
+                                                                            <span class="input-group-addon"><span class="ello-calendar color-c"></span></span>
+                                                                            <input value="" name="filterStartDate" data-datepicker="filter" class="form-control padding-left-0 hasDatepicker" type="text" placeholder="Từ" tabindex="97" id="dp1710095280393">
+                                                                        </div>
+                                                                        <div class="input-group datepicker-custom">
+                                                                            <span class="input-group-addon"><span class="ello-calendar color-c"></span></span>
+                                                                            <input value="" name="filterEndDate" data-datepicker="filter" class="form-control padding-left-0 hasDatepicker" type="text" placeholder="Đến" tabindex="98" id="dp1710095280394">
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <!-- prices -->
+                                                    <div class="col-sm-3 filter-selector">
+                                                        <div class="custome-select cs1-inp-select w-100">
+                                                            <span class="before-icon ello-dollar"></span>
+                                                            <select data-price-filter="true" tabindex="99">
+                                                                <option value="Both" selected="">Tất cả giá vé</option>
+                                                                <option value="Free">Miễn phí</option>
+                                                                <option value="Paid">Có phí</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
