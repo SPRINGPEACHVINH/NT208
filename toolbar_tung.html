@@ -64,7 +64,7 @@
             border-radius: 50%;
             background-color: #bbb;
         }
-        
+
         .ello-search.smooth-trans {
             box-sizing: border-box;
             font-family: fontello;
@@ -127,8 +127,7 @@
 
 <body id="page-top" data-spy="scroll">
     <div id="content" class="snap-content box-shadow">
-        <div id="welcome-banner" style="display: none"></div>
-        <div id="alert-bar"></div>
+
         <div class="relative">
             <div id="navbarheader">
                 <style>
@@ -417,7 +416,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!-- date range -->
+                                                <!-- date -->
                                                 <div class="col-sm-4 filter-selector">
                                                     <div class="btn-group w-100 cs1-inp-dropdown">
                                                         <button class="dropdown-toggle overflow-hidden" type="button"
@@ -427,46 +426,6 @@
                                                                 ngày</span>
                                                             <span class="after-icon ello-down-dir"></span>
                                                         </button>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li date-date-filter-type="0" data-date-filter="true"
-                                                                data-date-value-to="">Tất cả các ngày</li>
-                                                            <li date-date-filter-type="1" data-date-filter="true"
-                                                                date-date-value-from="10/03/2024 5:00:00 PM"
-                                                                data-date-value-to="">Tất cả các ngày sắp tới</li>
-                                                            <li date-date-filter-type="2" data-date-filter="true"
-                                                                date-date-value-from="10/03/2024 5:00:00 PM"
-                                                                data-date-value-to="11/03/2024 4:59:59 PM">Hôm nay</li>
-                                                            <li date-date-filter-type="3" data-date-filter="true"
-                                                                date-date-value-from="11/03/2024 5:00:00 PM"
-                                                                data-date-value-to="12/03/2024 4:59:59 PM">Ngày mai</li>
-                                                            <li date-date-filter-type="4" data-date-filter="true"
-                                                                date-date-value-from="11/03/2024 5:00:00 PM"
-                                                                data-date-value-to="17/03/2024 4:59:59 PM">Tuần này</li>
-                                                            <li data-action="date-rage" data-prevent="close"
-                                                                class="li-custome-date">
-                                                                <p>Ngày tháng tuỳ chọn</p>
-                                                                <div class="cs1-inp-group dl-input-groups bg-white">
-                                                                    <div class="input-group datepicker-custom">
-                                                                        <span class="input-group-addon"><span
-                                                                                class="ello-calendar color-c"></span></span>
-                                                                        <input value="" name="filterStartDate"
-                                                                            data-datepicker="filter"
-                                                                            class="form-control padding-left-0 hasDatepicker"
-                                                                            type="text" placeholder="Từ" tabindex="97"
-                                                                            id="dp1710095280393">
-                                                                    </div>
-                                                                    <div class="input-group datepicker-custom">
-                                                                        <span class="input-group-addon"><span
-                                                                                class="ello-calendar color-c"></span></span>
-                                                                        <input value="" name="filterEndDate"
-                                                                            data-datepicker="filter"
-                                                                            class="form-control padding-left-0 hasDatepicker"
-                                                                            type="text" placeholder="Đến" tabindex="98"
-                                                                            id="dp1710095280394">
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
                                                     </div>
                                                 </div>
                                                 <!-- prices -->
@@ -481,12 +440,572 @@
                                                     </div>
                                                 </div>
                                             </div>
+
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="w-100 relative clearfix">
+                        <div class="loading-screen" data-loading-screen="process" style="display: none;">
+                            <main class="loading-main">
+                                <span class="loading-spinner"></span>
+                            </main>
+                        </div>
+                        <div class="container section-container">
+                            <div class="elist-container">
+                                <div class="row">
+
+                                    <div data-event-list-container="true" class="container-list-event">
+
+                                        <script>
+                                            tkb.data = tkb.data || {};
+                                            tkb.data.variousEvents = tkb.data.variousEvents || [];
+                                        </script>
+                                        <style>
+                                            .event-list-item {}
+
+                                            .event-list-item .card {
+                                                height: calc(100% - 40px);
+                                                display: flex;
+                                                flex-direction: column;
+                                            }
+
+                                            .event-list-item .card .card-body {
+                                                height: 100%;
+                                            }
+
+                                            .event-list-item .card .card-body .thumbnail-description {
+                                                height: 100%;
+                                                display: flex;
+                                                flex-direction: column;
+                                                justify-content: space-between;
+                                            }
+
+                                            .event-title {
+                                                height: auto !important;
+                                                min-height: unset !important;
+                                                max-height: unset !important;
+                                            }
+
+                                            .event-title a {
+                                                height: auto !important;
+                                                min-height: unset !important;
+                                                max-height: unset !important;
+                                            }
+
+                                            .event-title a {
+                                                font-size: 18px;
+                                            }
+
+                                            .event-price {
+                                                margin-bottom: 5px;
+                                            }
+
+                                            .event-price .price-green {
+                                                color: #2DC275;
+                                            }
+
+                                            .status-passed {
+                                                color: #AFB8C9;
+                                            }
+
+                                            .event-date {
+                                                display: none;
+                                            }
+
+                                            .etags-line.etags-line-list {
+                                                width: 100%;
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: space-between;
+                                            }
+
+                                            .tag-venues {
+                                                white-space: nowrap;
+                                            }
+
+                                            .tag-venues .ello-location-1 {
+                                                color: #ccc;
+                                            }
+
+                                            .tag-venue {
+                                                margin-right: 0;
+                                            }
+
+                                            .tag-kinds {
+                                                text-overflow: ellipsis;
+                                                display: block;
+                                                white-space: nowrap;
+                                                overflow: hidden;
+                                            }
+
+                                            .event-calendar-time {
+                                                font-weight: 500;
+                                                font-size: 13px;
+                                                line-height: 16px;
+                                                color: #64646D;
+                                                white-space: nowrap;
+                                            }
+
+                                            .date-with-calendar-icon {
+                                                display: flex;
+                                                align-items: center;
+                                            }
+
+                                            .date-with-calendar-icon span {
+                                                padding-left: 5px;
+                                            }
+
+                                            @media (min-width: 768px) {
+                                                .event-title {
+                                                    height: auto !important;
+                                                    min-height: unset !important;
+                                                    max-height: unset !important;
+                                                }
+
+                                                .event-title a {
+                                                    height: auto !important;
+                                                    min-height: unset !important;
+                                                    max-height: unset !important;
+                                                }
+                                            }
+                                        </style>
+                                        <div data-opm="list"
+                                            class="col-sm-6 col-md-4 left  padding-left-right-0-m event-list-item">
+                                            <div class="card">
+                                                <div class="card-cover relative"
+                                                    style="background-image: url(https://images.tkbcdn.com/1/780/300/Upload/eventcover/2024/01/23/38553E.jpg?w=360&amp;maxheight=137&amp;mode=crop&amp;anchor=topcenter);">
+                                                    <div class="e-marker tkb-sprites hot-e"></div>
+                                                    <a data-opm="0"
+                                                        href="https://ticketbox.vn/event/harmony-show-83-nang-tho-hoang-dung-89327"
+                                                        class="cover-img w-100" target="_blank">
+                                                    </a>
+                                                </div>
+                                                <div class="card-body relative">
+                                                    <div class="padding-10 thumbnail-description">
+                                                        <div class="table w-100 margin-bottom-0">
+                                                            <div class="table-cell event-title">
+                                                                <a data-opm="0"
+                                                                    href="https://ticketbox.vn/event/harmony-show-83-nang-tho-hoang-dung-89327"
+                                                                    title="HARMONY SHOW 8/3 | NÀNG THƠ | HOÀNG DŨNG"
+                                                                    target="_blank">
+                                                                    HARMONY SHOW 8/3 | NÀNG THƠ | HOÀNG DŨNG
+                                                                </a>
+                                                            </div>
+                                                            <div class="table-cell card-right-block">
+                                                            </div>
+                                                        </div>
+                                                        <div class="table w-100 margin-bottom-0">
+                                                            <div class="table-cell">
+                                                                <div
+                                                                    style="display: flex; align-items: center; justify-content: space-between">
+                                                                    <div class="event-price w-100">
+                                                                        <span class="color-6">Từ</span> <strong
+                                                                            class="price-green">600.000 VND</strong>
+                                                                    </div>
+                                                                    <div class="event-calendar-time">
+                                                                        <div class="event-date">
+                                                                            <div class="relative">
+                                                                                <div class="date-month">
+                                                                                    Tháng 3
+                                                                                </div>
+                                                                                <div class="date-detail">
+                                                                                    <div class="date-num color-6">
+                                                                                        08
+                                                                                    </div>
+                                                                                    <div class="date-day">
+                                                                                        Thứ 6
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="date-with-calendar-icon">
+                                                                            <img src="https://static.tkbcdn.com/site/global/content-v2/img/calendar.svg"
+                                                                                alt="calendar">
+                                                                            <span>08.03.2024</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="w-100">
+                                                                    <div class="event-tags">
+                                                                        <div class="etags-line etags-line-list">
+                                                                            <div class="tag-kinds inline-block">
+                                                                                <span class="ello-th color-c"></span>
+                                                                                <a data-category-selected="8"
+                                                                                    class="tag-kind"
+                                                                                    target="_blank">Nhạc sống</a>
+                                                                                <a data-category-selected="12"
+                                                                                    class="tag-kind"
+                                                                                    target="_blank">Ngoài trời</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div data-opm="list"
+                                            class="col-sm-6 col-md-4 left  padding-left-right-0-m event-list-item">
+                                            <div class="card">
+                                                <div class="card-cover relative"
+                                                    style="background-image: url(https://images.tkbcdn.com/1/780/300/Upload/eventcover/2024/02/25/29CBC6.jpg?w=360&amp;maxheight=137&amp;mode=crop&amp;anchor=topcenter);">
+                                                    <div class="e-marker tkb-sprites hot-e"></div>
+                                                    <a data-opm="1"
+                                                        href="https://api-v2.ticketbox.vn/event/redirect/events/89460?platform=web"
+                                                        class="cover-img w-100" target="_blank">
+                                                    </a>
+                                                </div>
+                                                <div class="card-body relative">
+                                                    <div class="padding-10 thumbnail-description">
+                                                        <div class="table w-100 margin-bottom-0">
+                                                            <div class="table-cell event-title">
+                                                                <a data-opm="1"
+                                                                    href="https://api-v2.ticketbox.vn/event/redirect/events/89460?platform=web"
+                                                                    title="[9/3 ] - MINISHOW - CÂU TRẢ LỜI DUY NHẤT -HOÀNG HẢI"
+                                                                    target="_blank">
+                                                                    [9/3 ] - MINISHOW - CÂU TRẢ LỜI DUY NHẤT -HOÀNG HẢI
+                                                                </a>
+                                                            </div>
+                                                            <div class="table-cell card-right-block">
+                                                            </div>
+                                                        </div>
+                                                        <div class="table w-100 margin-bottom-0">
+                                                            <div class="table-cell">
+                                                                <div
+                                                                    style="display: flex; align-items: center; justify-content: space-between">
+                                                                    <div class="event-price w-100">
+                                                                        <span class="color-6">Từ</span> <strong
+                                                                            class="price-green">350.000 VND</strong>
+                                                                    </div>
+                                                                    <div class="event-calendar-time">
+                                                                        <div class="event-date">
+                                                                            <div class="relative">
+                                                                                <div class="date-month">
+                                                                                    Tháng 3
+                                                                                </div>
+                                                                                <div class="date-detail">
+                                                                                    <div class="date-num color-6">
+                                                                                        09
+                                                                                    </div>
+                                                                                    <div class="date-day">
+                                                                                        Thứ 7
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="date-with-calendar-icon">
+                                                                            <img src="https://static.tkbcdn.com/site/global/content-v2/img/calendar.svg"
+                                                                                alt="calendar">
+                                                                            <span>09.03.2024</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="w-100">
+                                                                    <div class="event-tags">
+                                                                        <div class="etags-line etags-line-list">
+                                                                            <div class="tag-kinds inline-block">
+                                                                                <span class="ello-th color-c"></span>
+                                                                                <a data-category-selected="9"
+                                                                                    class="tag-kind" target="_blank">Văn
+                                                                                    hóa nghệ thuật</a>
+                                                                                <a data-category-selected="10"
+                                                                                    class="tag-kind" target="_blank">Sân
+                                                                                    khấu</a>
+                                                                            </div>
+                                                                            <span class="tag-venues">
+                                                                                <span
+                                                                                    class="tag-venue smooth-trans label-default uppercase">
+                                                                                    <span
+                                                                                        class="before-icon ello-location-1"></span>
+                                                                                    Vinh Phuc
+                                                                                </span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div data-opm="list"
+                                            class="col-sm-6 col-md-4 left  padding-left-right-0-m event-list-item">
+                                            <div class="card">
+                                                <div class="card-cover relative"
+                                                    style="background-image: url(https://images.tkbcdn.com/1/780/300/Upload/eventcover/2024/03/04/9096B3.jpg?w=360&amp;maxheight=137&amp;mode=crop&amp;anchor=topcenter);">
+                                                    <div class="e-marker tkb-sprites hot-e"></div>
+                                                    <a data-opm="2"
+                                                        href="https://api-v2.ticketbox.vn/event/redirect/events/89547?platform=web"
+                                                        class="cover-img w-100" target="_blank">
+                                                    </a>
+                                                </div>
+                                                <div class="card-body relative">
+                                                    <div class="padding-10 thumbnail-description">
+                                                        <div class="table w-100 margin-bottom-0">
+                                                            <div class="table-cell event-title">
+                                                                <a data-opm="2"
+                                                                    href="https://api-v2.ticketbox.vn/event/redirect/events/89547?platform=web"
+                                                                    title="Sân Khấu Hồng Vân: Kỳ Án 292"
+                                                                    target="_blank">
+                                                                    Sân Khấu Hồng Vân: Kỳ Án 292
+                                                                </a>
+                                                            </div>
+                                                            <div class="table-cell card-right-block">
+                                                            </div>
+                                                        </div>
+                                                        <div class="table w-100 margin-bottom-0">
+                                                            <div class="table-cell">
+                                                                <div
+                                                                    style="display: flex; align-items: center; justify-content: space-between">
+                                                                    <div class="event-price w-100">
+                                                                        <span class="color-6">Từ</span> <strong
+                                                                            class="price-green">250.000 VND</strong>
+                                                                    </div>
+                                                                    <div class="event-calendar-time">
+                                                                        <div class="event-date datepicker-custom event-datepicker"
+                                                                            data-various-show="true" event-id="89547">
+                                                                            <input data-datepicker="select-show"
+                                                                                type="hidden" class="hidden hide">
+                                                                            <div class="event-date-contaniner">
+                                                                                <a data-opm="2"
+                                                                                    href="https://api-v2.ticketbox.vn/event/redirect/events/89547?platform=web"
+                                                                                    title="Sân Khấu Hồng Vân: Kỳ Án 292"
+                                                                                    target="_blank" class="relative">
+                                                                                    <span class="date-month">
+                                                                                        Tháng 3
+                                                                                    </span>
+                                                                                    <span class="date-detail"></span>
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="date-with-calendar-icon">
+                                                                            <img src="https://static.tkbcdn.com/site/global/content-v2/img/calendar-multiple.svg"
+                                                                                alt="calendar">
+                                                                            <span>Tháng 3.2024<span>
+                                                                                </span></span>
+                                                                        </div>
+                                                                        <script>
+                                                                            tkb.data.variousEvents.push({
+                                                                                eventId: 89547,
+                                                                                showings: [{ "id": 82718, "startDate": "2024-03-09", "startTime": "2024-03-09T07:30:00+0700", "upcoming": true }, { "id": 82719, "startDate": "2024-03-16", "startTime": "2024-03-16T07:30:00+0700", "upcoming": true }]
+                                                                            });
+                                                                        </script>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="w-100">
+                                                                    <div class="event-tags">
+                                                                        <div class="etags-line etags-line-list">
+                                                                            <div class="tag-kinds inline-block">
+                                                                                <span class="ello-th color-c"></span>
+                                                                                <a data-category-selected="9"
+                                                                                    class="tag-kind" target="_blank">Văn
+                                                                                    hóa nghệ thuật</a>
+                                                                                <a data-category-selected="10"
+                                                                                    class="tag-kind" target="_blank">Sân
+                                                                                    khấu</a>
+                                                                            </div>
+                                                                            <span class="tag-venues">
+                                                                                <span
+                                                                                    class="tag-venue smooth-trans label-default uppercase">
+                                                                                    <span
+                                                                                        class="before-icon ello-location-1"></span>
+                                                                                    Ho Chi Minh
+                                                                                </span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div data-opm="list"
+                                            class="col-sm-6 col-md-4 left  padding-left-right-0-m event-list-item">
+                                            <div class="card">
+                                                <div class="card-cover relative"
+                                                    style="background-image: url(https://images.tkbcdn.com/1/780/300/Upload/eventcover/2024/03/04/9096B3.jpg?w=360&amp;maxheight=137&amp;mode=crop&amp;anchor=topcenter);">
+                                                    <div class="e-marker tkb-sprites hot-e"></div>
+                                                </div>
+                                                <div class="card-body relative">
+                                                    <div class="padding-10 thumbnail-description">
+                                                        <div class="table w-100 margin-bottom-0">
+                                                            <div class="table-cell event-title">
+                                                                <a data-opm="2" title="Sân Khấu Hồng Vân: Kỳ Án 292"
+                                                                    target="_blank">
+                                                                    Sân Khấu Hồng Vân: Kỳ Án 292
+                                                                </a>
+                                                            </div>
+                                                            <div class="table-cell card-right-block">
+                                                            </div>
+                                                        </div>
+                                                        <div class="table w-100 margin-bottom-0">
+                                                            <div class="table-cell">
+                                                                <div
+                                                                    style="display: flex; align-items: center; justify-content: space-between">
+                                                                    <div class="event-price w-100">
+                                                                        <span class="color-6">Từ</span> <strong
+                                                                            class="price-green">250.000 VND</strong>
+                                                                    </div>
+                                                                    <div class="event-calendar-time">
+                                                                        <div class="event-date datepicker-custom event-datepicker"
+                                                                            data-various-show="true" event-id="89547">
+                                                                            <input data-datepicker="select-show"
+                                                                                type="hidden" class="hidden hide">
+                                                                            <div class="event-date-contaniner">
+                                                                                <a data-opm="2"
+                                                                                    title="Sân Khấu Hồng Vân: Kỳ Án 292"
+                                                                                    target="_blank" class="relative">
+                                                                                    <span class="date-month">
+                                                                                        Tháng 3
+                                                                                    </span>
+                                                                                    <span class="date-detail"></span>
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="date-with-calendar-icon">
+                                                                            <img src="https://static.tkbcdn.com/site/global/content-v2/img/calendar-multiple.svg"
+                                                                                alt="calendar">
+                                                                            <span>Tháng 3.2024<span>
+                                                                                </span></span>
+                                                                        </div>
+                                                                        <script>
+                                                                            tkb.data.variousEvents.push({
+                                                                                eventId: 89547,
+                                                                                showings: [{ "id": 82718, "startDate": "2024-03-09", "startTime": "2024-03-09T07:30:00+0700", "upcoming": true }, { "id": 82719, "startDate": "2024-03-16", "startTime": "2024-03-16T07:30:00+0700", "upcoming": true }]
+                                                                            });
+                                                                        </script>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="w-100">
+                                                                    <div class="event-tags">
+                                                                        <div class="etags-line etags-line-list">
+                                                                            <div class="tag-kinds inline-block">
+                                                                                <span class="ello-th color-c"></span>
+                                                                                <a data-category-selected="9"
+                                                                                    class="tag-kind" target="_blank">Văn
+                                                                                    hóa nghệ thuật</a>
+                                                                                <a data-category-selected="10"
+                                                                                    class="tag-kind" target="_blank">Sân
+                                                                                    khấu</a>
+                                                                            </div>
+                                                                            <span class="tag-venues">
+                                                                                <span
+                                                                                    class="tag-venue smooth-trans label-default uppercase">
+                                                                                    <span
+                                                                                        class="before-icon ello-location-1"></span>
+                                                                                    Ho Chi Minh
+                                                                                </span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div data-opm="list"
+                                            class="col-sm-6 col-md-4 left  padding-left-right-0-m event-list-item">
+                                            <div class="card">
+                                                <div class="card-cover relative"
+                                                    style="background-image: url(&quot;https://images.tkbcdn.com/1/780/300/Upload/eventcover/2023/12/10/6CD1EE.jpg?w=360&amp;maxheight=137&amp;mode=crop&amp;anchor=topcenter&quot;);">
+
+                                                </div>
+                                                <div class="card-body relative" style="">
+                                                    <div class="padding-10 thumbnail-description" style="">
+                                                        <div class="table w-100 margin-bottom-0">
+                                                            <div class="table-cell event-title">
+                                                                <a data-opm="0"
+                                                                    title="SỰ KIỆN BÁN KẾT VÀ CHUNG KẾT ARENA OF VALOR INTERNATIONAL CHAMPIONSHIP 2023 (AIC 2023)"
+                                                                    target="_blank"
+                                                                    data-opm-anchor-id="tbox.searchlist.list.0">
+                                                                    SỰ KIỆN BÁN KẾT VÀ CHUNG KẾT ARENA OF VALOR
+                                                                    INTERNATIONAL CHAMPIONSHIP 2023 (AIC 2023)
+                                                                </a>
+                                                            </div>
+                                                            <div class="table-cell card-right-block">
+                                                            </div>
+                                                        </div>
+                                                        <div class="table w-100 margin-bottom-0">
+                                                            <div class="table-cell">
+                                                                <div
+                                                                    style="display: flex; align-items: center; justify-content: space-between">
+                                                                    <div class="event-price w-100">
+                                                                        <span class="color-6 font-bold status-passed">Đã
+                                                                            diễn ra</span>
+                                                                    </div>
+                                                                    <div class="event-calendar-time">
+                                                                        <div class="event-date">
+                                                                            <div class="relative">
+                                                                                <div class="date-month">
+                                                                                    Tháng 12
+                                                                                </div>
+                                                                                <div class="date-detail">
+                                                                                    <div class="date-num color-6">
+                                                                                        23
+                                                                                    </div>
+                                                                                    <div class="date-day">
+                                                                                        Thứ 7
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="date-with-calendar-icon">
+                                                                            <img src="https://static.tkbcdn.com/site/global/content-v2/img/calendar-multiple.svg"
+                                                                                alt="calendar">
+                                                                            <span>23.12.2023</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="w-100">
+                                                                    <div class="event-tags">
+                                                                        <div class="etags-line etags-line-list">
+                                                                            <div class="tag-kinds inline-block">
+                                                                                <span class="ello-th color-c"></span>
+                                                                                <a data-category-selected="6"
+                                                                                    class="tag-kind" target="_blank">Thể
+                                                                                    thao</a>
+                                                                                <a data-category-selected="10"
+                                                                                    class="tag-kind" target="_blank">Sân
+                                                                                    khấu</a>
+                                                                            </div>
+                                                                            <span class="tag-venues">
+                                                                                <span
+                                                                                    class="tag-venue smooth-trans label-default uppercase">
+                                                                                    <span
+                                                                                        class="before-icon ello-location-1"></span>
+                                                                                    Hồ Chí Minh
+                                                                                </span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="loadmore text-center">
+                                            <button data-style="zoom-out" data-loadmore-eventlist="true" class="btn-loadmore rounded ladda-button" style=""><span class="ladda-label">Tải thêm</span><span class="ladda-spinner"></span></button>
+                                        </div> -->
+
+                                    </div>
                 </section>
             </div>
         </div>
