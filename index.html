@@ -1,185 +1,437 @@
 <!DOCTYPE html>
-<html>
-
-<head>
-    <title>TicketX88</title>
-    <style data-styled="active" data-styled-version="5.1.1"></style>
-    <style>
-        .header {
-            color: #333;
-            font-family: "Open Sans", sans-serif;
-            font-size: 14px;
-            line-height: 22px;
-            -webkit-tap-highlight-color: transparent;
-            background-color: rgba(0, 0, 0, 0.6);
-            border-color: transparent;
-            bottom: 4055.08px;
-            box-sizing: border-box;
-            height: 52px;
-            left: 0;
-            margin-bottom: 20px;
-            min-height: 43px;
-            padding: 5px 0;
+<html class>
+    <head>
+        <title>TicketX88</title>
+        <style data-styled="active" data-styled-version="5.1.1"></style>
+        <link rel="stylesheet" href="https://static.tkbcdn.com/dist-canary/tkbvn/css/shared/layoutv2-libs.css?v=4353">
+        <link rel="stylesheet" href="https://static.tkbcdn.com/dist-canary/tkbvn/css/shared/layoutv2.css?v=4353">
+        <link rel="stylesheet" href="https://static.tkbcdn.com/dist-canary/tkbvn/css/event/listv2.css?v=4353">
+        <style type="text/css">
+            .card-right-block {
+                width: 50px;
+                text-align: right;
+            }
+            .loading-screen {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #eee;
+                background-color: rgba(238, 238, 238, 0.9);
+                z-index: 100;
+            }
+            .loading-main {
             position: absolute;
-            right: 0;
-            text-size-adjust: 100%;
-            top: 0;
-            width: 1860px;
-        }
-
-        header.top-right {
-            box-sizing: border-box;
-            height: 42px;
-            margin-left: 1437.23px;
-            min-block-size: auto;
-            min-height: auto;
-            min-inline-size: auto;
-            min-width: auto;
-            text-size-adjust: 100%;
-            width: 364.766px;
-            color: #333;
-            font-family: "Open Sans", sans-serif;
-            font-size: 14px;
-            line-height: 22px;
-            -webkit-tap-highlight-color: transparent
-        }
-
-        #top-right {
-            box-sizing: border-box;
-            height: 42px;
-            margin-left: 797.24px;
-            min-block-size: auto;
-            min-height: auto;
-            min-inline-size: auto;
-            min-width: auto;
-            text-size-adjust: 100%;
-            width: 364.76px;
-            color: #333;
-            font-family: "Open Sans", sans-serif;
-            font-size: 14px;
-            line-height: 22px;
-            -webkit-tap-highlight-color: transparent
-        }
-
-        .logo {
-            display: inline-block;
-            height: 33px;
-            width: 33px;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            }
+        
+            .loading-spinner {
             position: relative;
-            left: 5px;
-            text-size-adjust: 100%;
-            text-wrap: nowrap;
-            vertical-align: middle;
-            cursor: pointer;
-            font-family: "Open Sans", sans-serif;
-            font-size: 18px;
-            line-height: 20px;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .ello-plus {
-            cursor: pointer;
-            font-size: 14px;
-            line-height: 14px;
-            list-style-type: none;
-            text-align: left;
-            -webkit-tap-highlight-color: transparent
-        }
-
-        .ello-plus.tkb-dark-color {
-            box-sizing: border-box;
-            color: #5c7b17;
-            font-family: fontello;
-            text-size-adjust: 100%;
-        }
-
-        .font-bold {
-            box-sizing: border-box;
-            font-family: "Open Sans", sans-serif;
-            font-weight: 700;
-            text-shadow: rgba(0, 0, 0, .28)0 0 2px;
-            text-size-adjust: 100%;
-            color: #fff;
-            cursor: pointer;
-            font-size: 14px;
-            line-height: 34px;
-            list-style-type: none;
-            text-align: left;
-            -webkit-tap-highlight-color: transparent
-        }
-
-        .btn-create-e.btn-create-e-logged.tkb-btn.rounded.tkb-bg-color.center {
-            background-color: #90ba3e;
-            border-color: #7ca629;
-            border-radius: 2px;
-            box-sizing: border-box;
-            color: #fff;
-            display: inline-block;
-            height: 33px;
-            line-height: 34px;
-            margin-top: 4px;
-            padding: 0 10px;
-            text-shadow: rgba(0, 0, 0, .28)0 0 2px;
-            text-size-adjust: 100%;
-            width: 123.76px;
-            cursor: pointer;
-            font-family: "Open Sans", sans-serif;
-            font-size: 14px;
-            list-style-type: none;
-            text-align: left;
-            -webkit-tap-highlight-color: transparent
-        }
-
-        .w100.top {
-            box-sizing: border-box;
-            display: flex;
-            height: 42px;
-            text-size-adjust: 100%;
-            width: 1860px;
-            color: #333;
-            font-family: "Open Sans", sans-serif;
-            font-size: 14px;
-            line-height: 22px;
-            -webkit-tap-highlight-color: transparent;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="header">
-        <div class="logo" class="w100 top">
-            <img class="logo" src="https://github.com/SPRINGPEACHVINH/NT208/blob/main/ticketx88.png?raw=true" alt="logo"
-                width="33px" height="33px" left: 10px; />
-        </div>
-        <div id="top-right">
-            <button type="button" data-menu-trigger="true" class="navbar-toggle cd-nav-trigger pull-right">
-                <span></span>
-            </button>
-            <ul class="nav navbar-nav navbar-right nav-lang nav-lang-mobi pull-right hidden-xs hidden-sm">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" role="button" data-toggle="dropdown">
-                        <span class="lang pull-left rounded vi"></span><span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu smooth-trans" role="menu">
-                        <li>
-                            <span class="lang vi pull-left rounded"></span>Tiếng
-                            Việt
+            }
+            .loading-spinner:before, .loading-spinner:after {
+            content: '';
+            position: relative;
+            display: block;
+            }
+            .loading-spinner:before {
+            -webkit-animation: spinner 2.5s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            animation: spinner 2.5s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            width: 60px;
+            height: 60px;
+            background-color: #9FCA51;
+            background-image: url(https://static.tkbcdn.com/site/global/content-v2/img/ticketbox-logo-200.png?v1);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            border-radius: 8px;
+            }
+            .loading-spinner:after {
+            -webkit-animation: shadow 2.5s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            animation: shadow 2.5s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            bottom: -.5em;
+            height: 7px;
+            border-radius: 50%;
+            background-color: #bbb;
+            }
+        
+            @keyframes spinner {
+            50% {
+                -webkit-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+            100% {
+                -webkit-transform: scale(1) rotate(720deg);
+                -ms-transform: scale(1) rotate(720deg);
+                transform: scale(1) rotate(720deg);
+            }
+            }
+            @-webkit-keyframes spinner {
+            50% {
+                -webkit-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+            100% {
+                -webkit-transform: scale(1) rotate(720deg);
+                -ms-transform: scale(1) rotate(720deg);
+                transform: scale(1) rotate(720deg);
+            }
+            }
+            @keyframes shadow {
+            50% {
+                -webkit-transform: scale(0.5);
+                -ms-transform: scale(0.5);
+                transform: scale(0.5);
+                border-color: #e4e4e4;
+            }
+            }
+            @-webkit-keyframes shadow {
+            50% {
+                -webkit-transform: scale(0.5);
+                -ms-transform: scale(0.5);
+                transform: scale(0.5);
+                border-color: #e4e4e4;
+            }
+            }
+            </style>
+    </head>
+    <body id="page-top" data-spy="scroll">
+        <div id="content" class="snap-content box-shadow">
+            <div id="welcome-banner" style="display: none"></div>
+            <div id="alert-bar"></div>    
+            <div class="relative">
+                <div id="navbarheader">
+                    <style>
+                        .location-select {
+                            color: unset !important;
+                            height: unset !important;
+                            padding: unset !important;
+                            line-height: unset !important;
+                            font-weight: unset !important;
+                        }
+                        .location-selector .dropdown-menu li {
+                            padding: unset !important;
+                        }
+                        .nav-location .nav-bar-item-under {
+                            font-size: 0.857em;
+                            font-weight: bold;
+                            color: #333;
+                            padding: 16px 8px;
+                        }
+                        .active-under {
+                            border-bottom: 2px solid #90ba3e;
+                        }
+                            .active-under span {
+                                color: #90ba3e !important;
+                            }
+                        .nav-location .nav-bar-item-under-m {
+                            font-size: 0.857em;
+                            font-weight: bold;
+                            color: #333;
+                            padding: 16px 8px;
+                        }
+                        .nav-location .nav-bar-item-under-m-detail {
+                            font-size: 16px;
+                            line-height: 24px;
+                            color: #333333;
+                        }
+                        .second-top-nav ul li {
+                            display: inline-block;
+                            padding: 6px 8px 6px 0px;
+                            list-style: none;
+                        }
+                        .nav-location-under-header {
+                            display: flex;
+                            list-style: none;
+                            width: 100%;
+                            line-height: 30px;
+                            margin: 0px;
+                            text-align: center;
+                        }
+                        .nav-location-under-header-m {
+                            background-color: #F5F7FC;
+                            color: black;
+                            height: auto;
+                            position: absolute;
+                            width: 100%;
+                            z-index: 5;
+                            margin-top: 0px;
+                            display: none
+                        }
+                        .active-under-m {
+                            border-bottom: 3px solid #90ba3e;
+                        }
+                            .active-under-m span {
+                                color: #90ba3e !important;
+                            }
+                        #nav-under-header table tr td {
+                            height: 48px;
+                        }
+                            #nav-under-header table tr td a {
+                                display: block;
+                            }
+                        #nav-under-header table thead tr th {
+                            height: 35px;
+                            vertical-align: bottom;
+                        }
+                        #nav-under-header .active {
+                            font-weight: bold !important;
+                            color: #2DC275 !important;
+                        }
+                        #nav-under-header .content-text {
+                            margin-left: 11px;
+                        }
+                        /* create 1px gap in table for line */
+                        #nav-under-header table tr.line-break td {
+                            position: relative;
+                            top: 1px;
+                        }
+                    
+                            /* create the line */
+                            #nav-under-header table tr.line-break td:after {
+                                content: '';
+                                position: absolute;
+                                top: -1px;
+                                left: 0px;
+                                height: 1px;
+                                width: 100%;
+                                background-color: #E6EBF5;
+                            }
+                    
+                            /* reduce width of line for first and last cells, by cell padding amount */
+                            #nav-under-header table tr.line-break td:first-child:after,
+                            #nav-under-header table tr.line-break td:last-child:after {
+                                width: calc(100% - 10px);
+                            }
+                    
+                            /* pull line on first cell to the right */
+                            #nav-under-header table tr.line-break td:first-child:after {
+                                right: 0px;
+                                left: auto;
+                            }
+                    </style>
+                    <nav class="navbar tkb-navbar navbar-default ">
+                        <div data-opm="header" class="w-100 top-nav">
+                            <a class="tkb-brand navbar-brand" href="/" data-opm="logo">
+                                <img class="tkb-logo" src="https://github.com/SPRINGPEACHVINH/NT208/blob/main/ticketx88.png?raw=true">
                             </a>
-                        </li>
-                        <li>
-                            <span class="lang en pull-left rounded"></span>English
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="hidden-xs hidden-sm">
-                    <div data-action="create-e" data-target="[modal=&#39;create-e-modal&#39;]"
-                        class="btn-create-e btn-create-e-logged tkb-btn rounded tkb-bg-color center">
-                        <span class="ello-plus tkb-dark-color"></span>
-                        <span class="font-bold">Tạo sự kiện</span>
-                    </div>
-                </li>
-            </ul>
+                            <div id="top-nav-right" class="top-nav-right">
+                                <button type="button" data-menu-trigger="true" class="navbar-toggle cd-nav-trigger pull-right">
+                                </button>
+                                <ul class="nav navbar-nav navbar-right nav-lang nav-lang-mobi pull-right hidden-xs hidden-sm">
+                                    <li class="dropdown">
+                                        <a class="dropdown-toggle" role="button" data-toggle="dropdown">
+                                            <span class="lang pull-left rounded vi"></span><span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu smooth-trans" role="menu">
+                                            <li>
+                                                <a data-select-language="" href="/lang/vi?redirectUrl=true" data-language="vi">
+                                                    <span class="lang vi pull-left rounded"></span>Tiếng Việt
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a data-select-language="" href="/lang/en?redirectUrl=true" data-language="en">
+                                                    <span class="lang en pull-left rounded"></span>English
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="hidden-xs hidden-sm">
+                                        <div data-action="create-e" data-target="[modal='create-e-modal']" class="btn-create-e btn-create-e-logged tkb-btn rounded tkb-bg-color center">
+                                            <span class="ello-plus tkb-dark-color"></span>
+                                            <span class="font-bold">Tạo sự kiện</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                         </div>
+                    </nav>
+                </div>
+                <div class="render-body w-100 overflow-hidden">
+                    <header class="text-center bg-gray" style="background-image: url(https://static.tkbcdn.com/site/global/content-v2/img/home-search-bg-00.jpg);">
+                        <div class="container">
+                            <div class="header-container">
+                                <h1 class="search-title hidden-sm hidden-xs">Thế giới sự kiện đặc sắc</h1>
+                                <div class="w-100 clearfix">
+                                    <div class="col-md-8 col-md-offset-2 clearfix padding-left-0 padding-right-0">
+                                        <div class="w-100 searcher">
+                                            <div class="input-group rounded search-form">
+                                                <input data-autocomplete="search" type="text" class="form-control" placeholder="Tìm sự kiện, khóa học, khu vui chơi..." aria-describedby="sizing-addon1" value="" tabindex="1" autocomplete="off">
+                                                <span tabindex="2" class="search-btn input-group-addon bg-white smooth-trans" data-search-click="true"><span class="ello-search smooth-trans"></span></span>
+                                            </div>
+                                            <div class="search-res relative" data-search-result="true"><div class="autocomplete-suggestions" style="position: absolute; display: none; z-index: 9999;"></div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                    <section id="eventlist" class="eventlist clearfix">
+                        <div class="filter-wrapper w-100">
+                            <div data-fixed="filter" data-top="#eventlist" data-bottom="#buyerhelper"
+                                class="filter bg-white ns-effect-bouncyflip">
+                                <div class="container color-6 clearfix">
+                                    <div class="col-sm-12 cs1-inp-group ">
+                                        <div class="row">
+                                            <div class="col-sm-3 filter-selector">
+                                                <div class="custome-select cs1-inp-select w-100">
+                                                    <span class="before-icon ello-location-1"></span>
+                                                    <select data-location="true" tabindex="94">
+                                                        <option value="">Tất cả địa điểm</option>
+                                                        <option value="ho-chi-minh">Hồ Chí Minh</option>
+                                                        <option value="ha-noi">Hà Nội</option>
+                                                        <option value="other-locations">Các địa điểm khác</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="filter-collapse col-sm-9">
+                                                <div class="row">
+                                                    <!-- kind of event -->
+                                                    <div class="col-sm-5 filter-selector">
+                                                        <div class="btn-group w-100 cs1-inp-dropdown">
+                                                            <span class="before-icon ello-th"></span>
+                                                            <span class="after-icon ello-down-dir"></span>
+                                                            <div class="dropdown-toggle overflow-hidden">
+                                                                <select name="kind" data-multiple-select="filter-e"
+                                                                    multiple="" required="true"
+                                                                    class="multiple-select form-control select2-hidden-accessible"
+                                                                    tabindex="-1" aria-hidden="true" style>
+                                                                    <option value="Any" selected="">Tất cả loại sự kiện
+                                                                    </option>
+                                                                    <optgroup label="Giải trí">
+                                                                        <option value="8">Nhạc sống</option>
+                                                                        <option value="9">Văn hóa nghệ thuật</option>
+                                                                        <option value="10">Sân khấu</option>
+                                                                        <option value="11">Nightlife</option>
+                                                                        <option value="12">Ngoài trời</option>
+                                                                        <option value="17">OnlineEvent</option>
+                                                                    </optgroup>
+                                                                    <optgroup label="Học hỏi">
+                                                                        <option value="2">Hội thảo</option>
+                                                                        <option value="4">Khóa học</option>
+                                                                    </optgroup>
+                                                                    <optgroup label="Các lĩnh vực khác">
+                                                                        <option value="3">Triển lãm</option>
+                                                                        <option value="5">Hội họp</option>
+                                                                        <option value="6">Thể thao</option>
+                                                                        <option value="7">Cộng đồng</option>
+                                                                        <option value="13">Vui chơi giải trí</option>
+                                                                    </optgroup>
+                                                                </select>
+                                                                <span
+                                                                    class="select2 select2-container select2-container--default select2-container--below"
+                                                                    dir="ltr" style="width: 222px;">
+                                                                    <span class="selection">
+                                                                        <span
+                                                                            class="select2-selection select2-selection--multiple"
+                                                                            role="combobox" aria-autocomplete="list"
+                                                                            aria-haspopup="true" aria-expanded="false"
+                                                                            tabindex="95">
+                                                                            <ul class="select2-selection__rendered">
+                                                                                <li class="select2-selection__choice"
+                                                                                    title="Tất cả loại sự kiện">
+                                                                                    <span
+                                                                                        class="select2-selection__choice__remove"
+                                                                                        role="presentation">×</span>
+                                                                                    Tất cả loại sự kiện
+                                                                                </li>
+                                                                                <li
+                                                                                    class="select2-search select2-search--inline">
+                                                                                    <input class="select2-search__field"
+                                                                                        type="search" tabindex="-1"
+                                                                                        autocomplete="off" autocorrect="off"
+                                                                                        autocapitalize="off"
+                                                                                        spellcheck="false" role="textbox"
+                                                                                        placeholder=""
+                                                                                        style="width: 0.75em;">
+                                                                                </li>
+                                                                            </ul>
+                                                                        </span>
+                                                                    </span>
+                                                                    <span class="dropdown-wrapper"
+                                                                        aria-hidden="true"></span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- date range -->
+                                                    <div class="col-sm-4 filter-selector">
+                                                        <div class="btn-group w-100 cs1-inp-dropdown">
+                                                            <button class="dropdown-toggle overflow-hidden" type="button"
+                                                                data-toggle="dropdown" aria-expanded="false" tabindex="96">
+                                                                <span class="before-icon ello-calendar"></span>
+                                                                <span class="filter-rage-label" data-bind="label">Tất cả các
+                                                                    ngày</span>
+                                                                <span class="after-icon ello-down-dir"></span>
+                                                            </button>
+                                                            <ul class="dropdown-menu" role="menu">
+                                                                <li date-date-filter-type="0" data-date-filter="true"
+                                                                    data-date-value-to="">Tất cả các ngày</li>
+                                                                <li date-date-filter-type="1" data-date-filter="true"
+                                                                    date-date-value-from="10/03/2024 5:00:00 PM"
+                                                                    data-date-value-to="">Tất cả các ngày sắp tới</li>
+                                                                <li date-date-filter-type="2" data-date-filter="true"
+                                                                    date-date-value-from="10/03/2024 5:00:00 PM"
+                                                                    data-date-value-to="11/03/2024 4:59:59 PM">Hôm nay</li>
+                                                                <li date-date-filter-type="3" data-date-filter="true"
+                                                                    date-date-value-from="11/03/2024 5:00:00 PM"
+                                                                    data-date-value-to="12/03/2024 4:59:59 PM">Ngày mai</li>
+                                                                <li date-date-filter-type="4" data-date-filter="true"
+                                                                    date-date-value-from="11/03/2024 5:00:00 PM"
+                                                                    data-date-value-to="17/03/2024 4:59:59 PM">Tuần này</li>
+                                                                <li data-action="date-rage" data-prevent="close"
+                                                                    class="li-custome-date">
+                                                                    <p>Ngày tháng tuỳ chọn</p>
+                                                                    <div class="cs1-inp-group dl-input-groups bg-white">
+                                                                        <div class="input-group datepicker-custom">
+                                                                            <span class="input-group-addon"><span
+                                                                                    class="ello-calendar color-c"></span></span>
+                                                                            <input value="" name="filterStartDate"
+                                                                                data-datepicker="filter"
+                                                                                class="form-control padding-left-0 hasDatepicker"
+                                                                                type="text" placeholder="Từ" tabindex="97"
+                                                                                id="dp1710095280393">
+                                                                        </div>
+                                                                        <div class="input-group datepicker-custom">
+                                                                            <span class="input-group-addon"><span
+                                                                                    class="ello-calendar color-c"></span></span>
+                                                                            <input value="" name="filterEndDate"
+                                                                                data-datepicker="filter"
+                                                                                class="form-control padding-left-0 hasDatepicker"
+                                                                                type="text" placeholder="Đến" tabindex="98"
+                                                                                id="dp1710095280394">
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <!-- prices -->
+                                                    <div class="col-sm-3 filter-selector">
+                                                        <div class="custome-select cs1-inp-select w-100">
+                                                            <span class="before-icon ello-dollar"></span>
+                                                            <select data-price-filter="true" tabindex="99">
+                                                                <option value="Both" selected="">Tất cả giá vé</option>
+                                                                <option value="Free">Miễn phí</option>
+                                                                <option value="Paid">Có phí</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -187,3 +439,5 @@
 </body>
 
 </html> 
+    </body>
+</html>
