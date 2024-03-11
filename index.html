@@ -44,6 +44,23 @@
             -webkit-tap-highlight-color: transparent
         }
 
+        #top-right {
+            box-sizing: border-box;
+            height: 42px;
+            margin-left: 797.24px;
+            min-block-size: auto;
+            min-height: auto;
+            min-inline-size: auto;
+            min-width: auto;
+            text-size-adjust: 100%;
+            width: 364.76px;
+            color: #333;
+            font-family: "Open Sans", sans-serif;
+            font-size: 14px;
+            line-height: 22px;
+            -webkit-tap-highlight-color: transparent
+        }
+
         .logo {
             display: inline-block;
             height: 33px;
@@ -91,7 +108,7 @@
             -webkit-tap-highlight-color: transparent
         }
 
-        .Button_TaoSuKien {
+        .btn-create-e.btn-create-e-logged.tkb-btn.rounded.tkb-bg-color.center {
             background-color: #90ba3e;
             border-color: #7ca629;
             border-radius: 2px;
@@ -102,15 +119,15 @@
             line-height: 34px;
             margin-top: 4px;
             padding: 0 10px;
-            text-shadow: rgba(0, 0, 0, 0.28) 0 0 2px;
+            text-shadow: rgba(0, 0, 0, .28)0 0 2px;
             text-size-adjust: 100%;
-            width: 123.766px;
+            width: 123.76px;
             cursor: pointer;
             font-family: "Open Sans", sans-serif;
             font-size: 14px;
             list-style-type: none;
             text-align: left;
-            -webkit-tap-highlight-color: transparent;
+            -webkit-tap-highlight-color: transparent
         }
 
         .w100.top {
@@ -134,16 +151,23 @@
             <img class="logo" src="https://github.com/SPRINGPEACHVINH/NT208/blob/main/ticketx88.png?raw=true" alt="logo"
                 width="33px" height="33px" left: 10px; />
         </div>
-        <div class="top-right">
-            <ul class="Button_TaoSuKien">
+        <div id="top-right">
+            <button type="button" data-menu-trigger="true" class="navbar-toggle cd-nav-trigger pull-right">
+                <span></span>
+            </button>
+            <ul class="nav navbar-nav navbar-right nav-lang nav-lang-mobi pull-right hidden-xs hidden-sm">
                 <li class="dropdown">
                     <a class="dropdown-toggle" role="button" data-toggle="dropdown">
                         <span class="lang pull-left rounded vi"></span><span class="caret"></span>
                     </a>
-                    <ul role="menu">
+                    <ul class="dropdown-menu smooth-trans" role="menu">
                         <li>
-                            <a data-select-language="" data-language="vi">
-                                <span class="lang vi pull-left rounded"></span>Tiếng Việt
+                            <span class="lang vi pull-left rounded"></span>Tiếng
+                            Việt
+                            </a>
+                        </li>
+                        <li>
+                            <span class="lang en pull-left rounded"></span>English
                             </a>
                         </li>
                     </ul>
