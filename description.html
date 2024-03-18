@@ -3,168 +3,203 @@
 <head>
     <title>TicketX88</title>
     <style>
+
         .title {
             font-family: arial, helvetica, sans-serif;
-            color: rgb(73, 73, 73)
+            color: rgb(73, 73, 73);
+            padding-left: 20px;
+        }
+
+        .details {
+            font-family: arial, helvetica, sans-serif;
+            color: rgb(0, 0, 0);
+            font-size: 14px;
+            position: relative;
         }
 
         #desc-pad {
             flex-direction: column;
-            width: 600px;
+            background-color: white;
+            margin: 0 auto;
+            position: relative;
+            width: 650px;
+            padding-top: 4px;
+            box-shadow: 0 5px 30px -15px rgba(54, 37, 13, 0.75);
         }
 
         #description {
-            transition: max-height 1s ease-in-out;
+            transition: max-height 0.75s ease-in-out;
             overflow: hidden;
-            max-height: 555px;
+            max-height: 455px;
+            padding-left: 20px;
+            padding-right: 20px;
+            border-top: 1px solid rgb(142, 142, 142);
         }
 
-        #readMoreBtn {
+        #read-more-button {
             display: flex;
             justify-content: center;
-            margin-top: 10px;
+            position: relative;
+            width: 100%;
+            padding-top: 20px;
+            padding-bottom: 20px;
         }
 
         .arrow {
-            border: solid black;
+            border: solid rgb(142, 142, 142);
             background-color: transparent;
             border-width: 0 3px 3px 0;
-            display: inline-block;
             padding: 5px;
         }
 
         .down {
             transform: rotate(45deg);
-            -webkit-transform: rotate(45deg);
         }
 
         .up {
             transform: rotate(-135deg);
-            -webkit-transform: rotate(-135deg);
+        }
+
+        #white-pad {
+            height: 300px;
+            width: 650px;
+            bottom: 0px;
+            position: absolute;
+            background-color: white;
+            transition: opacity 0.75s;
+            -webkit-mask-image: linear-gradient(to top, black 10%, transparent 80%);
+            mask-image: linear-gradient(to top, black 10%, transparent 80%);
         }
     </style>
 </head>
 
 <body>
     <div id="desc-pad">
+        <h3 class="title">GIỚI THIỆU</h3>
         <div id="description">
-            <h3 class="title">Giới thiệu</h3>
-            <p style="text-align: center"><span style="font-size: 16px"><span
-                        style="font-family: arial, helvetica, sans-serif"><strong>Những Thành Phố Mơ Màng -
-                            Summer
-                            Sài Gòn 2024</strong></span></span></p>
+            <p class="details" style="text-align: center"><strong>Những Thành Phố Mơ Màng -
+                    Summer
+                    Sài Gòn 2024</strong></p>
 
-            <p><span style="font-size: 14px"><span style="font-family: arial, helvetica, sans-serif"><span
-                            style="color: rgb(13, 13, 13)">Cư dân đã sẵn sàng chuẩn bị cho chuyến hành trình với
-                            "Những Thành Phố Mơ Màng Summer" chưa! Đón nhận không khí trẻ trung, năng động của
-                            mùa
-                            hè, sự lung linh của thành phố, và những bản hit âm nhạc sôi động. Hãy mua ngay vé
-                            để
-                            trải nghiệm cuộc phiêu lưu âm nhạc độc đáo này và tận hưởng một mùa hè đầy ý nghĩa
-                            cùng
-                            NTPMM nhé.</span></span></span></p>
+            <p class="details">Cư dân đã sẵn sàng chuẩn bị cho chuyến hành trình với
+                "Những Thành Phố Mơ Màng Summer" chưa! Đón nhận không khí trẻ trung, năng động của
+                mùa
+                hè, sự lung linh của thành phố, và những bản hit âm nhạc sôi động. Hãy mua ngay vé
+                để
+                trải nghiệm cuộc phiêu lưu âm nhạc độc đáo này và tận hưởng một mùa hè đầy ý nghĩa
+                cùng
+                NTPMM nhé.</p>
 
-            <p><span style="font-size: 14px"><span style="font-family: arial, helvetica, sans-serif"><strong>Thời
-                            gian: 15/06/2024</strong></span></span></p>
+            <p class="details"><strong>Thời
+                    gian: 15/06/2024</strong></p>
 
-            <p><span style="font-size: 14px"><span style="font-family: arial, helvetica, sans-serif"><strong><strong>Địa
-                                điểm: Hồ Chí Minh
-                                (updating)</strong></strong></span></span></p>
+            <p class="details"><strong><strong>Địa
+                        điểm: Hồ Chí Minh
+                        (Updating)</strong></strong></p>
 
-            <p><span style="font-size: 14px"><span style="font-family: arial, helvetica, sans-serif"><strong>QUY
-                            ĐỊNH
-                            CHUNG KHI MUA
-                            VÉ</strong></span></span></p>
+            <p class="details"><strong>QUY
+                    ĐỊNH
+                    CHUNG KHI MUA
+                    VÉ</strong></p>
 
-            <p><span style="font-size: 14px"><span style="font-family: arial, helvetica, sans-serif">1. Chương
-                        trình
-                        dành cho đối tượng khán giả trên 16 tuổi. Khán giả từ 10-15 tuổi tham gia chương trình
-                        phải
-                        có người giám hộ đi kèm (người giám hộ phải từ 18 tuổi trở lên, một người giám hộ kèm
-                        một
-                        trẻ vị thành niên) để quản lý và chịu hoàn toàn trách nhiệm nếu có bất kì sự cố nào xảy
-                        ra
-                        trong sự kiện.</span></span></p>
+            <p class="details">1. Chương
+                trình
+                dành cho đối tượng khán giả trên 16 tuổi. Khán giả từ 10-15 tuổi tham gia chương trình
+                phải
+                có người giám hộ đi kèm (người giám hộ phải từ 18 tuổi trở lên, một người giám hộ kèm
+                một
+                trẻ vị thành niên) để quản lý và chịu hoàn toàn trách nhiệm nếu có bất kì sự cố nào xảy
+                ra
+                trong sự kiện.</p>
 
-            <p><span style="font-size: 14px"><span style="font-family: arial, helvetica, sans-serif">2. Phụ nữ
-                        mang
-                        thai và người có vấn đề về sức khoẻ tự cân nhắc khi tham gia chương trình. Trong trường
-                        hợp
-                        có vấn đề xảy ra, BTC không chịu trách nhiệm.</span></span></p>
+            <p class="details">2. Phụ nữ
+                mang
+                thai và người có vấn đề về sức khoẻ tự cân nhắc khi tham gia chương trình. Trong trường
+                hợp
+                có vấn đề xảy ra, BTC không chịu trách nhiệm.</p>
 
-            <p><span style="font-size: 14px"><span style="font-family: arial, helvetica, sans-serif">3. Mỗi vé
-                        chỉ
-                        dành cho một khán giả tham dự, không kèm trẻ em và trẻ vị thành niên. Người giám hộ đi
-                        kèm
-                        theo khán giả vị thành niên phải mua vé để tham dự.&nbsp;</span></span></p>
+            <p class="details">3. Mỗi vé
+                chỉ
+                dành cho một khán giả tham dự, không kèm trẻ em và trẻ vị thành niên. Người giám hộ đi
+                kèm
+                theo khán giả vị thành niên phải mua vé để tham dự.&nbsp;</p>
 
-            <p><span style="font-size: 14px"><span style="font-family: arial, helvetica, sans-serif">4. Vé đã
-                        mua
-                        không được đổi hoặc hoàn trả dưới mọi hình thức. Khán giả có trách nhiệm tự bảo quản,
-                        bảo
-                        mật thông tin mã vé của mình. BTC từ chối giải quyết trường hợp có nhiều hơn một người
-                        check-in cùng một mã vé. Theo quy định, BTC cho phép người check-in đầu tiên mã vé bị
-                        trùng
-                        được tham dự sự kiện.</span></span></p>
+            <p class="details">4. Vé đã
+                mua
+                không được đổi hoặc hoàn trả dưới mọi hình thức. Khán giả có trách nhiệm tự bảo quản,
+                bảo
+                mật thông tin mã vé của mình. BTC từ chối giải quyết trường hợp có nhiều hơn một người
+                check-in cùng một mã vé. Theo quy định, BTC cho phép người check-in đầu tiên mã vé bị
+                trùng
+                được tham dự sự kiện.</p>
 
-            <p><span style="font-size: 14px"><span style="font-family: arial, helvetica, sans-serif">5. Vui lòng
-                        không mua vé từ bất kỳ nguồn nào khác ngoài Ticketbox tránh trường hợp vé giả hoặc lừa
-                        đảo.
-                        BTC từ chối giải quyết cho những trường hợp mua vé từ nguồn khác nếu có vấn đề hay tranh
-                        chấp xảy ra.</span></span></p>
+            <p class="details">5. Vui lòng
+                không mua vé từ bất kỳ nguồn nào khác ngoài Ticketbox tránh trường hợp vé giả hoặc lừa
+                đảo.
+                BTC từ chối giải quyết cho những trường hợp mua vé từ nguồn khác nếu có vấn đề hay tranh
+                chấp xảy ra.</p>
 
-            <p><span style="font-size: 14px"><span style="font-family: arial, helvetica, sans-serif">6. Khi tham
-                        gia
-                        chương trình, khán giả đồng ý với việc hình ảnh của mình được sử dụng để khai thác cho
-                        sản
-                        phẩm ghi hình, thu âm, quảng bá cho chương trình.</span></span></p>
+            <p class="details">6. Khi tham
+                gia
+                chương trình, khán giả đồng ý với việc hình ảnh của mình được sử dụng để khai thác cho
+                sản
+                phẩm ghi hình, thu âm, quảng bá cho chương trình.</p>
 
-            <p><span style="font-family: arial, helvetica, sans-serif"><span style="font-size: 14px">7. BTC có
-                        quyền
-                        kiểm tra giấy tờ tuỳ thân của khán giả nếu có nghi ngờ về độ tuổi không phù hợp và từ
-                        chối
-                        quyền tham gia của bất kì khán giả nào không tuân thủ quy định của chương trình mà không
-                        hoàn trả vé.</span></span></p>
+            <p class="details">7. BTC có
+                quyền
+                kiểm tra giấy tờ tuỳ thân của khán giả nếu có nghi ngờ về độ tuổi không phù hợp và từ
+                chối
+                quyền tham gia của bất kì khán giả nào không tuân thủ quy định của chương trình mà không
+                hoàn trả vé.</p>
 
-            <p><span style="font-family: arial, helvetica, sans-serif"><span style="font-size: 14px">8. Hãy kiểm
-                        tra
-                        kỹ thông tin trước khi đặt vé, BTC không hỗ trợ đổi chặng hay hoàn tiền đối với những
-                        trường
-                        hợp đặt nhầm chặng vé.</span></span></p>
+            <p class="details">8. Hãy kiểm
+                tra
+                kỹ thông tin trước khi đặt vé, BTC không hỗ trợ đổi chặng hay hoàn tiền đối với những
+                trường
+                hợp đặt nhầm chặng vé.</p>
 
-            <p><span style="font-family: arial, helvetica, sans-serif"><span style="font-size: 14px">9. Trong
-                        mọi
-                        trường hợp, quyết định của BTC là quyết định cuối cùng.</span></span></p>
+            <p class="details">9. Trong
+                mọi
+                trường hợp, quyết định của BTC là quyết định cuối cùng.</p>
 
-            <p><span style="font-size: 14px"><span style="font-family: arial, helvetica, sans-serif">10. Vui
-                        lòng
-                        theo dõi thêm và tuân thủ các quy định cũng như những đồ dùng bị cấm mang sẽ được đăng
-                        tải
-                        tại trang Facebook của chương trình trước khi chương trình được diễn ra.</span></span>
+            <p class="details">10. Vui
+                lòng
+                theo dõi thêm và tuân thủ các quy định cũng như những đồ dùng bị cấm mang sẽ được đăng
+                tải
+                tại trang Facebook của chương trình trước khi chương trình được diễn ra.
             </p>
 
-            <p><span style="font-size: 14px"><span style="font-family: arial, helvetica, sans-serif">11. Mọi vấn
-                        đề
-                        liên quan đến vé sự kiện cần hỗ trợ, bạn vui lòng liên hệ tổng đài của Ticketbox theo số
-                        hotline 1900 9000.</span></span></p>
+            <p class="details">11. Mọi vấn
+                đề
+                liên quan đến vé sự kiện cần hỗ trợ, bạn vui lòng liên hệ tổng đài của Ticketbox theo số
+                hotline 1900 9000.</p>
         </div>
-        <div id="readMoreBtn"><button id="toggleButton" class="arrow down"></button></div>
+        <div id="white-pad"></div>
+        <div id="read-more-button">
+            <button id="the-button" class="arrow down"></button>
+        </div>
     </div>
 
     <script>
-        var button = document.getElementById('toggleButton');
+        var button = document.getElementById('the-button');
+        var clickarea = document.getElementById('read-more-button');
         var descriptionDiv = document.getElementById('description');
+        var whitePad = document.getElementById('white-pad');
 
-        button.addEventListener('click', function () {
-            if (descriptionDiv.style.maxHeight !== '555px') {
-                descriptionDiv.style.maxHeight = '555px';
+        function toggleDescriptionHeight() {
+            if (descriptionDiv.style.maxHeight !== '455px') {
+                descriptionDiv.style.maxHeight = '455px';
+                whitePad.style.opacity = '1';
                 button.classList.remove('up');
                 button.classList.add('down');
             } else {
                 descriptionDiv.style.maxHeight = '1000px';
+                whitePad.style.opacity = '0';
                 button.classList.remove('down');
                 button.classList.add('up');
             }
-        });
+        }
+
+        clickarea.addEventListener('click', toggleDescriptionHeight);
     </script>
 </body>
