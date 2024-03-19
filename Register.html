@@ -163,6 +163,31 @@
             text-wrap: nowrap;
             width: 328px;
         }
+
+/* Hide the default checkbox */
+.checkbox-custom {
+  position: relative;
+  height: 25px;
+  width: 25px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  outline: none;
+  border: none;
+  background: #2dc275;
+  cursor: pointer;
+}
+
+/* Style for the custom checkbox when it is checked */
+.checkbox-custom:checked {
+  background: #2dc275;
+}
+
+/* Style for the custom checkbox when it is not checked */
+.checkbox-custom:not(:checked) {
+  background: #ccc;
+}
+
     </style>
 </head>
 
@@ -184,8 +209,10 @@
             </div>
             <div class="term-of-use">
                 <div class="checkbox">
-                    <input class="checkbox_mini" type="checkbox">
-                    <span class="checkmark"></span>
+                    <!-- <input class="checkbox_mini" type="checkbox">
+                    <span class="checkmark"></span> -->
+                    <!-- Use the custom checkbox -->
+                    <input type="checkbox" class="checkbox-custom">
                     <label for="term-of-use">I agree to TicketX88's Term of use and Privacy</label>
                 </div>
             </div>

@@ -87,7 +87,11 @@
             position: relative;
             border: 1px solid black;
             border-radius: 12px;
-            background: linear-gradient(to bottom, gray, darkgray);
+            background-color: #2f3234;
+        }
+
+        #ticket-info-text {
+            color: white;
         }
 
         .ticket-day {
@@ -138,8 +142,13 @@
             color: #6c757d;
         }
 
+        .enabled {
+            color: white;
+        }
+
         .ticket-price {
             font-family: arial, helvetica, sans-serif;
+            font-weight: bold;
         }
 
         .unavailable {
@@ -162,13 +171,11 @@
             right: 0;
         }
 
-        @media screen and (max-width: 650px) {
+        @media screen and (max-width: 900px) {
 
             #desc-pad,
             #white-pad,
-            .ticket-info,
-            .info-footer,
-            .info-header {
+            .ticket-info {
                 width: 100%;
             }
         }
@@ -371,34 +378,33 @@
                     </script>
 
                     <div class="ticket-info">
-                        <h3 class="title">THÔNG TIN VÉ</h3>
+                        <h3 class="title" id="ticket-info-text">THÔNG TIN VÉ</h3>
                         <div class="ticket-day">
                             <div class="info-header">
                                 <h4 class="title datetime">
                                     <button id="the-button" class="arrow right"></button>
-                                    <pre class="title datetime">    16:30 - 19:30, 07 tháng 04, 2024</pre>
+                                    <pre class="title datetime" id="ticket-info-text">    16:30 - 19:30, 07 tháng 04, 2024</pre>
                                 </h4>
                             </div>
                             <div class="ticket-classes">
                                 <div class="info-header">
                                     <h4 class="title class-name"><button id="the-button" class="arrow right"></button>
-                                        <pre class="title class-name">  VIP A STANDING</pre>
+                                        <pre class="title class-name" id="ticket-info-text">  VIP A STANDING</pre>
                                     </h4>
                                     <div class="ticket-status">
                                         <span class="unavailable">Hết vé</span>
                                     </div>
-                                    <div class="ticket-price">
+                                    <div class="ticket-price disabled">
                                         1.000.000 VND
                                     </div>
                                 </div>
                                 <div class="class-info">
                                     <img src="/vipA.jpeg" height="100px" alt="class-position"
                                         style="border-radius: 12px">
-                                    <div class="info">VIP A/B STANDING * Sound check / Send off – ALL * Signed poster –
-                                        15pcs per zone
-                                        (random) *
-                                        Exclusive Photocard (random
-                                        1 out of 3) – ALL
+                                    <div class="info" id="ticket-info-text">VIP A/B STANDING 
+                                        * Sound check / Send off – ALL 
+                                        * Signed poster – 5pcs per zone (random) 
+                                        *Exclusive Photocard (random 1 out of 3) – ALL
                                     </div>
                                 </div>
                             </div>
@@ -407,30 +413,29 @@
                             <div class="info-header">
                                 <h4 class="title datetime">
                                     <button id="the-button" class="arrow right"></button>
-                                    <pre class="title datetime">    18:00 - 21:00, 06 tháng 04, 2024</pre>
+                                    <pre class="title datetime" id="ticket-info-text">    18:00 - 21:00, 06 tháng 04, 2024</pre>
                                 </h4>
                             </div>
                             <div class="ticket-classes">
                                 <div class="info-header">
                                     <h4 class="title class-name">
                                         <button id="the-button" class="arrow right"></button>
-                                        <pre class="title class-name">  VIP A STANDING</pre>
+                                        <pre class="title class-name" id="ticket-info-text">  CAT 3 STANDING</pre>
                                     </h4>
                                     <div class="ticket-status">
                                         <span class="available">Còn vé</span>
                                     </div>
-                                    <div class="ticket-price">
+                                    <div class="ticket-price enabled">
                                         1.000.000 VND
                                     </div>
                                 </div>
                                 <div class="class-info">
                                     <img src="/catB.jpeg" height="100px" alt="class-position"
                                         style="border-radius: 12px">
-                                    <div class="info">VIP A/B STANDING * Sound check / Send off – ALL * Signed poster –
-                                        15pcs per zone
-                                        (random) *
-                                        Exclusive Photocard (random
-                                        1 out of 3) – ALL
+                                    <div class="info" id="ticket-info-text">CAT 3 SEATING
+                                    * Sound check / Send off – X
+                                    * Signed poster – 20pcs (random)
+                                    * Exclusive Photocard (random 1 out of 3) – ALL
                                     </div>
                                 </div>
                             </div>
