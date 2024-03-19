@@ -24,8 +24,8 @@ html {
 }
 .General #_next .WrapperEventDetail .Container_FlexColumn {
     width: 100%;
-    min-height: 100vh;
-    background: rgb(245, 247, 252);
+    min-height: 150vh;
+    background: rgb(0, 0, 0);
 }
 .General #_next .WrapperEventDetail .Container_FlexColumn {
     display: flex;
