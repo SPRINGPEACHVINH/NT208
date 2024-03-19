@@ -24,7 +24,7 @@ html {
 }
 .General #_next .WrapperEventDetail .Container_FlexColumn {
     width: 100%;
-    min-height: 150vh;
+    min-height: 100vh;
     background: rgb(245, 247, 252);
 }
 .General #_next .WrapperEventDetail .Container_FlexColumn {
@@ -55,8 +55,8 @@ main {
     height: max-content;
     padding-block: 2rem;
     padding-inline: 1rem;
-    background: linear-gradient(rgb(245, 247, 252) 48.04%, rgb(245, 247, 252) 100%);
-    color: rgb(245, 247, 252);
+    background: linear-gradient(rgb(39, 39, 42) 48.04%, rgb(0, 0, 0) 100%);
+    color: rgb(255, 255, 255);
 }
 @media (max-width: 1024px){
     .General #_next .WrapperEventDetail .Container_FlexColumn .Layout_Main .style_EventDetailWrapper .style_BannerWrapper {
