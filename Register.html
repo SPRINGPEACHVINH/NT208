@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <title>Sign up for TicketX88</title>
     <style>
         .body {
             background-color: #f5f7fc;
@@ -68,6 +69,7 @@
             text-size-adjust: 100%;
             position: relative;
             margin: 0 auto;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
         }
 
         .Country {
@@ -75,23 +77,31 @@
         }
 
         .Post-code {
-            background-color: #f5f7fc;
-            border: 1px solid #afb8c9;
+            display: flex;
+            align-items: center;
             border-radius: 4px;
+            background: rgb(245, 247, 252);
+            justify-content: space-between;
             box-sizing: border-box;
             cursor: pointer;
-            font-size: 14px;
             height: 44px;
-            width: 100px;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            top: 0;
-            justify-content: space-between;
+            width: 104px;
             line-height: 20px;
             margin-right: 4px;
             padding: 12px;
-            position: relative;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+        }
+
+        .btn_arrow {
+            margin-right: 0px;
+            box-sizing: border-box;
+            width: 24px;
+            height: 24px;
+            fill: none;
+            text-size-adjust: 100%;
+            transform: rotate(0deg);
         }
 
         .input-phone-number {
@@ -120,7 +130,7 @@
             text-size-adjust: 100%;
             top: 0;
             width: 298px;
-            font-size: 10px;
+            font-size: 15px;
         }
 
         .sign-up.Continue-part {
@@ -166,6 +176,9 @@
             <div class="Country">
                 <div class="Post-code">
                     +84
+                    <svg class="btn_arrow" width="24" height="24">
+                        <path d="M6 9l6 6 6-6" stroke="#2A2D34" stroke-width="2" stroke-milterlinmit="10"></path>
+                    </svg>
                 </div>
                 <input class="input-phone-number" type="tel" placeholder="Input here" required>
             </div>
@@ -181,5 +194,4 @@
             </div>
         </div>
 </body>
-
 </html>
