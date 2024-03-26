@@ -25,7 +25,7 @@ html {
 .General #_next .WrapperEventDetail .Container_FlexColumn {
     width: 100%;
     min-height: 150vh;
-    background: rgb(245, 247, 252);
+    background: rgb(0, 0, 0);
 }
 .General #_next .WrapperEventDetail .Container_FlexColumn {
     display: flex;
@@ -55,8 +55,8 @@ main {
     height: max-content;
     padding-block: 2rem;
     padding-inline: 1rem;
-    background: linear-gradient(rgb(245, 247, 252) 48.04%, rgb(245, 247, 252) 100%);
-    color: rgb(245, 247, 252);
+    background: linear-gradient(rgb(39, 39, 42) 48.04%, rgb(0, 0, 0) 100%);
+    color: rgb(255, 255, 255);
 }
 @media (max-width: 1024px){
     .General #_next .WrapperEventDetail .Container_FlexColumn .Layout_Main .style_EventDetailWrapper .style_BannerWrapper {
@@ -168,7 +168,7 @@ b, strong {
     padding-left: 0.5rem;
 }
 .General #_next .WrapperEventDetail .Container_FlexColumn .Layout_Main .style_EventDetailWrapper #banner .content-desktop .text-wrapper .text .info span {
-    color: rgb(45, 194, 117);
+    color: rgb(233, 109, 55);
     font-weight: bold;
 }
 .General #_next .WrapperEventDetail .Container_FlexColumn .Layout_Main .style_EventDetailWrapper #banner .content-desktop .text-wrapper .text .info #more-days {
@@ -222,7 +222,7 @@ a {
     -webkit-box-align: center;
     align-items: center;
     gap: 0.5rem;
-    color: rgb(45, 194, 117);
+    color: rgb(233, 109, 55);
 }
 .General #_next .WrapperEventDetail .Container_FlexColumn .Layout_Main .style_EventDetailWrapper #banner .content-desktop .text-wrapper .text .price #ticket-price #price-value svg {
     margin-left: 0.5rem;
@@ -234,7 +234,7 @@ a {
     font-weight: bold;
     transition: background-color 0.4s ease-in-out 0s;
     color: rgb(255, 255, 255);
-    background-color: rgb(45, 194, 117);
+    background-color: rgb(233, 109, 55);
 }
 button {
     background-color: transparent;
