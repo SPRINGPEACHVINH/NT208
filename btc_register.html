@@ -158,6 +158,11 @@
         background-color: #f4f4f4; /* Màu nền khi hover trên option */
       }
 
+      .text-for-button {
+        cursor: pointer;
+        margin: 1px 0;
+      }
+
       /* Media query: chuyển topbar và sidebar từ dọc sang ngang khi thu nhỏ màn hình */
       @media (max-width: 768px) {
         .container {
@@ -166,7 +171,7 @@
 
         .container-sidebar {
           width: 100%; /* Sidebar sẽ chiếm toàn bộ chiều rộng của thiết bị khi thu nhỏ */
-          height: auto; /* Chiều cao tự động theo nội dung */
+          height: 340px; /* Chiều cao tự động theo nội dung */
           position: relative; /* Đặt lại vị trí về relative để sidebar di chuyển dựa trên vị trí mặc định của nó */
         }
 
@@ -187,7 +192,7 @@
             height="35px"
           />
           <p class="text" style="position: absolute; right: 75px">
-            NguyenNgocMinhTam
+            LePhatAnhTuan
           </p>
           <!-- Thêm style cho phần tử text -->
           <img
@@ -201,19 +206,19 @@
         <div class="sidebar">
           <ul>
             <li>
-              Hồ sơ ban tổ chức
+              <p class="text-for-button">Hồ sơ ban tổ chức</p>
               <div class="li-overlay"></div>
             </li>
             <li>
-              Sự kiện đã tạo
+              <p class="text-for-button">Sự kiện đã tạo</p>
               <div class="li-overlay"></div>
             </li>
             <li>
-              Số dư tài khoản
+              <p class="text-for-button">Số dư tài khoản</p>
               <div class="li-overlay"></div>
             </li>
             <li>
-              Tài khoản ngân hàng
+              <p class="text-for-button">Tài khoản ngân hàng</p>
               <div class="li-overlay"></div>
             </li>
           </ul>
