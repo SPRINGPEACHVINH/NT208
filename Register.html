@@ -149,8 +149,12 @@
             width: 328px;
         }
 
+        .checkbox:focus {
+            border-color: #2dc275;
+        }
+
 /* Hide the default checkbox */
-.checkbox-custom {
+/* .checkbox-custom {
   position: relative;
   height: 25px;
   width: 25px;
@@ -161,17 +165,21 @@
   border: none;
   background: #2dc275;
   cursor: pointer;
-}
+} */
 
 /* Style for the custom checkbox when it is checked */
-.checkbox-custom:checked {
+/* .checkbox-custom:checked {
   background: #2dc275;
-}
+} */
 
 /* Style for the custom checkbox when it is not checked */
-.checkbox-custom:not(:checked) {
+/* .checkbox-custom:not(:checked) {
   background: #ccc;
-}
+  position: relative;
+  cursor: pointer;
+  height: 25px;
+  width: 25px;
+} */
 
     </style>
 </head>
@@ -186,6 +194,11 @@
             <div class="Country">
                 <div class="Post-code">
                     +84
+                    <!-- <section>
+                        <select id="select-checkbox">
+                            <option value="Vietnam">+84</option>
+                        </select> -->
+                    </section>
                     <svg class="btn_arrow" width="24" height="24">
                         <path d="M6 9l6 6 6-6" stroke="#2A2D34" stroke-width="2" stroke-milterlinmit="10"></path>
                     </svg>
@@ -200,6 +213,7 @@
                     <!-- Use the custom checkbox -->
                     <input type="checkbox" class="checkbox-custom">
                     <label for="term-of-use">I agree to TicketX88's Term of use and Privacy</label>
+
                 </div>
             </div>
             <div class="Continue-part">
