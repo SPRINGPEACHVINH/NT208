@@ -16,10 +16,6 @@
         display: flex;
       }
 
-      .container-container-sidebar {
-        position: fixed;
-      }
-
       .container-sidebar {
         width: 30vw;
         height: 100vh;
@@ -27,13 +23,30 @@
         flex-direction: column;
         position: fixed;
         left: 0;
-        z-index: 1;
+      }
+
+      .top-bar {
+        background-color: #262f38;
+        color: white;
+        height: 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 2vw;
+        position: relative;
+      }
+
+      .profile-name {
+        cursor: pointer;
+        display: flex; 
+        align-items:center;
+        position: absolute;
+        right: 1.5vw;
       }
 
       .sidebar {
         background-color: #303b46;
         flex: 1;
-        overflow-y: auto;
       }
 
       .sidebar ul {
@@ -44,15 +57,13 @@
 
       .sidebar ul li {
         color: white;
+        margin-top: 10px;
         padding: 20px 30px;
-        font-size: 18px;
+        font-size: 100%;
+        white-space: nowrap;
         position: relative;
+        display: flex;
         transition: color 0.05s; /* Thêm hiệu ứng chuyển đổi màu trong 0.05s */
-      }
-
-      .sidebar ul li:hover {
-        color: #27313d; /* Thay đổi màu chữ khi di chuột vào */
-        z-index: 1; /* đưa màu lên 1 lớp */
       }
 
       .li-overlay {
@@ -62,58 +73,77 @@
         width: 100%;
         height: 100%;
         background-color: #dadada;
-        display: none;
+        display: block;
         cursor: pointer;
         z-index: -1; /* đưa màu xuống 1 lớp */
       }
 
-      .sidebar ul li:hover .li-overlay {
-        display: block;
+      .sidebar ul li:hover {
+        color: #27313d; /* Thay đổi màu chữ khi di chuột vào */
+        z-index: 1; /* đưa màu lên 1 lớp */
       }
 
-      .top-bar {
-        background-color: #262f38;
-        color: white;
-        height: 60px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 1.3vw;
-        position: relative;
+      .i-human, .i-calendar, .i-dolar, .i-pig {
+        padding: 0px 13px;
+        margin-right: 10px;
+      }
+
+      .sidebar ul li:hover .i-human, .sidebar ul li:hover .i-calendar, .sidebar ul li:hover .i-dolar, .sidebar ul li:hover .i-pig {
+        padding: 0px 13px;
+        margin-right: 10px;
+      }
+
+      .i-human {
+        background: url(sprite-left-bar.png)no-repeat scroll left -82px;
+      }
+
+      .sidebar ul li:hover .i-human{
+        background: url(sprite-left-bar.png)no-repeat scroll left -383px;
+      }
+
+      .i-calendar { 
+        background: url(sprite-left-bar.png)no-repeat scroll left -307.5px;
+      }
+
+      .sidebar ul li:hover .i-calendar{
+        background: url(sprite-left-bar.png)no-repeat scroll left -0.5px;
+      }
+
+      .i-dolar {
+        background: url(sprite-left-bar.png)no-repeat scroll left -26px;
+      }
+
+      .sidebar ul li:hover .i-dolar{
+        background: url(sprite-left-bar.png)no-repeat scroll left -333px;
+      }
+
+      .i-pig {
+        background: url(sprite-left-bar.png)no-repeat scroll left -588.2px;
+      }
+
+      .sidebar ul li:hover .i-pig{
+        background: url(sprite-left-bar.png)no-repeat scroll left -408.2px;
       }
 
       .container-content {
         flex: 1;
+        color: #27313d;
         background-color: #e1e1e1;
         padding: 30px;
         position: relative;
         margin-left: 30vw; /* Bắt đầu form từ phía bên phải của sidebar */
       }
 
-      .form-register {
-        font-size: 17px;
-        margin: 0 auto;
+      .container-basic-information {
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 10px;
+        padding: 20px;
       }
 
       .form-group {
-        margin-bottom: 10px;
         display: flex;
-        flex-direction: column; /* Hiển thị các phần tử trong form-group dưới dạng cột */
-      }
-
-      .form-group label {
-        margin-top: 10px;
-        font-weight: bold;
-      }
-
-      .form-group input {
-        padding: 10px;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        box-sizing: border-box;
-        margin-top: 5px; /* Tạo khoảng cách giữa input và nhãn */
-        width: 100%;
+        flex-direction: row; /* Hiển thị các phần tử trong form-group dưới dạng cột */
       }
 
       .form-group button {
@@ -124,44 +154,92 @@
         padding: 10px;
         border: none;
         border-radius: 10px;
-        margin-top: 15px;
+        width: 100%;
+        font-size: 18px;
       }
 
       .form-group button:hover {
         background-color: #45a049;
       }
 
-      .container-basic-information {
-        background-color: white;
-        border: 1px solid black;
+      .form-group .form-item {
+        margin-bottom: 15px; /* Đặt khoảng cách giữa các hàng là 15px */
+        width: 100%;
+      }
+
+      .form-group .form-item:first-child {
+        margin-right: 20px; /* Khoảng cách giữa các cột */
+      }
+
+      .form-group .form-item:last-child {
+        margin-right: 0;
+      }
+
+      #item-special {
+        width: calc(50% - 10px); /* Chiều rộng của cột là 50% trừ 10px */
+      }
+
+      .form-item input {
+        background-color: #f5f7fd;
+        padding: 10px;
+        font-size: 16px;
+        border: 0.5px solid black;
         border-radius: 10px;
         box-sizing: border-box;
-        padding: 20px;
+        width: 100%;  
+      }
+
+      .form-item label {
+        font-weight: bold;
+        margin: 10px 0 5px;
+        display: block;
+      }
+
+      .form-item input:focus {
+        outline: 0.3px solid black;
       }
 
       .form-group select {
+        background-color: #f5f7fd;
         padding: 10px;
         font-size: 16px;
-        border: 1px solid #ccc;
+        border: 0.5px solid black;
         border-radius: 10px;
-        box-sizing: border-box;
-        margin-top: 5px;
         width: 100%;
       }
 
       .form-group select:focus {
-        outline: none;
-        border: 2px solid black;
-        border-color: black; /* Màu viền khi select được focus */
+        outline: 0.3px solid black;
       }
 
       .form-group select option:hover {
         background-color: #f4f4f4; /* Màu nền khi hover trên option */
       }
 
-      .text-for-button {
-        cursor: pointer;
-        margin: 1px 0;
+      select[disabled],
+      input[disabled] {
+        background-color: #f1f1f1;
+        pointer-events: none;
+      }
+
+      /* Ẩn mũi tên tăng/giảm giá trị số */
+      input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
+
+      @media (max-width: 992px) {
+        .form-group {
+          flex-direction: column;
+        } 
+
+        .form-group .form-item {
+          margin-bottom: 15px; /* Khoảng cách giữa các hàng */
+        }
+
+        #item-special {
+          width: 100%;
+        }
+
       }
 
       /* Media query: chuyển topbar và sidebar từ dọc sang ngang khi thu nhỏ màn hình */
@@ -172,7 +250,7 @@
 
         .container-sidebar {
           width: 100%; /* Sidebar sẽ chiếm toàn bộ chiều rộng của thiết bị khi thu nhỏ */
-          height: 340px; /* Chiều cao tự động theo nội dung */
+          height: 360px; /* Chiều cao tự động theo nội dung */
           position: relative; /* Đặt lại vị trí về relative để sidebar di chuyển dựa trên vị trí mặc định của nó */
         }
 
@@ -187,132 +265,202 @@
     <div class="container">
       <div class="container-sidebar">
         <div class="top-bar">
-          <img src="favicon.png" width="35px" height="35px" />
-          <p class="text" style="position: absolute; right: 75px">
-            LePhatAnhTuan
-          </p>
-          <!-- Thêm style cho phần tử text -->
-          <img
-            src="icon.jpg"
-            width="45px"
-            height="45px"
-            style="border-radius: 50%"
-          />
+          <a href="index.html"><img src="favicon.png" width="35px" height="35px" /></a>
+          <div class="profile-name">
+            <p class="text" style="margin-right: 10px">
+              NguyenNgocMinhTam
+            </p>
+            <img
+              src="icon.jpg"
+              width="45px"
+              height="45px"
+              style="border-radius: 50%"
+            />
+          </div>
         </div>
 
         <div class="sidebar">
           <ul>
+            <a href="web2.html" style="text-decoration: none">
             <li>
-              <p class="text-for-button">Hồ sơ ban tổ chức</p>
+                <span class="i-human"></span>
+                Hồ sơ ban tổ chức
+                <div class="li-overlay"></div>
+            </li>
+          </a>
+          <a href="web2.html" style="text-decoration: none">
+            <li>
+              <span class="i-calendar"></span>
+              Sự kiện đã tạo
               <div class="li-overlay"></div>
             </li>
+          </a>
+          <a href="web2.html" style="text-decoration: none">
             <li>
-              <p class="text-for-button">Sự kiện đã tạo</p>
+              <span class="i-dolar"></span>
+              Số dư tài khoản
               <div class="li-overlay"></div>
             </li>
+          </a>
+          <a href="web2.html" style="text-decoration: none">
             <li>
-              <p class="text-for-button">Số dư tài khoản</p>
+              <span class="i-pig"></span>
+              Tài khoản ngân hàng
               <div class="li-overlay"></div>
             </li>
-            <li>
-              <p class="text-for-button">Tài khoản ngân hàng</p>
-              <div class="li-overlay"></div>
-            </li>
+          </a>
           </ul>
         </div>
       </div>
 
       <div class="container-content">
-        <div class="form-register">
-          <h1 style="text-align: center">Đơn đăng ký ban tổ chức</h1>
-          <div class="container-basic-information">
-            <div class="form-group">
+        <h1 style="text-align: center; margin-top: 10px;">
+          Đơn đăng ký ban tổ chức
+        </h1>
+        <div class="container-basic-information">
+          <div class="form-group">
+            <div class="form-item">
               <label for="business-type"
                 >Loại hình kinh doanh<span style="color: red">*</span></label
               >
               <section>
                 <select id="business-type" name="business-type">
-                  <option value="individual">Cá nhân</option>
-                  <option value="enterprise">Doanh nghiệp</option>
+                  <option value="personal">Cá nhân</option>
+                  <option value="enterprise">Doanh nghiệp/Nhà tổ chức</option>
                 </select>
               </section>
             </div>
           </div>
-          <h3 style="font-size: 25px">Thông tin cơ bản</h3>
-          <div class="container-basic-information">
-            <div class="form-group">
+        </div>
+
+        <h3 style="font-size: 25px">Thông tin cơ bản</h3>
+        <div class="container-basic-information">
+          <div class="form-group">
+            <div class="form-item">
               <label for="name"
                 >Họ và tên<span style="color: red">*</span></label
               >
               <input type="text" id="name" name="name" />
             </div>
-            <div class="form-group">
+            <div class="form-item">
               <label for="email">Email<span style="color: red">*</span></label>
               <input type="email" id="email" name="email" />
             </div>
-            <div class="form-group">
+          </div>
+          <div class="form-group">
+            <div class="form-item">
               <label for="phone"
                 >Số điện thoại<span style="color: red">*</span></label
               >
-              <input type="tel" id="phone" name="phone" />
+              <input type="number" id="phone" name="phone" />
             </div>
-            <div class="form-group">
-              <label for="CCCD">Số CCCD<span style="color: red">*</span></label>
-              <input type="text" id="CCCD" name="CCCD" />
-            </div>
-          </div>
-          <br />
-          <br />
-          <div class="container-basic-information">
-            <h2 style="font-size: 20px; margin-top: 10px">
-              Địa chỉ thường trú
-            </h2>
-            <div class="form-group">
-              <label for="city-list"
-                >Tỉnh/Thành<span style="color: red">*</span></label
-              >
-              <section>
-                <select id="city-list" name="city-list">
-                  <option value="city-HCM">Thành Phố Hồ Chí Minh</option>
-                  <option value="city-HaNoi">Thành Phố Hà Nội</option>
-                </select>
-              </section>
-            </div>
-            <div class="form-group">
-              <label for="district-list"
-                >Quận/Huyện<span style="color: red">*</span></label
-              >
-              <section>
-                <select id="district-list" name="district-list">
-                  <option value="district1">Quận 1</option>
-                  <option value="district2">Quận 2</option>
-                  <option value="district3">Quận 3</option>
-                </select>
-              </section>
-            </div>
-            <div class="form-group">
-              <label for="ward-list"
-                >Phường/Xã<span style="color: red">*</span></label
-              >
-              <section>
-                <select id="ward-list" name="ward-list">
-                  <option value="ward-HCM-1">Phường Bến Nghé</option>
-                  <option value="ward-HCM-2">Phường Bến Thành</option>
-                </select>
-              </section>
-            </div>
-            <div class="form-group">
-              <label for="address"
-                >Địa chỉ<span style="color: red">*</span></label
-              >
-              <input type="text" id="address" name="address" />
+            <div class="form-item">
+              <label for="id">Số CCCD<span style="color: red">*</span></label>
+              <input type="text" id="id" name="id" />
             </div>
           </div>
           <div class="form-group">
-            <button type="submit">Lưu thông tin</button>
+            <div class="form-item" id="item-special">
+              <label for="tax"
+                >Mã số thuế<span style="color: red">*</span></label
+              >
+              <input type="number" id="tax" name="tax" />
+            </div>
+          </div>
+        </div>
+
+      <h3 style="font-size: 25px">Địa chỉ thường trú</h3>
+      <div class="container-basic-information">
+        <div class="form-group">
+          <div class="form-item">
+            <label for="city-list"
+              >Tỉnh/Thành<span style="color: red">*</span></label
+            >
+            <section>
+              <select
+                id="city-list"
+                name="city-list"
+                onchange="handleCityChange()"
+              >
+                <option value="city-HCM">Thành Phố Hồ Chí Minh</option>
+                <option value="city-HaNoi">Thành Phố Hà Nội</option>
+              </select>
+            </section>
+          </div>
+          <div class="form-item">
+            <label for="district-list"
+              >Quận/Huyện<span style="color: red">*</span></label
+            >
+            <section>
+              <select id="district-list" name="district-list" disabled>
+                <option value="district1">Quận 1</option>
+                <option value="district2">Quận 2</option>
+                <option value="district3">Quận 3</option>
+              </select>
+            </section>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-item">
+            <label for="ward-list"
+              >Phường/Xã<span style="color: red">*</span></label
+            >
+            <section>
+              <select id="ward-list" name="ward-list" disabled>
+                <option value="ward-HCM-1">Phường Bến Nghé</option>
+                <option value="ward-HCM-2">Phường Bến Thành</option>
+              </select>
+            </section>
+          </div>
+          <div class="form-item">
+            <label for="address"
+              >Địa chỉ<span style="color: red">*</span></label
+            >
+            <input type="text" id="address" name="address" disabled />
           </div>
         </div>
       </div>
+
+      <br />
+      <br />
+
+      <div class="form-group">
+        <button type="submit">Lưu thông tin</button>
+      </div>
     </div>
+
+    <script>
+      // Hàm được gọi khi trang web tải lần đầu tiên
+      window.onload = function () {
+        // Xóa lựa chọn mặc định và vô hiệu hóa các ô chọn danh sách và trường nhập liệu
+        document.getElementById("city-list").value = "";
+        document.getElementById("district-list").value = "";
+        document.getElementById("ward-list").value = "";
+        document.getElementById("address").value = "";
+      };
+
+      function handleCityChange() {
+        var cityDropdown = document.getElementById("city-list");
+        var districtDropdown = document.getElementById("district-list");
+        var wardDropdown = document.getElementById("ward-list");
+        var addressInput = document.getElementById("address");
+
+        // Enable/disable dropdowns and input field based on city selection
+        if (cityDropdown.value === "") {
+          districtDropdown.disabled = true;
+          wardDropdown.disabled = true;
+          addressInput.disabled = true;
+        } else {
+          districtDropdown.disabled = false;
+          wardDropdown.disabled = false;
+          addressInput.disabled = false;
+        }
+
+        // Reset dropdowns and input field
+        districtDropdown.selectedIndex = 0;
+        wardDropdown.selectedIndex = 0;
+        addressInput.value = "";
+      }
+    </script>
   </body>
 </html>
