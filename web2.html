@@ -86,7 +86,7 @@
             flex-direction: column;
             display: flex;
             margin: 0 auto;
-            margin-top: 50px;
+            margin-top: 30px;
             position: relative;
             border: 1px solid black;
             border-radius: 12px;
@@ -105,11 +105,23 @@
             position: relative;
         }
 
-        .info-header {
+        .info-header1,
+        .info-header2,
+        .info-header1_1,
+        .info-header2_1 {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
+            cursor: pointer;
+            margin-bottom: 0px;
+            transition: all 0.5s ease;
+        }
+
+        .ticket-classes1_1,
+        .ticket-classes2_1 {
+            height: 0px;
+            overflow: hidden;
+            transition: all 0.5s ease;
         }
 
         .datetime {
@@ -124,21 +136,38 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-left: 0px;
+            padding-left: px;
             margin: 10px 0px;
+            transition: all 0.5s ease;
         }
 
-        .class-info {
+        .class-info1_1,
+        .class-info2_1 {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 20px;
+            margin-bottom: 7px;
+            height: 0px;
+            transition: all 0.5s ease;
         }
 
         .info {
             font-family: arial, helvetica, sans-serif;
             color: rgb(0, 0, 0);
             margin-left: 20px;
+            transition: all 0.5s ease;
+        }
 
+        .text1_1,
+        .text2_1 {
+            display: none;
+            transition: all 0.5s ease;
+        }
+
+        .seat-img-1,
+        .seat-img-2 {
+            height: 0px;
+            visibility: hidden;
+            transition: all 0.5s ease;
         }
 
         .disabled {
@@ -384,16 +413,17 @@
                     <div class="ticket-info">
                         <h3 class="title" id="ticket-info-text">THÔNG TIN VÉ</h3>
                         <div class="ticket-day">
-                            <div class="info-header">
+                            <div class="info-header1">
                                 <h4 class="title datetime">
-                                    <button id="the-button" class="arrow right"></button>
+                                    <button id="the-datetime-button-1" class="arrow right"></button>
                                     <pre class="title datetime"
                                         id="ticket-info-text">    16:30 - 19:30, 07 tháng 04, 2024</pre>
                                 </h4>
                             </div>
-                            <div class="ticket-classes">
-                                <div class="info-header">
-                                    <h4 class="title class-name"><button id="the-button" class="arrow right"></button>
+                            <div class="ticket-classes1_1">
+                                <div class="info-header1_1">
+                                    <h4 class="title class-name"><button id="the-class-name-button-1"
+                                            class="arrow right"></button>
                                         <pre class="title class-name" id="ticket-info-text">  VIP A STANDING</pre>
                                     </h4>
                                     <div class="ticket-status">
@@ -403,29 +433,30 @@
                                         1.000.000 VND
                                     </div>
                                 </div>
-                                <div class="class-info">
-                                    <img src="vipA.jpeg" height="100px" alt="class-position"
-                                        style="border-radius: 12px">
-                                    <div class="info" id="ticket-info-text">VIP A/B STANDING
-                                        * Sound check / Send off – ALL
-                                        * Signed poster – 5pcs per zone (random)
-                                        *Exclusive Photocard (random 1 out of 3) – ALL
+                                <div class="class-info1_1">
+                                    <img src="vipA.jpeg" height="100px" alt="class-position" style="border-radius: 12px"
+                                        class="seat-img-1">
+                                    <div class="info" id="ticket-info-text">
+                                        <p class="text1_1">VIP A/B STANDING
+                                            * Sound check / Send off – ALL
+                                            * Signed poster – 5pcs per zone (random)
+                                            *Exclusive Photocard (random 1 out of 3) – ALL</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="ticket-day">
-                            <div class="info-header">
+                            <div class="info-header2">
                                 <h4 class="title datetime">
-                                    <button id="the-button" class="arrow right"></button>
+                                    <button id="the-datetime-button-2" class="arrow right"></button>
                                     <pre class="title datetime"
                                         id="ticket-info-text">    18:00 - 21:00, 06 tháng 04, 2024</pre>
                                 </h4>
                             </div>
-                            <div class="ticket-classes">
-                                <div class="info-header">
+                            <div class="ticket-classes2_1">
+                                <div class="info-header2_1">
                                     <h4 class="title class-name">
-                                        <button id="the-button" class="arrow right"></button>
+                                        <button id="the-class-name-button-2" class="arrow right"></button>
                                         <pre class="title class-name" id="ticket-info-text">  CAT 3 STANDING</pre>
                                     </h4>
                                     <div class="ticket-status">
@@ -435,18 +466,94 @@
                                         1.000.000 VND
                                     </div>
                                 </div>
-                                <div class="class-info">
-                                    <img src="catB.jpeg" height="100px" alt="class-position"
-                                        style="border-radius: 12px">
-                                    <div class="info" id="ticket-info-text">CAT 3 SEATING
-                                        * Sound check / Send off – X
-                                        * Signed poster – 20pcs (random)
-                                        * Exclusive Photocard (random 1 out of 3) – ALL
+                                <div class="class-info2_1">
+                                    <img src="catB.jpeg" height="100px" alt="class-position" style="border-radius: 12px"
+                                        class="seat-img-2">
+                                    <div class="info" id="ticket-info-text">
+                                        <p class="text2_1">CAT 3 SEATING
+                                            * Sound check / Send off – X
+                                            * Signed poster – 20pcs (random)
+                                            * Exclusive Photocard (random 1 out of 3) – ALL</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <script>
+                        document.querySelector('.info-header1').addEventListener('click', function () {
+                            var ticketClasses = document.querySelector('.ticket-classes1_1');
+                            var button = document.querySelector('#the-datetime-button-1');
+                            if (ticketClasses.style.height != '0px') {
+                                ticketClasses.style.height = '0px';
+                                button.classList.remove('down');
+                                button.classList.add('right');
+                            } else {
+                                ticketClasses.style.height = 'auto';
+                                button.classList.remove('right');
+                                button.classList.add('down');
+                            }
+                        });
+
+                        document.querySelector('.info-header1_1').addEventListener('click', function () {
+                            var classInfo = document.querySelector('.class-info1_1');
+                            var button = document.querySelector('#the-class-name-button-1');
+                            var picture = document.querySelector('.seat-img-1');
+                            var text = document.querySelector('.text1_1');
+
+                            if (classInfo.style.height != '0px') {
+                                classInfo.style.height = '0px';
+                                button.classList.remove('down');
+                                button.classList.add('right');
+                                picture.style.display = 'none';
+                                text.style.display = 'none';
+                            } else {
+                                classInfo.style.height = '120px';
+                                button.classList.remove('right');
+                                button.classList.add('down');
+                                picture.style.height = '100px';
+                                picture.style.display = 'block';
+                                picture.style.visibility = 'visible';
+                                text.style.display = 'block';
+                            }
+                        });
+
+                        document.querySelector('.info-header2').addEventListener('click', function () {
+                            var ticketClasses = document.querySelector('.ticket-classes2_1');
+                            var button = document.querySelector('#the-datetime-button-2');
+                            if (ticketClasses.style.height != '0px') {
+                                ticketClasses.style.height = '0px';
+                                button.classList.remove('down');
+                                button.classList.add('right');
+                            } else {
+                                ticketClasses.style.height = 'auto';
+                                button.classList.remove('right');
+                                button.classList.add('down');
+                            }
+                        });
+
+                        document.querySelector('.info-header2_1').addEventListener('click', function () {
+                            var classInfo = document.querySelector('.class-info2_1');
+                            var button = document.querySelector('#the-class-name-button-2');
+                            var picture = document.querySelector('.seat-img-2');
+                            var text = document.querySelector('.text2_1');
+
+                            if (classInfo.style.height != '0px') {
+                                classInfo.style.height = '0px';
+                                button.classList.remove('down');
+                                button.classList.add('right');
+                                picture.style.display = 'none';
+                                text.style.display = 'none';
+                            } else {
+                                classInfo.style.height = '120px';
+                                button.classList.remove('right');
+                                button.classList.add('down');
+                                picture.style.height = '100px';
+                                picture.style.display = 'block';
+                                picture.style.visibility = 'visible';
+                                text.style.display = 'block';
+                            }
+                        });
+                    </script>
                 </main>
             </div>
         </div>
