@@ -261,6 +261,7 @@
       }
     </style>
   </head>
+  
   <body>
     <div class="container">
       <div class="container-sidebar">
@@ -313,110 +314,158 @@
         </div>
       </div>
 
-      <div class="container-content">
-        <h1 style="text-align: center; margin-top: 10px;">
-          Đơn đăng ký ban tổ chức
-        </h1>
-        <div class="container-basic-information">
-          <div class="form-group">
-            <div class="form-item">
-              <label for="business-type"
-                >Loại hình kinh doanh<span style="color: red">*</span></label
-              >
-              <section>
-                <select id="business-type" name="business-type">
-                  <option value="personal">Cá nhân</option>
-                  <option value="enterprise">Doanh nghiệp/Nhà tổ chức</option>
-                </select>
-              </section>
-            </div>
+    <div class="container-content">
+      <h1 style="text-align: center; margin-top: 10px">Đơn đăng ký ban tổ chức</h1>
+      <div class="container-basic-information">
+        <div class="form-group">
+          <div class="form-item">
+            <label for="business-type">Loại hình kinh doanh<span style="color: red">*</span></label>
+            <select id="business-type" name="business-type" onchange="showBusinessType()" >
+              <option value="enterprise" selected>Doanh nghiệp/Nhà tổ chức</option>
+              <option value="personal">Cá nhân</option>
+            </select>
           </div>
         </div>
+      </div>
 
+      <div id="personal-business" style="display: none;">
         <h3 style="font-size: 25px">Thông tin cơ bản</h3>
         <div class="container-basic-information">
           <div class="form-group">
             <div class="form-item">
-              <label for="name"
-                >Họ và tên<span style="color: red">*</span></label
-              >
-              <input type="text" id="name" name="name" />
+              <label for="personal-name">Họ và tên<span style="color: red">*</span></label>
+              <input type="text" id="personal-name" name="personal-name" />
             </div>
             <div class="form-item">
-              <label for="email">Email<span style="color: red">*</span></label>
-              <input type="email" id="email" name="email" />
+              <label for="personal-email">Email<span style="color: red">*</span></label>
+              <input type="email" id="personal-email" name="personal-email" />
             </div>
           </div>
+
           <div class="form-group">
             <div class="form-item">
-              <label for="phone"
-                >Số điện thoại<span style="color: red">*</span></label
-              >
+              <label for="personal-phone">Số điện thoại<span style="color: red">*</span></label>
+              <input type="number" id="personal-phone" name="personal-phone" />
+            </div>
+            <div class="form-item">
+              <label for="personal-id">Số CCCD<span style="color: red">*</span></label>
+              <input type="text" id="personal-id" name="personal-id" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-item" id="item-special">
+              <label for="personal-tax">Mã số thuế<span style="color: red">*</span></label>
+              <input type="number" id="personal-tax" name="personal-tax" />
+            </div>
+          </div>
+        </div>
+
+        <h3 style="font-size: 25px">Địa chỉ thường trú</h3>
+        <div class="container-basic-information">
+          <div class="form-group">
+            <div class="form-item">
+              <label for="personal-city-list">Tỉnh/Thành<span style="color: red">*</span></label>
+              <select id="personal-city-list" name="personal-city-list" onchange="handleCityChange()">
+                <option value="personal-city-HCM">Thành Phố Hồ Chí Minh</option>
+                <option value="personal-city-HaNoi">Thành Phố Hà Nội</option>
+              </select>
+            </div>
+            <div class="form-item">
+              <label for="personal-district-list">Quận/Huyện<span style="color: red">*</span></label>
+              <select id="personal-district-list" name="personal-district-list" disabled>
+                <option value="personal-district-1">Quận 1</option>
+                <option value="personal-district-2">Quận 2</option>
+                <option value="personal-district-3">Quận 3</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-item">
+              <label for="personal-ward-list">Phường/Xã<span style="color: red">*</span></label>
+              <select id="personal-ward-list" name="personal-ward-list" disabled>
+                <option value="personal-ward-HCM-1">Phường Bến Nghé</option>
+                <option value="personal-ward-HCM-2">Phường Bến Thành</option>
+              </select>
+            </div>
+            <div class="form-item">
+              <label for="personal-address">Địa chỉ<span style="color: red">*</span></label>
+              <input type="text" id="personal-address" name="personal-address" disabled />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="enterprise-business" style="display: block">
+        <h3 style="font-size: 25px">Thông tin cơ bản</h3>
+        <div class="container-basic-information">
+          <div class="form-group">
+            <div class="form-item">
+              <label for="enterprise-name">Tên doanh nghiệp<span style="color: red">*</span></label>
+              <input type="text" id="enterprise-name" name="enterprise-name" />
+            </div>
+            <div class="form-item">
+              <label for="enterprise-email">Mã số đăng ký kinh doanh<span style="color: red">*</span></label>
+              <input type="email" id="enterprise-email" name="enterprise-mail" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-item">
+              <label for="phone">Nơi cấp<span style="color: red">*</span></label>
               <input type="number" id="phone" name="phone" />
             </div>
             <div class="form-item">
-              <label for="id">Số CCCD<span style="color: red">*</span></label>
+              <label for="id">Ngày cấp<span style="color: red">*</span></label>
               <input type="text" id="id" name="id" />
             </div>
           </div>
+
           <div class="form-group">
-            <div class="form-item" id="item-special">
-              <label for="tax"
-                >Mã số thuế<span style="color: red">*</span></label
-              >
+            <div class="form-item">
+              <label for="tax">Số điện thoại<span style="color: red">*</span></label>
+              <input type="number" id="tax" name="tax" />
+            </div>
+            <div class="form-item">
+              <label for="tax">Email<span style="color: red">*</span></label>
               <input type="number" id="tax" name="tax" />
             </div>
           </div>
         </div>
 
-      <h3 style="font-size: 25px">Địa chỉ thường trú</h3>
-      <div class="container-basic-information">
-        <div class="form-group">
-          <div class="form-item">
-            <label for="city-list"
-              >Tỉnh/Thành<span style="color: red">*</span></label
-            >
-            <section>
-              <select
-                id="city-list"
-                name="city-list"
-                onchange="handleCityChange()"
-              >
-                <option value="city-HCM">Thành Phố Hồ Chí Minh</option>
-                <option value="city-HaNoi">Thành Phố Hà Nội</option>
+        <h3 style="font-size: 25px">Địa chỉ trụ sở</h3>
+        <div class="container-basic-information">
+          <div class="form-group">
+            <div class="form-item">
+              <label for="enterprise-city-list">Tỉnh/Thành<span style="color: red">*</span></label>
+                <select id="enterprise-city-list" name="enterprise-city-list" onchange="handleCityChange()">
+                  <option value="enterprise-city-HCM">Thành Phố Hồ Chí Minh</option>
+                  <option value="enterprise-city-HaNoi">Thành Phố Hà Nội</option>
+                </select>
+            </div>
+            <div class="form-item">
+              <label for="enterprise-district-list">Quận/Huyện<span style="color: red">*</span></label>
+              <select id="enterprise-district-list" name="enterprise-district-list" disabled>
+                <option value="enterprise-district-1">Quận 1</option>
+                <option value="enterprise-district-2">Quận 2</option>
+                <option value="enterprise-district-3">Quận 3</option>
               </select>
-            </section>
+            </div>
           </div>
-          <div class="form-item">
-            <label for="district-list"
-              >Quận/Huyện<span style="color: red">*</span></label
-            >
-            <section>
-              <select id="district-list" name="district-list" disabled>
-                <option value="district1">Quận 1</option>
-                <option value="district2">Quận 2</option>
-                <option value="district3">Quận 3</option>
+
+          <div class="form-group">
+            <div class="form-item">
+              <label for="enterprise-ward-list">Phường/Xã<span style="color: red">*</span></label>
+              <select id="enterprise-ward-list" name="enterprise-ward-list" disabled>
+                <option value="enterprise-ward-HCM-1">Phường Bến Nghé</option>
+                <option value="enterprise-ward-HCM-2">Phường Bến Thành</option>
               </select>
-            </section>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="form-item">
-            <label for="ward-list"
-              >Phường/Xã<span style="color: red">*</span></label
-            >
-            <section>
-              <select id="ward-list" name="ward-list" disabled>
-                <option value="ward-HCM-1">Phường Bến Nghé</option>
-                <option value="ward-HCM-2">Phường Bến Thành</option>
-              </select>
-            </section>
-          </div>
-          <div class="form-item">
-            <label for="address"
-              >Địa chỉ<span style="color: red">*</span></label
-            >
-            <input type="text" id="address" name="address" disabled />
+            </div>
+            <div class="form-item">
+              <label for="enterprise-address">Địa chỉ<span style="color: red">*</span></label>
+              <input type="text" id="enterprise-address" name="enterprise-address" disabled />
+            </div>
           </div>
         </div>
       </div>
@@ -432,34 +481,73 @@
     <script>
       // Hàm được gọi khi trang web tải lần đầu tiên
       window.onload = function () {
-        // Xóa lựa chọn mặc định và vô hiệu hóa các ô chọn danh sách và trường nhập liệu
-        document.getElementById("city-list").value = "";
-        document.getElementById("district-list").value = "";
-        document.getElementById("ward-list").value = "";
-        document.getElementById("address").value = "";
+        // Xóa lựa chọn mặc định và vô hiệu hóa các ô chọn danh sách và trường nhập liệu  
+        document.getElementById("enterprise-city-list").value = "";
+        document.getElementById("enterprise-district-list").value = "";
+        document.getElementById("enterprise-ward-list").value = "";
+        document.getElementById("enterprise-address").value = "";
+
+        document.getElementById("personal-city-list").value = "";
+        document.getElementById("personal-district-list").value = "";
+        document.getElementById("personal-ward-list").value = "";
+        document.getElementById("personal-address").value = "";
       };
 
-      function handleCityChange() {
-        var cityDropdown = document.getElementById("city-list");
-        var districtDropdown = document.getElementById("district-list");
-        var wardDropdown = document.getElementById("ward-list");
-        var addressInput = document.getElementById("address");
+      function showBusinessType() {
+        var selectElement = document.getElementById("business-type");
+        var selectOption = selectElement.options[selectElement.selectedIndex].value;
+      
+        // Ẩn tất cả các phần tử
+        document.getElementById("personal-business").style.display = "none";
+        document.getElementById("enterprise-business").style.display = "none";
+      
+        // Hiển thị phần tử tương ứng với lựa chọn của người dùng
+        if (selectOption === "personal") {
+          document.getElementById("personal-business").style.display = "block";
+        } else if (selectOption === "enterprise") {
+          document.getElementById("enterprise-business").style.display = "block";
+        }
+      }
 
-        // Enable/disable dropdowns and input field based on city selection
-        if (cityDropdown.value === "") {
+      function handleCityChange() {
+        var selectElement = document.getElementById("business-type");
+        var selectOption = selectElement.options[selectElement.selectedIndex].value;
+
+        var cityDropdown;
+        var districtDropdown;
+        var wardDropdown;
+        var addressInput;
+        
+        if (selectOption === "personal")
+        {
+          cityDropdown = document.getElementById("personal-city-list");
+          districtDropdown = document.getElementById("personal-district-list");
+          wardDropdown = document.getElementById("personal-ward-list");
+          addressInput = document.getElementById("personal-address");
+        }
+        else if (selectOption === "enterprise")
+        {
+          cityDropdown = document.getElementById("enterprise-city-list");
+          districtDropdown = document.getElementById("enterprise-district-list");
+          wardDropdown = document.getElementById("enterprise-ward-list");
+          addressInput = document.getElementById("enterprise-address");
+        }
+
+        if (cityDropdown.value === "")
+        {
           districtDropdown.disabled = true;
           wardDropdown.disabled = true;
           addressInput.disabled = true;
-        } else {
+        }
+        else
+        {
           districtDropdown.disabled = false;
           wardDropdown.disabled = false;
           addressInput.disabled = false;
         }
 
-        // Reset dropdowns and input field
         districtDropdown.selectedIndex = 0;
         wardDropdown.selectedIndex = 0;
-        addressInput.value = "";
       }
     </script>
   </body>
