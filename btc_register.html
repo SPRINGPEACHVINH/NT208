@@ -5,12 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>legal | TicketX88</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
     <style>
       body {
         margin: 0;
         padding: 0;
         font-family: Arial, sans-serif;
       }
+
 
       .container {
         position: relative;
@@ -155,7 +159,8 @@
         padding: 10px;
         border: none;
         border-radius: 10px;
-        width: 100%;
+        width: 30%;
+        margin-left: auto;
         font-size: 18px;
       }
 
@@ -181,23 +186,27 @@
       }
 
       .form-item input {
+        position: relative;
         background-color: #f5f7fd;
         padding: 10px;
         font-size: 16px;
         border: 0.5px solid black;
         border-radius: 10px;
         box-sizing: border-box;
-        width: 100%;  
+        width: 100%;
+      }
+
+      .error-message {
+        display: none;
+        color: red; 
+        font-size: 12px;
+        font-style: italic;
       }
 
       .form-item label {
         font-weight: bold;
         margin: 10px 0 5px;
         display: block;
-      }
-
-      .form-item input:focus {
-        outline: 0.3px solid black;
       }
 
       .form-group select {
@@ -209,23 +218,23 @@
         width: 100%;
       }
 
-      .form-group select:focus {
-        outline: 0.3px solid black;
-      }
-
-      .form-group select option:hover {
-        background-color: #f4f4f4; /* Màu nền khi hover trên option */
-      }
-
       select[disabled],
       input[disabled] {
-        background-color: #f1f1f1;
+        background-color: #e7e7e7;
         pointer-events: none;
       }
 
       /* Ẩn mũi tên tăng/giảm giá trị số */
       input[type="number"]::-webkit-inner-spin-button {
         -webkit-appearance: none;
+      }
+
+      #enterprise-day-of-issue::-webkit-calendar-picker-indicator {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor:text;
       }
 
       @media (max-width: 992px) {
@@ -269,7 +278,7 @@
         <div class="top-bar">
           <a href="index.html"><img src="favicon.png" width="35px" height="35px" /></a>
           <div class="profile-name">
-            <p class="text" style="margin-right: 10px">
+            <p class="text" style="margin-right: 10px"> 
               NguyenNgocMinhTam
             </p>
             <img
@@ -283,7 +292,7 @@
 
         <div class="sidebar">
           <ul>
-            <a href="web2.html" style="text-decoration: none">
+            <a href="btc_register.html" style="text-decoration: none">
             <li>
                 <span class="i-human"></span>
                 Hồ sơ ban tổ chức
@@ -320,7 +329,7 @@
       <div class="container-basic-information">
         <div class="form-group">
           <div class="form-item">
-            <label for="business-type">Loại hình kinh doanh<span style="color: red">*</span></label>
+            <label>Loại hình kinh doanh<span style="color: red">*</span></label>
             <select id="business-type" name="business-type" onchange="showBusinessType()" >
               <option value="enterprise" selected>Doanh nghiệp/Nhà tổ chức</option>
               <option value="personal">Cá nhân</option>
@@ -329,35 +338,40 @@
         </div>
       </div>
 
-      <div id="personal-business" style="display: none;">
+      <form id="personal-business" style="display: none;">
         <h3 style="font-size: 25px">Thông tin cơ bản</h3>
         <div class="container-basic-information">
           <div class="form-group">
             <div class="form-item">
-              <label for="personal-name">Họ và tên<span style="color: red">*</span></label>
+              <label>Họ và tên<span style="color: red">*</span></label>
               <input type="text" id="personal-name" name="personal-name" />
+              <span class="error-message">Vui lòng nhập họ tên</span>
             </div>
             <div class="form-item">
-              <label for="personal-email">Email<span style="color: red">*</span></label>
+              <label>Email<span style="color: red">*</span></label>
               <input type="email" id="personal-email" name="personal-email" />
+              <span class="error-message">Vui lòng nhập email</span>
             </div>
           </div>
 
           <div class="form-group">
             <div class="form-item">
-              <label for="personal-phone">Số điện thoại<span style="color: red">*</span></label>
-              <input type="number" id="personal-phone" name="personal-phone" />
+              <label>Số điện thoại<span style="color: red">*</span></label>
+              <input type="tel" id="personal-phone" name="personal-phone" maxlength="10" ninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,10)"/>
+              <span class="error-message">Vui lòng nhập số điện thoại</span>
             </div>
             <div class="form-item">
-              <label for="personal-id">Số CCCD<span style="color: red">*</span></label>
+              <label>Số CCCD<span style="color: red">*</span></label>
               <input type="text" id="personal-id" name="personal-id" />
+              <span class="error-message">Vui lòng nhập số CCCD</span>
             </div>
           </div>
 
           <div class="form-group">
             <div class="form-item" id="item-special">
-              <label for="personal-tax">Mã số thuế<span style="color: red">*</span></label>
+              <label>Mã số thuế<span style="color: red">*</span></label>
               <input type="number" id="personal-tax" name="personal-tax" />
+              <span class="error-message">Vui lòng nhập mã số thuế</span>
             </div>
           </div>
         </div>
@@ -366,71 +380,88 @@
         <div class="container-basic-information">
           <div class="form-group">
             <div class="form-item">
-              <label for="personal-city-list">Tỉnh/Thành<span style="color: red">*</span></label>
+              <label>Tỉnh/Thành<span style="color: red">*</span></label>
               <select id="personal-city-list" name="personal-city-list" onchange="handleCityChange()">
                 <option value="personal-city-HCM">Thành Phố Hồ Chí Minh</option>
                 <option value="personal-city-HaNoi">Thành Phố Hà Nội</option>
               </select>
+              <span class="error-message">Vui lòng chọn tỉnh/thành</span>
             </div>
             <div class="form-item">
-              <label for="personal-district-list">Quận/Huyện<span style="color: red">*</span></label>
+              <label >Quận/Huyện<span style="color: red">*</span></label>
               <select id="personal-district-list" name="personal-district-list" disabled>
                 <option value="personal-district-1">Quận 1</option>
                 <option value="personal-district-2">Quận 2</option>
                 <option value="personal-district-3">Quận 3</option>
               </select>
+              <span class="error-message">Vui lòng chọn quận/huyện</span>
             </div>
           </div>
 
           <div class="form-group">
             <div class="form-item">
-              <label for="personal-ward-list">Phường/Xã<span style="color: red">*</span></label>
+              <label>Phường/Xã<span style="color: red">*</span></label>
               <select id="personal-ward-list" name="personal-ward-list" disabled>
                 <option value="personal-ward-HCM-1">Phường Bến Nghé</option>
                 <option value="personal-ward-HCM-2">Phường Bến Thành</option>
               </select>
+              <span class="error-message">Vui lòng chọn phường/xã</span>
             </div>
             <div class="form-item">
-              <label for="personal-address">Địa chỉ<span style="color: red">*</span></label>
+              <label>Địa chỉ<span style="color: red">*</span></label>
               <input type="text" id="personal-address" name="personal-address" disabled />
+              <span class="error-message">Vui lòng nhập địa chỉ</span>
             </div>
           </div>
         </div>
-      </div>
 
-      <div id="enterprise-business" style="display: block">
+        <br>
+        <br>
+
+        <div class="form-group">
+          <button type="submit">Lưu thông tin</button>
+        </div>
+      </form>
+
+      <form id="enterprise-business" style="display: block">
         <h3 style="font-size: 25px">Thông tin cơ bản</h3>
         <div class="container-basic-information">
           <div class="form-group">
             <div class="form-item">
-              <label for="enterprise-name">Tên doanh nghiệp<span style="color: red">*</span></label>
+              <label>Tên doanh nghiệp<span style="color: red">*</span></label>
               <input type="text" id="enterprise-name" name="enterprise-name" />
+              <span class="error-message">Vui lòng nhập tên doanh nghiệp</span>
             </div>
             <div class="form-item">
-              <label for="enterprise-email">Mã số đăng ký kinh doanh<span style="color: red">*</span></label>
-              <input type="email" id="enterprise-email" name="enterprise-mail" />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <div class="form-item">
-              <label for="phone">Nơi cấp<span style="color: red">*</span></label>
-              <input type="number" id="phone" name="phone" />
-            </div>
-            <div class="form-item">
-              <label for="id">Ngày cấp<span style="color: red">*</span></label>
-              <input type="text" id="id" name="id" />
+              <label>Mã số đăng ký kinh doanh<span style="color: red">*</span></label>
+              <input type="number" id="enterprise-number-business" name="enterprise-number-business" />
+              <span class="error-message">Vui lòng nhập mã số đăng ký kinh doanh</span>
             </div>
           </div>
 
           <div class="form-group">
             <div class="form-item">
-              <label for="tax">Số điện thoại<span style="color: red">*</span></label>
-              <input type="number" id="tax" name="tax" />
+              <label>Nơi cấp<span style="color: red">*</span></label>
+              <input type="text" id="enterprise-place-of-issue" name="enterprise-place-of-issue" />
+              <span class="error-message">Vui lòng nhập nơi cấp</span>
             </div>
             <div class="form-item">
-              <label for="tax">Email<span style="color: red">*</span></label>
-              <input type="number" id="tax" name="tax" />
+              <label>Ngày cấp<span style="color: red">*</span></label>
+              <input type="text" id="enterprise-day-of-issue" name="enterprise-day-of-issue" />
+              <span class="error-message">Vui lòng nhập ngày cấp</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-item">
+              <label>Số điện thoại<span style="color: red">*</span></label>
+              <input type="tel" id="enterprise-phone" name="enterprise-phone" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,10)"/>
+              <span class="error-message">Vui lòng nhập số điện thoại</span>
+            </div>
+            <div class="form-item">
+              <label>Email<span style="color: red">*</span></label>
+              <input type="email" id="enterprise-email" name="enterprise-email" />
+              <span class="error-message">Vui lòng nhập email</span>
             </div>
           </div>
         </div>
@@ -439,117 +470,116 @@
         <div class="container-basic-information">
           <div class="form-group">
             <div class="form-item">
-              <label for="enterprise-city-list">Tỉnh/Thành<span style="color: red">*</span></label>
+              <label>Tỉnh/Thành<span style="color: red">*</span></label>
                 <select id="enterprise-city-list" name="enterprise-city-list" onchange="handleCityChange()">
                   <option value="enterprise-city-HCM">Thành Phố Hồ Chí Minh</option>
                   <option value="enterprise-city-HaNoi">Thành Phố Hà Nội</option>
                 </select>
+                <span class="error-message">Vui lòng chọn tỉnh/thành</span>
             </div>
             <div class="form-item">
-              <label for="enterprise-district-list">Quận/Huyện<span style="color: red">*</span></label>
+              <label>Quận/Huyện<span style="color: red">*</span></label>
               <select id="enterprise-district-list" name="enterprise-district-list" disabled>
                 <option value="enterprise-district-1">Quận 1</option>
                 <option value="enterprise-district-2">Quận 2</option>
                 <option value="enterprise-district-3">Quận 3</option>
               </select>
+              <span class="error-message">Vui lòng chọn quận/huyện</span>
             </div>
           </div>
 
           <div class="form-group">
             <div class="form-item">
-              <label for="enterprise-ward-list">Phường/Xã<span style="color: red">*</span></label>
+              <label>Phường/Xã<span style="color: red">*</span></label>
               <select id="enterprise-ward-list" name="enterprise-ward-list" disabled>
                 <option value="enterprise-ward-HCM-1">Phường Bến Nghé</option>
                 <option value="enterprise-ward-HCM-2">Phường Bến Thành</option>
               </select>
+              <span class="error-message">Vui lòng chọn phường/xã</span>
             </div>
             <div class="form-item">
-              <label for="enterprise-address">Địa chỉ<span style="color: red">*</span></label>
+              <label>Địa chỉ<span style="color: red">*</span></label>
               <input type="text" id="enterprise-address" name="enterprise-address" disabled />
+              <span class="error-message">Vui lòng nhập địa chỉ</span>
             </div>
           </div>
         </div>
-      </div>
 
-      <br />
-      <br />
+        <br>
+        <br>
 
-      <div class="form-group">
-        <button type="submit">Lưu thông tin</button>
-      </div>
+        <div class="form-group">
+          <button type="submit">Lưu thông tin</button>
+        </div>
+      </form>
     </div>
 
     <script>
-      // Hàm được gọi khi trang web tải lần đầu tiên
-      window.onload = function () {
+      $(document).ready(function() {
         // Xóa lựa chọn mặc định và vô hiệu hóa các ô chọn danh sách và trường nhập liệu  
-        document.getElementById("enterprise-city-list").value = "";
-        document.getElementById("enterprise-district-list").value = "";
-        document.getElementById("enterprise-ward-list").value = "";
-        document.getElementById("enterprise-address").value = "";
+        $("#enterprise-city-list, #enterprise-district-list, #enterprise-ward-list, #enterprise-address").val("");
+    
+        $("#personal-city-list, #personal-district-list, #personal-ward-list, #personal-address").val("");
 
-        document.getElementById("personal-city-list").value = "";
-        document.getElementById("personal-district-list").value = "";
-        document.getElementById("personal-ward-list").value = "";
-        document.getElementById("personal-address").value = "";
-      };
-
-      function showBusinessType() {
-        var selectElement = document.getElementById("business-type");
-        var selectOption = selectElement.options[selectElement.selectedIndex].value;
+        $("#enterprise-day-of-issue").datepicker({
+          format: 'dd-mm-yyyy', // Định dạng ngày tháng
+          autoclose: true, // Tự đóng khi chọn xong
+          todayHighlight: true // Làm nổi bật ngày hiện tại
+        });
       
-        // Ẩn tất cả các phần tử
-        document.getElementById("personal-business").style.display = "none";
-        document.getElementById("enterprise-business").style.display = "none";
-      
-        // Hiển thị phần tử tương ứng với lựa chọn của người dùng
-        if (selectOption === "personal") {
-          document.getElementById("personal-business").style.display = "block";
-        } else if (selectOption === "enterprise") {
-          document.getElementById("enterprise-business").style.display = "block";
-        }
-      }
-
-      function handleCityChange() {
-        var selectElement = document.getElementById("business-type");
-        var selectOption = selectElement.options[selectElement.selectedIndex].value;
-
-        var cityDropdown;
-        var districtDropdown;
-        var wardDropdown;
-        var addressInput;
+        $("#business-type").change(function() {
+          let selectOption = $(this).val();
+  
+          // Ẩn tất cả các phần tử
+          $("#personal-business, #enterprise-business").hide();
+  
+          // Hiển thị phần tử tương ứng với lựa chọn của người dùng
+          if (selectOption === "personal") {
+            $("#personal-business").show();
+          } else if (selectOption === "enterprise") {
+            $("#enterprise-business").show();
+          }
+        });
         
-        if (selectOption === "personal")
-        {
-          cityDropdown = document.getElementById("personal-city-list");
-          districtDropdown = document.getElementById("personal-district-list");
-          wardDropdown = document.getElementById("personal-ward-list");
-          addressInput = document.getElementById("personal-address");
-        }
-        else if (selectOption === "enterprise")
-        {
-          cityDropdown = document.getElementById("enterprise-city-list");
-          districtDropdown = document.getElementById("enterprise-district-list");
-          wardDropdown = document.getElementById("enterprise-ward-list");
-          addressInput = document.getElementById("enterprise-address");
-        }
-
-        if (cityDropdown.value === "")
-        {
-          districtDropdown.disabled = true;
-          wardDropdown.disabled = true;
-          addressInput.disabled = true;
-        }
-        else
-        {
-          districtDropdown.disabled = false;
-          wardDropdown.disabled = false;
-          addressInput.disabled = false;
-        }
-
-        districtDropdown.selectedIndex = 0;
-        wardDropdown.selectedIndex = 0;
-      }
+        $('#enterprise-business, #personal-business').on('submit', function(e) {
+          let isValid = true;
+          $(this).find('.form-item').each(function() {
+            if ($(this).find('input, select').val() === '' || $(this).find('input, select').val() === null) { // Sử dụng .find() để tìm các trường nhập liệu trong mỗi form-item
+              isValid = false;
+              $(this).find('.error-message').show(); // Hiển thị thông báo lỗi
+            } else {
+              $(this).find('.error-message').hide(); // Ẩn thông báo lỗi nếu trường đã được điền
+            }
+          });
+          if (!isValid) {
+            e.preventDefault(); // Ngăn chặn hành vi mặc định của form
+          }
+        });
+      
+        // Xử lý sự kiện khi thay đổi thành phố
+        $("#personal-city-list, #enterprise-city-list").change(function() {
+          let selectOption = $("#business-type").val();
+          let cityDropdown = $(this);
+          let districtDropdown = $(`#${selectOption}-district-list`);
+          let wardDropdown = $(`#${selectOption}-ward-list`);
+          let addressInput = $(`#${selectOption}-address`);
+  
+          if (cityDropdown.val() === "") {
+            districtDropdown.prop("disabled", true);
+            wardDropdown.prop("disabled", true);
+            addressInput.prop("disabled", true);
+          } else {
+            districtDropdown.prop("disabled", false);
+            wardDropdown.prop("disabled", false);
+            addressInput.prop("disabled", false);
+          }
+  
+          districtDropdown.prop("selectedIndex", 0);
+          wardDropdown.prop("selectedIndex", 0);
+        });
+      });
     </script>
   </body>
 </html>
+
+
