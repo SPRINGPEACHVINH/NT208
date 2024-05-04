@@ -1,0 +1,119 @@
+.container {
+  position: relative;
+  display: flex;
+}
+
+.container-sidebar {
+  width: 30vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+}
+
+.top-bar {
+  background-color: #262f38;
+  color: white;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2vw;
+  position: relative;
+}
+
+.profile-name {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 1.5vw;
+}
+
+.sidebar {
+  background-color: #303b46;
+  flex: 1;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul li {
+  color: white;
+  margin-top: 10px;
+  padding: 20px 30px;
+  font-size: 100%;
+  white-space: nowrap;
+  position: relative;
+  display: flex;
+  transition: color 0.05s; /* Thêm hiệu ứng chuyển đổi màu trong 0.05s */
+}
+
+.li-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #dadada;
+  display: block;
+  cursor: pointer;
+  z-index: -1; /* đưa màu xuống 1 lớp */
+}
+
+.sidebar ul li:hover {
+  color: #27313d; /* Thay đổi màu chữ khi di chuột vào */
+  z-index: 1; /* đưa màu lên 1 lớp */
+}
+
+.i-human,
+.i-calendar,
+.i-dolar,
+.i-pig {
+  padding: 0px 13px;
+  margin-right: 10px;
+}
+
+.sidebar ul li:hover .i-human,
+.sidebar ul li:hover .i-calendar,
+.sidebar ul li:hover .i-dolar,
+.sidebar ul li:hover .i-pig {
+  padding: 0px 13px;
+  margin-right: 10px;
+}
+
+.i-human {
+  background: url(../assets/images/sprite-left-bar.png) no-repeat scroll left -82px;
+}
+
+.sidebar ul li:hover .i-human {
+  background: url(../assets/images/sprite-left-bar.png) no-repeat scroll left -383px;
+}
+
+.i-calendar {
+  background: url(../assets/images/sprite-left-bar.png) no-repeat scroll left -307.5px;
+}
+
+.sidebar ul li:hover .i-calendar {
+  background: url(../assets/images/sprite-left-bar.png) no-repeat scroll left -0.5px;
+}
+
+.i-dolar {
+  background: url(../assets/images/sprite-left-bar.png) no-repeat scroll left -26px;
+}
+
+.sidebar ul li:hover .i-dolar {
+  background: url(../assets/images/sprite-left-bar.png) no-repeat scroll left -333px;
+}
+
+.i-pig {
+  background: url(../assets/images/sprite-left-bar.png) no-repeat scroll left -588.2px;
+}
+
+.sidebar ul li:hover .i-pig {
+  background: url(../assets/images/sprite-left-bar.png) no-repeat scroll left -408.2px;
+}
