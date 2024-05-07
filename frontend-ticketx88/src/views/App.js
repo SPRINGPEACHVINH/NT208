@@ -1,8 +1,9 @@
+import React, { Fragment } from "react";
 import { routes } from "../routes";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Sidebar from "../components/Sidebar";
-import Form from "../components/Form";
-import React, { Fragment } from "react";
+import DefaultComponent from "../components/DefaultComponent/DefaultComponent";
+// import Sidebar from "../components/Sidebar"
+// import Form from "../components/Form"
 
 function App() {
   return (
@@ -15,7 +16,14 @@ function App() {
         <Routes>
           {routes.map((route) => {
             const Page = route.page;
-            return <Route path={route.path} element={<Page />} />;
+            const Layout = route.isShowHeader ? DefaultComponent : Fragment;
+            return (
+              <Route path={route.path} element={
+                <Layout>
+                  <Page />
+                </Layout>
+              } />
+            )
           })}
         </Routes>
       </Router>
