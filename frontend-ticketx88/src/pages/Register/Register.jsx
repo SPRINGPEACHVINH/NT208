@@ -1,9 +1,10 @@
 import React from "react"
+import SignIn from "./style.js"
 
 const Register = () => {
     return (
         <div>
-            <h1>Register</h1>
+            <SignIn />
         </div>
     )
 }
