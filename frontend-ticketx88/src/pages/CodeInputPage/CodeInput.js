@@ -11,7 +11,6 @@ function CodeInput() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Here you can handle the submitted code
     console.log(`Submitted code: ${code}`);
     setShowVideo(true);
   };
@@ -27,7 +26,19 @@ function CodeInput() {
         />
         <button type="submit">Enter</button>
       </form>
-      {showVideo && <div className="video-box"></div>}
+      {showVideo && (
+        <div className="video-box">
+          <iframe
+            width="100%"
+            height="100%"
+            src="https://www.youtube.com/embed/M-l5YImGpUE"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      )}
     </div>
   );
 }

@@ -38,12 +38,12 @@
 }
 
 .video-box {
-  width: 640px;
-  height: 360px;
-  margin-top: 20px;
-  background-color: #000;
-  opacity: 0;
-  animation: zoomIn 0.25s forwards;
+    width: 640px;
+    height: 360px;
+    margin-top: 20px;
+    background-color: #000;
+    opacity: 0;
+    animation: zoomIn 0.25s forwards;
 }
 
 @keyframes zoomIn {
