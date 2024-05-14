@@ -1,30 +1,103 @@
-.container {
-  position: relative;
+/* Steps */
+.container-step {
   display: flex;
+  justify-content: center;
+  background-color: #f0f0f0;
+  margin: 10px 0;
+  border-radius: 10px;
 }
 
+.ant-steps-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  transition: all 0.3s ease;
+}
+
+.ant-steps-item-title {
+  color: #555;
+  font-weight: bold;
+}
+
+.ant-steps-item-right-icon {
+  position: absolute;
+  right: -30%;
+  top: calc(50% - 6px);
+  color: rgb(191, 191, 191);
+}
+
+.ant-steps-item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  aspect-ratio: 1;
+  margin-right: 10px;
+  background-color: #fff;
+  border: 2px solid #bbb;
+  border-radius: 50%;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.ant-steps-item:hover {
+  transform: translateY(-3px);
+}
+
+.ant-steps-item-active .ant-steps-item-icon {
+  background-color: orangered;
+  border-color: orangered;
+  color: #fff;
+}
+
+.ant-steps-icon {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ant-steps-item-audio-icon {
+  color: #bbb;
+}
+
+.ant-steps-icon-active .ant-steps-item-audio-icon {
+  color: orangered;
+}
+
+/* form */
 .container-content {
-  flex: 1;
-  background-color: #e1e1e1;
-  padding: 30px;
-  position: relative;
-  margin-left: 30vw; /* Bắt đầu form từ phía bên phải của sidebar */
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 10px;
 }
 
-.container-basic-information {
+.container-form-organizer {
   background-color: white;
   border: 1px solid black;
   border-radius: 10px;
   padding: 20px;
+  margin: 30px 30px 0 30px;
+}
+
+.container-form-event {
+  margin-top: 30px;
+  display: flex;
 }
 
 .form-group {
   display: flex;
-  flex-direction: row; /* Hiển thị các phần tử trong form-group dưới dạng cột */
+  flex-direction: row;
+  margin-bottom: 37px;
 }
 
 .form-group button {
-  background-color: #4caf50;
+  display: inline-block;
+  background-color: orangered;
   color: white;
   font-weight: bold;
   cursor: pointer;
@@ -37,35 +110,61 @@
 }
 
 .form-group button:hover {
-  background-color: #45a049;
+  background-color: rgb(255, 98, 40);
 }
 
-.form-group .form-item {
-  margin-bottom: 15px; /* Đặt khoảng cách giữa các hàng là 15px */
+.form-item {
   width: 100%;
 }
 
-.form-group .form-item:first-child {
+.form-item:first-child {
   margin-right: 20px; /* Khoảng cách giữa các cột */
 }
 
-.form-group .form-item:last-child {
+.form-item:last-child {
   margin-right: 0;
 }
 
-#item-special {
-  width: calc(50% - 10px); /* Chiều rộng của cột là 50% trừ 10px */
+.form-item label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
 }
 
 .form-item input {
   position: relative;
-  background-color: #f5f7fd;
   padding: 10px;
   font-size: 16px;
-  border: 0.5px solid black;
+  border: 0.5px solid #b1b1a9;
   border-radius: 10px;
-  box-sizing: border-box;
   width: 100%;
+  outline: none;
+}
+
+.form-item input:hover {
+  border: 0.5px solid orangered;
+}
+
+.form-item input:focus {
+  border: 0.5px solid orangered;
+}
+
+.form-item select {
+  position: relative;
+  padding: 10px;
+  font-size: 16px;
+  border: 0.5px solid #b1b1a9;
+  border-radius: 10px;
+  width: 100%;
+  outline: none;
+}
+
+.form-item select:hover {
+  border: 0.5px solid orangered;
+}
+
+.form-item select:focus {
+  border: 0.5px solid orangered;
 }
 
 .error-message {
@@ -75,36 +174,31 @@
   font-style: italic;
 }
 
-.form-item label {
-  font-weight: bold;
-  margin: 10px 0 5px;
-  display: block;
-}
-
-.form-group select {
-  background-color: #f5f7fd;
-  padding: 10px;
-  font-size: 16px;
-  border: 0.5px solid black;
-  border-radius: 10px;
+.form-group-event {
   width: 100%;
 }
 
-select[disabled],
-input[disabled] {
-  background-color: #e7e7e7;
-  pointer-events: none;
+.event-item {
+  margin-bottom: 20px;
 }
 
-/* Ẩn mũi tên tăng/giảm giá trị số */
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
+/* Upload */
+.ant-upload-wrapper .ant-upload-drag:not(.ant-upload-disabled):hover {
+  border-color: orangered;
 }
 
-#enterprise-day-of-issue::-webkit-calendar-picker-indicator {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: text;
+.ant-container-drag-upload-cover-event {
+  margin-top: 30px;
+  height: 300px;
+}
+
+.ant-container-drag-upload-logo-event {
+  margin-right: 20px;
+  width: 400px;
+}
+
+.ant-upload-icon {
+  font-size: 48px;
+  color: orangered;
+  margin-bottom: 0;
 }
