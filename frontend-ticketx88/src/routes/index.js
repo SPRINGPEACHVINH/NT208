@@ -1,6 +1,6 @@
 import MainMenu from "../pages/MainMenu/MainMenu";
 import Btc_Register from "../pages/BtcRegister/BtcRegister";
-import Decription from "../pages/Decription/Decription";
+import Description from "../pages/Decription/Decription";
 import Register from "../pages/Register/Register";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 import CodeInputPage from "../pages/CodeInputPage/CodeInput";
@@ -17,8 +17,8 @@ export const routes = [
     isShowHeader: true,
   },
   {
-    path: "/Decription",
-    page: Decription,
+    path: "/Description",
+    page: Description,
     isShowHeader: true,
   },
   {
