@@ -1,4 +1,5 @@
 const User = require("../models/Users");
+const bcrypt = require("bcryptjs");
 
 const CreateUser = (newUser) => {
   return new Promise(async (resolve, reject) => {
