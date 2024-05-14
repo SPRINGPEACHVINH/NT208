@@ -1,5 +1,6 @@
 .code-input-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -33,5 +34,26 @@
 }
 
 .code-input-form button:hover {
-    background-color: #cc5500;
+    background-color: rgb(69, 69, 69);
+}
+
+.video-box {
+  width: 640px;
+  height: 360px;
+  margin-top: 20px;
+  background-color: #000;
+  opacity: 0;
+  animation: zoomIn 0.25s forwards;
+}
+
+@keyframes zoomIn {
+    0% {
+        transform: translateY(-70%) scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
 }

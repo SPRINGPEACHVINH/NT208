@@ -3,6 +3,7 @@ import "../../styles/CodeInput.css";
 
 function CodeInput() {
   const [code, setCode] = useState("");
+  const [showVideo, setShowVideo] = useState(false);
 
   const handleInputChange = (event) => {
     setCode(event.target.value);
@@ -12,6 +13,7 @@ function CodeInput() {
     event.preventDefault();
     // Here you can handle the submitted code
     console.log(`Submitted code: ${code}`);
+    setShowVideo(true);
   };
 
   return (
@@ -25,6 +27,7 @@ function CodeInput() {
         />
         <button type="submit">Enter</button>
       </form>
+      {showVideo && <div className="video-box"></div>}
     </div>
   );
 }
