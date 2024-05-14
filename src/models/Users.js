@@ -5,8 +5,8 @@ const userSchema = new mongoose.Schema(
     Password: { type: String, required: true },
     Email: { type: String, required: true, unique: true },
     PhoneNumber: { type: String, required: true },
-    // AccessToken: { type: String, required: true },
-    // RefreshToken: { type: String, required: true }
+    AccessToken: { type: String, required: true },
+    RefreshToken: { type: String, required: true }
   },
   {
     timestamps: true,
