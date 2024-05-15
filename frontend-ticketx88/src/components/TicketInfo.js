@@ -38,7 +38,7 @@ const TicketInfo = () => {
   return (
     <div className="ticket-info-container">
       <div className="ticket-info">
-        <div className="header" onClick={() => toggleDetails("main-details")}>
+        <div className="ticket-header" onClick={() => toggleDetails("main-details")}>
           18:00 - 22:00, 31 Tháng 05, 2024
           <button className="buy-button">Mua vé ngay</button>
         </div>
