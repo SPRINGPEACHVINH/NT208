@@ -1,6 +1,7 @@
 const User = require("../models/Users");
 const bcrypt = require("bcrypt");
 const genneralAccessToken = require("./JwtService")
+
 const CreateUser = (newUser) => {
   return new Promise(async (resolve, reject) => {
     const { UserName, Email, Password, confirmPassword, PhoneNumber } = newUser;
@@ -28,7 +29,7 @@ const CreateUser = (newUser) => {
         resolve({
           status: "OK",
           message: "User created successfully",
-          data: CreateUser,
+          data: createdUser,
         });
       }
     } catch (e) {
@@ -67,7 +68,7 @@ const LoginUser = (userLogin) => {
       resolve({
         status: "OK",
         message: "Success",
-        data: LoginUser,
+        data: userLogin
       })
     } catch (e) {
       reject(e);
