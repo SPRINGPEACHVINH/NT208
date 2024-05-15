@@ -7,20 +7,27 @@
 }
 
 .title {
-    color: rgb(73, 73, 73);
+    color: whitesmoke;
     padding-left: 20px;
+    padding-top: 10px;
 }
 
 .details {
-    color: rgb(0, 0, 0);
+    color: white;
     font-size: 14px;
     position: relative;
+    margin-top: 15px;
+}
+
+.details.font-arial {
+    text-align: center;
+    font-size: 16px;
 }
 
 #desc-pad {
     flex-direction: column;
     display: flex;
-    background-color: white;
+    background-color: #444;
     margin: 0 auto;
     position: relative;
     width: 900px;
@@ -35,7 +42,7 @@
     max-height: 255px;
     padding-left: 20px;
     padding-right: 20px;
-    border-top: 1px solid rgb(175, 174, 174);
+    border-top: 5px solid #666;
 }
 
 #read-more-button {
@@ -67,7 +74,7 @@
     width: 900px;
     bottom: 0px;
     position: absolute;
-    background-color: white;
+    background-color: #555;
     transition: opacity 0.75s;
     -webkit-mask-image: linear-gradient(to top, black 10%, transparent 80%);
     mask-image: linear-gradient(to top, black 10%, transparent 80%);

@@ -1,5 +1,6 @@
 import React from 'react';
 import ShowDescription from './ShowDescription';
+import TicketInfo from '../../components/TicketInfo';
 
 const ShowPage = () => {
   const show = {
@@ -10,7 +11,8 @@ const ShowPage = () => {
 
   return (
     <div>
-      <ShowDescription show={show} />
+        <ShowDescription show={show} />
+        <TicketInfo />
     </div>
   );
 };
