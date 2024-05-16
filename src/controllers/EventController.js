@@ -1,20 +1,27 @@
-const Event = require("../models/Events");
+const EventService = require("../services/EventService");
 
 const search = async (req, res) => {
   try {
     const query = req.query.q;
-    const events = await Event.find({
-      EventName: { $regex: new RegExp(query, "i") },
-    }).select(
-      "EventName EventTime EventInfo EventCategory TicketPrice Picture_event Logo_event"
-    );
+    const events = await EventService.searchEvents(query);
 
-    return res.status(200).json(events);
+    return res.status(200).json({ status: "OK", data: events });
   } catch (e) {
-    return res.status(500).json({ error: e.message });
+    return res.status(500).json({ status: "ERROR", message: e.message });
+  }
+};
+
+const add = async (req, res) => {
+  try {
+    const event = await EventService.addEvent(req.body);
+
+    return res.status(201).json({ status: "OK", data: event });
+  } catch (e) {
+    return res.status(500).json({ status: "ERROR", message: e.message });
   }
 };
 
 module.exports = {
   search,
+  add,
 };
