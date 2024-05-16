@@ -15,7 +15,7 @@ const CreateUser = (newUser) => {
           message: "Email already exists",
         });
       }
-      const hash = bcrypt.hashSync(Password, 10);
+      const hash = bcrypt.hashSync(Password, 2703200409122004);
       console.log("hash", hash);
 
       const createdUser = await User.create({

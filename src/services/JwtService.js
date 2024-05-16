@@ -9,7 +9,7 @@ const genneralAccessToken = async (payload) => {
     },
     process.env.ACCESS_TOKEN,
     {
-      expiresIn: '10s'
+      expiresIn: '1h'
     }
   )
   return access_token
