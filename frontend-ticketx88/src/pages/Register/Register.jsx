@@ -1,10 +1,10 @@
 import React from "react"
-import SignIn from "./signin.js"
+import Registers from "./register.js"
 
 const Register = () => {
     return (
         <div>
-            <SignIn />
+            <Registers />
         </div>
     )
 }
