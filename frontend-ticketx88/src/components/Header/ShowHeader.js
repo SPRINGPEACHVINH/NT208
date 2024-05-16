@@ -12,14 +12,16 @@ const ShowHeader = () => {
       if (isTyping && searchTerm !== "") {
         fetchResults();
       }
-    }, 5000); // 5000ms delay
+    }, 1000); // 5000ms delay
 
     return () => clearTimeout(timer);
   }, [searchTerm, isTyping]);
 
   const fetchResults = async () => {
     const response = await fetch(
-      `http://localhost:8888/api/event/search?q=${searchTerm}`
+      `http://localhost:8888/api/event/search?q=${encodeURIComponent(
+        searchTerm
+      )}`
     );
     const data = await response.json();
     setResults(data);
