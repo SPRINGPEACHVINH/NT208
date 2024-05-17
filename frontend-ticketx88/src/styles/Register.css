@@ -9,6 +9,7 @@
   text-size-adjust: 100%;
   position: relative;
   margin: 0 auto;
+  margin-top: 20px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
@@ -26,22 +27,16 @@
   color: rgb(255, 255, 255);
 }
 
-.Continue-button:disabled {
-  background: rgb(221, 221, 227);
-  color: rgb(128, 128, 137);
-  cursor: not-allowed;
-}
+/* .Continue-button:disabled {
+    background: rgb(221, 221, 227);
+    color: rgb(128, 128, 137);
+    cursor: not-allowed;
+  } */
 
 .checkbox {
-  text-size-adjust: 100%;
+
 }
 
-.ant-checkbox-wrapper:not(.ant-checkbox-wrapper-disabled):hover .ant-checkbox-checked:not(.ant-checkbox-disabled) .ant-checkbox-inner {
-    background-color: orangered !important;
-    border-color: orangered !important;
-}
-
-.ant-checkbox-wrapper:not(.ant-checkbox-wrapper-disabled):hover .ant-checkbox-checked:not(.ant-checkbox-disabled) .ant-checkbox-inner:focus {
-    background-color: orangered !important;
-    border-color: orangered !important;
+.checkbox:checked {
+  background-color: orangered;
 }

@@ -4,26 +4,27 @@ import { Input } from "antd";
 import { Checkbox } from "antd";
 import "../../styles/Register.css";
 
-function onChange(e) {
+function onClick(e) {
   console.log(`checked = ${e.target.checked}`);
 }
 function Register() {
   return (
-    <div class="sign-up">
-      <p>Nhập email</p>
+    <div className="sign-up">
+      <span>Nhập email</span>
       <Input placeholder="Nhập email" prefix={<UserOutlined />} />
-      <p>Nhập username</p>
+      <p></p>
+      <span>Nhập Username</span>
       <Input placeholder="Nhập username" prefix={<UserOutlined />} />
-      <p>Nhập mật khẩu</p>
+      <p></p>
+      <span>Nhập mật khẩu</span>
       <Input placeholder="Nhập mật khẩu" prefix={<UserOutlined />} />
-      <div class="term-of-use">
-        <div class="checkbox">
-          <input_ className="checkbox" type="checkbox" class="checkbox-custom"></input_>
-          <Checkbox onChange={onChange}></Checkbox>
-          <label for="term-of-use">
-            Tôi đồng ý với Điều khoản sử dụng và Chính sách bảo mật của TicketX88
-          </label>
+      <p></p>
+      <div className="term-of-use">
+        <div>
+          <Checkbox  className="checkbox" onClick={onClick}></Checkbox>
         </div>
+        <p>Tôi đồng ý với Điều khoản sử dụng và Chính sách bảo mật của TicketX88 </p>
+
       </div>
       
       <div class="Continue-part">
