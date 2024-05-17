@@ -1,4 +1,5 @@
 const UserService = require("../services/UserService");
+const jwtservice = require("../services/JwtService");
 
 const CreateUser = async (req, res) => {
   try {
@@ -154,7 +155,7 @@ const RefreshToken = async (req, res) => {
         message: "The token is required",
       });
     }
-    const response = await UserService.RefreshTokenService(token)
+    const response = await jwtservice.refreshToken(token)
     return res.status(200).json(response)
   } catch (e) {
     return res.status(404).json({
