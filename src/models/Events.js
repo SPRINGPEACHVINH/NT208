@@ -10,7 +10,6 @@ const eventSchema = new mongoose.Schema(
     TicketPrice: { type: Number, required: true },
     Picture_event: { type: String, required: true },
     Logo_event: { type: String, required: true },
-    RemainingTickets: { type: Number, required: true },
     Btc: { type: mongoose.Schema.Types.ObjectId, ref: "Btc", required: true },
   },
   {
