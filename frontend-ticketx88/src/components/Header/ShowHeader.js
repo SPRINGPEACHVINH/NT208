@@ -11,20 +11,21 @@ const ShowHeader = () => {
     const timer = setTimeout(() => {
       if (isTyping && searchTerm !== "") {
         fetchResults();
+      } else if (searchTerm === "") {
+        setResults([]);
       }
-    }, 1000); // 5000ms delay
+    }, 250); // 250ms delay
 
     return () => clearTimeout(timer);
   }, [searchTerm, isTyping]);
 
   const fetchResults = async () => {
     const response = await fetch(
-      `http://localhost:8888/api/event/search?q=${encodeURIComponent(
-        searchTerm
-      )}`
+      `http://localhost:8888/api/event/search?q=${encodeURIComponent(searchTerm)}`
     );
     const data = await response.json();
-    setResults(data);
+    setResults(data.data);
+    setIsTyping(false);
   };
 
   const handleInputChange = (event) => {
@@ -45,14 +46,18 @@ const ShowHeader = () => {
             value={searchTerm}
             onChange={handleInputChange}
           />
-          {results.length > 0 && (
-            <ul>
-              {results.map((result, index) => (
-                <li key={index}>{result.EventName}</li>
-              ))}
-            </ul>
-          )}
           <button id="search-btn">Tìm kiếm</button>
+          {results.length > 0 && (
+            <div className="dropdown">
+              <ul>
+                {results.map((result, index) => (
+                  <li key={index}>
+                    {result.EventName} - {result.EventCategory}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
         <div className="actions">
           <button className="create-event">Tạo sự kiện</button>
