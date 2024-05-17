@@ -7,7 +7,7 @@ const ShowHeader = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
-  const [isFocused, setIsFocused] = useState(false); // new state variable
+  const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -49,12 +49,12 @@ const ShowHeader = () => {
             autoComplete="off"
             value={searchTerm}
             onChange={handleInputChange}
-            onFocus={() => setIsFocused(true)} // set isFocused to true when input is focused
-            onBlur={() => setIsFocused(false)} // set isFocused to false when input loses focus
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
           />
           <button id="search-btn">Tìm kiếm</button>
           {isFocused &&
-            results.length > 0 && ( // only show dropdown when input is focused and there are results
+            results.length > 0 && (
               <div className="dropdown">
                 <ul>
                   {results.map((result, index) => (
