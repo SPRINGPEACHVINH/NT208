@@ -73,9 +73,48 @@
     padding: 0;
 }
 
-.dropdown li {
+.dropdown ul li {
+    display: flex;
+    align-items: center;
     padding: 10px;
     cursor: pointer;
+}
+
+.dropdown ul li .event-image {
+    width: 70px;
+    height: 70px;
+    margin-right: 10px;
+}
+
+.dropdown ul li .event-info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.dropdown ul li .event-info .event-name {
+    font-weight: bold;
+}
+
+.dropdown ul li .event-info .event-time-location {
+    font-weight: bold;
+}
+
+.dropdown ul li .event-info .event-price-category {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.dropdown ul li .event-info .event-price-category .ticket-price {
+    color: orangered;
+    align-self: flex-start;
+}
+
+.dropdown ul li .event-info .event-price-category .event-category {
+    font-style: italic;
+    align-self: flex-end;
+    text-align: right;
 }
 
 .dropdown li:hover {
