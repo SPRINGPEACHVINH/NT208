@@ -1,11 +1,12 @@
-import React from "react"
+import React from "react";
+import ShowHome from "./ShowHome";
 
 const MainMenu = () => {
-    return (
-        <div>
-            <h1>Main Menu</h1>
-        </div>
-    )
-}
+  return (
+    <div>
+      <ShowHome />
+    </div>
+  );
+};
 
-export default MainMenu
+export default MainMenu;
