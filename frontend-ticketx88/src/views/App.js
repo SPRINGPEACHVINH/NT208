@@ -1,16 +1,20 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
+import axios from "axios";
 import { routes } from "../routes";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import DefaultComponent from "../components/DefaultComponent/DefaultComponent";
-// import Sidebar from "../components/Sidebar"
-// import Form from "../components/Form"
 
 function App() {
+
+  useEffect(() => {
+    fetchApi()
+  }, [])
+
+  const fetchApi = async () => {
+    const res = axios.get(`${process.env.REACT_API_URL_BACKEND}/user/getAll`)
+    console.log('res', res)
+  }
   return (
-    // <Fragment>
-    //   <Sidebar />
-    //   <Form />
-    // </Fragment>
     <div>
       <Router>
         <Routes>
