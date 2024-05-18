@@ -21,7 +21,18 @@ const add = async (req, res) => {
   }
 };
 
+const getAll = async (req, res) => {
+  try {
+    const events = await EventService.getAllEvents();
+
+    return res.status(200).json({ status: "OK", data: events });
+  } catch (e) {
+    return res.status(500).json({ status: "ERROR", message: e.message });
+  }
+};
+
 module.exports = {
   search,
   add,
+  getAll,
 };

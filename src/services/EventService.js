@@ -11,7 +11,12 @@ const addEvent = async (eventData) => {
   return event.save();
 };
 
+const getAllEvents = async () => {
+  return Event.find({}).select("EventName EventTime TicketPrice Picture_event");
+};
+
 module.exports = {
   searchEvents,
   addEvent,
+  getAllEvents,
 };
