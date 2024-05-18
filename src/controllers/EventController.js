@@ -31,8 +31,27 @@ const getAll = async (req, res) => {
   }
 };
 
+const deleteById = async (req, res) => {
+  try {
+    const result = await EventService.deleteEvent(req.params.id);
+
+    if (!result) {
+      return res
+        .status(404)
+        .json({ status: "ERROR", message: "Event not found" });
+    }
+
+    return res
+      .status(200)
+      .json({ status: "OK", message: "Event deleted successfully" });
+  } catch (e) {
+    return res.status(500).json({ status: "ERROR", message: e.message });
+  }
+};
+
 module.exports = {
   search,
   add,
   getAll,
+  deleteById,
 };
