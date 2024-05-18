@@ -36,7 +36,7 @@ const ShowHeader = () => {
     setSearchTerm(event.target.value);
     setIsTyping(true);
   };
-
+  
   return (
     <header className="header">
       <div className="logo">TicketX88</div>

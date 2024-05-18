@@ -6,10 +6,13 @@ import DefaultComponent from "../components/DefaultComponent/DefaultComponent";
 
 function App() {
 
-  useEffect(() => {})
+  useEffect(() => {
+    fetchApi()
+  }, [])
 
   const fetchApi = async () => {
-    const res = axios.get(`${process.env.REACT_API_URL_BACKEND}/`)
+    const res = axios.get(`${process.env.REACT_API_URL_BACKEND}/user/getAll`)
+    console.log('res', res)
   }
   return (
     <div>
