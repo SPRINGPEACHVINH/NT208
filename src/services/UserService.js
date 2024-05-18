@@ -15,7 +15,7 @@ const CreateUser = (newUser) => {
           message: "Email already exists",
         });
       }
-      const hash = bcrypt.hashSync(Password, 2703200409122004);
+      const hash = bcrypt.hashSync(Password, 10);
       console.log("hash", hash);
 
       const createdUser = await User.create({
@@ -142,36 +142,12 @@ const GetDetailsUser = (id) => {
       reject(e);
     }
   });
-};
-
-const RefreshTokenService = (token) => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      // const user = await User.findOne({
-      //   _id: id,
-      // });
-      // if (user === null) {
-      //   resolve({
-      //     status: "ERROR",
-      //     message: "User does not exist",
-      //   });
-      // }
-      console.log("token", token);
-      resolve({
-        status: "OK",
-        message: "Success",
-      });
-    } catch (e) {
-      reject(e);
-    }
-  });
-};
+};  
 
 module.exports = {
   CreateUser,
   LoginUser,
   DeleteUser,
   GetAllUser,
-  GetDetailsUser,
-  RefreshTokenService,
+  GetDetailsUser
 };
