@@ -10,21 +10,25 @@ export const routes = [
     path: "/",
     page: MainMenu,
     isShowHeader: true,
+    isShowFooter: true,
   },
   {
     path: "/BtcRegister",
     page: Btc_Register,
-    isShowHeader: true,
+    isShowHeader: false,
+    isShowFooter: false,
   },
   {
     path: "/Description",
     page: Description,
     isShowHeader: true,
+    isShowFooter: true,
   },
   {
     path: "/Register",
     page: Register,
     isShowHeader: false,
+    isShowFooter: true,
   },
   {
     path: "/code-input",

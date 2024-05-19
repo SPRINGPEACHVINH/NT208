@@ -1,18 +1,37 @@
 .row {
+  display: flex;
   margin: 0;
   padding: 0;
   background-color: rgb(30, 30, 30);
+}
+
+.row-1 {
+  display: flex;
+  margin: 0;
+  padding: 0;
 }
 
 .col-md-3 {
   padding: 0;
   width: 20%;
   height: 100%;
+  position: fixed;
+}
+
+.col-md-3-hidden {
+  display: none;
 }
 
 .col-md-9 {
-  width: 80%;
-  height: auto;
+  flex: 1;
+  padding: 10px;
+  margin-left: 20%;
+}
+
+.col-md-9-full {
+  flex: 1;
+  padding: 10px;
+  margin-left: 0;
 }
 
 @media only screen and (max-width: 768px) {
@@ -22,11 +41,17 @@
     background-color: rgb(30, 30, 30);
   }
 
+  .header-btc-register {
+    position: static;
+  }
+
   .col-md-3 {
-    display: none; /* Ẩn Sidebar trên điện thoại */
+    display: none;
+    width: 100%;
   }
 
   .col-md-9 {
-    width: 100%; /* Chiếm toàn bộ chiều rộng trên điện thoại */
+    margin-left: 0;
+    width: 100%;
   }
 }
