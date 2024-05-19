@@ -3,14 +3,8 @@
   fill: currentColor;
 }
 
-.container-sidebar-hidden {
-  height: 100vh;
-}
-
-.container-sidebar {
-  position: fixed;
-  width: 20vw;
-  height: 100vh;
+.d-flex {
+  height: 100%;
 }
 
 .nav-link.active {
