@@ -26,7 +26,7 @@ p {
     margin: 0px;
 }
 
-.content {
+.banner .content {
     width: 100%;
     height: 100%;
     padding: 0px;
@@ -40,11 +40,11 @@ p {
     margin-right: auto;
 }
 
-@media (min-width: 1024px) {
-    .content {
+/* @media (min-width: 1024px) {
+    .banner .content {
         display: flex;
     }
-}
+} */
 
 .text-wrapper {
     flex: 1 1 0%;
@@ -75,7 +75,7 @@ p {
     background-color: rgb(2, 2, 3);
 }
 
-.content .text-wrapper #vertical-dashed {
+.banner .content .text-wrapper #vertical-dashed {
     position: absolute;
     right: 0px;
     bottom: 4px;
@@ -83,7 +83,7 @@ p {
     transform: translate(2px, -4.4rem);
 }
 
-.content .text-wrapper #vertical-dashed-2 {
+.banner .content .text-wrapper #vertical-dashed-2 {
     position: absolute;
     right: 0px;
     top: 100%;
@@ -100,7 +100,7 @@ p {
     justify-content: space-between;
 }
 
-.content .text-wrapper .text div {
+.banner .content .text-wrapper .text div {
     width: 100%;
 }
 
@@ -112,7 +112,7 @@ p {
     overflow: hidden;
 }
 
-.content .text-wrapper .text .info #titles {
+.banner .content .text-wrapper .text .info #titles {
     overflow: hidden;
     word-break: break-word;
     display: -webkit-box;
@@ -120,7 +120,7 @@ p {
     -webkit-line-clamp: 3;
 }
 
-.content .text-wrapper .text .info #date {
+.banner .content .text-wrapper .text .info #date {
     font-size: 18px;
     margin-top: 1rem;
 }
@@ -130,19 +130,19 @@ p {
     stroke: rgb(255, 255, 255);
 }
 
-.content .text-wrapper .text .info #date #date-text {
+.banner .content .text-wrapper .text .info #date #date-text {
     text-transform: capitalize;
     font-size: 18px;
     padding-left: 0.5rem;
 }
 
-.content .text-wrapper .text .info span {
+.banner .content .text-wrapper .text .info span {
     font-size: 18px;
     color: orangered;
     font-weight: bold;
 }
 
-.content .text-wrapper .text .info #more-days {
+.banner .content .text-wrapper .text .info #more-days {
     font-size: 18px;
     margin-top: 0.5rem;
     margin-left: 1.5rem;
@@ -163,7 +163,7 @@ a {
 a {
     background-color: transparent;
 }
-.content .text-wrapper .text .info #venue {
+.banner .content .text-wrapper .text .info #venue {
     font-size: 18px;
     display: flex;
     -webkit-box-align: center;
@@ -171,26 +171,26 @@ a {
     margin-top: 1rem;
 }
 
-.content .text-wrapper .text .info #location-icon {
+.banner .content .text-wrapper .text .info #location-icon {
     transform: scale(0.65) translateX(-0.4rem);
 }
 
-.content .text-wrapper .text .info #address {
+.banner .content .text-wrapper .text .info #address {
     
     font-size: 0.8em;
     color: rgb(196, 196, 207);
     margin-left: 1.5rem;
 }
 
-.content .text-wrapper .text .price {
+.banner .content .text-wrapper .text .price {
     border-top: 1px solid rgb(196, 196, 207);
 }
 
-.content .text-wrapper .text div {
+.banner .content .text-wrapper .text div {
     width: 100%;
 }
 
-.content .text-wrapper .text .price #ticket-price {
+.banner .content .text-wrapper .text .price #ticket-price {
     display: flex;
     -webkit-box-align: center;
     align-items: center;
@@ -200,7 +200,7 @@ a {
     font-weight: bold;
 }
 
-.content .text-wrapper .text .price #ticket-price #price-value {
+.banner .content .text-wrapper .text .price #ticket-price #price-value {
     padding-top: 2pt;
     display: flex;
     -webkit-box-align: center;
@@ -211,7 +211,7 @@ a {
     font-weight: bold;
 }
 
-.content .text-wrapper .text .price #ticket-price #price-value svg {
+.banner .content .text-wrapper .text .price #ticket-price #price-value svg {
     margin-left: 0.5rem;
 }
 
@@ -277,4 +277,209 @@ button, input, optgroup, select, textarea {
     width:100%;
     -webkit-locale:"vi";
     position: relative !important
+}
+
+.container1 {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.container1 #bg-wrapper {
+    z-index: 2;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    filter: blur(10px) brightness(0.4);
+}
+
+.container1 #bg-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+img {
+    border-style: none;
+}
+
+.container1 #banner-info-wrapper {
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    padding: 0.75rem;
+    position: relative;
+}
+
+.container1 #banner-info-stack {
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5rem;
+    background-color: rgb(42, 45, 52);
+}
+
+.container1 #banner-img-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.container1 #banner-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.container1 #banner-info-content {
+    width: 100%;
+    background-color: rgb(42, 45, 52);
+    padding: 0.75rem;
+}
+
+.container1 #banner-info-content #title {
+    font-size: 16px;
+}
+
+.container1 #banner-info-content p {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.container1 #banner-info-content #date {
+    font-size: 0.75rem;
+    margin-top: 0.75rem;
+}
+
+.container1 .icon path {
+    fill: rgb(255, 255, 255);
+    stroke: rgb(255, 255, 255);
+}
+
+.container1 #banner-info-content #date #date-text {
+    text-transform: capitalize;
+    padding-left: 0.5rem;
+}
+
+.container1 #banner-info-content span {
+    color: orangered;
+    font-weight: bold;
+}
+
+.container1 #banner-info-content #more-days {
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+    margin-left: 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgb(255, 255, 255);
+    width: max-content;
+    padding: 0.25rem;
+    cursor: pointer;
+}
+
+.container1 #banner-info-content #venue {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+}
+
+.container1 #banner-info-content #venue #location-icon {
+    transform: scale(0.65) translateX(-0.4rem);
+}
+
+.container1 #banner-info-content #address {
+    font-size: 0.75rem;
+    color: rgb(196, 196, 207);
+    margin-left: 1.5rem;
+}
+
+.banner .desktop {
+    display: flex;
+}
+
+.wrap {
+    width: 100%;
+    height: 4.2rem;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(7.5px);
+    position: fixed;
+    z-index: 10;
+    left: 2px;
+    top: auto;
+    bottom: -2px;
+    animation: 0.2s ease-out 0s 1 normal forwards running fadeIn;
+}
+
+.tbox-container {
+    box-sizing: border-box;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.showingBtn {
+    font-weight: bold;
+    font-size: 1.25rem;
+    border-radius: 0.25rem;
+    padding: 1rem;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    transition: background-color 0.4s ease-in-out 0s;
+    color: rgb(255, 255, 255);
+    background-color: orangered;
+}
+
+.showingBtn #my-ticket-icon {
+    transition: all 0.4s ease-in-out 0s;
+    margin-right: 1rem;
+}
+
+.showingBtn #my-ticket-icon path {
+    fill: orangered;
+    stroke: rgb(255, 255, 255);
+}
+
+.container2 {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    color: rgb(255, 255, 255);
+    padding: 2rem;
+}
+
+.container2 #min-price-value {
+    font-weight: bold;
+    margin-left: 0.4rem;
+}
+
+.container2 #select-showing-btn {
+    height: 1rem;
+    font-size: 0.875rem;
+}
+
+.container2 #select-showing-btn #my-ticket-icon {
+    transform: scale(0.8);
+    margin-right: 0.5rem;
+}
+
+.showingBtn #my-ticket-icon {
+    transition: all 0.4s ease-in-out 0s;
+    margin-right: 1rem;
 }
