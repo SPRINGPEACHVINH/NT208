@@ -2,6 +2,7 @@ import MainMenu from "../pages/MainMenu/MainMenu";
 import Btc_Register from "../pages/BtcRegister/BtcRegister";
 import Description from "../pages/Decription/Decription";
 import Register from "../pages/Register/Register.jsx";
+import SignIn from "../pages/Register/SignIn.jsx";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 import CodeInputPage from "../pages/CodeInputPage/CodeInput";
 
@@ -24,6 +25,11 @@ export const routes = [
   {
     path: "/Register",
     page: Register,
+    isShowHeader: false,
+  },
+  {
+    path: "/SignIn",
+    page: SignIn,
     isShowHeader: false,
   },
   {

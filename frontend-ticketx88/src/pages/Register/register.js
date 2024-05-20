@@ -43,7 +43,7 @@ function Register() {
         <p>
           Tôi đồng ý với Điều khoản sử dụng và Chính sách bảo mật của TicketX88{" "}
         </p>
-        <a href="/signin">Đã có tài khoản?</a>
+        <a href="/SignIn">Đã có tài khoản?</a>
       </div>
 
       <div class="Continue-part">
