@@ -1,0 +1,48 @@
+.row {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  background-color: rgb(30, 30, 30);
+}
+
+.row-1 {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.col-md-3 {
+  padding: 0;
+  width: 20%;
+  height: 100%;
+  position: fixed;
+}
+
+.col-md-3-mobile {
+  position: fixed;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.col-md-3-hidden {
+  display: none;
+}
+
+.col-md-9 {
+  flex: 1;
+  padding: 10px;
+  height: 100%;
+  margin-left: 20%;
+}
+
+.col-md-9-mobile {
+  display: none;
+}
+
+.col-md-9-full {
+  flex: 1;
+  padding: 10px;
+  margin-left: 0;
+}

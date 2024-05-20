@@ -1,0 +1,38 @@
+.sign-up {
+  background-color: #fff;
+  border: 1px solid #e6ebf5;
+  border-radius: 8px;
+  box-sizing: border-box;
+  /* height: 390px; */
+  width: 360px;
+  padding: 16px;
+  text-size-adjust: 100%;
+  position: relative;
+  margin: 0 auto;
+  margin-top: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.Continue-button {
+  border-radius: 20px;
+  height: 40px;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 24px;
+  min-width: 88px;
+  padding: 0px 24px;
+  width: 328px;
+  margin-top: 50px;
+  background: orangered;
+  color: rgb(255, 255, 255);
+}
+
+/* .Continue-button:disabled {
+    background: rgb(221, 221, 227);
+    color: rgb(128, 128, 137);
+    cursor: not-allowed;
+  } */
+
+.checkbox:checked {
+  background-color: orangered;
+}

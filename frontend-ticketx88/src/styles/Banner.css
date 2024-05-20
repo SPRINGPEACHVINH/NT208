@@ -1,0 +1,485 @@
+.banner {
+    margin: 0px;
+    margin-bottom: 30px;
+    font-family: Inter, sans-serif;
+    font-weight: normal;
+    color: rgb(42, 45, 52);
+    min-height: 100%;
+    font-size: 20px;
+    overflow: auto;
+    scroll-behavior: smooth;
+    background:linear-gradient(#27272a 48.04%,#000 100%);
+    box-sizing:border-box;
+    color:#fff;
+    height:max-content;
+    padding-block:2rem;
+    padding-inline:1rem;
+    text-size-adjust:100%;
+    width:100%;
+    -webkit-locale:"vi";
+    line-height:1.15;
+    display: block;
+    unicode-bidi: isolate;
+}
+
+p {
+    margin: 0px;
+}
+
+.banner .content {
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    color: white;
+    border-radius: 1.5rem;
+    background: linear-gradient(rgb(39, 39, 42) 48.04%, rgb(0, 0, 0) 100%);
+    overflow: hidden;
+    box-sizing: border-box;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* @media (min-width: 1024px) {
+    .banner .content {
+        display: flex;
+    }
+} */
+
+.text-wrapper {
+    flex: 1 1 0%;
+    background-color: rgb(56, 56, 61);
+    position: relative;
+    padding: 1.875rem;
+}
+
+.circle {
+    position: absolute;
+    width: 3.75rem;
+    height: 3.75rem;
+    border-radius: 50%;
+    z-index: 12;
+}
+
+#circle1 {
+    top: 0px;
+    right: 0px;
+    transform: translate(1.875rem, -1.875rem);
+    background-color: rgb(39, 39, 42);
+}
+
+#circle2 {
+    bottom: 0px;
+    right: 0px;
+    transform: translate(1.875rem, 1.875rem);
+    background-color: rgb(2, 2, 3);
+}
+
+.banner .content .text-wrapper #vertical-dashed {
+    position: absolute;
+    right: 0px;
+    bottom: 4px;
+    z-index: 10;
+    transform: translate(2px, -4.4rem);
+}
+
+.banner .content .text-wrapper #vertical-dashed-2 {
+    position: absolute;
+    right: 0px;
+    top: 100%;
+    z-index: 10;
+    transform: translate(2px, -4.4rem);
+}
+
+.text {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.banner .content .text-wrapper .text div {
+    width: 100%;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.banner .content .text-wrapper .text .info #titles {
+    overflow: hidden;
+    word-break: break-word;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+.banner .content .text-wrapper .text .info #date {
+    font-size: 18px;
+    margin-top: 1rem;
+}
+
+.icon path {
+    fill: rgb(255, 255, 255);
+    stroke: rgb(255, 255, 255);
+}
+
+.banner .content .text-wrapper .text .info #date #date-text {
+    text-transform: capitalize;
+    font-size: 18px;
+    padding-left: 0.5rem;
+}
+
+.banner .content .text-wrapper .text .info span {
+    font-size: 18px;
+    color: orangered;
+    font-weight: bold;
+}
+
+.banner .content .text-wrapper .text .info #more-days {
+    font-size: 18px;
+    margin-top: 0.5rem;
+    margin-left: 1.5rem;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 0.5rem;
+    width: max-content;
+    padding: 0.3rem;
+    cursor: pointer;
+}
+
+a {
+    font-size: 18px;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+a {
+    background-color: transparent;
+}
+.banner .content .text-wrapper .text .info #venue {
+    font-size: 18px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.banner .content .text-wrapper .text .info #location-icon {
+    transform: scale(0.65) translateX(-0.4rem);
+}
+
+.banner .content .text-wrapper .text .info #address {
+    
+    font-size: 0.8em;
+    color: rgb(196, 196, 207);
+    margin-left: 1.5rem;
+}
+
+.banner .content .text-wrapper .text .price {
+    border-top: 1px solid rgb(196, 196, 207);
+}
+
+.banner .content .text-wrapper .text div {
+    width: 100%;
+}
+
+.banner .content .text-wrapper .text .price #ticket-price {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    gap: 0.5rem;
+    padding-block: 1rem;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.banner .content .text-wrapper .text .price #ticket-price #price-value {
+    padding-top: 2pt;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    gap: 0.5rem;
+    color: orangered;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.banner .content .text-wrapper .text .price #ticket-price #price-value svg {
+    margin-left: 0.5rem;
+}
+
+#buynow-btn {
+    width: 100%;
+    padding-block: 0.5rem;
+    border-radius: 0.25rem;
+    font-weight: bold;
+    transition: background-color 0.4s ease-in-out 0s;
+    color: rgb(255, 255, 255);
+    background-color: orangered;
+}
+
+button {
+    background-color: transparent;
+    color: inherit;
+    border-width: 0px;
+    padding: 0px;
+    cursor: pointer;
+}
+
+button, [type="button"], [type="reset"], [type="submit"] {
+    appearance: button;
+}
+
+button, select {
+    text-transform: none;
+}
+
+button, input {
+    overflow: visible;
+}
+
+button, input, optgroup, select, textarea {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0px;
+}
+
+.img-wrapper {
+    flex: 2 0 0%;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(rgb(39, 39, 42) 48.04%, rgb(0, 0, 0) 100%);
+}
+
+.img-wrapper img {
+    border-radius: 1.5rem;
+    box-sizing:border-box;
+    display:block;
+    height:100%;
+    min-block-size:auto;
+    min-height:auto;
+    min-inline-size:auto;
+    min-width:auto;
+    object-fit:cover;
+    text-size-adjust:100%;
+    width:100%;
+    -webkit-locale:"vi";
+    position: relative !important
+}
+
+.container1 {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.container1 #bg-wrapper {
+    z-index: 2;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    filter: blur(10px) brightness(0.4);
+}
+
+.container1 #bg-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+img {
+    border-style: none;
+}
+
+.container1 #banner-info-wrapper {
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    padding: 0.75rem;
+    position: relative;
+}
+
+.container1 #banner-info-stack {
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5rem;
+    background-color: rgb(42, 45, 52);
+}
+
+.container1 #banner-img-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.container1 #banner-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.container1 #banner-info-content {
+    width: 100%;
+    background-color: rgb(42, 45, 52);
+    padding: 0.75rem;
+}
+
+.container1 #banner-info-content #title {
+    font-size: 16px;
+}
+
+.container1 #banner-info-content p {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.container1 #banner-info-content #date {
+    font-size: 0.75rem;
+    margin-top: 0.75rem;
+}
+
+.container1 .icon path {
+    fill: rgb(255, 255, 255);
+    stroke: rgb(255, 255, 255);
+}
+
+.container1 #banner-info-content #date #date-text {
+    text-transform: capitalize;
+    padding-left: 0.5rem;
+}
+
+.container1 #banner-info-content span {
+    color: orangered;
+    font-weight: bold;
+}
+
+.container1 #banner-info-content #more-days {
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+    margin-left: 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgb(255, 255, 255);
+    width: max-content;
+    padding: 0.25rem;
+    cursor: pointer;
+}
+
+.container1 #banner-info-content #venue {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+}
+
+.container1 #banner-info-content #venue #location-icon {
+    transform: scale(0.65) translateX(-0.4rem);
+}
+
+.container1 #banner-info-content #address {
+    font-size: 0.75rem;
+    color: rgb(196, 196, 207);
+    margin-left: 1.5rem;
+}
+
+.banner .desktop {
+    display: flex;
+}
+
+.wrap {
+    width: 100%;
+    height: 4.2rem;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(7.5px);
+    position: fixed;
+    z-index: 10;
+    left: 2px;
+    top: auto;
+    bottom: -2px;
+    animation: 0.2s ease-out 0s 1 normal forwards running fadeIn;
+}
+
+.tbox-container {
+    box-sizing: border-box;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.showingBtn {
+    font-weight: bold;
+    font-size: 1.25rem;
+    border-radius: 0.25rem;
+    padding: 1rem;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    transition: background-color 0.4s ease-in-out 0s;
+    color: rgb(255, 255, 255);
+    background-color: orangered;
+}
+
+.showingBtn #my-ticket-icon {
+    transition: all 0.4s ease-in-out 0s;
+    margin-right: 1rem;
+}
+
+.showingBtn #my-ticket-icon path {
+    fill: orangered;
+    stroke: rgb(255, 255, 255);
+}
+
+.container2 {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    color: rgb(255, 255, 255);
+    padding: 2rem;
+}
+
+.container2 #min-price-value {
+    font-weight: bold;
+    margin-left: 0.4rem;
+}
+
+.container2 #select-showing-btn {
+    height: 1rem;
+    font-size: 0.875rem;
+}
+
+.container2 #select-showing-btn #my-ticket-icon {
+    transform: scale(0.8);
+    margin-right: 0.5rem;
+}
+
+.showingBtn #my-ticket-icon {
+    transition: all 0.4s ease-in-out 0s;
+    margin-right: 1rem;
+}
