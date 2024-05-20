@@ -4,7 +4,7 @@ import TicketInfo from '../../components/TicketInfo';
 import ShowBanner from '../../components/Banner/ShowBanner';
 import "../../styles/Description.css";
 const ShowPage = () => {
-  const show = {
+  const event = {
     name: 'LIVESHOW MƯA THÁNG SÁU - DÀNH CHO EM | VĂN MAI HƯƠNG - HOÀNG TÔN',
     date: 'Thứ sáu - Ngày 31/05/2024',
     location: 'Harmony Hill - khu đồi thông tại đảo Tuần Châu, Hạ Long'
@@ -12,9 +12,9 @@ const ShowPage = () => {
 
   return (
     <div className='layout'>
-      <ShowBanner show={show} />
+      <ShowBanner event={event} />
       <div className='contents'>
-        <ShowDescription show={show} />
+        <ShowDescription event={event} />
         <TicketInfo />
       </div>
     </div>

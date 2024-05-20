@@ -5,6 +5,7 @@ import Register from "../pages/Register/Register.jsx";
 import SignIn from "../pages/Register/SignIn.jsx";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 import CodeInputPage from "../pages/CodeInputPage/CodeInput";
+import SearchResult from "../pages/SearchResult/ShowResult";
 
 export const routes = [
   {
@@ -40,6 +41,12 @@ export const routes = [
     path: "/code-input",
     page: CodeInputPage,
     isShowHeader: true,
+  },
+  {
+    path: "/SearchResult",
+    page: SearchResult,
+    isShowHeader: true,
+    isShowFooter: true,
   },
   {
     path: "*",

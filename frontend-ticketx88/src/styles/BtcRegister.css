@@ -18,6 +18,14 @@
   position: fixed;
 }
 
+.col-md-3-mobile {
+  position: fixed;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
 .col-md-3-hidden {
   display: none;
 }
@@ -25,33 +33,16 @@
 .col-md-9 {
   flex: 1;
   padding: 10px;
+  height: 100%;
   margin-left: 20%;
+}
+
+.col-md-9-mobile {
+  display: none;
 }
 
 .col-md-9-full {
   flex: 1;
   padding: 10px;
   margin-left: 0;
-}
-
-@media only screen and (max-width: 768px) {
-  .row {
-    margin: 0;
-    padding: 0;
-    background-color: rgb(30, 30, 30);
-  }
-
-  .header-btc-register {
-    position: static;
-  }
-
-  .col-md-3 {
-    display: none;
-    width: 100%;
-  }
-
-  .col-md-9 {
-    margin-left: 0;
-    width: 100%;
-  }
 }

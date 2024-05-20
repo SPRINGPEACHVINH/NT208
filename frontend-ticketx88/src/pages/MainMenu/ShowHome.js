@@ -47,19 +47,13 @@ const ShowHome = () => {
     });
 
     const fetchEvents = async () => {
-      const response = await fetch("http://localhost:8888/api/event/all"); // Replace with your API URL
+      const response = await fetch("http://localhost:8881/api/event/all"); // Replace with your API URL
       const { data } = await response.json();
       setEvents(data);
-    };
-
-    const fetchSlideEvents = async () => {
-      const response = await fetch("http://localhost:8888/api/event/all"); // Replace with your API URL
-      const { data } = await response.json();
       setSlideEvents(data.slice(0, 3)); // Get only the first 3 events
     };
 
     fetchEvents();
-    fetchSlideEvents();
   }, []);
 
   const groupedEvents = events.reduce((groups, event) => {
@@ -85,7 +79,7 @@ const ShowHome = () => {
               src={event.Picture_event}
               alt={event.EventName}
             />
-            </div>
+          </div>
         ))}
 
         <a className="prev">&#10094;</a>

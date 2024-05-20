@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../../styles/Form.css";
 import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
@@ -7,52 +7,10 @@ import { Upload, message } from "antd";
 import { Editor } from "@tinymce/tinymce-react";
 const { Dragger } = Upload;
 
-async function addEventToDatabase(event) {
-  const eventData = JSON.stringify(event);
-
-  const response = await fetch(
-    'http://localhost:8888/api/event/addhttp://localhost:8888/api/event/add',
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: eventData,
-    }
-  );
-
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
-
-  return response.json();
-}
-
-async function handleClick() {
-  const event = {
-    // khúc này code sao lấy dữ liệu của event bỏ dô đây theo dạng
-    // EventId: "some-unique-id",
-    // EventTime: new Date(),
-    // EventInfo: "Event Information",
-    // EventLocation: "Event Location",
-    // EventCategory: "Event Category",
-    // TicketPrice: 100,
-    // Picture_event: "picture_string",
-    // Logo_event: "logo_string",
-    // Btc: "btc-object-id", // Cái này l Vinh set ngu lắm nên hỏi anh ruột đi ảnh cho cái Id rồi bỏ vô
-  };
-
-  try {
-    const data = await addEventToDatabase(event);
-    console.log(data);
-  } catch (error) {
-    console.log("There was an error!", error);
-  }
-}
-
-function Form() {
+function Form({ isMobile }) {
   // Upload logo btc
   const [fileListLogoBTC, setFileListLogoBTC] = useState([]);
+
   const handleChangeLogoBTC = ({ fileList }) => {
     const uploadedFile = fileList.find(
       (file) => !fileListLogoBTC.some((item) => item.uid === file.uid)
@@ -110,6 +68,7 @@ function Form() {
 
   // Upload cover event
   const [fileListCoverEvent, setFileListCoverEvent] = useState([]);
+
   const handleChangeCoverEvent = ({ fileList }) => {
     const uploadedFile = fileList.find(
       (file) => !fileListCoverEvent.some((item) => item.uid === file.uid)
@@ -167,6 +126,7 @@ function Form() {
 
   // Upload logo event
   const [fileListLogoEvent, setFileListLogoEvent] = useState([]);
+
   const handleChangeLogoEvent = ({ fileList }) => {
     const uploadedFile = fileList.find(
       (file) => !fileListLogoEvent.some((item) => item.uid === file.uid)
@@ -248,30 +208,6 @@ function Form() {
     );
   };
 
-  // Thiết lập lắng nghe sự kiện resize window để kiểm tra chế độ xem
-  useEffect(() => {
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => {
-      window.removeEventListener("resize", checkMobile);
-    };
-  });
-
-  // Hàm để kiểm tra xem trên điện thoại hay không
-  const [isMobile, setIsMobile] = useState(false);
-  const checkMobile = () => {
-    setIsMobile(window.innerWidth <= 768); // Định nghĩa ngưỡng chiều rộng cho điện thoại
-  };
-
-  const [activeStep, setActiveStep] = useState(0);
-  const handleNext = () => {
-    setActiveStep(activeStep + 1);
-  };
-
-  const handlePrevious = () => {
-    setActiveStep(activeStep - 1);
-  };
-
   // Hàm chuẩn hóa giá vé
   const [ticketPrice, setTicketPrice] = useState("");
 
@@ -285,103 +221,230 @@ function Form() {
     setTicketPrice(formatPrice(e.target.value));
   };
 
+  // Hàm xử lý form và hàm xử lý chuyển step
+  const [formData, setFormData] = useState({
+    enterpriseName: "",
+    enterpriseNumberBusiness: "",
+    enterprisePhone: "",
+    enterpriseEmail: "",
+    enterpriseAddress: "",
+    btcName: "",
+    btcInformation: "",
+  });
+
+  const [formErrors, setFormErrors] = useState({
+    enterpriseName: false,
+    enterpriseNumberBusiness: false,
+    enterprisePhone: false,
+    enterpriseEmail: false,
+    enterpriseAddress: false,
+    btcName: false,
+    btcInformation: false,
+  });
+
+  const handleInputFormChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+    setFormErrors((prevFormErrors) => ({
+      ...prevFormErrors,
+      [name]: value.trim() === "",
+    }));
+  };
+
+  const [eventData, setEventData] = useState({
+    eventName: "",
+    eventType: "",
+    eventDateTime: "",
+    eventTicketPrice: "",
+  });
+
+  const [eventErrors, setEventErrors] = useState({
+    eventName: false,
+    eventType: false,
+    eventDateTime: false,
+    eventTicketPrice: false,
+  });
+
+  const handleInputEventChange = (e) => {
+    const { name, value } = e.target;
+    setEventData((prevEventData) => ({ ...prevEventData, [name]: value }));
+    setEventErrors((prevEventErrors) => ({
+      ...prevEventErrors,
+      [name]: value.trim() === "",
+    }));
+  };
+
+  const [activeStep, setActiveStep] = useState(0);
+  const [errorMessageVisible, setErrorMessageVisible] = useState(false);
+  const handleFormNext = () => {
+    const newErrors = { ...formErrors };
+    let hasError = false;
+
+    for (const key in formData) {
+      if (formData[key].trim() === "") {
+        newErrors[key] = true;
+        hasError = true;
+      } else {
+        newErrors[key] = false;
+      }
+    }
+
+    setFormErrors(newErrors);
+
+    if (
+      hasError &&
+      Object.values(formData).every((value) => value.trim() === "")
+    ) {
+      setErrorMessageVisible(true);
+    }
+
+    if (!hasError) {
+      setActiveStep(activeStep + 1);
+    }
+  };
+
+  const handleEventNext = () => {
+    const newErrors = { ...eventErrors };
+    let hasError = false;
+
+    for (const key in eventData) {
+      if (eventData[key].trim() === "") {
+        newErrors[key] = true;
+        hasError = true;
+      } else {
+        newErrors[key] = false;
+      }
+    }
+
+    setEventErrors(newErrors);
+
+    if (
+      hasError &&
+      Object.values(eventData).every((value) => value.trim() === "")
+    ) {
+      setErrorMessageVisible(true);
+    }
+
+    if (!hasError) {
+      setActiveStep(activeStep + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    setActiveStep(activeStep - 1);
+  };
+
+  const renderStep = (stepNumber, title) => {
+    return (
+      <div
+        className={`ant-steps-item ${
+          activeStep === stepNumber
+            ? "ant-steps-item-active"
+            : "ant-steps-item-wait"
+        }`}
+      >
+        <div className="ant-steps-item-icon">{stepNumber + 1}</div>
+        <div className="ant-steps-item-title">{title}</div>
+      </div>
+    );
+  };
+
   return (
     <div>
       <div className="container-step">
-        {/* step 1 */}
         {!isMobile && (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              position: "relative",
-            }}
-          >
+          <>
+            {/* step 1 */}
             <div
-              className={`ant-steps-item ${
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                position: "relative",
+              }}
+            >
+              {renderStep(0, "Đăng ký ban tổ chức")}
+              <RightOutlined className="ant-steps-item-right-icon" />
+            </div>
+            {/* step 2 */}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                margin: "0 10%",
+                position: "relative",
+              }}
+            >
+              {activeStep > 0 ? (
+                renderStep(1, "Thông tin sự kiện")
+              ) : (
+                <div className="ant-steps-item ant-steps-item-wait">
+                  <div className="ant-steps-item-icon">2</div>
+                  <div className="ant-steps-item-title">Thông tin sự kiện</div>
+                </div>
+              )}
+              <RightOutlined className="ant-steps-item-right-icon" />
+            </div>
+            {/* step 3 */}
+            <div style={{ display: "flex", flexDirection: "row" }}>
+              {activeStep > 1 ? (
+                renderStep(2, "Thông tin thanh toán")
+              ) : (
+                <div className="ant-steps-item ant-steps-item-wait">
+                  <div className="ant-steps-item-icon">3</div>
+                  <div className="ant-steps-item-title">
+                    Thông tin thanh toán
+                  </div>
+                </div>
+              )}
+            </div>
+          </>
+        )}
+
+        {isMobile && (
+          <>
+            <div
+              className={`ant-steps-icon ${
                 activeStep === 0
-                  ? "ant-steps-item-active"
-                  : "ant-steps-item-wait"
+                  ? "ant-steps-icon-active"
+                  : "ant-steps-icon-wait"
               }`}
             >
-              <div className="ant-steps-item-icon">1</div>
-              <div className="ant-steps-item-title">Đăng ký ban tổ chức</div>
+              <AuditOutlined className="ant-steps-item-audio-icon" />
             </div>
-            <RightOutlined className="ant-steps-item-right-icon" />
-          </div>
-        )}
-        {isMobile && (
-          <div
-            className={`ant-steps-icon ${
-              activeStep === 0 ? "ant-steps-icon-active" : "ant-steps-icon-wait"
-            }`}
-          >
-            <AuditOutlined className="ant-steps-item-audio-icon" />
-          </div>
-        )}
-        {/* step 2 */}
-        {!isMobile && (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              margin: "0 10%",
-              position: "relative",
-            }}
-          >
             <div
-              className={`ant-steps-item ${
+              className={`ant-steps-icon ${
                 activeStep === 1
-                  ? "ant-steps-item-active"
-                  : "ant-steps-item-wait"
+                  ? "ant-steps-icon-active"
+                  : "ant-steps-icon-wait"
               }`}
             >
-              <div className="ant-steps-item-icon">2</div>
-              <div className="ant-steps-item-title">Thông tin sự kiện</div>
+              <AuditOutlined className="ant-steps-item-audio-icon" />
             </div>
-            <RightOutlined className="ant-steps-item-right-icon" />
-          </div>
-        )}
-        {isMobile && (
-          <div
-            className={`ant-steps-icon ${
-              activeStep === 0 ? "ant-steps-icon-active" : "ant-steps-icon-wait"
-            }`}
-          >
-            <AuditOutlined className="ant-steps-item-audio-icon" />
-          </div>
-        )}
-        {/* step 3 */}
-        {!isMobile && (
-          <div style={{ display: "flex", flexDirection: "row" }}>
             <div
-              className={`ant-steps-item ${
+              className={`ant-steps-icon ${
                 activeStep === 2
-                  ? "ant-steps-item-active"
-                  : "ant-steps-item-wait"
+                  ? "ant-steps-icon-active"
+                  : "ant-steps-icon-wait"
               }`}
             >
-              <div className="ant-steps-item-icon">3 </div>
-              <div className="ant-steps-item-title">Thông tin thanh toán</div>
+              <AuditOutlined className="ant-steps-item-audio-icon" />
             </div>
-          </div>
-        )}
-        {isMobile && (
-          <div
-            className={`ant-steps-icon ${
-              activeStep === 0 ? "ant-steps-icon-active" : "ant-steps-icon-wait"
-            }`}
-          >
-            <AuditOutlined className="ant-steps-item-audio-icon" />
-          </div>
+          </>
         )}
       </div>
 
       {activeStep === 0 && (
         <div className="container-content">
-          <h3 style={{ fontSize: "50px", textAlign: "center" }}>
+          <div
+            style={{
+              fontSize: "35px",
+              textAlign: "center",
+              fontWeight: "bold",
+              marginBottom: "20px",
+            }}
+          >
             Đăng ký ban tổ chức
-          </h3>
+          </div>
           <div className="container-form-organizer">
             <div className="form-group">
               <div className="form-item">
@@ -391,10 +454,18 @@ function Form() {
                 <input
                   type="text"
                   id="enterprise-name"
-                  name="enterprise-name"
+                  name="enterpriseName"
                   placeholder="Tên doanh nghiệp"
+                  value={formData.enterpriseName}
+                  onChange={handleInputFormChange}
                 />
-                <span className="error-message">
+                <span
+                  className={`error-message ${
+                    formErrors.enterpriseName && errorMessageVisible
+                      ? "show"
+                      : ""
+                  }`}
+                >
                   Vui lòng nhập tên doanh nghiệp
                 </span>
               </div>
@@ -406,10 +477,18 @@ function Form() {
                 <input
                   type="text"
                   id="enterprise-number-business"
-                  name="enterprise-number-business"
+                  name="enterpriseNumberBusiness"
                   placeholder="Mã số đăng ký kinh doanh"
+                  value={formData.enterpriseNumberBusiness}
+                  onChange={handleInputFormChange}
                 />
-                <span className="error-message">
+                <span
+                  className={`error-message ${
+                    formErrors.enterpriseNumberBusiness && errorMessageVisible
+                      ? "show"
+                      : ""
+                  }`}
+                >
                   Vui lòng nhập mã số đăng ký kinh doanh
                 </span>
               </div>
@@ -422,7 +501,7 @@ function Form() {
                 <input
                   type="tel"
                   id="enterprise-phone"
-                  name="enterprise-phone"
+                  name="enterprisePhone"
                   placeholder="Số điện thoại"
                   maxLength="10"
                   onInput={(e) =>
@@ -430,8 +509,16 @@ function Form() {
                       .replace(/[^0-9]/g, "")
                       .slice(0, 10))
                   }
+                  value={formData.enterprisePhone}
+                  onChange={handleInputFormChange}
                 />
-                <span className="error-message">
+                <span
+                  className={`error-message ${
+                    formErrors.enterprisePhone && errorMessageVisible
+                      ? "show"
+                      : ""
+                  }`}
+                >
                   Vui lòng nhập số điện thoại
                 </span>
               </div>
@@ -442,10 +529,20 @@ function Form() {
                 <input
                   type="email"
                   id="enterprise-email"
-                  name="enterprise-email"
+                  name="enterpriseEmail"
                   placeholder="Email"
+                  value={formData.enterpriseEmail}
+                  onChange={handleInputFormChange}
                 />
-                <span className="error-message">Vui lòng nhập email</span>
+                <span
+                  className={`error-message ${
+                    formErrors.enterpriseEmail && errorMessageVisible
+                      ? "show"
+                      : ""
+                  }`}
+                >
+                  Vui lòng nhập email
+                </span>
               </div>
             </div>
             <div className="form-group">
@@ -456,10 +553,20 @@ function Form() {
                 <input
                   type="text"
                   id="enterprise-address"
-                  name="enterprise-address"
+                  name="enterpriseAddress"
                   placeholder="Địa chỉ trụ sở"
+                  value={formData.enterpriseAddress}
+                  onChange={handleInputFormChange}
                 />
-                <span className="error-message">Vui lòng nhập email</span>
+                <span
+                  className={`error-message ${
+                    formErrors.enterpriseAddress && errorMessageVisible
+                      ? "show"
+                      : ""
+                  }`}
+                >
+                  Vui lòng nhập địa chỉ trụ sở
+                </span>
               </div>
             </div>
             <div className="container-form-btc">
@@ -490,10 +597,16 @@ function Form() {
                   <input
                     type="text"
                     id="btc-name"
-                    name="btc-name"
+                    name="btcName"
                     placeholder="Tên ban tổ chức"
+                    value={formData.btcName}
+                    onChange={handleInputFormChange}
                   />
-                  <span className="error-message">
+                  <span
+                    className={`error-message ${
+                      formErrors.btcName && errorMessageVisible ? "show" : ""
+                    }`}
+                  >
                     Vui lòng nhập tên ban tổ chức
                   </span>
                 </div>
@@ -504,23 +617,28 @@ function Form() {
                   <input
                     type="text"
                     id="btc-information"
-                    name="btc-information"
+                    name="btcInformation"
                     placeholder="Thông tin ban tổ chức"
+                    value={formData.btcInformation}
+                    onChange={handleInputFormChange}
                   />
-                  <span className="error-message">
-                    Vui lòng nhập Thông tin ban tổ chức
+                  <span
+                    className={`error-message ${
+                      formErrors.btcInformation && errorMessageVisible
+                        ? "show"
+                        : ""
+                    }`}
+                  >
+                    Vui lòng nhập thông tin ban tổ chức
                   </span>
                 </div>
               </div>
             </div>
           </div>
 
-          <br />
-          <br />
-
-          <div className="form-group">
+          <div className="form-group-button">
             {activeStep < 2 && (
-              <button onClick={handleNext} type="button">
+              <button onClick={handleFormNext} type="button">
                 Tiếp theo
               </button>
             )}
@@ -530,9 +648,16 @@ function Form() {
 
       {activeStep === 1 && (
         <div className="container-content">
-          <h3 style={{ fontSize: "50px", textAlign: "center" }}>
+          <div
+            style={{
+              fontSize: "35px",
+              textAlign: "center",
+              fontWeight: "bold",
+              marginBottom: "20px",
+            }}
+          >
             Thông tin sự kiện
-          </h3>
+          </div>
           <Dragger
             maxCount={1}
             listType="picture-card"
@@ -580,16 +705,29 @@ function Form() {
                 <input
                   type="text"
                   id="event-name"
-                  name="event-name"
+                  name="eventName"
                   placeholder="Tên sự kiện"
+                  value={eventData.eventName}
+                  onChange={handleInputEventChange}
                 />
-                <span className="error-message">Vui lòng nhập tên sự kiện</span>
+                <span
+                  className={`error-message ${
+                    eventErrors.eventName && errorMessageVisible ? "show" : ""
+                  }`}
+                >
+                  Vui lòng nhập tên sự kiện
+                </span>
               </div>
               <div className="form-item event-item">
                 <label>
                   Thể loại sự kiện<span style={{ color: "red" }}>*</span>
                 </label>
-                <select id="event-type" name="event-type">
+                <select
+                  id="event-type"
+                  name="eventType"
+                  value={eventData.eventType}
+                  onChange={handleInputEventChange}
+                >
                   <option value="" disabled selected hidden>
                     Vui lòng chọn
                   </option>
@@ -599,7 +737,11 @@ function Form() {
                   </option>
                   <option value="the-thao">Thể thao</option>
                 </select>
-                <span className="error-message">
+                <span
+                  className={`error-message ${
+                    eventErrors.eventType && errorMessageVisible ? "show" : ""
+                  }`}
+                >
                   Vui lòng chọn thể loại sự kiện
                 </span>
               </div>
@@ -612,11 +754,19 @@ function Form() {
                   timeFormat="HH:mm"
                   placeholder="Thời gian diễn ra sự kiện"
                   id="event-date-time"
-                  name="event-date-time"
+                  name="eventDateTime"
+                  value={eventData.eventDateTime}
+                  onChange={handleInputEventChange}
                   inputProps={{ readOnly: true, style: { boxShadow: "none" } }}
                 />
-                <span className="error-message">
-                  Vui lòng nhập thời gian diễn ra sự kiện
+                <span
+                  className={`error-message ${
+                    eventErrors.eventDateTime && errorMessageVisible
+                      ? "show"
+                      : ""
+                  }`}
+                >
+                  Vui lòng chọn thời gian diễn ra sự kiện
                 </span>
               </div>
               <div className="form-item event-item">
@@ -635,12 +785,20 @@ function Form() {
                     id="event-ticket-price"
                     name="event-ticket-price"
                     placeholder="Giá vé"
-                    value={ticketPrice}
-                    onChange={handleInputChange}
+                    value={(ticketPrice, eventData.eventTicketPrice)}
+                    onChange={(handleInputChange, handleInputEventChange)}
                   />
                   <span className="currency">VNĐ</span>
-                  <span className="error-message">Vui lòng nhập giá vé</span>
                 </div>
+                <span
+                  className={`error-message ${
+                    eventErrors.eventTicketPrice && errorMessageVisible
+                      ? "show"
+                      : ""
+                  }`}
+                >
+                  Vui lòng nhập giá vé
+                </span>
               </div>
             </div>
           </div>
@@ -661,29 +819,36 @@ function Form() {
               branding: false,
             }}
           />
-          <br></br>
-          <br></br>
-          <div className="form-group">
+
+          <div className="form-group-button">
             {activeStep > 0 && (
               <button onClick={handlePrevious}>Quay lại</button>
             )}
-            {activeStep < 2 && <button onClick={handleNext}>Tiếp theo</button>}
+            {activeStep < 2 && (
+              <button onClick={handleEventNext}>Tiếp theo</button>
+            )}
           </div>
         </div>
       )}
 
       {activeStep === 2 && (
         <div className="container-content">
-          <h3 style={{ fontSize: "50px", textAlign: "center" }}>
+          <div
+            style={{
+              fontSize: "35px",
+              textAlign: "center",
+              fontWeight: "bold",
+              marginBottom: "20px",
+            }}
+          >
             Thông tin thanh toán
-          </h3>
-          <div className="form-group">
+          </div>
+
+          <div className="form-group-button">
             {activeStep > 0 && (
               <button onClick={handlePrevious}>Quay lại</button>
             )}
-            <button type="submit" onClick={handleClick}>
-              Lưu thông tin
-            </button>
+            <button type="submit">Lưu thông tin</button>
           </div>
         </div>
       )}

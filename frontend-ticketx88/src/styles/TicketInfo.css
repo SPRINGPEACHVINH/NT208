@@ -4,7 +4,9 @@
     align-items: center;
     margin-top: 30px;
     margin-bottom: 30px;
-    width: 1000pt;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
 }
 
 .ticket-info {
