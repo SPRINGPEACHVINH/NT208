@@ -3,12 +3,14 @@
     justify-content: center;
     align-items: center;
     margin-top: 30px;
+    margin-bottom: 30px;
+    width: 1000pt;
 }
 
 .ticket-info {
     background-color: #333;
     color: white;
-    width: 500px;
+    width: 100%;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);

@@ -1,7 +1,8 @@
 import React, { Fragment, useEffect } from "react";
 import { routes } from "../routes";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import DefaultComponent from "../components/DefaultComponent/DefaultComponent";
+import DefaultComponentFooter from "../components/DefaultComponent/DefaultComponentFooter";
+import DefaultComponentHeader from "../components/DefaultComponent/DefaultComponentHeader";
 
 function App() {
   useEffect(() => {
@@ -19,14 +20,21 @@ function App() {
         <Routes>
           {routes.map((route) => {
             const Page = route.page;
-            const Layout = route.isShowHeader ? DefaultComponent : Fragment;
+            const HeaderLayout = route.isShowHeader
+              ? DefaultComponentHeader
+              : Fragment;
+            const FooterLayout = route.isShowFooter
+              ? DefaultComponentFooter
+              : Fragment;
             return (
               <Route
                 path={route.path}
                 element={
-                  <Layout>
-                    <Page />
-                  </Layout>
+                  <HeaderLayout>
+                    <FooterLayout>
+                      <Page />
+                    </FooterLayout>
+                  </HeaderLayout>
                 }
               />
             );
