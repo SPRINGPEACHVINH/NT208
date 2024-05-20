@@ -7,6 +7,49 @@ import { Upload, message } from "antd";
 import { Editor } from "@tinymce/tinymce-react";
 const { Dragger } = Upload;
 
+async function addEventToDatabase(event) {
+  const eventData = JSON.stringify(event);
+
+  const response = await fetch(
+    'http://localhost:8888/api/event/addhttp://localhost:8888/api/event/add',
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: eventData,
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  return response.json();
+}
+
+async function handleClick() {
+  const event = {
+    // khúc này code sao lấy dữ liệu của event bỏ dô đây theo dạng
+    // EventId: "some-unique-id",
+    // EventTime: new Date(),
+    // EventInfo: "Event Information",
+    // EventLocation: "Event Location",
+    // EventCategory: "Event Category",
+    // TicketPrice: 100,
+    // Picture_event: "picture_string",
+    // Logo_event: "logo_string",
+    // Btc: "btc-object-id", // Cái này l Vinh set ngu lắm nên hỏi anh ruột đi ảnh cho cái Id rồi bỏ vô
+  };
+
+  try {
+    const data = await addEventToDatabase(event);
+    console.log(data);
+  } catch (error) {
+    console.log("There was an error!", error);
+  }
+}
+
 function Form() {
   // Upload logo btc
   const [fileListLogoBTC, setFileListLogoBTC] = useState([]);
@@ -638,7 +681,9 @@ function Form() {
             {activeStep > 0 && (
               <button onClick={handlePrevious}>Quay lại</button>
             )}
-            <button type="submit">Lưu thông tin</button>
+            <button type="submit" onClick={handleClick}>
+              Lưu thông tin
+            </button>
           </div>
         </div>
       )}
