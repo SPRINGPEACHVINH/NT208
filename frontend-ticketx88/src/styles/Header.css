@@ -1,11 +1,10 @@
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: orangered;
-  padding: 30px;
-  color: white;
-  position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: orangered;
+    padding: 5px 5px;
+    color: white;
 }
 
 .logo {

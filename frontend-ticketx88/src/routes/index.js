@@ -1,7 +1,8 @@
 import MainMenu from "../pages/MainMenu/MainMenu";
 import Btc_Register from "../pages/BtcRegister/BtcRegister";
-import Description from "../pages/Decription/Decription";
+import Description from "../pages/Description/Description.jsx";
 import Register from "../pages/Register/Register.jsx";
+import SignIn from "../pages/Register/SignIn.jsx";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 import CodeInputPage from "../pages/CodeInputPage/CodeInput";
 
@@ -29,6 +30,11 @@ export const routes = [
     page: Register,
     isShowHeader: false,
     isShowFooter: true,
+  },
+  {
+    path: "/SignIn",
+    page: SignIn,
+    isShowHeader: false,
   },
   {
     path: "/code-input",
