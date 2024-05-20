@@ -50,16 +50,10 @@ const ShowHome = () => {
       const response = await fetch("http://localhost:8881/api/event/all"); // Replace with your API URL
       const { data } = await response.json();
       setEvents(data);
-    };
-
-    const fetchSlideEvents = async () => {
-      const response = await fetch("http://localhost:8881/api/event/all"); // Replace with your API URL
-      const { data } = await response.json();
       setSlideEvents(data.slice(0, 3)); // Get only the first 3 events
     };
 
     fetchEvents();
-    fetchSlideEvents();
   }, []);
 
   const groupedEvents = events.reduce((groups, event) => {
