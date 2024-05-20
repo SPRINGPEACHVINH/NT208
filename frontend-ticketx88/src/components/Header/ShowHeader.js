@@ -39,7 +39,9 @@ const ShowHeader = () => {
 
   return (
     <header className="header">
-      <div className="logo">TicketX88</div>
+      <div className="logo">
+        <Link className="logo-link" to="/">TicketX88</Link>
+      </div>
       <div className="options">
         <div className="search-container">
           <input
