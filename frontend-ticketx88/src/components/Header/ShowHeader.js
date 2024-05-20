@@ -16,7 +16,7 @@ const ShowHeader = () => {
       } else if (searchTerm === "") {
         setResults([]);
       }
-    }, 250); // 250ms delay
+    }, 100); // 250ms delay
 
     return () => clearTimeout(timer);
   }, [searchTerm, isTyping]);
