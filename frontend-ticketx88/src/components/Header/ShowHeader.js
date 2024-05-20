@@ -23,7 +23,7 @@ const ShowHeader = () => {
 
   const fetchResults = async () => {
     const response = await fetch(
-      `http://localhost:8888/api/event/search?q=${encodeURIComponent(
+      `http://localhost:8881/api/event/search?q=${encodeURIComponent(
         searchTerm
       )}`
     );
@@ -36,7 +36,7 @@ const ShowHeader = () => {
     setSearchTerm(event.target.value);
     setIsTyping(true);
   };
-  
+
   return (
     <header className="header">
       <div className="logo">TicketX88</div>
@@ -53,39 +53,36 @@ const ShowHeader = () => {
             onBlur={() => setIsFocused(false)}
           />
           <button id="search-btn">Tìm kiếm</button>
-          {isFocused &&
-            results.length > 0 && (
-              <div className="dropdown">
-                <ul>
-                  {results.map((result, index) => (
-                    <li key={index}>
-                      <img
-                        src={result.Picture_event}
-                        alt={result.EventName}
-                        className="event-image"
-                      />
-                      <div className="event-info">
-                        <div className="event-name">{result.EventName}</div>
-                        <div className="event-time-location">
-                          {moment(result.EventTime).format(
-                            "DD/MM/YYYY - HH:mm"
-                          )}{" "}
-                          ở {result.EventLocation}
-                        </div>
-                        <div className="event-price-category">
-                          <span className="ticket-price">
-                            Chỉ từ: {result.TicketPrice}
-                          </span>
-                          <span className="event-category">
-                            {result.EventCategory}
-                          </span>
-                        </div>
+          {isFocused && results.length > 0 && (
+            <div className="dropdown">
+              <ul>
+                {results.map((result, index) => (
+                  <li key={index}>
+                    <img
+                      src={result.Picture_event}
+                      alt={result.EventName}
+                      className="event-image"
+                    />
+                    <div className="event-info">
+                      <div className="event-name">{result.EventName}</div>
+                      <div className="event-time-location">
+                        {moment(result.EventTime).format("DD/MM/YYYY - HH:mm")}{" "}
+                        ở {result.EventLocation}
                       </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+                      <div className="event-price-category">
+                        <span className="ticket-price">
+                          Chỉ từ: {result.TicketPrice}
+                        </span>
+                        <span className="event-category">
+                          {result.EventCategory}
+                        </span>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
         <div className="actions">
           <button className="create-event">

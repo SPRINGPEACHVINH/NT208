@@ -11,7 +11,7 @@ async function addEventToDatabase(event) {
   const eventData = JSON.stringify(event);
 
   const response = await fetch(
-    'http://localhost:8888/api/event/addhttp://localhost:8888/api/event/add',
+    'http://localhost:8881/api/event/addhttp://localhost:8881/api/event/add',
     {
       method: "POST",
       headers: {
