@@ -5,9 +5,11 @@
     background-color: orangered;
     padding: 5px 5px;
     color: white;
+    width: 100vw;
+    height: 70px;
 }
 
-.logo {
+.logo .logo-link{
   font-size: 50px;
   font-weight: bold;
 }

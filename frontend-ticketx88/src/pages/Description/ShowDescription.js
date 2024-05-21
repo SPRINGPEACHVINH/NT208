@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import "../../styles/Description.css";
 
-const ShowDescription = ({ show }) => {
+const ShowDescription = ({ event }) => {
   const descriptionDiv = useRef(null);
   const whitePad = useRef(null);
   const button = useRef(null);
@@ -26,14 +26,14 @@ const ShowDescription = ({ show }) => {
       <div id="description" ref={descriptionDiv}>
         <p className="details font-arial">
           <strong>
-            {show.name} - {show.date}
+            {event.name} - {event.date}
           </strong>
         </p>
         <p className="details">
-          <strong>Thời gian: {show.date}</strong>
+          <strong>Thời gian: {event.date}</strong>
         </p>
         <p className="details">
-          <strong>Địa điểm: {show.location}</strong>
+          <strong>Địa điểm: {event.location}</strong>
         </p>
       </div>
       <div id="white-pad" ref={whitePad}></div>

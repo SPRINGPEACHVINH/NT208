@@ -59,7 +59,6 @@ const ShowHome = () => {
     };
 
     fetchEvents();
-    fetchSlideEvents();
   }, []);
 
   const groupedEvents = events.reduce((groups, event) => {
