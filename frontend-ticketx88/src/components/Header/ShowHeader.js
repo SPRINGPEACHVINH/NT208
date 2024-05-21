@@ -75,38 +75,28 @@ const ShowHeader = () => {
             <div className="dropdown">
               <ul>
                 {results.map((result, index) => (
-                  <Link
-                    key={index}
-                    to={{
-                      pathname: "/Description",
-                      state: { event: result },
-                    }}
-                  >
-                    <li key={index}>
-                      <img
-                        src={result.Picture_event}
-                        alt={result.EventName}
-                        className="event-image"
-                      />
-                      <div className="event-info">
-                        <div className="event-name">{result.EventName}</div>
-                        <div className="event-time-location">
-                          {moment(result.EventTime).format(
-                            "DD/MM/YYYY - HH:mm"
-                          )}{" "}
-                          ở {result.EventLocation}
-                        </div>
-                        <div className="event-price-category">
-                          <span className="ticket-price">
-                            Chỉ từ: {result.TicketPrice}
-                          </span>
-                          <span className="event-category">
-                            {result.EventCategory}
-                          </span>
-                        </div>
+                  <li key={index}>
+                    <img
+                      src={result.Picture_event}
+                      alt={result.EventName}
+                      className="event-image"
+                    />
+                    <div className="event-info">
+                      <div className="event-name">{result.EventName}</div>
+                      <div className="event-time-location">
+                        {moment(result.EventTime).format("DD/MM/YYYY - HH:mm")}{" "}
+                        ở {result.EventLocation}
                       </div>
-                    </li>
-                  </Link>
+                      <div className="event-price-category">
+                        <span className="ticket-price">
+                          Chỉ từ: {result.TicketPrice}
+                        </span>
+                        <span className="event-category">
+                          {result.EventCategory}
+                        </span>
+                      </div>
+                    </div>
+                  </li>
                 ))}
               </ul>
             </div>
