@@ -1,3 +1,4 @@
+const { get } = require("mongoose");
 const EventService = require("../services/EventService");
 
 const search = async (req, res) => {
@@ -49,9 +50,26 @@ const deleteById = async (req, res) => {
   }
 };
 
+const getById = async (req, res) => {
+  try {
+    const event = await EventService.getEventById(req.params.id);
+
+    if (!event) {
+      return res
+        .status(404)
+        .json({ status: "ERROR", message: "Event not found" });
+    }
+
+    return res.status(200).json({ status: "OK", data: event });
+  } catch (e) {
+    return res.status(500).json({ status: "ERROR", message: e.message });
+  }
+};
+
 module.exports = {
   search,
   add,
   getAll,
   deleteById,
+  getById,
 };

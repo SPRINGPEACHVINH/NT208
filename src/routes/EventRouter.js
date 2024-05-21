@@ -11,5 +11,6 @@ router.get("/search", EventController.search);
 router.post("/add", EventController.add);
 router.get("/all", EventController.getAll);
 router.delete("/delete/:id", EventController.deleteById);
+router.get("/:id", EventController.getById);
 
 module.exports = router;
