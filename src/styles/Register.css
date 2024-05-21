@@ -36,3 +36,7 @@
 .checkbox:checked {
   background-color: orangered;
 }
+
+a {
+  color: orangered;
+}
