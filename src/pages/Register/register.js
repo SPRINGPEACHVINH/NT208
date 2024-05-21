@@ -3,6 +3,7 @@ import { UserOutlined } from "@ant-design/icons";
 import { Checkbox } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { Button, Input, Space } from "antd";
+import { Link } from "react-router-dom";
 import "../../styles/Register.css";
 
 function onClick(e) {
