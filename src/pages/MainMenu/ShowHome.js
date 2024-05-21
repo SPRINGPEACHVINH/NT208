@@ -47,7 +47,7 @@ const ShowHome = () => {
     });
 
     const fetchEvents = async () => {
-      const response = await fetch("https://nt208-antt.azurewebsites.net/api/event/all"); // Replace with your API URL
+      const response = await fetch("http://localhost:8881/api/event/all"); // Replace with your API URL
       const { data } = await response.json();
       setEvents(data);
     };
