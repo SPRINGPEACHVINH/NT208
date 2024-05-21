@@ -14,7 +14,7 @@ const ShowResults = () => {
     const fetchEvents = async () => {
       setIsLoading(true);
       const response = await fetch(
-        `http://localhost:8881/api/event/search?q=${encodeURIComponent(query)}`
+        `https://nt208-antt.azurewebsites.net/api/event/search?q=${encodeURIComponent(query)}`
       );
       const { data } = await response.json();
       setEvents(data);
