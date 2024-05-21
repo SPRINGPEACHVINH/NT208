@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../styles/ShowHome.css";
 
 const ShowHome = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [events, setEvents] = useState([]);
   const [slideEvents, setSlideEvents] = useState([]);
+
+  const navigate = useNavigate();
 
   const changeSlide = (n) => {
     setCurrentSlide((currentSlide) => {
@@ -47,15 +50,10 @@ const ShowHome = () => {
     });
 
     const fetchEvents = async () => {
-      const response = await fetch("https://nt208-antt.azurewebsites.net//api/event/all"); // Replace with your API URL
+      const response = await fetch("http://localhost:8881/api/event/all");
       const { data } = await response.json();
       setEvents(data);
-    };
-
-    const fetchSlideEvents = async () => {
-      const response = await fetch("https://nt208-antt.azurewebsites.net//api/event/all"); // Replace with your API URL
-      const { data } = await response.json();
-      setSlideEvents(data.slice(0, 3)); // Get only the first 3 events
+      setSlideEvents(data.slice(0, 3));
     };
 
     fetchEvents();
@@ -105,7 +103,13 @@ const ShowHome = () => {
           <h1 className="category-header">{category}</h1>
           <div className="card-list">
             {events.map((event) => (
-              <div className="card" key={event.EventName}>
+              <div
+                className="card"
+                key={event.EventName}
+                onClick={() => {
+                   navigate(`/Description/${event.EventId}`);
+                }}
+              >
                 <img src={event.Picture_event} alt={event.EventName} />
                 <div className="card-content">
                   <h2 className="card-title">{event.EventName}</h2>

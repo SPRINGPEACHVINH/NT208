@@ -12,6 +12,7 @@
 .logo .logo-link{
   font-size: 50px;
   font-weight: bold;
+  color: white;
 }
 
 .options {
@@ -80,6 +81,7 @@
   align-items: center;
   padding: 10px;
   cursor: pointer;
+  z-index: 1000;
 }
 
 .dropdown ul li .event-image {
@@ -140,8 +142,15 @@
   margin-right: 10px;
 }
 
+.create-event a{
+  color: white;
+}
+
 .create-event:hover {
   background-color: white;
+}
+
+.create-event:hover a{
   color: orangered;
 }
 

@@ -21,7 +21,7 @@ export const routes = [
     isShowFooter: false,
   },
   {
-    path: "/Description",
+    path: "/Description/:eventId",
     page: Description,
     isShowHeader: true,
     isShowFooter: true,

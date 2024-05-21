@@ -1,22 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import ShowDescription from './ShowDescription';
 import TicketInfo from '../../components/TicketInfo';
 import ShowBanner from '../../components/Banner/ShowBanner';
 import "../../styles/Description.css";
+
 const ShowPage = () => {
-  const event = {
-    name: 'LIVESHOW MƯA THÁNG SÁU - DÀNH CHO EM | VĂN MAI HƯƠNG - HOÀNG TÔN',
-    date: 'Thứ sáu - Ngày 31/05/2024',
-    location: 'Harmony Hill - khu đồi thông tại đảo Tuần Châu, Hạ Long'
+  const location = useLocation();
+  const EventId = location.pathname.split('/').pop();
+  const [event, setEvent] = useState(null);
+
+useEffect(() => {
+  const fetchEvent = async () => {
+    const response = await fetch(`http://localhost:8881/api/event/${EventId}`);
+    if (!response.ok) {
+      console.error(`Failed to fetch event: ${response.statusText}`);
+      return;
+    }
+    const data = await response.json();
+    setEvent(data.data);
   };
+
+  fetchEvent();
+}, [EventId]);
 
   return (
     <div className='layout'>
-      <ShowBanner event={event} />
-      <div className='contents'>
-        <ShowDescription event={event} />
-        <TicketInfo />
-      </div>
+      {event && (
+        <>
+          <ShowBanner event={event} />
+          <div className='contents'>
+            <ShowDescription event={event} />
+            <TicketInfo />
+          </div>
+        </>
+      )}
     </div>
   );
 };

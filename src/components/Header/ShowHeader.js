@@ -9,6 +9,7 @@ const ShowHeader = () => {
   const [results, setResults] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
+  const [blurTimeoutId, setBlurTimeoutId] = useState(null);
 
   const navigate = useNavigate();
 
@@ -26,14 +27,14 @@ const ShowHeader = () => {
       } else if (searchTerm === "") {
         setResults([]);
       }
-    }, 300); // 250ms delay
+    }, 250); // 250ms delay
 
     return () => clearTimeout(timer);
   }, [searchTerm, isTyping]);
 
   const fetchResults = async () => {
     const response = await fetch(
-      `https://nt208-antt.azurewebsites.net//api/event/search?q=${encodeURIComponent(
+      `http://localhost:8881/api/event/search?q=${encodeURIComponent(
         searchTerm
       )}`
     );
@@ -47,10 +48,29 @@ const ShowHeader = () => {
     setIsTyping(true);
   };
 
+  const handleBlur = () => {
+    setBlurTimeoutId(
+      setTimeout(() => {
+        setIsFocused(false);
+      }, 250)
+    ); // 250ms delay
+  };
+
+  const handleFocus = () => {
+    clearTimeout(blurTimeoutId);
+    setIsFocused(true);
+  };
+
   return (
     <header className="header">
       <div className="logo">
-        <Link className="logo-link" to="/" onClick={() => setSearchTerm("")}>
+        <Link
+          className="logo-link"
+          to="/"
+          onClick={() => {
+            setSearchTerm("");
+          }}
+        >
           TicketX88
         </Link>
       </div>
@@ -64,8 +84,8 @@ const ShowHeader = () => {
               autoComplete="off"
               value={searchTerm}
               onChange={handleInputChange}
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
             />
             <button id="search-btn" onClick={handleSearch}>
               Tìm kiếm
@@ -75,7 +95,10 @@ const ShowHeader = () => {
             <div className="dropdown">
               <ul>
                 {results.map((result, index) => (
-                  <li key={index}>
+                  <li
+                    key={index}
+                    onClick={() => navigate(`/Description/${result.EventId}`)}
+                  >
                     <img
                       src={result.Picture_event}
                       alt={result.EventName}
@@ -84,8 +107,8 @@ const ShowHeader = () => {
                     <div className="event-info">
                       <div className="event-name">{result.EventName}</div>
                       <div className="event-time-location">
-                        {moment(result.EventTime).format("DD/MM/YYYY - HH:mm")}{" "}
-                        ở {result.EventLocation}
+                        {moment(result.EventTime).format("DD/MM/YYYY - HH:mm")}ở{" "}
+                        {result.EventLocation}
                       </div>
                       <div className="event-price-category">
                         <span className="ticket-price">

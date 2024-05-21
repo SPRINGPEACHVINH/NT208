@@ -52,5 +52,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://nt208-antt.azurewebsites.net/"
+  "proxy": "http://localhost:8881"
 }

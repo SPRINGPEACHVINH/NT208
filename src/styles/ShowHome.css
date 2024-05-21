@@ -184,6 +184,7 @@ body {
     border-radius: 8px;
     border-color: transparent;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .card img {
