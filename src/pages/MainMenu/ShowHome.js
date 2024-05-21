@@ -50,6 +50,11 @@ const ShowHome = () => {
       const response = await fetch("https://nt208-antt.azurewebsites.net/api/event/all"); // Replace with your API URL
       const { data } = await response.json();
       setEvents(data);
+    };
+
+    const fetchSlideEvents = async () => {
+      const response = await fetch("http://localhost:8881/api/event/all"); // Replace wit h your API URL
+      const { data } = await response.json();
       setSlideEvents(data.slice(0, 3)); // Get only the first 3 events
     };
 

@@ -3,8 +3,9 @@ import "../../styles/Form.css";
 import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
 import { RightOutlined, InboxOutlined, AuditOutlined } from "@ant-design/icons";
-import { Upload, message } from "antd";
-import { Editor } from "@tinymce/tinymce-react";
+import { Upload, message, Input } from "antd";
+
+const { TextArea } = Input;
 const { Dragger } = Upload;
 
 function Form({ isMobile }) {
@@ -218,7 +219,11 @@ function Form({ isMobile }) {
   };
 
   const handleInputChange = (e) => {
-    setTicketPrice(formatPrice(e.target.value));
+    const formattedValue = formatPrice(e.target.value);
+    setTicketPrice(formattedValue);
+    handleInputEventChange({
+      target: { name: "eventTicketPrice", value: formattedValue },
+    });
   };
 
   // Hàm xử lý form và hàm xử lý chuyển step
@@ -256,6 +261,7 @@ function Form({ isMobile }) {
     eventType: "",
     eventDateTime: "",
     eventTicketPrice: "",
+    eventDecsription: "",
   });
 
   const [eventErrors, setEventErrors] = useState({
@@ -263,14 +269,31 @@ function Form({ isMobile }) {
     eventType: false,
     eventDateTime: false,
     eventTicketPrice: false,
+    eventDecsription: false,
   });
 
-  const handleInputEventChange = (e) => {
-    const { name, value } = e.target;
-    setEventData((prevEventData) => ({ ...prevEventData, [name]: value }));
+  const handleInputEventChange = (e, name) => {
+    let targetName, targetValue;
+
+    if (e && e.target) {
+      targetName = e.target.name;
+      targetValue = e.target.value;
+    } else {
+      targetName = name;
+      targetValue = e;
+    }
+
+    setEventData((prevEventData) => ({
+      ...prevEventData,
+      [targetName]: targetValue,
+    }));
+
     setEventErrors((prevEventErrors) => ({
       ...prevEventErrors,
-      [name]: value.trim() === "",
+      [targetName]:
+        typeof targetValue === "string"
+          ? targetValue.trim() === ""
+          : !targetValue,
     }));
   };
 
@@ -308,11 +331,23 @@ function Form({ isMobile }) {
     let hasError = false;
 
     for (const key in eventData) {
-      if (eventData[key].trim() === "") {
-        newErrors[key] = true;
-        hasError = true;
+      const value = eventData[key];
+
+      // Kiểm tra nếu value là chuỗi
+      if (typeof value === "string") {
+        if (value.trim() === "") {
+          newErrors[key] = true;
+          hasError = true;
+        } else {
+          newErrors[key] = false;
+        }
       } else {
-        newErrors[key] = false;
+        if (!value) {
+          newErrors[key] = true;
+          hasError = true;
+        } else {
+          newErrors[key] = false;
+        }
       }
     }
 
@@ -756,7 +791,9 @@ function Form({ isMobile }) {
                   id="event-date-time"
                   name="eventDateTime"
                   value={eventData.eventDateTime}
-                  onChange={handleInputEventChange}
+                  onChange={(value) =>
+                    handleInputEventChange(value, "eventDateTime")
+                  }
                   inputProps={{ readOnly: true, style: { boxShadow: "none" } }}
                 />
                 <span
@@ -785,8 +822,8 @@ function Form({ isMobile }) {
                     id="event-ticket-price"
                     name="event-ticket-price"
                     placeholder="Giá vé"
-                    value={(ticketPrice, eventData.eventTicketPrice)}
-                    onChange={(handleInputChange, handleInputEventChange)}
+                    value={ticketPrice}
+                    onChange={handleInputChange}
                   />
                   <span className="currency">VNĐ</span>
                 </div>
@@ -802,24 +839,21 @@ function Form({ isMobile }) {
               </div>
             </div>
           </div>
-          <Editor
-            apiKey="2ntmyt2jddbvu54ukb07kath10a3zwuwmg9v1yr8q2s4d243"
-            init={{
-              plugins:
-                "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown",
-              toolbar:
-                "undo redo | blocks fontfamily fontsize | bold italic underline forecolor | image media | align | numlist bullist indent outdent | removeformat viewsource code",
-              tinycomments_mode: "embedded",
-              tinycomments_author: "Author name",
-              ai_request: (request, respondWith) =>
-                respondWith.string(() =>
-                  Promise.reject("See docs to implement AI Assistant")
-                ),
-              menubar: false,
-              branding: false,
-            }}
+          <TextArea
+            showCount
+            placeholder="Thông tin sự kiện"
+            style={{ height: "300px" }}
+            name="eventDecsription"
+            value={eventData.eventDecsription}
+            onChange={handleInputEventChange}
           />
-
+          <span
+            className={`error-message ${
+              eventErrors.eventDecsription && errorMessageVisible ? "show" : ""
+            }`}
+          >
+            Vui lòng nhập thông tin sự kiện
+          </span>
           <div className="form-group-button">
             {activeStep > 0 && (
               <button onClick={handlePrevious}>Quay lại</button>
