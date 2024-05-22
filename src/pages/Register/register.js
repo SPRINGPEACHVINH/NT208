@@ -38,10 +38,8 @@ function Register() {
       <Input placeholder="Nhập số điện thoại" prefix={<UserOutlined />} />
       <p></p>
       <div className="term-of-use">
-        <div>
-          <Checkbox className="checkbox" onClick={onClick}></Checkbox>
-        </div>
         <p>
+          <Checkbox className="checkbox" onClick={onClick}></Checkbox>
           Tôi đồng ý với Điều khoản sử dụng và Chính sách bảo mật của TicketX88{" "}
         </p>
         <a href="/SignIn">Đã có tài khoản?</a>
