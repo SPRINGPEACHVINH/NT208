@@ -4,7 +4,7 @@ import { Checkbox } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { Input } from "antd";
 import "../../styles/Register.css";
-import GoogleLogin  from "./GoogleLogin"
+import GoogleLogin from "./GoogleLogin";
 
 function onClick(e) {
   console.log(`checked = ${e.target.checked}`);
