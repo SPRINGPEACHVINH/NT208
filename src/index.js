@@ -6,6 +6,8 @@ const cors = require("cors");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
 const bodyParser = require("body-parser");
+const passportSetup = require("./services/passport");
+const authRoutes = require("./routes/AuthRouter");
 dotenv.config();
 
 const app = express();
@@ -14,15 +16,22 @@ const port = process.env.PORT || 8881;
 app.use(
   cookieSession({
     name: "session",
+    keys: ["TicketX88"],
+    maxAge: 24 * 60 * 60 * 100,
   })
-);
+)
+
 app.use(passport.initialize());
 app.use(passport.session());
+
 app.use(cors({
-  origin: "http://localhost:8881",
+  origin: "http://localhost:8080",
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 }));
+
+app.use("/auth", authRoutes);
+
 app.use(bodyParser.json());
 
 routes(app);
