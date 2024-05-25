@@ -1,9 +1,7 @@
 import "../../styles/Sidebar.css";
-import { useState } from "react";
+import { Link } from "react-router-dom";
 
-function Sidebar() {
-  const [activeItem, setActiveItem] = useState("my-event"); // Khởi tạo mục đang được chọn
-
+function Sidebar({ isSidebarOpen, activeTab, handleTabChange }) {
   return (
     <div className="d-flex flex-column flex-shrink-0 p-3 text-bg-dark ">
       <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
@@ -20,38 +18,70 @@ function Sidebar() {
           <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
         </symbol>
       </svg>
-
-      <ul className="nav nav-pills flex-column mb-auto">
-        <li className="nav-item">
-          <a
-            href="index.html"
-            className={`text-white nav-link ${
-              activeItem === "my-event" && "active"
-            }`}
-            aria-current="page"
-            onClick={() => setActiveItem("my-event")}
-          >
-            <svg className="bi pe-none me-2" width="16" height="16">
-              <use href="#my-event" />
-            </svg>
-            Sự kiện đã tạo
-          </a>
-        </li>
-        <li>
-          <a
-            href="index"
-            className={`text-white nav-link ${
-              activeItem === "create-event" && "active"
-            }`}
-            onClick={() => setActiveItem("create-event")}
-          >
-            <svg className="bi pe-none me-2" width="16" height="16">
-              <use href="#create-event" />
-            </svg>
-            Tạo sự kiện
-          </a>
-        </li>
-      </ul>
+      {isSidebarOpen && (
+        <ul className="nav nav-pills flex-column mb-auto">
+          <li className="nav-item-open">
+            <Link
+              to="/Events"
+              className={`text-white nav-link ${
+                activeTab === "my-event" && "active"
+              }`}
+              aria-current="page"
+              onClick={() => handleTabChange("my-event")}
+            >
+              <svg className="bi pe-none me-2-open" width="16" height="16">
+                <use href="#my-event" />
+              </svg>
+              Sự kiện đã tạo
+            </Link>
+          </li>
+          <li className="nav-item-open">
+            <Link
+              to="/CreateEvent"
+              className={`text-white nav-link ${
+                activeTab === "create-event" && "active"
+              }`}
+              onClick={() => handleTabChange("create-event")}
+            >
+              <svg className="bi pe-none me-2-open" width="16" height="16">
+                <use href="#create-event" />
+              </svg>
+              Tạo sự kiện
+            </Link>
+          </li>
+        </ul>
+      )}
+      {!isSidebarOpen && (
+        <ul className="nav nav-pills flex-column mb-auto">
+          <li className="nav-item-close">
+            <Link
+              to="/Events"
+              className={`text-white nav-link ${
+                activeTab === "my-event" && "active"
+              }`}
+              aria-current="page"
+              onClick={() => handleTabChange("my-event")}
+            >
+              <svg className="bi pe-none me-2-close" width="16" height="16">
+                <use href="#my-event" />
+              </svg>
+            </Link>
+          </li>
+          <li className="nav-item-close">
+            <Link
+              to="/CreateEvent"
+              className={`text-white nav-link ${
+                activeTab === "create-event" && "active"
+              }`}
+              onClick={() => handleTabChange("create-event")}
+            >
+              <svg className="bi pe-none me-2-close" width="16" height="16">
+                <use href="#create-event" />
+              </svg>
+            </Link>
+          </li>
+        </ul>
+      )}
     </div>
   );
 }

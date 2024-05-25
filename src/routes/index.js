@@ -15,7 +15,13 @@ export const routes = [
     isShowFooter: true,
   },
   {
-    path: "/BtcRegister",
+    path: "/CreateEvent",
+    page: Btc_Register,
+    isShowHeader: false,
+    isShowFooter: false,
+  },
+  {
+    path: "/Events",
     page: Btc_Register,
     isShowHeader: false,
     isShowFooter: false,

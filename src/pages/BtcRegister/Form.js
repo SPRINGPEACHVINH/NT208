@@ -11,6 +11,7 @@ const { Dragger } = Upload;
 function Form({ isMobile }) {
   // Upload logo btc
   const [fileListLogoBTC, setFileListLogoBTC] = useState([]);
+  const [uploadErrorLogoBTC, setUploadErrorLogoBTC] = useState(false);
 
   const handleChangeLogoBTC = ({ fileList }) => {
     const uploadedFile = fileList.find(
@@ -18,6 +19,7 @@ function Form({ isMobile }) {
     );
     if (uploadedFile) {
       message.success("Tải ảnh lên thành công");
+      setUploadErrorLogoBTC(false);
     }
 
     Promise.all(
@@ -69,6 +71,7 @@ function Form({ isMobile }) {
 
   // Upload cover event
   const [fileListCoverEvent, setFileListCoverEvent] = useState([]);
+  const [uploadErrorCoverEvent, setUploadErrorCoverEvent] = useState(false);
 
   const handleChangeCoverEvent = ({ fileList }) => {
     const uploadedFile = fileList.find(
@@ -76,6 +79,7 @@ function Form({ isMobile }) {
     );
     if (uploadedFile) {
       message.success("Tải ảnh lên thành công");
+      setUploadErrorCoverEvent(false);
     }
 
     Promise.all(
@@ -127,6 +131,7 @@ function Form({ isMobile }) {
 
   // Upload logo event
   const [fileListLogoEvent, setFileListLogoEvent] = useState([]);
+  const [uploadErrorLogoEvent, setUploadErrorLogoEvent] = useState(false);
 
   const handleChangeLogoEvent = ({ fileList }) => {
     const uploadedFile = fileList.find(
@@ -134,6 +139,7 @@ function Form({ isMobile }) {
     );
     if (uploadedFile) {
       message.success("Tải ảnh lên thành công");
+      setUploadErrorLogoEvent(false);
     }
 
     Promise.all(
@@ -298,7 +304,7 @@ function Form({ isMobile }) {
   };
 
   const [activeStep, setActiveStep] = useState(0);
-  const [errorMessageVisible, setErrorMessageVisible] = useState(false);
+  const [canShowMessage, setCanShowMessage] = useState(true);
   const handleFormNext = () => {
     const newErrors = { ...formErrors };
     let hasError = false;
@@ -315,13 +321,21 @@ function Form({ isMobile }) {
     setFormErrors(newErrors);
 
     if (
-      hasError &&
-      Object.values(formData).every((value) => value.trim() === "")
+      hasError ||
+      Object.values(formData).every((value) => value.trim() === "") ||
+      fileListLogoBTC.length === 0
     ) {
-      setErrorMessageVisible(true);
+      if (canShowMessage) {
+        if (fileListLogoBTC.length === 0) {
+          setUploadErrorLogoBTC(true);
+        }
+        setCanShowMessage(false);
+        message.error("Vui lòng nhập đầy đủ thông tin");
+        setTimeout(() => setCanShowMessage(true), 500);
+      }
     }
 
-    if (!hasError) {
+    if (!hasError && fileListLogoBTC.length > 0) {
       setActiveStep(activeStep + 1);
     }
   };
@@ -332,8 +346,6 @@ function Form({ isMobile }) {
 
     for (const key in eventData) {
       const value = eventData[key];
-
-      // Kiểm tra nếu value là chuỗi
       if (typeof value === "string") {
         if (value.trim() === "") {
           newErrors[key] = true;
@@ -354,13 +366,29 @@ function Form({ isMobile }) {
     setEventErrors(newErrors);
 
     if (
-      hasError &&
-      Object.values(eventData).every((value) => value.trim() === "")
+      hasError ||
+      Object.values(eventData).every((value) => value.trim() === "") ||
+      fileListCoverEvent.length === 0 ||
+      fileListLogoEvent.length === 0
     ) {
-      setErrorMessageVisible(true);
+      if (canShowMessage) {
+        if (fileListCoverEvent.length === 0) {
+          setUploadErrorCoverEvent(true);
+        }
+        if (fileListLogoEvent.length === 0) {
+          setUploadErrorLogoEvent(true);
+        }
+        setCanShowMessage(false);
+        message.error("Vui lòng nhập đầy đủ thông tin");
+        setTimeout(() => setCanShowMessage(true), 500);
+      }
     }
 
-    if (!hasError) {
+    if (
+      !hasError &&
+      fileListCoverEvent.length > 0 &&
+      fileListLogoEvent.length > 0
+    ) {
       setActiveStep(activeStep + 1);
     }
   };
@@ -496,9 +524,7 @@ function Form({ isMobile }) {
                 />
                 <span
                   className={`error-message ${
-                    formErrors.enterpriseName && errorMessageVisible
-                      ? "show"
-                      : ""
+                    formErrors.enterpriseName ? "show" : ""
                   }`}
                 >
                   Vui lòng nhập tên doanh nghiệp
@@ -519,9 +545,7 @@ function Form({ isMobile }) {
                 />
                 <span
                   className={`error-message ${
-                    formErrors.enterpriseNumberBusiness && errorMessageVisible
-                      ? "show"
-                      : ""
+                    formErrors.enterpriseNumberBusiness ? "show" : ""
                   }`}
                 >
                   Vui lòng nhập mã số đăng ký kinh doanh
@@ -549,9 +573,7 @@ function Form({ isMobile }) {
                 />
                 <span
                   className={`error-message ${
-                    formErrors.enterprisePhone && errorMessageVisible
-                      ? "show"
-                      : ""
+                    formErrors.enterprisePhone ? "show" : ""
                   }`}
                 >
                   Vui lòng nhập số điện thoại
@@ -571,9 +593,7 @@ function Form({ isMobile }) {
                 />
                 <span
                   className={`error-message ${
-                    formErrors.enterpriseEmail && errorMessageVisible
-                      ? "show"
-                      : ""
+                    formErrors.enterpriseEmail ? "show" : ""
                   }`}
                 >
                   Vui lòng nhập email
@@ -595,9 +615,7 @@ function Form({ isMobile }) {
                 />
                 <span
                   className={`error-message ${
-                    formErrors.enterpriseAddress && errorMessageVisible
-                      ? "show"
-                      : ""
+                    formErrors.enterpriseAddress ? "show" : ""
                   }`}
                 >
                   Vui lòng nhập địa chỉ trụ sở
@@ -623,6 +641,18 @@ function Form({ isMobile }) {
                     <p className="ant-upload-hint">(275x275)</p>
                   </div>
                 )}
+                <span
+                  style={{
+                    position: "absolute",
+                    left: "0",
+                    bottom: "-25px",
+                  }}
+                  className={`error-message ${
+                    uploadErrorLogoBTC ? "show" : ""
+                  }`}
+                >
+                  Vui lòng tải ảnh logo ban tổ chức
+                </span>
               </Dragger>
               <div className="form-group-btc">
                 <div className="form-item btc-item">
@@ -639,7 +669,7 @@ function Form({ isMobile }) {
                   />
                   <span
                     className={`error-message ${
-                      formErrors.btcName && errorMessageVisible ? "show" : ""
+                      formErrors.btcName ? "show" : ""
                     }`}
                   >
                     Vui lòng nhập tên ban tổ chức
@@ -659,9 +689,7 @@ function Form({ isMobile }) {
                   />
                   <span
                     className={`error-message ${
-                      formErrors.btcInformation && errorMessageVisible
-                        ? "show"
-                        : ""
+                      formErrors.btcInformation ? "show" : ""
                     }`}
                   >
                     Vui lòng nhập thông tin ban tổ chức
@@ -711,6 +739,16 @@ function Form({ isMobile }) {
                 <p className="ant-upload-hint">(1280x720)</p>
               </div>
             )}
+            <span
+              style={{
+                position: "absolute",
+                left: "0",
+                bottom: "-25px",
+              }}
+              className={`error-message ${uploadErrorCoverEvent ? "show" : ""}`}
+            >
+              Vui lòng tải ảnh nền sự kiện
+            </span>
           </Dragger>
           <div className="container-form-event">
             <Dragger
@@ -731,6 +769,18 @@ function Form({ isMobile }) {
                   <p className="ant-upload-hint">(720x958)</p>
                 </div>
               )}
+              <span
+                style={{
+                  position: "absolute",
+                  left: "0",
+                  bottom: "-25px",
+                }}
+                className={`error-message ${
+                  uploadErrorLogoEvent ? "show" : ""
+                }`}
+              >
+                Vui lòng tải ảnh logo sự kiện
+              </span>
             </Dragger>
             <div className="form-group-event">
               <div className="form-item event-item">
@@ -747,7 +797,7 @@ function Form({ isMobile }) {
                 />
                 <span
                   className={`error-message ${
-                    eventErrors.eventName && errorMessageVisible ? "show" : ""
+                    eventErrors.eventName ? "show" : ""
                   }`}
                 >
                   Vui lòng nhập tên sự kiện
@@ -774,7 +824,7 @@ function Form({ isMobile }) {
                 </select>
                 <span
                   className={`error-message ${
-                    eventErrors.eventType && errorMessageVisible ? "show" : ""
+                    eventErrors.eventType ? "show" : ""
                   }`}
                 >
                   Vui lòng chọn thể loại sự kiện
@@ -798,9 +848,7 @@ function Form({ isMobile }) {
                 />
                 <span
                   className={`error-message ${
-                    eventErrors.eventDateTime && errorMessageVisible
-                      ? "show"
-                      : ""
+                    eventErrors.eventDateTime ? "show" : ""
                   }`}
                 >
                   Vui lòng chọn thời gian diễn ra sự kiện
@@ -829,9 +877,7 @@ function Form({ isMobile }) {
                 </div>
                 <span
                   className={`error-message ${
-                    eventErrors.eventTicketPrice && errorMessageVisible
-                      ? "show"
-                      : ""
+                    eventErrors.eventTicketPrice ? "show" : ""
                   }`}
                 >
                   Vui lòng nhập giá vé
@@ -849,7 +895,7 @@ function Form({ isMobile }) {
           />
           <span
             className={`error-message ${
-              eventErrors.eventDecsription && errorMessageVisible ? "show" : ""
+              eventErrors.eventDecsription ? "show" : ""
             }`}
           >
             Vui lòng nhập thông tin sự kiện

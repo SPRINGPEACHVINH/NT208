@@ -5,6 +5,27 @@
 
 .d-flex {
   height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.nav-item-close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.nav-item-open {
+  margin-bottom: 5px;
+}
+
+.me-2-close {
+  margin-right: 0 !important;
+}
+
+.me-2-open {
+  margin-right: 0.5rem !important;
 }
 
 .nav-link.active {

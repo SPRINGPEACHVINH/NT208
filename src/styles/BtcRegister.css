@@ -12,7 +12,7 @@
   padding: 0;
 }
 
-.col-md-3 {
+.col-md-3-desktop {
   padding: 0;
   width: 20%;
   height: 100%;
@@ -27,11 +27,18 @@
   z-index: 1;
 }
 
-.col-md-3-hidden {
+.col-md-3-hidden-desktop {
+  padding: 0;
+  width: 6%;
+  height: 100%;
+  position: fixed;
+}
+
+.col-md-3-hidden-mobile {
   display: none;
 }
 
-.col-md-9 {
+.col-md-9-desktop {
   flex: 1;
   padding: 10px;
   height: 100%;
@@ -39,11 +46,19 @@
 }
 
 .col-md-9-mobile {
-  display: none;
-}
-
-.col-md-9-full {
   flex: 1;
   padding: 10px;
+  height: 100%;
   margin-left: 0;
+}
+
+.col-md-9-hidden-desktop {
+  flex: 1;
+  padding: 10px;
+  height: 100%;
+  margin-left: 6%;
+}
+
+.col-md-9-hidden-mobile {
+  display: none;
 }

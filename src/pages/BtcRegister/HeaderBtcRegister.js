@@ -4,7 +4,11 @@ import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 
 const SquareMenu = ({ handleSidebar, isSidebarOpen }) => (
   <button className="square-menu" onClick={handleSidebar}>
-    {isSidebarOpen ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+    {isSidebarOpen ? (
+      <MenuUnfoldOutlined className="icon-menu" />
+    ) : (
+      <MenuFoldOutlined className="icon-menu" />
+    )}
   </button>
 );
 
@@ -12,7 +16,9 @@ const HeaderBtcRegister = ({ handleSidebar, isSidebarOpen }) => {
   return (
     <header className="header-btc-register">
       <SquareMenu handleSidebar={handleSidebar} isSidebarOpen={isSidebarOpen} />
-      <Link className="title-logo">TicketX88</Link>
+      <Link className="title-logo" to="/">
+        TicketX88
+      </Link>
     </header>
   );
 };
