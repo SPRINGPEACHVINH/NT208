@@ -1,9 +1,13 @@
 import React from "react";
+import Signin from "./SignIn.js"
 
 const SignIn = () => {
     return (
         <div>
-            <h1>Sign In</h1>
+            <div className="register-banner">
+                <span className="span-sign-up">TicketX88 - Sign up</span>
+            </div>
+            <Signin />
         </div>
     )
 }

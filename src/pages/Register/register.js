@@ -2,9 +2,9 @@ import React from "react";
 import { UserOutlined } from "@ant-design/icons";
 import { Checkbox } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
-import { Button, Input, Space } from "antd";
-import { Link } from "react-router-dom";
+import { Input } from "antd";
 import "../../styles/Register.css";
+import GoogleLogin  from "./GoogleLogin"
 
 function onClick(e) {
   console.log(`checked = ${e.target.checked}`);
@@ -50,6 +50,7 @@ function Register() {
           Tiếp tục
         </button>
       </div>
+      <GoogleLogin />
     </div>
   );
 }
