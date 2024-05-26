@@ -4,7 +4,7 @@ import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 
 const CLIENT_ID = "957778684302-roirdu9se7h2e9f01kedlu82euq54pf2.apps.googleusercontent.com";
 
-function MyEvents() {
+function Google_Login() {
   const onSuccess = (response) => {
     console.log("Login Success:", response);
 
@@ -24,4 +24,4 @@ function MyEvents() {
   );
 }
 
-export default MyEvents;
+export default Google_Login;
