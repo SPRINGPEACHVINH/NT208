@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/ShowHome.css";
 
@@ -6,10 +6,12 @@ const ShowHome = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [events, setEvents] = useState([]);
   const [slideEvents, setSlideEvents] = useState([]);
+  const [isAutoSliding, setIsAutoSliding] = useState(true);
+  const autoSlideRef = useRef();
 
   const navigate = useNavigate();
 
-  const changeSlide = (n) => {
+  const changeSlide = (n, manual = false) => {
     setCurrentSlide((currentSlide) => {
       const slides = document.querySelectorAll(".slide");
       const dots = document.querySelectorAll(".dot");
@@ -21,7 +23,7 @@ const ShowHome = () => {
       );
       dots[currentSlide].classList.remove("active");
 
-      let newSlide = (currentSlide - n + slides.length) % slides.length;
+      let newSlide = (currentSlide + n + slides.length) % slides.length;
 
       if (n > 0) {
         slides[currentSlide].classList.add("slide-out-left");
@@ -38,16 +40,25 @@ const ShowHome = () => {
 
       return newSlide;
     });
+
+    if (manual) {
+      setIsAutoSliding(false);
+      clearTimeout(autoSlideRef.current);
+      autoSlideRef.current = setTimeout(() => {
+        setIsAutoSliding(true);
+      }, 3000);
+    }
   };
 
   useEffect(() => {
-    document.querySelector(".prev").addEventListener("click", function () {
-      changeSlide(-1);
-    });
+    const prevButton = document.querySelector(".prev");
+    const nextButton = document.querySelector(".next");
 
-    document.querySelector(".next").addEventListener("click", function () {
-      changeSlide(1);
-    });
+    const handlePrevClick = () => changeSlide(-1, true);
+    const handleNextClick = () => changeSlide(1, true);
+
+    prevButton.addEventListener("click", handlePrevClick);
+    nextButton.addEventListener("click", handleNextClick);
 
     const fetchEvents = async () => {
       const response = await fetch("http://localhost:8881/api/event/all");
@@ -57,7 +68,21 @@ const ShowHome = () => {
     };
 
     fetchEvents();
+
+    return () => {
+      prevButton.removeEventListener("click", handlePrevClick);
+      nextButton.removeEventListener("click", handleNextClick);
+    };
   }, []);
+
+  useEffect(() => {
+    if (isAutoSliding) {
+      const interval = setInterval(() => {
+        changeSlide(1);
+      }, 3000);
+      return () => clearInterval(interval);
+    }
+  }, [isAutoSliding]);
 
   const groupedEvents = events.reduce((groups, event) => {
     const category = event.EventCategory;
@@ -107,7 +132,7 @@ const ShowHome = () => {
                 className="card"
                 key={event.EventName}
                 onClick={() => {
-                   navigate(`/Description/${event.EventId}`);
+                  navigate(`/Description/${event.EventId}`);
                 }}
               >
                 <img src={event.Picture_event} alt={event.EventName} />
