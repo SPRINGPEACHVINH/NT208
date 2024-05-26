@@ -1,5 +1,6 @@
 import React from "react";
 import "../../styles/RegisterBanner.css";
+import { Link } from "react-router-dom";
 
 function Banner({ page }) {
   let text;
@@ -11,7 +12,9 @@ function Banner({ page }) {
 
   return (
     <div className="register-banner">
-      <span className="span-text">TicketX88 - {text}</span>
+      <span className="span-text">
+        <Link className="logo-link" to="/">TicketX88</Link> - {text}
+      </span>
     </div>
   );
 }
