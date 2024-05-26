@@ -1,15 +1,14 @@
-import React from "react";
-import Signin from "./SignIn.js"
+import React from 'react';
+import SignInForm from './SignInForm';
+import Banner from './Banner';
 
-const SignIn = () => {
-    return (
-        <div>
-            <div className="register-banner">
-                <span className="span-sign-up">TicketX88 - Sign up</span>
-            </div>
-            <Signin />
-        </div>
-    )
+function SignIn() {
+  return (
+    <div>
+      <Banner page="signin" />
+      <SignInForm />
+    </div>
+  );
 }
 
-export default SignIn
+export default SignIn;

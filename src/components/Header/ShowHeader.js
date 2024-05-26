@@ -76,7 +76,7 @@ const ShowHeader = () => {
       </div>
       <div className="options">
         <div className="search-container">
-          <form onSubmit={handleSearch}>
+          <form className="search-form" onSubmit={handleSearch}>
             <input
               type="text"
               id="search-input"
@@ -131,7 +131,7 @@ const ShowHeader = () => {
           </button>
           <button className="purchased-tickets">Vé đã mua</button>
           <button className="auth-button">
-            <Link to="/Register">Đăng ký | Đăng nhập</Link>
+            <Link to="/SignUp">Đăng ký | Đăng nhập</Link>
           </button>
         </div>
       </div>

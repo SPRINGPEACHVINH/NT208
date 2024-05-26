@@ -1,0 +1,26 @@
+.google-login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.google-login-button {
+    width: 100% !important;
+    max-width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.google-login-button div {
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+}
+
+.google-login-button iframe {
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+}

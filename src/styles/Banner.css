@@ -8,16 +8,16 @@
     font-size: 20px;
     overflow: auto;
     scroll-behavior: smooth;
-    background:linear-gradient(#27272a 48.04%,#000 100%);
-    box-sizing:border-box;
-    color:#fff;
-    height:max-content;
-    padding-block:2rem;
-    padding-inline:1rem;
-    text-size-adjust:100%;
-    width:100%;
-    -webkit-locale:"vi";
-    line-height:1.15;
+    background: linear-gradient(#27272a 48.04%, #000 100%);
+    box-sizing: border-box;
+    color: #fff;
+    height: max-content;
+    padding-block: 2rem;
+    padding-inline: 1rem;
+    text-size-adjust: 100%;
+    width: 100%;
+    -webkit-locale: "vi";
+    line-height: 1.15;
     display: block;
     unicode-bidi: isolate;
 }
@@ -163,6 +163,7 @@ a {
 a {
     background-color: transparent;
 }
+
 .banner .content .text-wrapper .text .info #venue {
     font-size: 18px;
     display: flex;
@@ -176,7 +177,7 @@ a {
 }
 
 .banner .content .text-wrapper .text .info #address {
-    
+
     font-size: 0.8em;
     color: rgb(196, 196, 207);
     margin-left: 1.5rem;
@@ -233,19 +234,28 @@ button {
     cursor: pointer;
 }
 
-button, [type="button"], [type="reset"], [type="submit"] {
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
     appearance: button;
 }
 
-button, select {
+button,
+select {
     text-transform: none;
 }
 
-button, input {
+button,
+input {
     overflow: visible;
 }
 
-button, input, optgroup, select, textarea {
+button,
+input,
+optgroup,
+select,
+textarea {
     font-family: inherit;
     font-size: 100%;
     line-height: 1.15;
@@ -265,17 +275,17 @@ button, input, optgroup, select, textarea {
 
 .img-wrapper img {
     border-radius: 1.5rem;
-    box-sizing:border-box;
-    display:block;
-    height:100%;
-    min-block-size:auto;
-    min-height:auto;
-    min-inline-size:auto;
-    min-width:auto;
-    object-fit:cover;
-    text-size-adjust:100%;
-    width:100%;
-    -webkit-locale:"vi";
+    box-sizing: border-box;
+    display: block;
+    height: 100%;
+    min-block-size: auto;
+    min-height: auto;
+    min-inline-size: auto;
+    min-width: auto;
+    object-fit: cover;
+    text-size-adjust: 100%;
+    width: 100%;
+    -webkit-locale: "vi";
     position: relative !important
 }
 
