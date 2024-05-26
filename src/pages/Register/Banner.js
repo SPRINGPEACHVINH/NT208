@@ -1,12 +1,19 @@
-import React from "react"
-import "../../styles/RegisterBanner.css" 
+import React from "react";
+import "../../styles/RegisterBanner.css";
 
-function Banner() {
-    return (
-        <div className="register-banner">
-            <span className="span-sign-up">Sign Up</span>
-        </div>
-    )
+function Banner({ page }) {
+  let text;
+  if (page === "signup") {
+    text = "Sign Up";
+  } else if (page === "signin") {
+    text = "Sign In";
+  }
+
+  return (
+    <div className="register-banner">
+      <span className="span-text">TicketX88 - {text}</span>
+    </div>
+  );
 }
 
-export default Banner
+export default Banner;

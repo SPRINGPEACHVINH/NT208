@@ -1,10 +1,11 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { routes } from "../routes";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import DefaultComponentFooter from "../components/DefaultComponent/DefaultComponentFooter";
 import DefaultComponentHeader from "../components/DefaultComponent/DefaultComponentHeader";
 
 function App() {
+
   useEffect(() => {
     fetchApi();
   }, []);

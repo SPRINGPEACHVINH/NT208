@@ -1,0 +1,98 @@
+form {
+    max-width: 300px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    position: relative;
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"] {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.password-container {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 5px;
+    top: 65%;
+    transform: translateY(-51%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    color: gray;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: orangered;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #cc1f00;
+}
+
+.agreement {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.agreement input {
+    transform: scale(1.25);
+    align-self: start;
+    margin: 6px 7px 0px 5px;
+    accent-color: orangered;
+}
+
+.agreement a {
+    color: orangered;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.agreement a:hover {
+    text-decoration: underline;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-link a {
+    color: orangered;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}

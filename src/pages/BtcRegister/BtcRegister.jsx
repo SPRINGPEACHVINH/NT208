@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Form from "./Form.js";
 import Sidebar from "./Sidebar.js";
-import MyEvents from "./MyEvents.js";
+import MyEvents from "../Register/GoogleLogin.js";
 import HeaderBtcRegister from "./HeaderBtcRegister.js";
 import "../../styles/BtcRegister.css";
 

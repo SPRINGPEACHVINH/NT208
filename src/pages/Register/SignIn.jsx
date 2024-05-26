@@ -1,11 +1,14 @@
-import React from "react";
+import React from 'react';
+import SignInForm from './SignInForm';
+import Banner from './Banner';
 
-const SignIn = () => {
-    return (
-        <div>
-            <h1>Sign In</h1>
-        </div>
-    )
+function SignIn() {
+  return (
+    <div>
+      <Banner page="signin" />
+      <SignInForm />
+    </div>
+  );
 }
 
-export default SignIn
+export default SignIn;

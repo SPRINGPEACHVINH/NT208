@@ -3,7 +3,7 @@ import ShowHeader from "./ShowHeader";
 
 const Header = () => {
   return (
-    <div className="row" style={{}}>
+    <div>
       <ShowHeader />
     </div>
   );
