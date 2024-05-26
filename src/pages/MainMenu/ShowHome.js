@@ -1,15 +1,35 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/ShowHome.css";
+import loadingGif from "../../assets/images/loading.gif";
 
 const ShowHome = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [events, setEvents] = useState([]);
   const [slideEvents, setSlideEvents] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [isAutoSliding, setIsAutoSliding] = useState(true);
   const autoSlideRef = useRef();
-
+  const prevButtonRef = useRef();
+  const nextButtonRef = useRef();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch("http://localhost:8881/api/event/all");
+        const { data } = await response.json();
+        setEvents(data);
+        setSlideEvents(data.slice(0, 3));
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+        setIsLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
 
   const changeSlide = (n, manual = false) => {
     setCurrentSlide((currentSlide) => {
@@ -46,32 +66,27 @@ const ShowHome = () => {
       clearTimeout(autoSlideRef.current);
       autoSlideRef.current = setTimeout(() => {
         setIsAutoSliding(true);
-      }, 3000);
+      }, 3000); // 3 seconds to resume auto sliding
     }
   };
 
   useEffect(() => {
-    const prevButton = document.querySelector(".prev");
-    const nextButton = document.querySelector(".next");
+    const prevButton = prevButtonRef.current;
+    const nextButton = nextButtonRef.current;
 
     const handlePrevClick = () => changeSlide(-1, true);
     const handleNextClick = () => changeSlide(1, true);
 
-    prevButton.addEventListener("click", handlePrevClick);
-    nextButton.addEventListener("click", handleNextClick);
-
-    const fetchEvents = async () => {
-      const response = await fetch("http://localhost:8881/api/event/all");
-      const { data } = await response.json();
-      setEvents(data);
-      setSlideEvents(data.slice(0, 3));
-    };
-
-    fetchEvents();
+    if (prevButton && nextButton) {
+      prevButton.addEventListener("click", handlePrevClick);
+      nextButton.addEventListener("click", handleNextClick);
+    }
 
     return () => {
-      prevButton.removeEventListener("click", handlePrevClick);
-      nextButton.removeEventListener("click", handleNextClick);
+      if (prevButton && nextButton) {
+        prevButton.removeEventListener("click", handlePrevClick);
+        nextButton.removeEventListener("click", handleNextClick);
+      }
     };
   }, []);
 
@@ -79,7 +94,7 @@ const ShowHome = () => {
     if (isAutoSliding) {
       const interval = setInterval(() => {
         changeSlide(1);
-      }, 3000);
+      }, 3000); // Change slide every 3 seconds
       return () => clearInterval(interval);
     }
   }, [isAutoSliding]);
@@ -92,6 +107,14 @@ const ShowHome = () => {
     groups[category].push(event);
     return groups;
   }, {});
+
+  if (isLoading) {
+    return (
+      <div className="loading-container">
+        <img src={loadingGif} alt="Loading..." />
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -106,12 +129,17 @@ const ShowHome = () => {
               className="slide-img"
               src={event.Picture_event}
               alt={event.EventName}
+              loading="lazy" // Lazy loading images
             />
           </div>
         ))}
 
-        <a className="prev">&#10094;</a>
-        <a className="next">&#10095;</a>
+        <a className="prev" ref={prevButtonRef}>
+          &#10094;
+        </a>
+        <a className="next" ref={nextButtonRef}>
+          &#10095;
+        </a>
 
         <div className="dot-container">
           {slideEvents.map((_, index) => (
@@ -135,7 +163,11 @@ const ShowHome = () => {
                   navigate(`/Description/${event.EventId}`);
                 }}
               >
-                <img src={event.Picture_event} alt={event.EventName} />
+                <img
+                  src={event.Picture_event}
+                  alt={event.EventName}
+                  loading="lazy"
+                />
                 <div className="card-content">
                   <h2 className="card-title">{event.EventName}</h2>
                   <p className="price">

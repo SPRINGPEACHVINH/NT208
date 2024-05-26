@@ -1,7 +1,7 @@
 import React from 'react';
 import ShowFooter from './ShowFooter';
 
-const App = () => {
+const Footer = () => {
   return (
     <div>
       <ShowFooter />
@@ -9,4 +9,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Footer;
