@@ -126,9 +126,9 @@ const ShowHeader = () => {
           )}
         </div>
         <div className="actions">
-          <button className="create-event">
-            <Link to="/CreateEvent">Tạo sự kiện</Link>
-          </button>
+          <Link to="/CreateEvent">
+            <button className="create-event">Tạo sự kiện</button>
+          </Link>
           <button className="purchased-tickets">Vé đã mua</button>
           <button className="auth-button">
             <Link to="/SignUp">Đăng ký | Đăng nhập</Link>
