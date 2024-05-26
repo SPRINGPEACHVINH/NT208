@@ -2,13 +2,20 @@ import React, { useState } from "react";
 import "../../styles/Form.css";
 import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
-import { RightOutlined, InboxOutlined, AuditOutlined } from "@ant-design/icons";
-import { Upload, message, Input } from "antd";
+import {
+  RightOutlined,
+  InboxOutlined,
+  AuditOutlined,
+  CheckCircleOutlined,
+  BarsOutlined,
+  BankOutlined,
+} from "@ant-design/icons";
+import { Upload, message, Input, Modal } from "antd";
 
 const { TextArea } = Input;
 const { Dragger } = Upload;
 
-function Form({ isMobile }) {
+function Form({ isMobile, addEvent }) {
   // Upload logo btc
   const [fileListLogoBTC, setFileListLogoBTC] = useState([]);
   const [uploadErrorLogoBTC, setUploadErrorLogoBTC] = useState(false);
@@ -255,10 +262,21 @@ function Form({ isMobile }) {
 
   const handleInputFormChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+    const formattedValue =
+      name === "enterprisePhone"
+        ? value.replace(/[^0-9]/g, "").slice(0, 10)
+        : value;
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: formattedValue,
+    }));
+
     setFormErrors((prevFormErrors) => ({
       ...prevFormErrors,
-      [name]: value.trim() === "",
+      [name]:
+        formattedValue.trim() === "" ||
+        (name === "enterprisePhone" && formattedValue.length !== 10),
     }));
   };
 
@@ -316,6 +334,18 @@ function Form({ isMobile }) {
       } else {
         newErrors[key] = false;
       }
+    }
+
+    if (formData.enterprisePhone.trim().length !== 10) {
+      newErrors.enterprisePhone = true;
+      hasError = true;
+    }
+
+    const emailRegex = /^[^\s@]+@gmail\.com$/;
+    const isValidEmail = emailRegex.test(formData.enterpriseEmail);
+    if (!isValidEmail) {
+      newErrors.enterpriseEmail = true;
+      hasError = true;
     }
 
     setFormErrors(newErrors);
@@ -412,6 +442,27 @@ function Form({ isMobile }) {
     );
   };
 
+  // Hàm lưu thông tin
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const handleSave = async () => {
+    const coverImageBase64 =
+      fileListCoverEvent.length > 0
+        ? await imageToBase64(fileListCoverEvent[0].originFileObj)
+        : null;
+    const formattedEventData = {
+      ...eventData,
+      coverImage: coverImageBase64,
+      eventDateTime: eventData.eventDateTime.format("DD-MM-YYYY HH:mm"),
+    };
+    addEvent(formattedEventData);
+    setModalVisible(true);
+  };
+
+  const handleModalOk = () => {
+    setModalVisible(false);
+  };
+
   return (
     <div>
       <div className="container-step">
@@ -464,7 +515,7 @@ function Form({ isMobile }) {
         )}
 
         {isMobile && (
-          <>
+          <div className="ant-steps-container">
             <div
               className={`ant-steps-icon ${
                 activeStep === 0
@@ -472,8 +523,9 @@ function Form({ isMobile }) {
                   : "ant-steps-icon-wait"
               }`}
             >
-              <AuditOutlined className="ant-steps-item-audio-icon" />
+              <AuditOutlined className="ant-icon" />
             </div>
+            <div className="line" />
             <div
               className={`ant-steps-icon ${
                 activeStep === 1
@@ -481,8 +533,9 @@ function Form({ isMobile }) {
                   : "ant-steps-icon-wait"
               }`}
             >
-              <AuditOutlined className="ant-steps-item-audio-icon" />
+              <BarsOutlined className="ant-icon" />
             </div>
+            <div className="line" />
             <div
               className={`ant-steps-icon ${
                 activeStep === 2
@@ -490,9 +543,9 @@ function Form({ isMobile }) {
                   : "ant-steps-icon-wait"
               }`}
             >
-              <AuditOutlined className="ant-steps-item-audio-icon" />
+              <BankOutlined className="ant-icon" />
             </div>
-          </>
+          </div>
         )}
       </div>
 
@@ -563,11 +616,6 @@ function Form({ isMobile }) {
                   name="enterprisePhone"
                   placeholder="Số điện thoại"
                   maxLength="10"
-                  onInput={(e) =>
-                    (e.target.value = e.target.value
-                      .replace(/[^0-9]/g, "")
-                      .slice(0, 10))
-                  }
                   value={formData.enterprisePhone}
                   onChange={handleInputFormChange}
                 />
@@ -576,7 +624,11 @@ function Form({ isMobile }) {
                     formErrors.enterprisePhone ? "show" : ""
                   }`}
                 >
-                  Vui lòng nhập số điện thoại
+                  {formData.enterprisePhone.trim() === ""
+                    ? "Vui lòng nhập số điện thoại"
+                    : formErrors.enterprisePhone
+                    ? "Vui lòng nhập đúng số điện thoại (10 số)"
+                    : ""}
                 </span>
               </div>
               <div className="form-item">
@@ -596,7 +648,11 @@ function Form({ isMobile }) {
                     formErrors.enterpriseEmail ? "show" : ""
                   }`}
                 >
-                  Vui lòng nhập email
+                  {formData.enterpriseEmail.trim() === ""
+                    ? "Vui lòng nhập email"
+                    : formErrors.enterpriseEmail
+                    ? "Vui lòng nhập đúng định dạng email"
+                    : ""}
                 </span>
               </div>
             </div>
@@ -912,25 +968,43 @@ function Form({ isMobile }) {
       )}
 
       {activeStep === 2 && (
-        <div className="container-content">
-          <div
-            style={{
-              fontSize: "35px",
-              textAlign: "center",
-              fontWeight: "bold",
-              marginBottom: "20px",
-            }}
-          >
-            Thông tin thanh toán
-          </div>
+        <>
+          <div className="container-content">
+            <div
+              style={{
+                fontSize: "35px",
+                textAlign: "center",
+                fontWeight: "bold",
+                marginBottom: "20px",
+              }}
+            >
+              Thông tin thanh toán
+            </div>
 
-          <div className="form-group-button">
-            {activeStep > 0 && (
-              <button onClick={handlePrevious}>Quay lại</button>
-            )}
-            <button type="submit">Lưu thông tin</button>
+            <div className="form-group-button">
+              {activeStep > 0 && (
+                <button onClick={handlePrevious}>Quay lại</button>
+              )}
+              <button type="submit" onClick={handleSave}>
+                Lưu thông tin
+              </button>
+            </div>
           </div>
-        </div>
+          <Modal
+            title="Đăng ký thành công"
+            visible={modalVisible}
+            onOk={handleModalOk}
+          >
+            <div style={{ textAlign: "center" }}>
+              <CheckCircleOutlined
+                style={{ fontSize: "50px", color: "orangered" }}
+              />
+            </div>
+            <div style={{ textAlign: "center", marginTop: "10px" }}>
+              Thông tin của bạn đã được lưu thành công
+            </div>
+          </Modal>
+        </>
       )}
     </div>
   );
