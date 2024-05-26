@@ -75,6 +75,7 @@ input[type="submit"]:hover {
 .agreement a {
     color: orangered;
     text-decoration: none;
+    font-size: 13px;
 }
 
 .agreement a:hover {
@@ -89,6 +90,7 @@ input[type="submit"]:hover {
 .login-link a {
     color: orangered;
     text-decoration: none;
+    font-size: 16px;
 }
 
 .login-link a:hover {

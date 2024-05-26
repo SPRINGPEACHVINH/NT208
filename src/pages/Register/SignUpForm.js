@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../../styles/SignUp.css";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import GoogleLoginButton from "./GoogleLogin";
 
 function SignUpForm() {
   const [form, setForm] = useState({
@@ -112,13 +113,15 @@ function SignUpForm() {
 
       <div className="agreement">
         <input type="checkbox" required />
-        <span style={{ fontSize: "0.8em", marginTop: "3px" }}>
+        <span style={{ fontSize: "0.8em", marginTop: "3px", fontSize: "13px"}}>
           Tôi đồng ý với <a href="#">Điều khoản sử dụng</a> và{" "}
           <a href="#">Chính sách bảo mật</a> của TicketX88
         </span>
       </div>
 
       <input type="submit" value="Tiếp tục" />
+      
+      <GoogleLoginButton />
 
       <div className="login-link">
         Đã có tài khoản? <a href="/SignIn">Đăng nhập</a>
