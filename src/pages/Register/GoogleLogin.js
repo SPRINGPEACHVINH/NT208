@@ -8,8 +8,8 @@ const CLIENT_ID =
 function Google_Login() {
   const onSuccess = (response) => {
     console.log("Login Success:", response);
-
     console.log("ID Token:", response.credential);
+    <a href="/">Success</a>
   };
 
   const onFailure = (response) => {
