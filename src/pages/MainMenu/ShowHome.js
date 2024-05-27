@@ -1,15 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/ShowHome.css";
+import loadingGif from "../../assets/images/loading.gif";
 
 const ShowHome = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [events, setEvents] = useState([]);
   const [slideEvents, setSlideEvents] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(true);
+  const [isAutoSliding, setIsAutoSliding] = useState(true);
+  const autoSlideRef = useRef();
+  const prevButtonRef = useRef();
+  const nextButtonRef = useRef();
   const navigate = useNavigate();
 
-  const changeSlide = (n) => {
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch("http://localhost:8881/api/event/all");
+        const { data } = await response.json();
+        setEvents(data);
+        setSlideEvents(data.slice(0, 3));
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+        setIsLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
+  const changeSlide = (n, manual = false) => {
     setCurrentSlide((currentSlide) => {
       const slides = document.querySelectorAll(".slide");
       const dots = document.querySelectorAll(".dot");
@@ -21,7 +43,7 @@ const ShowHome = () => {
       );
       dots[currentSlide].classList.remove("active");
 
-      let newSlide = (currentSlide - n + slides.length) % slides.length;
+      let newSlide = (currentSlide + n + slides.length) % slides.length;
 
       if (n > 0) {
         slides[currentSlide].classList.add("slide-out-left");
@@ -38,26 +60,44 @@ const ShowHome = () => {
 
       return newSlide;
     });
+
+    if (manual) {
+      setIsAutoSliding(false);
+      clearTimeout(autoSlideRef.current);
+      autoSlideRef.current = setTimeout(() => {
+        setIsAutoSliding(true);
+      }, 3000); // 3 seconds to resume auto sliding
+    }
   };
 
   useEffect(() => {
-    document.querySelector(".prev").addEventListener("click", function () {
-      changeSlide(-1);
-    });
+    const prevButton = prevButtonRef.current;
+    const nextButton = nextButtonRef.current;
 
-    document.querySelector(".next").addEventListener("click", function () {
-      changeSlide(1);
-    });
+    const handlePrevClick = () => changeSlide(-1, true);
+    const handleNextClick = () => changeSlide(1, true);
 
-    const fetchEvents = async () => {
-      const response = await fetch("http://localhost:8881/api/event/all");
-      const { data } = await response.json();
-      setEvents(data);
-      setSlideEvents(data.slice(0, 3));
+    if (prevButton && nextButton) {
+      prevButton.addEventListener("click", handlePrevClick);
+      nextButton.addEventListener("click", handleNextClick);
+    }
+
+    return () => {
+      if (prevButton && nextButton) {
+        prevButton.removeEventListener("click", handlePrevClick);
+        nextButton.removeEventListener("click", handleNextClick);
+      }
     };
-
-    fetchEvents();
   }, []);
+
+  useEffect(() => {
+    if (isAutoSliding) {
+      const interval = setInterval(() => {
+        changeSlide(1);
+      }, 3000); // Change slide every 3 seconds
+      return () => clearInterval(interval);
+    }
+  }, [isAutoSliding]);
 
   const groupedEvents = events.reduce((groups, event) => {
     const category = event.EventCategory;
@@ -67,6 +107,14 @@ const ShowHome = () => {
     groups[category].push(event);
     return groups;
   }, {});
+
+  if (isLoading) {
+    return (
+      <div className="loading-container">
+        <img src={loadingGif} alt="Loading..." />
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -81,12 +129,17 @@ const ShowHome = () => {
               className="slide-img"
               src={event.Picture_event}
               alt={event.EventName}
+              loading="lazy" // Lazy loading images
             />
           </div>
         ))}
 
-        <a className="prev">&#10094;</a>
-        <a className="next">&#10095;</a>
+        <a className="prev" ref={prevButtonRef}>
+          &#10094;
+        </a>
+        <a className="next" ref={nextButtonRef}>
+          &#10095;
+        </a>
 
         <div className="dot-container">
           {slideEvents.map((_, index) => (
@@ -107,10 +160,14 @@ const ShowHome = () => {
                 className="card"
                 key={event.EventName}
                 onClick={() => {
-                   navigate(`/Description/${event.EventId}`);
+                  navigate(`/Description/${event.EventId}`);
                 }}
               >
-                <img src={event.Picture_event} alt={event.EventName} />
+                <img
+                  src={event.Picture_event}
+                  alt={event.EventName}
+                  loading="lazy"
+                />
                 <div className="card-content">
                   <h2 className="card-title">{event.EventName}</h2>
                   <p className="price">

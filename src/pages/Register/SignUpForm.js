@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../styles/SignUp.css";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import GoogleLoginButton from "./GoogleLogin";
@@ -12,6 +13,8 @@ function SignUpForm() {
     PhoneNumber: "",
   });
 
+  const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -22,36 +25,56 @@ function SignUpForm() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (form.Password !== form.confirmPassword) {
-      alert("Passwords do not match");
       return;
     }
-    // Call the API with form data
-    console.log(form);
+
+    try {
+      const response = await fetch("http://localhost:8881/api/user/sign-up", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+
+    navigate("/SignIn");
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
+    <form className="signup-form" onSubmit={handleSubmit}>
+      <label className="signup-label">
         Username:
         <input
           type="text"
           name="UserName"
           placeholder="Nhập username"
           onChange={handleChange}
+          className="input-username"
           required
         />
       </label>
 
-      <label>
+      <label className="signup-label">
         Email:
         <input
           type="email"
           name="Email"
           placeholder="Nhập email"
           onChange={handleChange}
+          className="input-email"
           required
         />
       </label>
@@ -63,6 +86,7 @@ function SignUpForm() {
           name="Password"
           placeholder="Nhập mật khẩu"
           onChange={handleChange}
+          className="input-password"
           required
         />
         <button
@@ -85,6 +109,7 @@ function SignUpForm() {
           name="confirmPassword"
           placeholder="Nhập lại mật khẩu"
           onChange={handleChange}
+          className="input-password"
           required
         />
         <button
@@ -100,27 +125,28 @@ function SignUpForm() {
         </button>
       </label>
 
-      <label>
+      <label className="signup-label">
         Số điện thoại:
         <input
           type="tel"
           name="PhoneNumber"
           placeholder="Nhập số điện thoại"
           onChange={handleChange}
+          className="input-phone-number"
           required
         />
       </label>
 
       <div className="agreement">
         <input type="checkbox" required />
-        <span style={{ fontSize: "0.8em", marginTop: "3px", fontSize: "13px"}}>
+        <span style={{ fontSize: "0.8em", marginTop: "3px", fontSize: "13px" }}>
           Tôi đồng ý với <a href="#">Điều khoản sử dụng</a> và{" "}
           <a href="#">Chính sách bảo mật</a> của TicketX88
         </span>
       </div>
 
-      <input type="submit" value="Tiếp tục" />
-      
+      <input className="signup-submit" type="submit" value="Tiếp tục" />
+
       <GoogleLoginButton />
 
       <div className="login-link">

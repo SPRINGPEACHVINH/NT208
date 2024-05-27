@@ -1,4 +1,4 @@
-form {
+.signin-form {
   max-width: 300px;
   margin: auto;
   padding: 20px;
@@ -8,7 +8,7 @@ form {
   background-color: #fff;
 }
 
-label {
+.signin-label {
   display: block;
   font-weight: bold;
   position: relative;
@@ -16,14 +16,20 @@ label {
   font-size: 13px;
 }
 
-input[type="text"],
-input[type="password"] {
+.input-username,
+.input-password {
   width: 100%;
   padding: 5px;
   margin-bottom: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
+}
+
+.input-username:focus,
+.input-password:focus {
+  border-color: orangered;
+  outline: none;
 }
 
 .password-container {
@@ -42,9 +48,10 @@ input[type="password"] {
   color: gray;
 }
 
-input[type="submit"] {
+.signin-submit {
   width: 100%;
   padding: 10px;
+  margin-top: 17px;
   background-color: orangered;
   border: none;
   border-radius: 5px;
@@ -53,7 +60,7 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-input[type="submit"]:hover {
+.signin-submit:hover {
   background-color: #cc1f00;
 }
 

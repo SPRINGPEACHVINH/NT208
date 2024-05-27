@@ -110,3 +110,11 @@
     margin-right: auto;
 }
 
+/* src/styles/Description.css */
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* Adjust based on your layout */
+}
