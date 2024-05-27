@@ -20,6 +20,7 @@ function SignInForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Call the API with form data
+    fetch("http://localhost:8881/api/auth/login", {})
     console.log(form);
   };
 
