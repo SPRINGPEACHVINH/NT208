@@ -24,14 +24,15 @@ function SignInForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
+    <form className="signin-form" onSubmit={handleSubmit}>
+      <label className="signin-label">
         Username:
         <input
           type="text"
           name="UserName"
           placeholder="Nhập username"
           onChange={handleChange}
+          className="input-username"
           required
         />
       </label>
@@ -43,6 +44,7 @@ function SignInForm() {
           name="Password"
           placeholder="Nhập mật khẩu"
           onChange={handleChange}
+          className="input-password"
           required
         />
         <button

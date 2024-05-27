@@ -1,4 +1,4 @@
-form {
+.signin-form {
     max-width: 300px;
     margin: auto;
     padding: 20px;
@@ -8,7 +8,7 @@ form {
     background-color: #fff;
 }
 
-label {
+.signin-label {
     display: block;
     font-weight: bold;
     position: relative;
@@ -16,8 +16,8 @@ label {
     font-size: 13px;
 }
 
-input[type="text"],
-input[type="password"] {
+.input-username,
+.input-password {
     width: 100%;
     padding: 5px;
     margin-bottom: 5px;
@@ -26,8 +26,8 @@ input[type="password"] {
     box-sizing: border-box;
 }
 
-input[type="text"]:focus,
-input[type="password"]:focus {
+.input-username:focus,
+.input-password:focus {
     border-color: orangered;
     outline: none;
 }

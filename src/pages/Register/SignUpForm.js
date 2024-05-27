@@ -54,25 +54,27 @@ function SignUpForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
+    <form className="signup-form" onSubmit={handleSubmit}>
+      <label className="signup-label">
         Username:
         <input
           type="text"
           name="UserName"
           placeholder="Nhập username"
           onChange={handleChange}
+          className="input-username"
           required
         />
       </label>
 
-      <label>
+      <label className="signup-label">
         Email:
         <input
           type="email"
           name="Email"
           placeholder="Nhập email"
           onChange={handleChange}
+          className="input-email"
           required
         />
       </label>
@@ -84,6 +86,7 @@ function SignUpForm() {
           name="Password"
           placeholder="Nhập mật khẩu"
           onChange={handleChange}
+          className="input-password"
           required
         />
         <button
@@ -106,6 +109,7 @@ function SignUpForm() {
           name="confirmPassword"
           placeholder="Nhập lại mật khẩu"
           onChange={handleChange}
+          className="input-password"
           required
         />
         <button
@@ -121,13 +125,14 @@ function SignUpForm() {
         </button>
       </label>
 
-      <label>
+      <label className="signup-label">
         Số điện thoại:
         <input
           type="tel"
           name="PhoneNumber"
           placeholder="Nhập số điện thoại"
           onChange={handleChange}
+          className="input-phone-number"
           required
         />
       </label>
