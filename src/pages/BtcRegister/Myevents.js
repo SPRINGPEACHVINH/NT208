@@ -22,7 +22,7 @@ function MyEvents({ events }) {
 
   return (
     <>
-      {events.length === o ? (
+      {events.length === 0 ? (
         <div className="my-events">Không có sự kiện</div>
       ) : (
         events.map((event, index) => (
