@@ -24,14 +24,15 @@ router.get("/login/failed", (req, res) => {
   });
 });
 
-router.get(
-  "/google/callback",
+router.get("/google/callback",
   passport.authenticate("google", {
-    successRedirect: process.env.CLIENT_URL,
+    successRedirect: "/login/success",
     failureRedirect: "/login/failed",
   })
 );
-router.get("/google", passport.authenticate("google", ["profile", "email"]));
+router.get("/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
 
 router.get("/logout", (req, res) => {
   req.logout();
