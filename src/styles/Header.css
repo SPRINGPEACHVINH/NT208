@@ -1,5 +1,15 @@
-.header {
+.header .desktop {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: orangered;
+  padding: 5px 5px;
+  color: white;
+  width: 100vw;
+  height: 70px;
+}
+
+.header .mobile {
   align-items: center;
   justify-content: space-between;
   background-color: orangered;
@@ -54,7 +64,7 @@
   height: 70%;
 }
 
-.dropdown {
+.desktop .dropdown {
   position: absolute;
   top: 100%;
   left: 0;
@@ -158,6 +168,139 @@
 .auth-button a {
   color: inherit;
   text-decoration: none;
+}
+
+@media (max-width: 1252px) {
+  .wrapper {
+      display: flex;
+      -webkit-box-align: center;
+      align-items: center;
+      -webkit-box-pack: justify;
+      justify-content: space-between;
+  }
+}
+
+.wrapper {
+  z-index: 10;
+  width: 100%;
+  height: 1000px;
+  padding-block: 1rem;
+  padding-inline: 1rem;
+  margin: 0px;
+  font-family: Inter, sans-serif;
+  font-weight: normal;
+  min-height: 100%;
+  font-size: 14px;
+  overflow: auto;
+  line-height: 1.15;
+  text-size-adjust: 100%;
+}
+
+.wrapper #other-content {
+  margin-left: auto;
+}
+
+.wrapper .content-col {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+#search-icon {
+  transform: scale(1.35);
+}
+
+#search-icon path {
+  stroke: rgb(255, 255, 255);
+}
+
+.signin {
+  position: relative;
+}
+
+.sign-in {
+  color: rgb(255, 255, 255);
+}
+
+.link {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.sign-in a {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+a {
+  background-color: transparent;
+}
+
+.search-box {
+  margin-left: 20px;
+	width: 50px;
+	background-color: #242628;
+	position: relative;
+	overflow: hidden;
+	transition: all 0.5s ease;
+	border-radius: 15px;
+	
+}
+
+.search-box.open {
+	width: 300px;
+}
+
+.mobile #search-input {
+  border-radius: 15px;
+	width: 100%;
+	height: 100%;
+	border: none;
+	box-shadow: none;
+	background: white;
+	color: #444444;
+	padding: 10px 20px 10px 20px;
+	font-size: 20px;
+}
+
+.search-btn {
+  background-color: #444444;
+	color: #ffffff;
+	outline: none;
+	border: none;
+	width: 50px;
+	height: 100%;
+	position: absolute;
+	cursor: pointer;
+	font-size: 30px;
+  right: 0;
+}
+
+.mobile .dropdown {
+  display: flex;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 12px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
 }
 
 .user-dropdown {

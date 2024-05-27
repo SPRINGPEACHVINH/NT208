@@ -11,6 +11,7 @@ import {
   BankOutlined,
 } from "@ant-design/icons";
 import { Upload, message, Input, Modal } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const { TextArea } = Input;
 const { Dragger } = Upload;
@@ -459,8 +460,10 @@ function Form({ isMobile, addEvent }) {
     setModalVisible(true);
   };
 
+  const navigate = useNavigate();
   const handleModalOk = () => {
     setModalVisible(false);
+    navigate("/Events");
   };
 
   return (

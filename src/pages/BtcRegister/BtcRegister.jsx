@@ -4,6 +4,7 @@ import Sidebar from "./Sidebar.js";
 import MyEvents from "./MyEvents.js";
 import HeaderBtcRegister from "./HeaderBtcRegister.js";
 import "../../styles/BtcRegister.css";
+import { useLocation } from "react-router-dom";
 
 const BtcRegister = () => {
   // Thiết lập lắng nghe sự kiện resize window để kiểm tra chế độ xem
@@ -13,7 +14,7 @@ const BtcRegister = () => {
     return () => {
       window.removeEventListener("resize", checkMobile);
     };
-  });
+  }, []);
   // Hàm để kiểm tra xem trên điện thoại hay không
   const [isMobile, setIsMobile] = useState(false);
   const checkMobile = () => {
@@ -28,6 +29,27 @@ const BtcRegister = () => {
   const [activeTab, setActiveTab] = useState("create-event");
   const handleTabChange = (tab) => {
     setActiveTab(tab);
+    if (!isMobile && isSidebarOpen) {
+      setIsSidebarOpen(true);
+    } else if (!isMobile && !isSidebarOpen) {
+      setIsSidebarOpen(false);
+    } else if (isMobile) {
+      setIsSidebarOpen(false);
+    }
+  };
+
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname === "/CreateEvent") {
+      setActiveTab("create-event");
+    } else if (location.pathname === "/Events") {
+      setActiveTab("my-events");
+    }
+  }, [location.pathname]);
+
+  const [events, setEvents] = useState([]);
+  const addEvent = (newEvent) => {
+    setEvents([...events, newEvent]);
   };
 
   return (
@@ -67,9 +89,9 @@ const BtcRegister = () => {
           }
         >
           {activeTab === "create-event" ? (
-            <Form isMobile={isMobile} />
+            <Form isMobile={isMobile} addEvent={addEvent} />
           ) : (
-            <MyEvents isMobile={isMobile} />
+            <MyEvents isMobile={isMobile} events={events} />
           )}
         </div>
       </div>
