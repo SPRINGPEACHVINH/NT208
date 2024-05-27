@@ -40,11 +40,10 @@ const CreateUser = (newUser) => {
 
 const LoginUser = (userLogin) => {
   return new Promise(async (resolve, reject) => {
-    const { UserName, Email, Password, confirmPassword, PhoneNumber } =
-      userLogin;
+    const { UserName, Password } = userLogin;
     try {
       const checkUser = await User.findOne({
-        Email: Email,
+        UserName: UserName,
       });
       if (checkUser === null) {
         resolve({
@@ -56,8 +55,8 @@ const LoginUser = (userLogin) => {
       console.log("comparePassword", comparePassword);
       if (!comparePassword) {
         resolve({
-          status: "OK",
-          message: "The password or user is incorrect",
+          status: "ERROR",
+          message: "The password is incorrect",
         });
       }
 
@@ -120,34 +119,30 @@ const GetAllUser = (id) => {
   });
 };
 
-const GetDetailsUser = (id) => {
+const FindUserByUserName = (UserName) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const user = await User.findOne({
-        _id: id,
-      });
-      if (user === null) {
-        resolve({
-          status: "ERROR",
-          message: "User does not exist",
-        });
+      const user = await User.findOne({ UserName: UserName });
+      if (!user) {
+        resolve(null);
+      } else {
+        resolve(user);
       }
-
-      resolve({
-        status: "OK",
-        message: "Success",
-        data: user
-      });
     } catch (e) {
       reject(e);
     }
   });
-};  
+};
+
+const CheckPassword = (inputPassword, userPassword) => {
+  return bcrypt.compareSync(inputPassword, userPassword);
+};
 
 module.exports = {
   CreateUser,
   LoginUser,
   DeleteUser,
   GetAllUser,
-  GetDetailsUser
+  FindUserByUserName,
+  CheckPassword,
 };
