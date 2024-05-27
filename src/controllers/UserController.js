@@ -35,27 +35,30 @@ const CreateUser = async (req, res) => {
 
 const LoginUser = async (req, res) => {
   try {
-    const { UserName, Email, Password, confirmPassword, PhoneNumber } =
-      req.body;
-    const reg = /^[a-zA-Z0-9._%+-]+@(gmail\.com|gm\.uit\.edu\.vn)$/;
-    const isCheckEmail = reg.test(Email);
-    if (!UserName || !Email || !Password || !confirmPassword || !PhoneNumber) {
+    const { UserName, Password } = req.body;
+    if (!UserName || !Password) {
       return res.status(200).json({
         status: "ERROR",
         message: "The input is required",
       });
-    } else if (Password !== confirmPassword) {
+    }
+    const user = await UserService.FindUserByUserName(UserName);
+    if (!user) {
       return res.status(200).json({
         status: "ERROR",
-        message: "Password and confirmPassword are not the same",
-      });
-    } else if (!isCheckEmail) {
-      return res.status(200).json({
-        status: "ERROR",
-        message: "Email is not valid",
+        message: "The user does not exist",
       });
     }
-    console.log("isCheckEmail", isCheckEmail);
+    const isPasswordMatch = await UserService.CheckPassword(
+      Password,
+      user.Password
+    );
+    if (!isPasswordMatch) {
+      return res.status(200).json({
+        status: "ERROR",
+        message: "The password is incorrect",
+      });
+    }
     const response = await UserService.LoginUser(req.body);
     return res.status(200).json(response);
   } catch (e) {
