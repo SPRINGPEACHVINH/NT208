@@ -50,7 +50,7 @@ function SignUpForm() {
       console.error("Error:", error);
     }
 
-    navigate("/");
+    navigate("/SignIn");
   };
 
   return (
@@ -145,7 +145,7 @@ function SignUpForm() {
         </span>
       </div>
 
-      <input type="submit" value="Tiếp tục" />
+      <input className="signup-submit" type="submit" value="Tiếp tục" />
 
       <GoogleLoginButton />
 
