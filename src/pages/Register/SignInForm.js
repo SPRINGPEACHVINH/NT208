@@ -60,10 +60,10 @@ function SignInForm() {
         </button>
       </label>
 
-      <input type="submit" value="Đăng nhập" />
+      <input className="signin-submit" type="submit" value="Đăng nhập" />
 
       <div className="signup-link">
-        Chưa có tài khoản? <a href="/SignUp">Đăng ký</a>
+        Chưa có tài khoản? <a style={{fontSize: 16}} href="/SignUp">Đăng ký</a>
       </div>
     </form>
   );
