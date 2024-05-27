@@ -39,7 +39,7 @@ const ShowHeader = () => {
     if (isLoggedIn) {
       dispatch(logIn(username));
     }
-  }, []);
+  },[]);
 
   const handleLogOut = () => {
     dispatch(logOut());
