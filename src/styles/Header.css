@@ -214,7 +214,7 @@
 }
 
 #search-icon path {
-  stroke: rgb(255, 255, 255);
+  stroke: orangered;
 }
 
 .signin {
@@ -259,7 +259,7 @@ a {
 }
 
 .search-box.open {
-	width: 300px;
+	width: 200px;
 }
 
 .mobile #search-input {
@@ -275,8 +275,7 @@ a {
 }
 
 .search-btn {
-  background-color: #444444;
-	color: #ffffff;
+  background-color: #ffffff;
 	outline: none;
 	border: none;
 	width: 50px;

@@ -236,7 +236,7 @@ const ShowHeader = () => {
                 <input
                   type="text"
                   id="search-input"
-                  placeholder="Bạn tìm gì hôm nay?"
+                  placeholder="Search..."
                   autoComplete="off"
                   value={searchTerm}
                   onChange={handleInputChange}
@@ -281,10 +281,30 @@ const ShowHeader = () => {
                   </div>
                 )}
               </form>
-              <div class="signin">
-                <div class="link sign-in">
-                  <a href="/SignUp">Đăng nhập</a>
-                </div>
+              <div className="actions">
+                {isLoggedIn ? (
+                  <div className="user-dropdown" ref={dropdownRef}>
+                    <button
+                      className="user-button"
+                      onClick={() => setDropdownVisible(!dropdownVisible)}
+                    >
+                      {username}
+                    </button>
+                    {dropdownVisible && (
+                      <div
+                        className={`user-dropdown-content ${
+                          dropdownVisible ? "show" : ""
+                        }`}
+                      >
+                        <button onClick={handleLogOut}>Đăng xuất</button>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <button className="auth-button">
+                    <Link to="/SignUp">Đăng nhập</Link>
+                  </button>
+                )}
               </div>
             </div>
           </header>
