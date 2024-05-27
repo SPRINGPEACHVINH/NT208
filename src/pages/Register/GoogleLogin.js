@@ -13,7 +13,7 @@ function Google_Login() {
     console.log("Login Success:", response);
     console.log("ID Token:", response.credential);
 
-    navigate("/");
+    navigate("/")
   };
 
   const onFailure = (response) => {

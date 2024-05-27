@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logIn, logOut } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import "../../styles/Header.css";
 import moment from "moment";
@@ -10,9 +12,40 @@ const ShowHeader = () => {
   const [isTyping, setIsTyping] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const [blurTimeoutId, setBlurTimeoutId] = useState(null);
-
   const navigate = useNavigate();
+  var isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const username = useSelector((state) => state.user.username);
+  const dispatch = useDispatch();
 
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setDropdownVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    const username = localStorage.getItem("username");
+    if (isLoggedIn) {
+      dispatch(logIn(username));
+    }
+  }, []);
+
+  const handleLogOut = () => {
+    dispatch(logOut());
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("username");
+  };
   const handleSearch = (event) => {
     event.preventDefault();
     navigate(`/SearchResult?q=${encodeURIComponent(searchTerm)}`);
