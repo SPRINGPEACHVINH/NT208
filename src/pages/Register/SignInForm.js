@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logIn } from "../../redux/actions";
 import "../../styles/SignIn.css";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 
@@ -10,6 +13,9 @@ function SignInForm() {
 
   const [showPassword, setShowPassword] = useState(false);
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -17,10 +23,30 @@ function SignInForm() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Call the API with form data
-    console.log(form);
+    try {
+      const response = await fetch("http://localhost:8881/api/user/sign-in", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      if (!response.ok) {
+        throw new Error("Response was not ok");
+      }
+
+      const data = await response.json();
+
+      dispatch(logIn(form.UserName));
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("username", form.UserName);
+      navigate("/");
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
@@ -38,7 +64,7 @@ function SignInForm() {
       </label>
 
       <label className="password-container">
-        Password:
+        Mật khẩu:
         <input
           type={showPassword ? "text" : "password"}
           name="Password"
@@ -63,7 +89,10 @@ function SignInForm() {
       <input className="signin-submit" type="submit" value="Đăng nhập" />
 
       <div className="signup-link">
-        Chưa có tài khoản? <a style={{fontSize: 16}} href="/SignUp">Đăng ký</a>
+        Chưa có tài khoản?{" "}
+        <a style={{ fontSize: 16 }} href="/SignUp">
+          Đăng ký
+        </a>
       </div>
     </form>
   );
