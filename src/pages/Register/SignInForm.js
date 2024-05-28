@@ -38,7 +38,7 @@ function SignInForm() {
         throw new Error("Response was not ok");
       }
 
-      const data = await response.json();
+      //const data = await response.json();
 
       dispatch(logIn(form.UserName));
       localStorage.setItem("isLoggedIn", "true");

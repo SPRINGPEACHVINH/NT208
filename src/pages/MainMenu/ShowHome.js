@@ -4,14 +4,12 @@ import "../../styles/ShowHome.css";
 import loadingGif from "../../assets/images/loading.gif";
 
 const ShowHome = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [/*currentSlide*/, setCurrentSlide] = useState(0);
   const [events, setEvents] = useState([]);
   const [slideEvents, setSlideEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isAutoSliding, setIsAutoSliding] = useState(true);
   const autoSlideRef = useRef();
-  const prevButtonRef = useRef();
-  const nextButtonRef = useRef();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -71,24 +69,22 @@ const ShowHome = () => {
   };
 
   useEffect(() => {
-    const prevButton = prevButtonRef.current;
-    const nextButton = nextButtonRef.current;
+    if (!isLoading) {
+      const prevButton = document.querySelector(".prev");
+      const nextButton = document.querySelector(".next");
 
-    const handlePrevClick = () => changeSlide(-1, true);
-    const handleNextClick = () => changeSlide(1, true);
+      const handlePrevClick = () => changeSlide(-1, true);
+      const handleNextClick = () => changeSlide(1, true);
 
-    if (prevButton && nextButton) {
       prevButton.addEventListener("click", handlePrevClick);
       nextButton.addEventListener("click", handleNextClick);
-    }
 
-    return () => {
-      if (prevButton && nextButton) {
+      return () => {
         prevButton.removeEventListener("click", handlePrevClick);
         nextButton.removeEventListener("click", handleNextClick);
-      }
-    };
-  }, []);
+      };
+    }
+  }, [isLoading]);
 
   useEffect(() => {
     if (isAutoSliding) {
@@ -134,12 +130,8 @@ const ShowHome = () => {
           </div>
         ))}
 
-        <a className="prev" ref={prevButtonRef}>
-          &#10094;
-        </a>
-        <a className="next" ref={nextButtonRef}>
-          &#10095;
-        </a>
+        <a className="prev">&#10094;</a>
+        <a className="next">&#10095;</a>
 
         <div className="dot-container">
           {slideEvents.map((_, index) => (
