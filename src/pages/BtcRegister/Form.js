@@ -449,23 +449,23 @@ function Form({ isMobile, addEvent }) {
   const mongoose = require("mongoose");
   const Event = mongoose.model("Event");
   const getLastEventId = async () => {
-    const lastEvent = await Event.find().sort({ EventId: -1 }).limit(1);
-    if (lastEvent.length > 0) {
-      return lastEvent[0].EventId;
-    } else {
-      return null;
+    try {
+      const lastEvent = await Event.find().sort({ EventId: -1 }).limit(1);
+      if (lastEvent.length > 0) {
+        return lastEvent[0].EventId;
+      } else {
+        return "EV0";
+      }
+    } catch (error) {
+      console.error("Lỗi khi lấy ID sự kiện cuối cùng:", error);
+      throw error;
     }
   };
 
   const handleSave = async () => {
     const reader = new FileReader();
+
     reader.onloadend = async () => {
-      const lastEventId = await getLastEventId();
-      const newEventId = "EV" + (parseInt(lastEventId.substring(2)) + 1);
-      // const coverImageBase64 =
-      //   fileListCoverEvent.length > 0
-      //     ? await imageToBase64(fileListCoverEvent[0].originFileObj)
-      //     : null;
       // const formattedEventData = {
       //   ...eventData,
       //   coverImage: coverImageBase64,
@@ -474,6 +474,14 @@ function Form({ isMobile, addEvent }) {
       // addEvent(formattedEventData);
       // setModalVisible(true);
       try {
+        const lastEventId = await getLastEventId();
+        const newEventId = "EV" + (parseInt(lastEventId.substring(2)) + 1);
+
+        const coverImageBase64 =
+          fileListCoverEvent.length > 0
+            ? await imageToBase64(fileListCoverEvent[0].originFileObj)
+            : null;
+
         const response = await fetch("http://localhost:8881/api/event/add", {
           method: "POST",
           headers: {
@@ -487,6 +495,7 @@ function Form({ isMobile, addEvent }) {
             EventLocation: "TicketX88",
             EventCategory: document.getElementById("event-type").value,
             TicketPrice: document.getElementById("event-ticket-price").value,
+            Picture_event: coverImageBase64,
             Btc: "60d6c47e53e68c761c3a2a18", // Replace with your actual ObjectId
           }),
         });
@@ -507,6 +516,12 @@ function Form({ isMobile, addEvent }) {
         console.error("Failed to save event:", error);
       }
     };
+
+    if (fileListCoverEvent.length > 0) {
+      reader.readAsDataURL(fileListCoverEvent[0].originFileObj);
+    } else {
+      reader.onloadend();
+    }
   };
 
   // const navigate = useNavigate();
