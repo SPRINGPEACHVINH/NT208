@@ -26,7 +26,18 @@ const BtcRegister = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  const [activeTab, setActiveTab] = useState("create-event");
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname === "/CreateEvent") {
+      setActiveTab("create-event");
+    } else if (location.pathname === "/Events") {
+      setActiveTab("my-events");
+    }
+  }, [location.pathname]);
+
+  const [activeTab, setActiveTab] = useState(
+    location.pathname === "/CreateEvent" ? "create-event" : "my-events"
+  );
   const handleTabChange = (tab) => {
     setActiveTab(tab);
     if (!isMobile && isSidebarOpen) {
@@ -37,15 +48,6 @@ const BtcRegister = () => {
       setIsSidebarOpen(false);
     }
   };
-
-  const location = useLocation();
-  useEffect(() => {
-    if (location.pathname === "/CreateEvent") {
-      setActiveTab("create-event");
-    } else if (location.pathname === "/Events") {
-      setActiveTab("my-events");
-    }
-  }, [location.pathname]);
 
   const [events, setEvents] = useState([]);
   const addEvent = (newEvent) => {
