@@ -10,10 +10,14 @@ const payForTicket = async (req, res) => {
         message: "No unpaid and unused ticket found",
       });
     }
-    await TicketService.setTicketPaid(ticket._id, UserId);
+    await TicketService.setTicketPaid(ticket.TicketId, UserId);
     return res
       .status(200)
-      .json({ status: "OK", message: "Ticket paid successfully" });
+      .json({
+        status: "OK",
+        message: `Ticket paid successfully!`,
+        ticket: ticket.TicketCode, 
+      });
   } catch (e) {
     return res.status(500).json({ status: "ERROR", message: e.message });
   }
@@ -31,12 +35,11 @@ const addTicketsToEvent = async (req, res) => {
 
     for (let i = 0; i < ticketCount; i++) {
       const ticketCode = generateTicketCode();
-      console.log(i, ticketCode);
       await TicketService.addTicket(EventId, ticketCode);
     }
     return res
       .status(200)
-      .json({ status: "OK", message: "Tickets added successfully" });
+      .json({ status: "OK", message: `Tickets added successfully for EventId: ${EventId}` });
   } catch (e) {
     return res.status(500).json({ status: "ERROR", message: e.message });
   }

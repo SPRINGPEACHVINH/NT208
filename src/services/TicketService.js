@@ -18,15 +18,11 @@ const addTicket = async (EventId, ticketCode) => {
     throw new Error(`Event with EventId ${EventId} does not exist`);
   }
 
-  console.log(
-    `Adding ticket for EventId: ${EventId} with ticketCode: ${ticketCode}`
-  );
-
   const ticket = new Ticket({
     TicketId: ticketCode,
     TicketPath: event.VideoPath,
     TicketCode: ticketCode,
-    EventId: EventId,
+    EventId: event.EventId,
     UserId: null,
     isUsed: false,
     isPaid: false,
