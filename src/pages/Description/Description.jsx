@@ -33,7 +33,7 @@ const ShowPage = () => {
           <ShowBanner event={event} />
           <div className="contents">
             <ShowDescription event={event} />
-            <TicketInfo />
+            <TicketInfo event={event} />
           </div>
         </>
       )}

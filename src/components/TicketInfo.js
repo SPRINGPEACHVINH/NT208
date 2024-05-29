@@ -1,7 +1,24 @@
 import React from "react";
 import "../styles/TicketInfo.css";
 
-const TicketInfo = () => {
+const TicketInfo = ({ event }) => {
+  const basePrice = event.TicketPrice;
+
+  const calculatePrice = (percentage) => {
+    const price = basePrice * (1 + percentage / 100);
+    return new Intl.NumberFormat("de-DE").format(Math.floor(price));
+  };
+
+  const eventDate = new Date(event.EventTime);
+
+  const hours = eventDate.getHours().toString().padStart(2, "0");
+  const minutes = eventDate.getMinutes().toString().padStart(2, "0");
+  const day = eventDate.getDate().toString().padStart(2, "0");
+  const month = (eventDate.getMonth() + 1).toString().padStart(2, "0"); // Months are 0-indexed in JavaScript
+  const year = eventDate.getFullYear();
+
+  const formattedEventTime = `${hours}:${minutes}, ${day}/${month}/${year}`;
+
   const toggleDetails = (id) => {
     const element = document.getElementById(id);
     const maxHeight = element.style.maxHeight;
@@ -37,35 +54,68 @@ const TicketInfo = () => {
 
   return (
     <div className="ticket-info-container">
-      <div className="ticket-info" id="ticket-info">
-        <div className="ticket-header" onClick={() => toggleDetails("main-details")}>
-          18:00 - 22:00, 31 Tháng 05, 2024
+      <div className="ticket-info">
+        <div
+          className="ticket-header"
+          onClick={() => toggleDetails("main-details")}
+        >
+          {formattedEventTime}
           <button className="buy-button">Mua vé ngay</button>
         </div>
         <div id="main-details" className="ticket-details">
           <div
-            className="detail"
-            onClick={() => toggleDetails("standard-details")}
+            className="detail resolution-144p"
+            onClick={() => toggleDetails("details-144p")}
           >
-            STANDARD - RÌ RÀO <span>650.000 đ</span>
+            144p <span>{calculatePrice(0)} VNĐ</span>
           </div>
-          <div id="standard-details" className="sub-details">
-            Giá vé đã bao gồm 01 đồ uống
+          <div id="details-144p" className="sub-details">
+            Sẽ xem được video ở độ phân giải 144p
           </div>
           <div
-            className="detail"
-            onClick={() => toggleDetails("premium-details")}
+            className="detail resolution-240p"
+            onClick={() => toggleDetails("details-240p")}
           >
-            PREMIUM - LAO XAO <span>1.000.000 đ</span>
+            240p <span>{calculatePrice(20)} VNĐ</span>
           </div>
-          <div id="premium-details" className="sub-details">
-            Giá vé đã bao gồm 01 đồ uống
+          <div id="details-240p" className="sub-details">
+            Sẽ xem được video ở độ phân giải 240p
           </div>
-          <div className="detail" onClick={() => toggleDetails("vip-details")}>
-            VIP - VI VU <span>1.350.000 đ</span>
+          <div
+            className="detail resolution-360p"
+            onClick={() => toggleDetails("details-360p")}
+          >
+            360p <span>{calculatePrice(40)} VNĐ</span>
           </div>
-          <div id="vip-details" className="sub-details">
-            Giá vé đã bao gồm 01 đồ uống
+          <div id="details-360p" className="sub-details">
+            Sẽ xem được video ở độ phân giải 360p
+          </div>
+          <div
+            className="detail resolution-480p"
+            onClick={() => toggleDetails("details-480p")}
+          >
+            480p <span>{calculatePrice(60)} VNĐ</span>
+          </div>
+          <div id="details-480p" className="sub-details">
+            Sẽ xem được video ở độ phân giải 480p
+          </div>
+          <div
+            className="detail resolution-720p"
+            onClick={() => toggleDetails("details-720p")}
+          >
+            720p <span>{calculatePrice(80)} VNĐ</span>
+          </div>
+          <div id="details-720p" className="sub-details">
+            Sẽ xem được video ở độ phân giải 720p
+          </div>
+          <div
+            className="detail resolution-1080p"
+            onClick={() => toggleDetails("details-1080p")}
+          >
+            1080p <span>{calculatePrice(100)} VNĐ</span>
+          </div>
+          <div id="details-1080p" className="sub-details">
+            Sẽ xem được video ở độ phân giải 1080p
           </div>
         </div>
       </div>
