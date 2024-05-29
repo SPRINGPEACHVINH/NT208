@@ -36,6 +36,10 @@ const ShowHome = () => {
       const slides = document.querySelectorAll(".slide");
       const dots = document.querySelectorAll(".dot");
 
+      if (!slides[currentSlide] || !dots[currentSlide]) {
+        return currentSlide;
+      }
+
       slides[currentSlide].classList.remove(
         "active",
         "slide-in-left",
