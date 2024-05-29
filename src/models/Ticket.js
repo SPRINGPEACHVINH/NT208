@@ -1,12 +1,21 @@
 const mongoose = require("mongoose");
-const ticketSchema = new mongoose.Schema(
+const Schema = mongoose.Schema;
+
+const ticketSchema = new Schema(
   {
-    TicketId: { type: String, required: true, unique: true },
-    TicketPath: { type: String, required: true },
-    TicketPrice: { type: Number, required: true },
-    TicketCode: { type: String, required: true},
-    Event: { type: mongoose.Schema.Types.ObjectId, ref: "Event", required: true},
-    User: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    TicketId: { type: String, required: true},
+    TicketPath: { type: String, required: false },
+    TicketCode: { type: String, required: true },
+    EventId: {
+      type: String,
+      ref: "Event",
+      required: true,
+    },
+    UserId: {
+      type: String,
+      ref: "User",
+      unique: true,
+    },
     isUsed: { type: Boolean, required: true },
     isPaid: { type: Boolean, required: true },
   },
@@ -14,5 +23,5 @@ const ticketSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-const Ticket = mongoose.model("Ticket", userSchema);
+const Ticket = mongoose.model("Ticket", ticketSchema);
 module.exports = Ticket;

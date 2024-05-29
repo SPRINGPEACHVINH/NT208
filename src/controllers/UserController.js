@@ -42,7 +42,7 @@ const LoginUser = async (req, res) => {
         message: "The input is required",
       });
     }
-    const user = await UserService.FindUserByUserName(UserName);
+    const user = await UserService.FindUserByUserName(user);
     if (!user) {
       return res.status(200).json({
         status: "ERROR",
@@ -101,6 +101,12 @@ const UpdateUser = async (req, res) => {
     });
   }
 };
+
+const LoginUserGoogle = async (req, res) => {
+  const { UserName, Email } = req.body;
+  const response = await UserService.LoginUserGoogle(req.body);
+  return res.status(200).json(response);
+}
 
 const DeleteUser = async (req, res) => {
   try {
@@ -174,5 +180,6 @@ module.exports = {
   DeleteUser,
   GetAllUser,
   GetDetailsUser,
-  RefreshToken
+  RefreshToken,
+  LoginUserGoogle
 };
