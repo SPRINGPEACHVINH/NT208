@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect } from "react";
 import { routes } from "../routes";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import DefaultComponentFooter from "../components/DefaultComponent/DefaultComponentFooter";
@@ -11,9 +11,9 @@ function App() {
   }, []);
 
   const fetchApi = async () => {
-    const res = await fetch(`${process.env.REACT_API_URL_BACKEND}/user/getAll`);
-    const data = await res.json();
-    console.log("res", data);
+    //const res = await fetch(`${process.env.REACT_API_URL_BACKEND}/user/getAll`);
+    //const data = await res.json();
+    //console.log("res", data);
   };
   return (
     <div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "../../styles/SearchResult.module.css";
 import loadingImage from "../../assets/images/loading.gif";
 
@@ -9,6 +9,7 @@ const ShowResults = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const query = searchParams.get("q");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -26,27 +27,33 @@ const ShowResults = () => {
 
   return (
     <div>
-      <h1 className={styles["indicate"]}>Kết quả tìm kiếm cho: {query}</h1>
+      <h1 className={styles.indicate}>Kết quả tìm kiếm cho: {query}</h1>
       {isLoading ? (
-        <div className={styles["loading-container"]}>
+        <div className={styles.loadingContainer}>
           <img
-            className={styles["loading-image"]}
+            className={styles.loadingImage}
             src={loadingImage}
             alt="Loading..."
           />
         </div>
       ) : (
-        <div className={styles["card-list"]}>
+        <div className={styles.cardList}>
           {events.length > 0 ? (
             events.map((event) => (
-              <div className={styles.card} key={event.EventName}>
+              <div
+                className={styles.card}
+                key={event.EventName}
+                onClick={() => {
+                  navigate(`/Description/${event.EventId}`);
+                }}
+              >
                 <img src={event.Picture_event} alt={event.EventName} />
-                <div className={styles["card-content"]}>
-                  <h2 className={styles["card-title"]}>{event.EventName}</h2>
+                <div className={styles.cardContent}>
+                  <h2 className={styles.cardTitle}>{event.EventName}</h2>
                   <p className={styles.price}>
                     Chỉ từ: {event.TicketPrice.toLocaleString("vi-VN")} VNĐ
                   </p>
-                  <div className={styles["date-category"]}>
+                  <div className={styles.dateCategory}>
                     <p className={styles.date}>
                       {new Date(event.EventTime).toLocaleDateString("en-GB", {
                         day: "2-digit",
@@ -60,7 +67,7 @@ const ShowResults = () => {
               </div>
             ))
           ) : (
-            <p className={styles["no-card"]}>
+            <p className={styles.noCard}>
               Không có kết quả cho sự kiện này.
             </p>
           )}

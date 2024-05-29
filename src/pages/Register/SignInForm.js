@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { logIn } from "../../redux/actions";
 import "../../styles/SignIn.css";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import GoogleLoginButton from "./GoogleLogin";
 
 function SignInForm() {
   const [form, setForm] = useState({
@@ -85,6 +86,8 @@ function SignInForm() {
           )}
         </button>
       </label>
+
+      <GoogleLoginButton />
 
       <input className="signin-submit" type="submit" value="Đăng nhập" />
 
