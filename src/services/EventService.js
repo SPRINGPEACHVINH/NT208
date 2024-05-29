@@ -25,9 +25,11 @@ const getEventById = async (EventId) => {
 };
 
 const getLastEvent = async () => {
-  return Event.find({}).select(
-    "EventId EventName EventTime EventCategory TicketPrice Picture_event"
-  );
+  return Event.findOne({})
+    .sort({ EventTime: -1 })
+    .select(
+      "EventId EventName EventTime EventCategory TicketPrice Picture_event"
+    );
 };
 
 const deleteEvent = async (EventId) => {
