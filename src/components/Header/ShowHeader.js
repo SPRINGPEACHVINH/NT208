@@ -45,6 +45,7 @@ const ShowHeader = () => {
     dispatch(logOut());
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("username");
+    
   };
   const handleSearch = (event) => {
     event.preventDefault();

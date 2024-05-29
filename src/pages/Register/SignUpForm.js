@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/SignUp.css";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import GoogleLoginButton from "./GoogleLogin";
+import { useDispatch } from "react-redux";
+import { logIn } from "../../redux/actions";
+import axios from "axios";
 
 function SignUpForm() {
   const [form, setForm] = useState({
@@ -13,7 +16,8 @@ function SignUpForm() {
     PhoneNumber: "",
   });
 
-  const navigate = useNavigate();
+  const navigate = useNavigate();  
+  const dispatch = useDispatch();
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -32,13 +36,15 @@ function SignUpForm() {
     }
 
     try {
-      const response = await fetch("http://localhost:8881/api/user/sign-up", {
+      const response =  {
         method: "POST",
+        url: "http://localhost:8881/api/user/sign-up",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(form),
-      });
+      };
+      await axios(response);
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -50,7 +56,21 @@ function SignUpForm() {
       console.error("Error:", error);
     }
 
-    navigate("/SignIn");
+    const signin = {
+      method: "POST",
+      url: "http://localhost:8881/api/user/sign-in",
+      headers: {},
+      body: JSON.stringify({
+        UserName: form.UserName,
+        Password: form.Password,
+      }),
+    };
+    await axios(signin);
+
+    dispatch(logIn(form.UserName));
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("username", form.UserName);
+    navigate("/");
   };
 
   return (
