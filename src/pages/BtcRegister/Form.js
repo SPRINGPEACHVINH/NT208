@@ -11,7 +11,7 @@ import {
   BankOutlined,
 } from "@ant-design/icons";
 import { Upload, message, Input, Modal } from "antd";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const { TextArea } = Input;
 const { Dragger } = Upload;
@@ -446,24 +446,88 @@ function Form({ isMobile, addEvent }) {
   // Hàm lưu thông tin
   const [modalVisible, setModalVisible] = useState(false);
 
-  const handleSave = async () => {
-    const coverImageBase64 =
-      fileListCoverEvent.length > 0
-        ? await imageToBase64(fileListCoverEvent[0].originFileObj)
-        : null;
-    const formattedEventData = {
-      ...eventData,
-      coverImage: coverImageBase64,
-      eventDateTime: eventData.eventDateTime.format("DD-MM-YYYY HH:mm"),
-    };
-    addEvent(formattedEventData);
-    setModalVisible(true);
+  const mongoose = require("mongoose");
+  const Event = mongoose.model("Event");
+  const getLastEventId = async () => {
+    try {
+      const lastEvent = await Event.find().sort({ EventId: -1 }).limit(1);
+      if (lastEvent.length > 0) {
+        return lastEvent[0].EventId;
+      } else {
+        return "EV0";
+      }
+    } catch (error) {
+      console.error("Lỗi khi lấy ID sự kiện cuối cùng:", error);
+      throw error;
+    }
   };
 
-  const navigate = useNavigate();
+  const handleSave = async () => {
+    const reader = new FileReader();
+
+    reader.onloadend = async () => {
+      // const formattedEventData = {
+      //   ...eventData,
+      //   coverImage: coverImageBase64,
+      //   eventDateTime: eventData.eventDateTime.format("DD-MM-YYYY HH:mm"),
+      // };
+      // addEvent(formattedEventData);
+      // setModalVisible(true);
+      try {
+        const lastEventId = await getLastEventId();
+        const newEventId = "EV" + (parseInt(lastEventId.substring(2)) + 1);
+
+        const coverImageBase64 =
+          fileListCoverEvent.length > 0
+            ? await imageToBase64(fileListCoverEvent[0].originFileObj)
+            : null;
+
+        const response = await fetch("http://localhost:8881/api/event/add", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            EventId: newEventId,
+            EventName: document.getElementById("event-name").value,
+            EventTime: document.getElementById("event-date-time").value,
+            EventInfo: document.getElementsByName("eventDecsription")[0].value,
+            EventLocation: "TicketX88",
+            EventCategory: document.getElementById("event-type").value,
+            TicketPrice: document.getElementById("event-ticket-price").value,
+            Picture_event: coverImageBase64,
+            Btc: "60d6c47e53e68c761c3a2a18", // Replace with your actual ObjectId
+          }),
+        });
+        const data = await response.json();
+        console.log(data);
+        if (!response.ok) {
+          throw new Error(data.message || "Failed to save event data.");
+        }
+        setEventData({
+          eventName: "",
+          eventType: "",
+          eventDateTime: null,
+          eventDescription: "",
+          ticketPrice: "",
+        });
+        setModalVisible(true);
+      } catch (error) {
+        console.error("Failed to save event:", error);
+      }
+    };
+
+    if (fileListCoverEvent.length > 0) {
+      reader.readAsDataURL(fileListCoverEvent[0].originFileObj);
+    } else {
+      reader.onloadend();
+    }
+  };
+
+  // const navigate = useNavigate();
   const handleModalOk = () => {
     setModalVisible(false);
-    navigate("/Events");
+    // navigate("/Events");
   };
 
   return (

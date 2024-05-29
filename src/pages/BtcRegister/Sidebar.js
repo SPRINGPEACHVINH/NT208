@@ -1,7 +1,17 @@
 import "../../styles/Sidebar.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
 
 function Sidebar({ isSidebarOpen, activeTab, handleTabChange }) {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === "/CreateEvent") {
+      handleTabChange("create-event");
+    } else if (location.pathname === "/Events") {
+      handleTabChange("my-event");
+    }
+  }, [location.pathname, handleTabChange]);
   return (
     <div className="d-flex flex-column flex-shrink-0 p-3 text-bg-dark ">
       <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
