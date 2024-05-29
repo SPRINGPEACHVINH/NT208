@@ -16,7 +16,7 @@ body {
     margin-bottom: 0px;
 }
 
-.no-card {
+.noCard {
     font-size: 20px;
     color: white;
     display: flex;
@@ -25,19 +25,19 @@ body {
     grid-column: 2 / span 2;
 }
 
-.loading-container {
+.loadingContainer {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 50vh;
 }
 
-.loading-image {
+.loadingImage {
     width: 200px;
     height: 200px;
 }
 
-.card-list {
+.cardList {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
@@ -60,11 +60,11 @@ body {
     object-fit: cover;
 }
 
-.card-content {
+.cardContent {
     padding: 16px;
 }
 
-.card-content h2 {
+.cardContent h2 {
     margin: 0;
     font-size: 24px;
     line-height: 1.2;
@@ -78,57 +78,57 @@ body {
     text-overflow: ellipsis;
 }
 
-.card-content p {
+.cardContent p {
     margin: 8px 0;
     font-size: 16px;
     color: #cccccc;
 }
 
-.card-content .price {
+.cardContent .price {
     color: #2ecc71;
     font-size: 18px;
     font-weight: bold;
 }
 
-.card-content .date-category {
+.cardContent .date-category {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
 }
 
-.card-content .date {
+.cardContent .date {
     font-size: 14px;
     color: #bdc3c7;
 }
 
-.card-content .category {
+.cardContent .category {
     font-size: 14px;
     color: #bdc3c7;
 }
 
 @media (max-width: 1200px) {
-    .card-list {
+    .cardList {
         grid-template-columns: repeat(3, 1fr);
     }
-    .no-card {
+    .noCard {
         grid-column: 2 / span 1;
     }
 }
 
 @media (max-width: 900px) {
-    .card-list {
+    .cardList {
         grid-template-columns: repeat(2, 1fr);
     }
-    .no-card {
+    .noCard {
         grid-column: 1 / span 1;
     }
 }
 
 @media (max-width: 600px) {
-    .card-list {
+    .cardList {
         grid-template-columns: repeat(1, 1fr);
     }
-    .no-card {
+    .noCard {
         grid-column: 1 / span 1;
     }
 }
