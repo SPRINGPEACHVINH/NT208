@@ -1,6 +1,7 @@
 const User = require("../models/Users");
 const bcrypt = require("bcrypt");
 const genneralToken = require("./JwtService");
+require("dotenv").config();
 
 const CreateUser = (newUser) => {
   return new Promise(async (resolve, reject) => {
@@ -15,8 +16,8 @@ const CreateUser = (newUser) => {
           message: "Email already exists",
         });
       }
-      const hash = bcrypt.hashSync(Password, 10);
-      console.log("hash", hash);
+      const bcrypt_salt = `${process.env.BCRYPT_SALT}`
+      const hash = bcrypt.hashSync(Password, bcrypt_salt);
 
       const createdUser = await User.create({
         UserName,
