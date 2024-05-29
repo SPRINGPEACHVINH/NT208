@@ -44,12 +44,25 @@ const ShowHeader = () => {
 
   const handleLogOut = () => {
     if (localStorage.getItem("isGoogle") === "true") {
-      googleLogout();
+      handleGoogleLogOut();
+    } else {
+      handleNormalLogOut();
     }
-    // dispatch(logOut());
+  };
 
-    // localStorage.removeItem("isLoggedIn");
-    // localStorage.removeItem("username");
+  const handleGoogleLogOut = () => {
+    googleLogout();
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("username");
+    localStorage.removeItem("isGoogle");
+    navigate("/"); // Navigate to the home page after logging out
+  };
+
+  const handleNormalLogOut = () => {
+    dispatch(logOut());
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("username");
+    navigate("/"); // Navigate to the home page after logging out
   };
   const handleSearch = (event) => {
     event.preventDefault();
