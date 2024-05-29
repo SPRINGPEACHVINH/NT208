@@ -22,15 +22,15 @@ const add = async (req, res) => {
   }
 };
 
-const getAll = async (req, res) => {
-  try {
-    const events = await EventService.getAllEvents();
+// const getAll = async (req, res) => {
+//   try {
+//     const events = await EventService.getAllEvents();
 
-    return res.status(200).json({ status: "OK", data: events });
-  } catch (e) {
-    return res.status(500).json({ status: "ERROR", message: e.message });
-  }
-};
+//     return res.status(200).json({ status: "OK", data: events });
+//   } catch (e) {
+//     return res.status(500).json({ status: "ERROR", message: e.message });
+//   }
+// };
 
 const deleteById = async (req, res) => {
   try {
@@ -79,7 +79,7 @@ const getLast = async (req, res) => {
 module.exports = {
   search,
   add,
-  getAll,
+  // getAll,
   deleteById,
   getById,
   getLast,
