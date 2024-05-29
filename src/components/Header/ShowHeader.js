@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import "../../styles/Header.css";
 import moment from "moment";
 
+
 const ShowHeader = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
@@ -42,10 +43,16 @@ const ShowHeader = () => {
   },[]);
 
   const handleLogOut = () => {
+    if(localStorage.getItem("isGoogle") === "true") {
+    //   <GoogleLogout
+    //   clientId="957778684302-roirdu9se7h2e9f01kedlu82euq54pf2.apps.googleusercontent.com"
+    //   buttonText="Logout"
+    //   onLogoutSuccess={logOut}>
+    // </GoogleLogout>
+    }
     dispatch(logOut());
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("username");
-    
   };
   const handleSearch = (event) => {
     event.preventDefault();
