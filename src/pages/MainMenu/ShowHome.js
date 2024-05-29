@@ -4,7 +4,7 @@ import "../../styles/ShowHome.css";
 import loadingGif from "../../assets/images/loading.gif";
 
 const ShowHome = () => {
-  const [/*currentSlide*/, setCurrentSlide] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [events, setEvents] = useState([]);
   const [slideEvents, setSlideEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -15,7 +15,9 @@ const ShowHome = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch("http://localhost:8881/api/event/all");
+        const response = await fetch(
+          "https://ticketx88.azurewebsites.net/api/event/all"
+        );
         const { data } = await response.json();
         setEvents(data);
         setSlideEvents(data.slice(0, 3));
