@@ -4,7 +4,9 @@ const Event = require("../models/Events");
 const searchEvents = async (query) => {
   return Event.find({
     EventName: { $regex: new RegExp(query, "i") },
-  }).select("EventId EventName EventTime EventLocation EventCategory TicketPrice Picture_event");
+  }).select(
+    "EventId EventName EventTime EventLocation EventCategory TicketPrice Picture_event"
+  );
 };
 
 const addEvent = async (eventData) => {
@@ -13,11 +15,19 @@ const addEvent = async (eventData) => {
 };
 
 const getAllEvents = async () => {
-  return Event.find({}).select("EventId EventName EventTime EventCategory TicketPrice Picture_event");
+  return Event.find({}).select(
+    "EventId EventName EventTime EventCategory TicketPrice Picture_event"
+  );
 };
 
 const getEventById = async (EventId) => {
   return Event.findOne({ EventId: EventId });
+};
+
+const getLastEvent = async () => {
+  return Event.find({}).select(
+    "EventId EventName EventTime EventCategory TicketPrice Picture_event"
+  );
 };
 
 const deleteEvent = async (EventId) => {
@@ -30,4 +40,5 @@ module.exports = {
   getAllEvents,
   deleteEvent,
   getEventById,
+  getLastEvent,
 };

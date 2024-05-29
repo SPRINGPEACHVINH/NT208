@@ -66,10 +66,21 @@ const getById = async (req, res) => {
   }
 };
 
+const getLast = async (req, res) => {
+  try {
+    const events = await EventService.getLastEvent();
+
+    return res.status(200).json({ status: "OK", data: events });
+  } catch (e) {
+    return res.status(500).json({ status: "ERROR", message: e.message });
+  }
+};
+
 module.exports = {
   search,
   add,
   getAll,
   deleteById,
   getById,
+  getLast,
 };

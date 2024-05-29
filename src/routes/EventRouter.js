@@ -12,5 +12,6 @@ router.post("/add", EventController.add);
 router.get("/all", EventController.getAll);
 router.delete("/delete/:id", EventController.deleteById);
 router.get("/:id", EventController.getById);
+router.get("/last", EventController.getLast);
 
 module.exports = router;
