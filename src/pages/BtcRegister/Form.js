@@ -11,7 +11,7 @@ import {
   BankOutlined,
 } from "@ant-design/icons";
 import { Upload, message, Input, Modal } from "antd";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const { TextArea } = Input;
 const { Dragger } = Upload;
@@ -223,23 +223,6 @@ function Form({ isMobile, addEvent }) {
     );
   };
 
-  // Hàm chuẩn hóa giá vé
-  const [ticketPrice, setTicketPrice] = useState("");
-
-  const formatPrice = (value) => {
-    let numericValue = value.replace(/\D/g, "");
-    let formattedValue = numericValue.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    return formattedValue;
-  };
-
-  const handleInputChange = (e) => {
-    const formattedValue = formatPrice(e.target.value);
-    setTicketPrice(formattedValue);
-    handleInputEventChange({
-      target: { name: "eventTicketPrice", value: formattedValue },
-    });
-  };
-
   // Hàm xử lý form và hàm xử lý chuyển step
   const [formData, setFormData] = useState({
     enterpriseName: "",
@@ -286,7 +269,7 @@ function Form({ isMobile, addEvent }) {
     eventType: "",
     eventDateTime: "",
     eventTicketPrice: "",
-    eventDecsription: "",
+    eventDescription: "",
   });
 
   const [eventErrors, setEventErrors] = useState({
@@ -294,7 +277,7 @@ function Form({ isMobile, addEvent }) {
     eventType: false,
     eventDateTime: false,
     eventTicketPrice: false,
-    eventDecsription: false,
+    eventDescription: false,
   });
 
   const handleInputEventChange = (e, name) => {
@@ -446,88 +429,79 @@ function Form({ isMobile, addEvent }) {
   // Hàm lưu thông tin
   const [modalVisible, setModalVisible] = useState(false);
 
-  const mongoose = require("mongoose");
-  const Event = mongoose.model("Event");
-  const getLastEventId = async () => {
-    try {
-      const lastEvent = await Event.find().sort({ EventId: -1 }).limit(1);
-      if (lastEvent.length > 0) {
-        return lastEvent[0].EventId;
-      } else {
-        return "EV0";
-      }
-    } catch (error) {
-      console.error("Lỗi khi lấy ID sự kiện cuối cùng:", error);
-      throw error;
-    }
-  };
-
   const handleSave = async () => {
-    const reader = new FileReader();
-
-    reader.onloadend = async () => {
-      // const formattedEventData = {
-      //   ...eventData,
-      //   coverImage: coverImageBase64,
-      //   eventDateTime: eventData.eventDateTime.format("DD-MM-YYYY HH:mm"),
-      // };
-      // addEvent(formattedEventData);
-      // setModalVisible(true);
-      try {
-        const lastEventId = await getLastEventId();
-        const newEventId = "EV" + (parseInt(lastEventId.substring(2)) + 1);
-
-        const coverImageBase64 =
-          fileListCoverEvent.length > 0
-            ? await imageToBase64(fileListCoverEvent[0].originFileObj)
-            : null;
-
-        const response = await fetch("http://localhost:8881/api/event/add", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            EventId: newEventId,
-            EventName: document.getElementById("event-name").value,
-            EventTime: document.getElementById("event-date-time").value,
-            EventInfo: document.getElementsByName("eventDecsription")[0].value,
-            EventLocation: "TicketX88",
-            EventCategory: document.getElementById("event-type").value,
-            TicketPrice: document.getElementById("event-ticket-price").value,
-            Picture_event: coverImageBase64,
-            Btc: "60d6c47e53e68c761c3a2a18", // Replace with your actual ObjectId
-          }),
-        });
-        const data = await response.json();
-        console.log(data);
-        if (!response.ok) {
-          throw new Error(data.message || "Failed to save event data.");
-        }
-        setEventData({
-          eventName: "",
-          eventType: "",
-          eventDateTime: null,
-          eventDescription: "",
-          ticketPrice: "",
-        });
-        setModalVisible(true);
-      } catch (error) {
-        console.error("Failed to save event:", error);
+    try {
+      const lastEventResponse = await fetch(
+        "http://localhost:8881/api/event/last"
+      );
+      if (!lastEventResponse.ok) {
+        throw new Error("Failed to fetch last event ID.");
       }
-    };
 
-    if (fileListCoverEvent.length > 0) {
-      reader.readAsDataURL(fileListCoverEvent[0].originFileObj);
-    } else {
-      reader.onloadend();
+      const lastEvent = await lastEventResponse.json();
+      const lastEventId = lastEvent.data.EventId;
+
+      let newEventId = "EV0";
+      if (lastEventId) {
+        const matches = lastEventId.match(/\d+$/);
+        if (matches) {
+          const lastNumber = parseInt(matches[0], 10);
+          newEventId = "EV" + (lastNumber + 1);
+        }
+      }
+
+      const coverImageBase64 =
+        fileListCoverEvent.length > 0
+          ? await imageToBase64(fileListCoverEvent[0].originFileObj)
+          : null;
+
+      const {
+        eventName,
+        eventDateTime,
+        eventDescription,
+        eventType,
+        eventTicketPrice,
+      } = eventData;
+
+      const response = await fetch("http://localhost:8881/api/event/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          EventId: newEventId,
+          EventName: eventName,
+          EventTime: eventDateTime,
+          EventInfo: eventDescription,
+          EventLocation: "TicketX88",
+          EventCategory: eventType,
+          TicketPrice: eventTicketPrice,
+          Picture_event: coverImageBase64,
+          Btc: "60d6c47e53e68c761c3a2a19",
+        }),
+      });
+      const data = await response.json();
+      console.log(data);
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to save event data.");
+      }
+
+      setModalVisible(true);
+      const formattedEventData = {
+        ...eventData,
+        coverImage: coverImageBase64,
+        eventDateTime: eventData.eventDateTime.format("DD-MM-YYYY HH:mm"),
+      };
+      addEvent(formattedEventData);
+    } catch (error) {
+      console.error("Failed to save event:", error);
     }
   };
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const handleModalOk = () => {
     setModalVisible(false);
-    // navigate("/Events");
+    navigate("/Events");
   };
 
   return (
@@ -939,11 +913,11 @@ function Form({ isMobile, addEvent }) {
                   <option value="" disabled selected hidden>
                     Vui lòng chọn
                   </option>
-                  <option value="nhac-song">Nhạc sống</option>
-                  <option value="san-khau-va-nghe-thuat">
+                  <option value="Nhạc sống">Nhạc sống</option>
+                  <option value="Sân khấu & Nghệ thuật">
                     Sân khấu & Nghệ thuật
                   </option>
-                  <option value="the-thao">Thể thao</option>
+                  <option value="Thể thao">Thể thao</option>
                 </select>
                 <span
                   className={`error-message ${
@@ -991,10 +965,12 @@ function Form({ isMobile, addEvent }) {
                   <input
                     type="text"
                     id="event-ticket-price"
-                    name="event-ticket-price"
+                    name="eventTicketPrice"
                     placeholder="Giá vé"
-                    value={ticketPrice}
-                    onChange={handleInputChange}
+                    value={eventData.eventTicketPrice}
+                    onChange={(e) =>
+                      handleInputEventChange(e, "eventTicketPrice")
+                    }
                   />
                   <span className="currency">VNĐ</span>
                 </div>
@@ -1012,8 +988,8 @@ function Form({ isMobile, addEvent }) {
             showCount
             placeholder="Thông tin sự kiện"
             style={{ height: "300px" }}
-            name="eventDecsription"
-            value={eventData.eventDecsription}
+            name="eventDescription"
+            value={eventData.eventDescription}
             onChange={handleInputEventChange}
           />
           <span
@@ -1059,7 +1035,7 @@ function Form({ isMobile, addEvent }) {
           </div>
           <Modal
             title="Đăng ký thành công"
-            visible={modalVisible}
+            open={modalVisible}
             onOk={handleModalOk}
           >
             <div style={{ textAlign: "center" }}>

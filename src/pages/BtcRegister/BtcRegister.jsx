@@ -51,7 +51,7 @@ const BtcRegister = () => {
 
   const [events, setEvents] = useState([]);
   const addEvent = (newEvent) => {
-    setEvents([...events, newEvent]);
+    setEvents((prevEvents) => [...prevEvents, newEvent]);
   };
 
   return (
