@@ -5,7 +5,7 @@ import { logIn, logOut } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import "../../styles/Header.css";
 import moment from "moment";
-
+import { googleLogout } from "@react-oauth/google";
 
 const ShowHeader = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -40,19 +40,16 @@ const ShowHeader = () => {
     if (isLoggedIn) {
       dispatch(logIn(username));
     }
-  },[]);
+  }, []);
 
   const handleLogOut = () => {
-    if(localStorage.getItem("isGoogle") === "true") {
-    //   <GoogleLogout
-    //   clientId="957778684302-roirdu9se7h2e9f01kedlu82euq54pf2.apps.googleusercontent.com"
-    //   buttonText="Logout"
-    //   onLogoutSuccess={logOut}>
-    // </GoogleLogout>
+    if (localStorage.getItem("isGoogle") === "true") {
+      googleLogout();
     }
-    dispatch(logOut());
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("username");
+    // dispatch(logOut());
+
+    // localStorage.removeItem("isLoggedIn");
+    // localStorage.removeItem("username");
   };
   const handleSearch = (event) => {
     event.preventDefault();
@@ -62,10 +59,12 @@ const ShowHeader = () => {
   };
 
   const searchBehavior = (event) => {
-    document.querySelector('.search-btn').addEventListener('click', function () {
-      this.parentElement.classList.toggle('open')
-      this.previousElementSibling.focus()
-    })
+    document
+      .querySelector(".search-btn")
+      .addEventListener("click", function () {
+        this.parentElement.classList.toggle("open");
+        this.previousElementSibling.focus();
+      });
   };
 
   useEffect(() => {
@@ -113,14 +112,14 @@ const ShowHeader = () => {
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => {
-        window.removeEventListener("resize", checkMobile);
+      window.removeEventListener("resize", checkMobile);
     };
   });
 
   // Hàm để kiểm tra xem trên điện thoại hay không
   const [isMobile, setIsMobile] = useState(false);
   const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 1251); // Định nghĩa ngưỡng chiều rộng cho điện thoại
+    setIsMobile(window.innerWidth <= 1251); // Định nghĩa ngưỡng chiều rộng cho điện thoại
   };
 
   return (
@@ -161,7 +160,9 @@ const ShowHeader = () => {
                     {results.map((result, index) => (
                       <li
                         key={index}
-                        onClick={() => navigate(`/Description/${result.EventId}`)}
+                        onClick={() =>
+                          navigate(`/Description/${result.EventId}`)
+                        }
                       >
                         <img
                           src={result.Picture_event}
@@ -171,8 +172,10 @@ const ShowHeader = () => {
                         <div className="event-info">
                           <div className="event-name">{result.EventName}</div>
                           <div className="event-time-location">
-                            {moment(result.EventTime).format("DD/MM/YYYY - HH:mm")}ở{" "}
-                            {result.EventLocation}
+                            {moment(result.EventTime).format(
+                              "DD/MM/YYYY - HH:mm"
+                            )}
+                            ở {result.EventLocation}
                           </div>
                           <div className="event-price-category">
                             <span className="ticket-price">
@@ -191,9 +194,9 @@ const ShowHeader = () => {
             </div>
             <div className="actions">
               {isLoggedIn && (
-              <Link to="/CreateEvent">
-                <button className="create-event">Tạo sự kiện</button>
-              </Link>
+                <Link to="/CreateEvent">
+                  <button className="create-event">Tạo sự kiện</button>
+                </Link>
               )}
               {isLoggedIn && (
                 <button className="purchased-tickets">Vé đã mua</button>
@@ -252,8 +255,23 @@ const ShowHeader = () => {
                   onBlur={handleBlur}
                 />
                 <button class="search-btn" onFocus={searchBehavior}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" id="search-icon"><path d="M11 17a6 6 0 100-12 6 6 0 000 12zM18.5 18.5l-3-3" stroke="#2A2D34" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
-                  </svg>  
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    id="search-icon"
+                  >
+                    <path
+                      d="M11 17a6 6 0 100-12 6 6 0 000 12zM18.5 18.5l-3-3"
+                      stroke="#2A2D34"
+                      stroke-width="2"
+                      stroke-miterlimit="10"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </svg>
                 </button>
                 {isFocused && results.length > 0 && (
                   <div className="dropdown">
@@ -261,7 +279,9 @@ const ShowHeader = () => {
                       {results.map((result, index) => (
                         <li
                           key={index}
-                          onClick={() => navigate(`/Description/${result.EventId}`)}
+                          onClick={() =>
+                            navigate(`/Description/${result.EventId}`)
+                          }
                         >
                           <img
                             src={result.Picture_event}
@@ -271,8 +291,10 @@ const ShowHeader = () => {
                           <div className="event-info">
                             <div className="event-name">{result.EventName}</div>
                             <div className="event-time-location">
-                              {moment(result.EventTime).format("DD/MM/YYYY - HH:mm")}ở{" "}
-                              {result.EventLocation}
+                              {moment(result.EventTime).format(
+                                "DD/MM/YYYY - HH:mm"
+                              )}
+                              ở {result.EventLocation}
                             </div>
                             <div className="event-price-category">
                               <span className="ticket-price">
