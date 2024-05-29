@@ -44,6 +44,11 @@
     cursor: pointer;
 }
 
+.detail span {
+    color: #2ecc71;
+    font-weight: bold;
+}
+
 .sub-details {
     background-color: #555;
     padding: 10px 15px;
