@@ -69,11 +69,7 @@ const getById = async (req, res) => {
 const getLast = async (req, res) => {
   try {
     const event = await EventService.getLastEvent();
-    if (!event) {
-      return res
-        .status(404)
-        .json({ status: "ERROR", message: "Event not found" });
-    }
+
     return res.status(200).json({ status: "OK", data: event });
   } catch (e) {
     return res.status(500).json({ status: "ERROR", message: e.message });
