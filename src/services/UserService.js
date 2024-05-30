@@ -18,6 +18,19 @@ const CreateUser = async (newUser) => {
   return createdUser;
 };
 
+const GoogleSignIn = async (newUser) => {
+  const { UserName, Email, Password } = newUser;
+  const hash = bcrypt.hashSync(Password, 10);
+
+  const createdUser = await User.create({
+    UserName,
+    Email,
+    Password: hash,
+    PhoneNumber: "1234"
+  });
+  return createdUser;
+};
+
 const LoginUser = (userLogin) => {
   return new Promise(async (resolve, reject) => {
     const { UserName, Password } = userLogin;
@@ -54,17 +67,6 @@ const LoginUser = (userLogin) => {
         access_token,
         refresh_token,
       });
-    } catch (e) {
-      reject(e);
-    }
-  });
-};
-
-const GoogleLogin = (userLogin) => {
-  return new Promise(async (resolve, reject) => {
-    const { UserName, Email, Id } = userLogin;
-    try {
-      
     } catch (e) {
       reject(e);
     }
@@ -147,6 +149,21 @@ const FindUserByUserName = (UserName) => {
   });
 };
 
+const FindUserByEmail = (Email) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const user = await User.findOne({ Email: Email });
+      if (!user) {
+        resolve(null);
+      } else {
+        resolve(user);
+      }
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
 const CheckPassword = (inputPassword, userPassword) => {
   return bcrypt.compareSync(inputPassword, userPassword);
 };
@@ -158,5 +175,7 @@ module.exports = {
   GetAllUser,
   GetDetailsUserByUserName,
   FindUserByUserName,
+  FindUserByEmail,
   CheckPassword,
+  GoogleSignIn
 };

@@ -4,6 +4,7 @@ const userController = require('../controllers/UserController')
 
 router.post('/sign-up', userController.CreateUser)
 router.post('/sign-in', userController.LoginUser)
+router.post('/google-sign-in', userController.GoogleSignIn)
 router.put('/update-user/:id', userController.UpdateUser)
 router.delete('/delete-user/:id', userController.DeleteUser)
 router.get('/getAll', userController.GetAllUser)

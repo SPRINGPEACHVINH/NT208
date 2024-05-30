@@ -32,14 +32,6 @@ const CreateUser = async (req, res) => {
       });
     }
 
-    const checkUserName = await User.findOne({ UserName });
-    if (checkUserName !== null) {
-      return res.status(200).json({
-        status: "ERROR",
-        message: "UserName already exists",
-      });
-    }
-
     const checkEmail = await User.findOne({ Email });
     if (checkEmail !== null) {
       return res.status(200).json({
@@ -78,7 +70,7 @@ const LoginUser = async (req, res) => {
         message: "The input is required",
       });
     }
-    const user = await UserService.FindUserByUserName(UserName);
+    const user = await UserService.FindUserByEmail(Email);
     if (!user) {
       return res.status(200).json({
         status: "ERROR",
@@ -97,6 +89,37 @@ const LoginUser = async (req, res) => {
     }
     const response = await UserService.LoginUser(req.body);
     return res.status(200).json(response);
+  } catch (e) {
+    return res.status(404).json({
+      error: e.message,
+    });
+  }
+};
+
+const GoogleSignIn = async (req, res) => {
+  try {
+    const { UserName, Email, Password } = req.body;
+    if (!UserName || !Email || !Password) {
+      return res.status(200).json({
+        status: "ERROR",
+        message: "The input is required",
+      });
+    }
+
+    const isCheckEmail = await UserService.FindUserByEmail(Email);
+    if (isCheckEmail !== null) {
+      return res.status(200).json({
+        status: "ERROR",
+        message: "Email already exist",
+      });
+    }
+
+    const newUser = await UserService.GoogleSignIn(req.body);
+    return res.status(200).json({
+      status: "OK",
+      message: "User created successfully",
+      data: newUser,
+    });
   } catch (e) {
     return res.status(404).json({
       error: e.message,
@@ -190,4 +213,5 @@ module.exports = {
   GetAllUser,
   GetDetailsUser,
   RefreshToken,
+  GoogleSignIn,
 };

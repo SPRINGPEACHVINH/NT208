@@ -14,11 +14,11 @@ const addEvent = async (eventData) => {
   return event.save();
 };
 
-// const getAllEvents = async () => {
-//   return Event.find({}).select(
-//     "EventId EventName EventTime EventCategory TicketPrice Picture_event"
-//   );
-// };
+const getAllEvents = async () => {
+  return Event.find({}).select(
+    "EventId EventName EventTime EventCategory TicketPrice Picture_event"
+  );
+};
 
 const getEventById = async (EventId) => {
   return Event.findOne({ EventId: EventId });
@@ -41,7 +41,7 @@ const deleteEvent = async (EventId) => {
 module.exports = {
   searchEvents,
   addEvent,
-  // getAllEvents,
+  getAllEvents,
   deleteEvent,
   getEventById,
   getLastEvent,
