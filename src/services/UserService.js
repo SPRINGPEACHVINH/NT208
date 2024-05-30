@@ -81,6 +81,17 @@ const LoginUser = (userLogin) => {
   });
 };
 
+const GoogleLogin = (userLogin) => {
+  return new Promise(async (resolve, reject) => {
+    const { UserName, Email, Id } = userLogin;
+    try {
+      
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
 const DeleteUser = (id) => {
   return new Promise(async (resolve, reject) => {
     try {
