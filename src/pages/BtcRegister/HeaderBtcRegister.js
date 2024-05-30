@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "../../styles/HeaderBtcRegister.css";
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
-
+import React from "react";
 const SquareMenu = ({ handleSidebar, isSidebarOpen }) => (
   <button className="square-menu" onClick={handleSidebar}>
     {isSidebarOpen ? (

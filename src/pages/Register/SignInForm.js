@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { logIn } from "../../redux/actions";
 import "../../styles/SignIn.css";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import GoogleLoginButton from "./GoogleLogin";
 
 function SignInForm() {
   const [form, setForm] = useState({
@@ -42,6 +43,7 @@ function SignInForm() {
 
       dispatch(logIn(form.UserName));
       localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("isGoogle", "false")
       localStorage.setItem("username", form.UserName);
       navigate("/");
     } catch (error) {
