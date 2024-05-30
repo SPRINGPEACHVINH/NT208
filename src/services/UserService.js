@@ -16,7 +16,7 @@ const CreateUser = (newUser) => {
           message: "Email already exists",
         });
       }
-      const bcrypt_salt = `${process.env.BCRYPT_SALT}`
+      const bcrypt_salt = `${process.env.BCRYPT_SALT}`;
       const hash = bcrypt.hashSync(Password, 10);
 
       const createdUser = await User.create({
@@ -94,7 +94,7 @@ const DeleteUser = (id) => {
         });
       }
 
-      const DeletedUser = await User.findByIdAndDelete(id)
+      const DeletedUser = await User.findByIdAndDelete(id);
       resolve({
         status: "OK",
         message: "User deleted successfully",
@@ -142,6 +142,21 @@ const GetDetailsUserByUserName = (UserName) => {
   });
 };
 
+const FindUserByUserName = (UserName) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const user = await User.findOne({ UserName: UserName });
+      if (!user) {
+        resolve(null);
+      } else {
+        resolve(user);
+      }
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
 const CheckPassword = (inputPassword, userPassword) => {
   return bcrypt.compareSync(inputPassword, userPassword);
 };
@@ -152,5 +167,6 @@ module.exports = {
   DeleteUser,
   GetAllUser,
   GetDetailsUserByUserName,
+  FindUserByUserName,
   CheckPassword,
 };
