@@ -17,7 +17,7 @@ const CreateUser = (newUser) => {
         });
       }
       const bcrypt_salt = `${process.env.BCRYPT_SALT}`
-      const hash = bcrypt.hashSync(Password, bcrypt_salt);
+      const hash = bcrypt.hashSync(Password, 10);
 
       const createdUser = await User.create({
         UserName,
@@ -80,25 +80,6 @@ const LoginUser = (userLogin) => {
     }
   });
 };
-
-const LoginUserGoogle = (userLogin) => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const { UserName, Email, PhoneNumber } = userLogin;
-      resolve({
-        status: "OK",
-        message: "Success",
-        data: {
-          UserName,
-          Email,
-        },
-      });
-    }
-    catch (e) {
-      reject(e);
-    }
-  })
-}
 
 const DeleteUser = (id) => {
   return new Promise(async (resolve, reject) => {
@@ -172,5 +153,4 @@ module.exports = {
   GetAllUser,
   GetDetailsUserByUserName,
   CheckPassword,
-  LoginUserGoogle
 };
