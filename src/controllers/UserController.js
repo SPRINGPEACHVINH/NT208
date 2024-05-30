@@ -23,7 +23,6 @@ const CreateUser = async (req, res) => {
         message: "Email is not valid",
       });
     }
-    console.log("isCheckEmail", isCheckEmail);
     const response = await UserService.CreateUser(req.body);
     return res.status(200).json(response);
   } catch (e) {
@@ -42,7 +41,7 @@ const LoginUser = async (req, res) => {
         message: "The input is required",
       });
     }
-    const user = await UserService.FindUserByUserName(user);
+    const user = await UserService.FindUserByUserName(UserName);
     if (!user) {
       return res.status(200).json({
         status: "ERROR",
@@ -70,27 +69,6 @@ const LoginUser = async (req, res) => {
 
 const UpdateUser = async (req, res) => {
   try {
-    // const { UserName, Email, Password, confirmPassword, PhoneNumber } =
-    //   req.body
-    // const reg = /^[a-zA-Z0-9._%+-]+@(gmail\.com|gm\.uit\.edu\.vn)$/;
-    // const isCheckEmail = reg.test(Email);
-    // if (!UserName || !Email || !Password || !confirmPassword || !PhoneNumber) {
-    //   return res.status(200).json({
-    //     status: "ERROR",
-    //     message: "The input is required",
-    //   })
-    // } else if (Password !== confirmPassword) {
-    //   return res.status(200).json({
-    //     status: "ERROR",
-    //     message: "Password and confirmPassword are not the same",
-    //   })
-    // } else if (!isCheckEmail) {
-    //   return res.status(200).json({
-    //     status: "ERROR",
-    //     message: "Email is not valid",
-    //   })
-    // }
-    // console.log("isCheckEmail", isCheckEmail);
     const userId = req.query.id;
     console.log("userId", userId);
     const response = await UserService.LoginUser(req.body);
@@ -101,12 +79,6 @@ const UpdateUser = async (req, res) => {
     });
   }
 };
-
-const LoginUserGoogle = async (req, res) => {
-  const { UserName, Email } = req.body;
-  const response = await UserService.LoginUserGoogle(req.body);
-  return res.status(200).json(response);
-}
 
 const DeleteUser = async (req, res) => {
   try {
@@ -180,6 +152,5 @@ module.exports = {
   DeleteUser,
   GetAllUser,
   GetDetailsUser,
-  RefreshToken,
-  LoginUserGoogle
+  RefreshToken
 };
