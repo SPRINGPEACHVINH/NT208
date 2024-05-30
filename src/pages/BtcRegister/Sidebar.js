@@ -1,25 +1,35 @@
 import "../../styles/Sidebar.css";
 import { Link, useLocation } from "react-router-dom";
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 function Sidebar({ isMobile, isSidebarOpen, activeTab, handleTabChange }) {
   const location = useLocation();
+  const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
-    if (location.pathname === "/CreateEvent") {
-      if (isMobile && isSidebarOpen) {
-        return;
-      } else {
-        handleTabChange("create-event");
-      }
-    } else if (location.pathname === "/Events") {
-      if (isMobile && isSidebarOpen) {
-        return;
-      } else {
-        handleTabChange("my-event");
+    if (!initialized) {
+      setInitialized(true);
+      if (location.pathname === "/CreateEvent") {
+        if (isMobile && isSidebarOpen) {
+          return;
+        } else {
+          handleTabChange("create-event");
+        }
+      } else if (location.pathname === "/Events") {
+        if (isMobile && isSidebarOpen) {
+          return;
+        } else {
+          handleTabChange("my-event");
+        }
       }
     }
-  }, [location.pathname, isMobile, isSidebarOpen, handleTabChange]);
+  }, [
+    initialized,
+    location.pathname,
+    isMobile,
+    isSidebarOpen,
+    handleTabChange,
+  ]);
 
   return (
     <div className="d-flex flex-column flex-shrink-0 p-3 text-bg-dark ">
