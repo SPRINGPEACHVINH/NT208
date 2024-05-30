@@ -15,25 +15,25 @@ function Google_Login() {
 
   var profile;
 
-  if (user) {
-    axios
-      .get(
-        `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
-        {
-          headers: {
-            Authorization: `Bearer ${user.access_token}`,
-            Accept: "application/json",
-          },
-        }
-      )
-      .then((res) => {
-        console.log("res: ", res);
-        console.log(res.data);
-        profile = res.data;
-        console.log("profile: ", profile);
-      })
-      .catch((err) => console.log(err));
-  }
+  // if (user) {
+  //   axios
+  //     .get(
+  //       `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${user.access_token}`,
+  //           Accept: "application/json",
+  //         },
+  //       }
+  //     )
+  //     .then((res) => {
+  //       console.log("res: ", res);
+  //       console.log(res.data);
+  //       profile = res.data;
+  //       console.log("profile: ", profile);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }
 
   // const handlelogin = async (response) => {
   //   // setUser(response);
@@ -59,25 +59,25 @@ function Google_Login() {
   // }
 
   const onSuccess = async (response) => {
-    try {
-      const config = {
-        method: "POST",
-        url: "http://localhost:8881/api/user/sign-in-google",
-        headers: {},
-        body: JSON.stringify({
-          UserName: profile.name,
-          Email: profile.email,
-        }),
-      };
-      await axios(config);
+    // try {
+    //   const config = {
+    //     method: "POST",
+    //     url: "http://localhost:8881/api/user/sign-in-google",
+    //     headers: {},
+    //     body: JSON.stringify({
+    //       UserName: profile.name,
+    //       Email: profile.email,
+    //     }),
+    //   };
+    //   await axios(config);
 
-      localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("isGoogle", "true");
-      localStorage.setItem("username", profile.name);
-      navigate("/");
-    } catch (error) {
-      console.error("Error:", error);
-    }
+    //   localStorage.setItem("isLoggedIn", "true");
+    //   localStorage.setItem("isGoogle", "true");
+    //   localStorage.setItem("username", profile.name);
+    //   navigate("/");
+    // } catch (error) {
+    //   console.error("Error:", error);
+    // }
   };
 
   const login = useGoogleLogin({
