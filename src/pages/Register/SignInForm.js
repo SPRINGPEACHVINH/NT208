@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../redux/actions";
+import { message } from "antd";
 import "../../styles/SignIn.css";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import GoogleLoginButton from "./GoogleLogin";
@@ -27,7 +28,8 @@ function SignInForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:8881/api/user/sign-in", {
+      const response = await fetch("https://ticketx88.azurewebsites.net/api/user/sign-in", {
+      
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -35,21 +37,21 @@ function SignInForm() {
         body: JSON.stringify(form),
       });
 
-      if (!response.ok) {
-        throw new Error("Response was not ok");
-      }
+    const data = await response.json();
 
-      //const data = await response.json();
-
-      dispatch(logIn(form.UserName));
-      localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("isGoogle", "false");
-      localStorage.setItem("username", form.UserName);
-      navigate("/");
-    } catch (error) {
-      console.error("Error:", error);
+    if (data.status === "ERROR") {
+      throw new Error(data.message);
     }
-  };
+
+    dispatch(logIn(form.UserName));
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("isGoogle", "false");
+    localStorage.setItem("username", form.UserName);
+    navigate("/");
+  } catch (error) {
+    message.error(error.message);
+  }
+};
 
   return (
     <form className="signin-form" onSubmit={handleSubmit}>
@@ -90,6 +92,8 @@ function SignInForm() {
 
       <input className="signin-submit" type="submit" value="Đăng nhập" />
 
+      <GoogleLoginButton />
+      
       <div className="signup-link">
         Chưa có tài khoản?{" "}
         <a style={{ fontSize: 16 }} href="/SignUp">

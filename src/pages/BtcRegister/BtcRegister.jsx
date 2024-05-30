@@ -44,36 +44,32 @@ const BtcRegister = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => {
+    const loadingTimer = setTimeout(() => {
       setIsLoading(false);
-    }, 300);
+    }, 500);
+
+    return () => clearTimeout(loadingTimer);
   }, []);
 
   return (
     <div className="row">
-      {isLoading ? (
-        <HeaderBtcRegister
-          handleSidebar={handleSidebar}
-          isSidebarOpen={isSidebarOpen}
-        />
-      ) : (
-        <>
-          <HeaderBtcRegister
-            handleSidebar={handleSidebar}
-            isSidebarOpen={isSidebarOpen}
-          />
-
-          <div className="row-1">
+      <HeaderBtcRegister
+        handleSidebar={handleSidebar}
+        isSidebarOpen={isSidebarOpen}
+      />
+      <div className="row-1">
+        {!isLoading && (
+          <>
             <div
-              className={
+              className={`col-md-3-${
                 isMobile
                   ? isSidebarOpen
-                    ? "col-md-3-mobile"
-                    : "col-md-3-hidden-mobile"
+                    ? "mobile"
+                    : "hidden-mobile"
                   : isSidebarOpen
-                  ? "col-md-3-desktop"
-                  : "col-md-3-hidden-desktop"
-              }
+                  ? "desktop"
+                  : "hidden-desktop"
+              }`}
             >
               <Sidebar
                 isMobile={isMobile}
@@ -83,15 +79,15 @@ const BtcRegister = () => {
               />
             </div>
             <div
-              className={
+              className={`col-md-9-${
                 isMobile
                   ? isSidebarOpen
-                    ? "col-md-9-hidden-mobile"
-                    : "col-md-9-mobile"
+                    ? "hidden-mobile"
+                    : "mobile"
                   : isSidebarOpen
-                  ? "col-md-9-desktop"
-                  : "col-md-9-hidden-desktop"
-              }
+                  ? "desktop"
+                  : "hidden-desktop"
+              }`}
             >
               {activeTab === "create-event" ? (
                 <Form isMobile={isMobile} addEvent={addEvent} />
@@ -99,9 +95,9 @@ const BtcRegister = () => {
                 <MyEvents isMobile={isMobile} events={events} />
               )}
             </div>
-          </div>
-        </>
-      )}
+          </>
+        )}
+      </div>
     </div>
   );
 };
