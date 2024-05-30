@@ -1,12 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/TicketInfo.css";
 
 const TicketInfo = ({ event }) => {
   const basePrice = event.TicketPrice;
+  const [selectedPrice, setSelectedPrice] = useState(null);
+  const [selectedDetail, setSelectedDetail] = useState(null);
 
   const calculatePrice = (percentage) => {
     const price = basePrice * (1 + percentage / 100);
     return new Intl.NumberFormat("de-DE").format(Math.floor(price));
+  };
+
+  const handleSelect = (price, resolution, detailId) => {
+    if (selectedDetail) {
+      toggleDetails(`details-${selectedDetail}`);
+    }
+
+    if (selectedDetail === resolution) {
+      setSelectedDetail(null);
+      setSelectedPrice(null);
+    } else {
+      setSelectedDetail(resolution);
+      setSelectedPrice(price);
+      toggleDetails(detailId);
+    }
   };
 
   const eventDate = new Date(event.EventTime);
@@ -57,15 +74,23 @@ const TicketInfo = ({ event }) => {
       <div className="ticket-info">
         <div
           className="ticket-header"
-          onClick={() => toggleDetails("main-details")}
+          onClick={() => {
+            toggleDetails("main-details");
+            setSelectedDetail(null);
+            setSelectedPrice(null);
+          }}
         >
           {formattedEventTime}
           <button className="buy-button">Mua vé ngay</button>
         </div>
         <div id="main-details" className="ticket-details">
           <div
-            className="detail resolution-144p"
-            onClick={() => toggleDetails("details-144p")}
+            className={`detail resolution-144p ${
+              selectedDetail === "144p" ? "selected" : ""
+            }`}
+            onClick={() =>
+              handleSelect(calculatePrice(0), "144p", "details-144p")
+            }
           >
             144p <span>{calculatePrice(0)} VNĐ</span>
           </div>
@@ -73,8 +98,12 @@ const TicketInfo = ({ event }) => {
             Sẽ xem được video ở độ phân giải 144p
           </div>
           <div
-            className="detail resolution-240p"
-            onClick={() => toggleDetails("details-240p")}
+            className={`detail resolution-240p ${
+              selectedDetail === "240p" ? "selected" : ""
+            }`}
+            onClick={() =>
+              handleSelect(calculatePrice(20), "240p", "details-240p")
+            }
           >
             240p <span>{calculatePrice(20)} VNĐ</span>
           </div>
@@ -82,8 +111,12 @@ const TicketInfo = ({ event }) => {
             Sẽ xem được video ở độ phân giải 240p
           </div>
           <div
-            className="detail resolution-360p"
-            onClick={() => toggleDetails("details-360p")}
+            className={`detail resolution-360p ${
+              selectedDetail === "360p" ? "selected" : ""
+            }`}
+            onClick={() =>
+              handleSelect(calculatePrice(40), "360p", "details-360p")
+            }
           >
             360p <span>{calculatePrice(40)} VNĐ</span>
           </div>
@@ -91,8 +124,12 @@ const TicketInfo = ({ event }) => {
             Sẽ xem được video ở độ phân giải 360p
           </div>
           <div
-            className="detail resolution-480p"
-            onClick={() => toggleDetails("details-480p")}
+            className={`detail resolution-480p ${
+              selectedDetail === "480p" ? "selected" : ""
+            }`}
+            onClick={() =>
+              handleSelect(calculatePrice(60), "480p", "details-480p")
+            }
           >
             480p <span>{calculatePrice(60)} VNĐ</span>
           </div>
@@ -100,8 +137,12 @@ const TicketInfo = ({ event }) => {
             Sẽ xem được video ở độ phân giải 480p
           </div>
           <div
-            className="detail resolution-720p"
-            onClick={() => toggleDetails("details-720p")}
+            className={`detail resolution-720p ${
+              selectedDetail === "720p" ? "selected" : ""
+            }`}
+            onClick={() =>
+              handleSelect(calculatePrice(80), "720p", "details-720p")
+            }
           >
             720p <span>{calculatePrice(80)} VNĐ</span>
           </div>
@@ -109,8 +150,12 @@ const TicketInfo = ({ event }) => {
             Sẽ xem được video ở độ phân giải 720p
           </div>
           <div
-            className="detail resolution-1080p"
-            onClick={() => toggleDetails("details-1080p")}
+            className={`detail resolution-1080p ${
+              selectedDetail === "1080p" ? "selected" : ""
+            }`}
+            onClick={() =>
+              handleSelect(calculatePrice(100), "1080p", "details-1080p")
+            }
           >
             1080p <span>{calculatePrice(100)} VNĐ</span>
           </div>

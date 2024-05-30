@@ -5,6 +5,7 @@ import { logIn } from "../../redux/actions";
 import "../../styles/SignIn.css";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import GoogleLoginButton from "./GoogleLogin";
+import GoogleLogout from "./GoogleLogout";
 
 function SignInForm() {
   const [form, setForm] = useState({
@@ -97,6 +98,7 @@ function SignInForm() {
           Đăng ký
         </a>
       </div>
+      <GoogleLogout />
     </form>
   );
 }

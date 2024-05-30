@@ -17,16 +17,17 @@ function CodeInput() {
 
   return (
     <div className="code-input-container">
-      <form className="code-input-form" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={code}
-          onChange={handleInputChange}
-          placeholder="Enter your code here"
-        />
-        <button type="submit">Enter</button>
-      </form>
-      {showVideo && (
+      {!showVideo ? (
+        <form className="code-input-form" onSubmit={handleSubmit}>
+          <input
+            type="text"
+            value={code}
+            onChange={handleInputChange}
+            placeholder="Enter your code here"
+          />
+          <button type="submit">Enter</button>
+        </form>
+      ) : (
         <div className="video-box">
           <iframe
             width="100%"

@@ -32,6 +32,7 @@
 }
 
 #desc-pad {
+<<<<<<< HEAD
   flex-direction: column;
   display: flex;
   background-color: #444;
@@ -60,6 +61,39 @@
   width: 100%;
   padding-top: 20px;
   padding-bottom: 20px;
+=======
+    flex-direction: column;
+    display: flex;
+    background-color: #444;
+    margin: 0 auto;
+    position: relative;
+    width: 100%;
+    min-width: 600px;
+    padding-top: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+}
+
+#description {
+    transition: max-height 0.75s ease-in-out;
+    overflow: hidden;
+    max-height: 255px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-top: 5px solid #666;
+    width: 100%;
+    min-width: 600px;
+}
+
+#read-more-button {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    min-width: 600px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+>>>>>>> 22670c9c561a3a8d2da7be24223e1e361c869207
 }
 
 .arrow {
@@ -78,6 +112,7 @@
 }
 
 #white-pad {
+<<<<<<< HEAD
   height: 300px;
   width: 100%;
   bottom: 0px;
@@ -87,6 +122,18 @@
   -webkit-mask-image: linear-gradient(to top, black 10%, transparent 80%);
   mask-image: linear-gradient(to top, black 10%, transparent 80%);
   border-radius: 12px;
+=======
+    height: 300px;
+    width: 100%;
+    min-width: 600px;
+    bottom: 0px;
+    position: absolute;
+    background-color: #555;
+    transition: opacity 0.75s;
+    -webkit-mask-image: linear-gradient(to top, black 10%, transparent 80%);
+    mask-image: linear-gradient(to top, black 10%, transparent 80%);
+    border-radius: 12px;
+>>>>>>> 22670c9c561a3a8d2da7be24223e1e361c869207
 }
 
 .layout {
@@ -110,11 +157,18 @@
   margin-right: auto;
 }
 
-/* src/styles/Description.css */
 .loading-container {
+<<<<<<< HEAD
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   /* Adjust based on your layout */
 }
+=======
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+>>>>>>> 22670c9c561a3a8d2da7be24223e1e361c869207
