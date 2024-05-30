@@ -5,5 +5,6 @@ const router = express.Router();
 
 router.post("/payForTicket", TicketController.payForTicket);
 router.post("/addTicketsToEvent", TicketController.addTicketsToEvent);
+router.post("/use-ticket", TicketController.useTicket);
 
 module.exports = router;
