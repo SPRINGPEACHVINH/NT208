@@ -7,6 +7,7 @@
     margin-left: auto;
     margin-right: auto;
     width: 100%;
+    min-width: 600px;
 }
 
 .ticket-info {
@@ -42,6 +43,15 @@
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
+}
+
+.detail span {
+    color: #2ecc71;
+    font-weight: bold;
+}
+
+.detail.selected {
+    background-color: #3b5e4a;
 }
 
 .sub-details {
