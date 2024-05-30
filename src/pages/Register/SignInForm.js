@@ -5,7 +5,6 @@ import { logIn } from "../../redux/actions";
 import "../../styles/SignIn.css";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import GoogleLoginButton from "./GoogleLogin";
-import GoogleLogout from "./GoogleLogout";
 
 function SignInForm() {
   const [form, setForm] = useState({
@@ -44,6 +43,7 @@ function SignInForm() {
 
       dispatch(logIn(form.UserName));
       localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("isGoogle", "false")
       localStorage.setItem("username", form.UserName);
       navigate("/");
     } catch (error) {
@@ -88,8 +88,6 @@ function SignInForm() {
         </button>
       </label>
 
-      <GoogleLoginButton />
-
       <input className="signin-submit" type="submit" value="Đăng nhập" />
 
       <div className="signup-link">
@@ -98,7 +96,6 @@ function SignInForm() {
           Đăng ký
         </a>
       </div>
-      <GoogleLogout />
     </form>
   );
 }
