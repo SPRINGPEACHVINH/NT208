@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../styles/TicketInfo.css";
-import { Modal } from "antd";
+import { Modal, message } from "antd";
 import { useNavigate } from "react-router-dom";
 
 const TicketInfo = ({ event, user }) => {
@@ -76,6 +76,11 @@ const TicketInfo = ({ event, user }) => {
   };
 
   const handleBuyTicket = async () => {
+    if (!user) {
+      message.error("User is not logged in");
+      return;
+    }
+
     const response = await fetch(
       "http://localhost:8881/api/ticket/payForTicket",
       {
@@ -91,16 +96,13 @@ const TicketInfo = ({ event, user }) => {
     );
 
     if (!response.ok) {
-      // Handle error
-      console.error("Failed to buy ticket");
+      message.error("Failed to buy ticket");
       return;
     }
 
     const data = await response.json();
-    // Set the ticket state variable to the ticket value returned from the server
     setTicket(data.ticket);
-    // Handle successful purchase
-    console.log("Ticket purchased successfully", data);
+    message.success("Ticket purchased successfully");
     setModalOpen(true);
   };
 

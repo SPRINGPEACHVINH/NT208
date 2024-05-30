@@ -39,11 +39,11 @@ function SignInForm() {
         throw new Error("Response was not ok");
       }
 
-      const data = await response.json();
+      //const data = await response.json();
 
       dispatch(logIn(form.UserName));
       localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("isGoogle", "false")
+      localStorage.setItem("isGoogle", "false");
       localStorage.setItem("username", form.UserName);
       navigate("/");
     } catch (error) {
