@@ -52,18 +52,18 @@ const ShowHeader = () => {
 
   const handleGoogleLogOut = () => {
     googleLogout()
-    localStorage.removeItem("isLoggedIn");
+    localStorage.setItem("isLoggedIn", "false");
     localStorage.removeItem("username");
-    localStorage.removeItem("isGoogle");
+    localStorage.setItem("isGoogle", "false");
     dispatch(logOut())
-    navigate("/"); // Navigate to the home page after logging out
+    navigate("/SignUp"); // Navigate to the home page after logging out
   };
 
   const handleNormalLogOut = () => {
     dispatch(logOut());
-    localStorage.removeItem("isLoggedIn");
+    localStorage.setItem("isLoggedIn", "false");
     localStorage.removeItem("username");
-    navigate("/"); // Navigate to the home page after logging out
+    navigate("/SignUp"); // Navigate to the home page after logging out
   };
   const handleSearch = (event) => {
     event.preventDefault();

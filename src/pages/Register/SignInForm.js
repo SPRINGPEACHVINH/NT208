@@ -90,6 +90,8 @@ function SignInForm() {
 
       <input className="signin-submit" type="submit" value="Đăng nhập" />
 
+      <GoogleLoginButton />
+      
       <div className="signup-link">
         Chưa có tài khoản?{" "}
         <a style={{ fontSize: 16 }} href="/SignUp">
