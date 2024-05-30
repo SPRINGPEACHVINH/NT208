@@ -111,14 +111,14 @@ const GetAllUser = async (req, res) => {
 
 const GetDetailsUser = async (req, res) => {
   try {
-    const userId = req.params.id;
-    if (!userId) {
+    const userName = req.params.UserName;
+    if (!userName) {
       return req.status(200).json({
         status: "ERROR",
-        message: "The userId is required",
+        message: "The UserName is required",
       });
     }
-    const response = await UserService.GetDetailsUser(userId);
+    const response = await UserService.GetDetailsUserByUserName(userName);
     return res.status(200).json(response);
   } catch (e) {
     return res.status(404).json({

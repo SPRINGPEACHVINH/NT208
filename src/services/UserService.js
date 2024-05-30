@@ -119,14 +119,21 @@ const GetAllUser = (id) => {
   });
 };
 
-const FindUserByUserName = (UserName) => {
+const GetDetailsUserByUserName = (UserName) => {
   return new Promise(async (resolve, reject) => {
     try {
       const user = await User.findOne({ UserName: UserName });
       if (!user) {
-        resolve(null);
+        resolve({
+          status: "ERROR",
+          message: "User does not exist",
+        });
       } else {
-        resolve(user);
+        resolve({
+          status: "OK",
+          message: "User fetched successfully",
+          data: user,
+        });
       }
     } catch (e) {
       reject(e);
@@ -143,6 +150,6 @@ module.exports = {
   LoginUser,
   DeleteUser,
   GetAllUser,
-  FindUserByUserName,
-  CheckPassword
+  GetDetailsUserByUserName,
+  CheckPassword,
 };
