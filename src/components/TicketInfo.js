@@ -83,13 +83,13 @@ const TicketInfo = ({ event, user }) => {
 
     const userName = localStorage.getItem("username");
     const userDetailsResponse = await fetch(
-      `http://localhost:8881/api/user/get-details/${userName}`
+      `https://ticketx88.azurewebsites.net/api/user/get-details/${userName}`
     );
     const res = await userDetailsResponse.json();
     const userDetails = res.data;
 
     const response = await fetch(
-      "ticketx88.azurewebsites.net/api/ticket/payForTicket",
+      "https://ticketx88.azurewebsites.net/api/ticket/payForTicket",
       {
         method: "POST",
         headers: {
