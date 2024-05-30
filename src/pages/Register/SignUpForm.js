@@ -35,8 +35,8 @@ function SignUpForm() {
 
     try {
       const response = await fetch("https://ticketx88.azurewebsites.net/api/user/sign-up", {
+        mode: "no-cors",
         method: "POST",
-        url: "https://ticketx88.azurewebsites.net/api/user/sign-up",
         headers: {
           "Content-Type": "application/json",
         },
