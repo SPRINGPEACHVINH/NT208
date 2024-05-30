@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import ShowDescription from "./ShowDescription";
 import TicketInfo from "../../components/TicketInfo";
+import LogoBTC from "../../components/LogoBTC";
 import ShowBanner from "../../components/Banner/ShowBanner";
 import "../../styles/Description.css";
 
@@ -56,6 +57,7 @@ const username = localStorage.getItem("username");
           <div className="contents">
             <ShowDescription event={event} />
             <TicketInfo event={event} user={user} />
+            <LogoBTC/>
           </div>
         </>
       )}

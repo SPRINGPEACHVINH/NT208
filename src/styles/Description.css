@@ -106,8 +106,7 @@
 }
 
 .layout .contents {
-  padding-left: 35px;
-  padding-right: 35px;
+  width: 70%;
   box-sizing: border-box;
   position: relative;
   margin-left: auto;
