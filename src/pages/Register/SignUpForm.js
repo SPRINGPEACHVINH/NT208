@@ -4,6 +4,9 @@ import "../../styles/SignUp.css";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import GoogleLoginButton from "./GoogleLogin";
 import { message } from "antd";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { logIn } from "../../redux/actions";
 
 function SignUpForm() {
   const [form, setForm] = useState({
@@ -15,6 +18,7 @@ function SignUpForm() {
   });
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -30,7 +34,8 @@ function SignUpForm() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8881/api/user/sign-up", {
+      const response = await fetch("https://ticketx88.azurewebsites.net/api/user/sign-up", {
+        mode: "no-cors",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -48,6 +53,22 @@ function SignUpForm() {
     } catch (error) {
       message.error(error.message);
     }
+
+    const signin = {
+      method: "POST",
+      url: "https://ticketx88.azurewebsites.net/api/user/sign-in",
+      headers: {},
+      body: JSON.stringify({
+        UserName: form.UserName,
+        Password: form.Password,
+      }),
+    };
+    await axios(signin);
+
+    dispatch(logIn(form.UserName));
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("username", form.UserName);
+    navigate("/");
   };
 
   return (
