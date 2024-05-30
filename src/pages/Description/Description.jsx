@@ -9,6 +9,9 @@ const ShowPage = () => {
   const location = useLocation();
   const EventId = location.pathname.split("/").pop();
   const [event, setEvent] = useState(null);
+  const [user, setUser] = useState(null);
+
+const username = localStorage.getItem("username");
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -23,8 +26,27 @@ const ShowPage = () => {
       setEvent(data.data);
     };
 
+    const fetchUser = async () => {
+      if (!username) {
+        setUser(null);
+        return;
+      }
+
+      const response = await fetch(
+        `http://localhost:8881/api/user/get-details/${username}`
+      );
+      if (!response.ok) {
+        console.error(`Failed to fetch user: ${response.statusText}`);
+        return;
+      }
+      console.log(response);
+      const data = await response.json();
+      setUser(data);
+    };
+
     fetchEvent();
-  }, [EventId]);
+    fetchUser();
+  }, [EventId, username]);
 
   return (
     <div className="layout">
@@ -33,7 +55,7 @@ const ShowPage = () => {
           <ShowBanner event={event} />
           <div className="contents">
             <ShowDescription event={event} />
-            <TicketInfo event={event} />
+            <TicketInfo event={event} user={user} />
           </div>
         </>
       )}
