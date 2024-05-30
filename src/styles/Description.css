@@ -1,34 +1,34 @@
 :root {
-    --gray-color: rgb(142, 142, 142);
+  --gray-color: rgb(142, 142, 142);
 }
 
-*{
-    -ms-overflow-style: none;
+* {
+  -ms-overflow-style: none;
 }
 ::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .font-arial {
-    font-family: arial, helvetica, sans-serif;
+  font-family: arial, helvetica, sans-serif;
 }
 
 .title {
-    color: whitesmoke;
-    padding-left: 20px;
-    padding-top: 10px;
+  color: whitesmoke;
+  padding-left: 20px;
+  padding-top: 10px;
 }
 
 .details {
-    color: white;
-    font-size: 14px;
-    position: relative;
-    margin-top: 15px;
+  color: white;
+  font-size: 14px;
+  position: relative;
+  margin-top: 15px;
 }
 
 .details.font-arial {
-    text-align: center;
-    font-size: 16px;
+  text-align: center;
+  font-size: 16px;
 }
 
 #desc-pad {
@@ -66,18 +66,18 @@
 }
 
 .arrow {
-    border: solid var(--gray-color);
-    background-color: transparent;
-    border-width: 0 3px 3px 0;
-    padding: 5px;
+  border: solid var(--gray-color);
+  background-color: transparent;
+  border-width: 0 3px 3px 0;
+  padding: 5px;
 }
 
 .down {
-    transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .up {
-    transform: rotate(-135deg);
+  transform: rotate(-135deg);
 }
 
 #white-pad {
@@ -94,24 +94,24 @@
 }
 
 .layout {
-    display: flex;
-    margin: 0px;
-    font-family: Inter, sans-serif;
-    font-weight: normal;
-    color: rgb(42, 45, 52);
-    min-height: 100%;
-    font-size: 14px;
-    overflow: auto;
-    flex-direction: column;
+  display: flex;
+  margin: 0px;
+  font-family: Inter, sans-serif;
+  font-weight: normal;
+  color: rgb(42, 45, 52);
+  min-height: 100%;
+  font-size: 14px;
+  overflow: auto;
+  flex-direction: column;
 }
 
 .layout .contents {
-    padding-left: 35px;
-    padding-right: 35px;
-    box-sizing: border-box;
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
+  padding-left: 35px;
+  padding-right: 35px;
+  box-sizing: border-box;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .loading-container {

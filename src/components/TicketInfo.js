@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import "../styles/TicketInfo.css";
+import { Modal } from "antd";
+import { useNavigate } from "react-router-dom";
 
-const TicketInfo = ({ event }) => {
+const TicketInfo = ({ event, user }) => {
   const basePrice = event.TicketPrice;
   const [selectedPrice, setSelectedPrice] = useState(null);
   const [selectedDetail, setSelectedDetail] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [ticket, setTicket] = useState(null);
+
+  const navigate = useNavigate();
 
   const calculatePrice = (percentage) => {
     const price = basePrice * (1 + percentage / 100);
@@ -69,6 +75,35 @@ const TicketInfo = ({ event }) => {
     }
   };
 
+  const handleBuyTicket = async () => {
+    const response = await fetch(
+      "http://localhost:8881/api/ticket/payForTicket",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          EventId: event.EventId,
+          UserId: user.Email,
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      // Handle error
+      console.error("Failed to buy ticket");
+      return;
+    }
+
+    const data = await response.json();
+    // Set the ticket state variable to the ticket value returned from the server
+    setTicket(data.ticket);
+    // Handle successful purchase
+    console.log("Ticket purchased successfully", data);
+    setModalOpen(true);
+  };
+
   return (
     <div className="ticket-info-container">
       <div className="ticket-info">
@@ -81,7 +116,24 @@ const TicketInfo = ({ event }) => {
           }}
         >
           {formattedEventTime}
-          <button className="buy-button">Mua vé ngay</button>
+          <button
+            className="buy-button"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleBuyTicket();
+            }}
+          >
+            Mua vé ngay
+          </button>
+          <button
+            className="code-input-button"
+            onClick={(e) => {
+              e.stopPropagation();
+              navigate("/code-input");
+            }}
+          >
+            Đã có vé?
+          </button>
         </div>
         <div id="main-details" className="ticket-details">
           <div
@@ -164,6 +216,14 @@ const TicketInfo = ({ event }) => {
           </div>
         </div>
       </div>
+      <Modal
+        title="Bạn đã mua vé thành công!"
+        centered
+        visible={modalOpen}
+        onOk={() => setModalOpen(false)}
+      >
+        <p>Mã vé là: {ticket}</p>
+      </Modal>
     </div>
   );
 };

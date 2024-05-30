@@ -51,10 +51,11 @@ const ShowHeader = () => {
   };
 
   const handleGoogleLogOut = () => {
-    googleLogout();
+    googleLogout()
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("username");
     localStorage.removeItem("isGoogle");
+    dispatch(logOut())
     navigate("/"); // Navigate to the home page after logging out
   };
 
