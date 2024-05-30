@@ -5,6 +5,8 @@ import { logIn, logOut } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import "../../styles/Header.css";
 import moment from "moment";
+import { Avatar } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 import { googleLogout } from "@react-oauth/google";
 
 const ShowHeader = () => {
@@ -221,7 +223,7 @@ const ShowHeader = () => {
                     className="user-button"
                     onClick={() => setDropdownVisible(!dropdownVisible)}
                   >
-                    {username}
+                    <Avatar size="small" icon={<UserOutlined />} />  {username}
                   </button>
                   {dropdownVisible && (
                     <div
@@ -235,7 +237,7 @@ const ShowHeader = () => {
                 </div>
               ) : (
                 <button className="auth-button">
-                  <Link to="/SignUp">Đăng ký | Đăng nhập</Link>
+                  <Link to="/SignIn">Đăng nhập | Đăng ký</Link>
                 </button>
               )}
             </div>
@@ -346,7 +348,7 @@ const ShowHeader = () => {
                   </div>
                 ) : (
                   <button className="auth-button">
-                    <Link to="/SignUp">Đăng nhập</Link>
+                    <Link to="/SignIn">Đăng nhập</Link>
                   </button>
                 )}
               </div>

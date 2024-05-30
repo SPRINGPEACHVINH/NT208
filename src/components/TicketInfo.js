@@ -81,6 +81,13 @@ const TicketInfo = ({ event, user }) => {
       return;
     }
 
+    const userName = localStorage.getItem("username");
+    const userDetailsResponse = await fetch(
+      `http://localhost:8881/api/user/get-details/${userName}`
+    );
+    const res = await userDetailsResponse.json();
+    const userDetails = res.data;
+
     const response = await fetch(
       "ticketx88.azurewebsites.net/api/ticket/payForTicket",
       {
@@ -90,7 +97,7 @@ const TicketInfo = ({ event, user }) => {
         },
         body: JSON.stringify({
           EventId: event.EventId,
-          UserId: user.Email,
+          UserId: userDetails.Email,
         }),
       }
     );
@@ -102,7 +109,7 @@ const TicketInfo = ({ event, user }) => {
 
     const data = await response.json();
     setTicket(data.ticket);
-    message.success("Ticket purchased successfully");
+    message.success("Ticket purchased successfully!");
     setModalOpen(true);
   };
 
@@ -222,7 +229,15 @@ const TicketInfo = ({ event, user }) => {
         title="Bạn đã mua vé thành công!"
         centered
         visible={modalOpen}
-        onOk={() => setModalOpen(false)}
+        onOk={async () => {
+          setModalOpen(false);
+          try {
+            await navigator.clipboard.writeText(ticket);
+            message.success("Ticket copied to clipboard");
+          } catch (err) {
+            console.error("Failed to copy ticket: ", err);
+          }
+        }}
       >
         <p>Mã vé là: {ticket}</p>
       </Modal>

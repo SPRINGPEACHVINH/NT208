@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/SignUp.css";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import GoogleLoginButton from "./GoogleLogin";
+import { message } from "antd";
+import axios from "axios";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../redux/actions";
-import axios from "axios";
 
 function SignUpForm() {
   const [form, setForm] = useState({
@@ -16,7 +17,7 @@ function SignUpForm() {
     PhoneNumber: "",
   });
 
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -31,29 +32,26 @@ function SignUpForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (form.Password !== form.confirmPassword) {
-      return;
-    }
 
     try {
-      const response =  {
+      const response = await fetch("http://localhost:8881/api/user/sign-up", {
         method: "POST",
         url: "ticketx88.azurewebsites.net/api/user/sign-up",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(form),
-      };
-      await axios(response);
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
+      });
 
       const data = await response.json();
-      console.log(data);
+
+      if (data.status === "ERROR") {
+        throw new Error(data.message);
+      }
+
+      navigate("/SignIn");
     } catch (error) {
-      console.error("Error:", error);
+      message.error(error.message);
     }
 
     const signin = {
