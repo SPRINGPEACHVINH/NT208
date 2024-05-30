@@ -477,6 +477,7 @@ function Form({ isMobile, addEvent }) {
           EventCategory: eventType,
           TicketPrice: eventTicketPrice,
           Picture_event: coverImageBase64,
+          VideoPath: "chuaco",
           Btc: "60d6c47e53e68c761c3a2a19",
         }),
       });
