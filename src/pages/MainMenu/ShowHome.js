@@ -75,6 +75,19 @@ const ShowHome = () => {
   };
 
   useEffect(() => {
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => {
+        window.removeEventListener("resize", checkMobile);
+    };
+  });
+
+  const [isMobile, setIsMobile] = useState(false);
+  const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 992);
+  };
+
+  useEffect(() => {
     if (!isLoading) {
       const prevButton = document.querySelector(".prev");
       const nextButton = document.querySelector(".next");
@@ -120,35 +133,63 @@ const ShowHome = () => {
 
   return (
     <div>
-      <div className="slides">
-        {slideEvents.map((event, index) => (
-          <div
-            className={`slide ${index === 0 ? "active" : ""}`}
-            data-slide={index}
-            key={event.EventName}
-          >
-            <img
-              className="slide-img"
-              src={event.Picture_event}
-              alt={event.EventName}
-              loading="lazy" // Lazy loading images
-            />
-          </div>
-        ))}
+      {!isMobile && (
+        <div className="desktop slides" style={{ display: "flex" }}>      
+            {slideEvents.map((event, index) => (
+              <div
+                className={`slide ${index === 0 ? "active" : ""}`}
+                data-slide={index}
+                key={event.EventName}
+              >
+                <img
+                  className="slide-img"
+                  src={event.Picture_event}
+                  alt={event.EventName}
+                  loading="lazy" // Lazy loading images
+                />
+              </div>
+            ))}
 
-        <a className="prev">&#10094;</a>
-        <a className="next">&#10095;</a>
+            <a className="prev">&#10094;</a>
+            <a className="next">&#10095;</a>
 
-        <div className="dot-container">
-          {slideEvents.map((_, index) => (
-            <span
-              className={`dot ${index === 0 ? "active" : ""}`}
-              key={index}
-            ></span>
-          ))}
+            <div className="dot-container">
+              {slideEvents.map((_, index) => (
+                <span
+                  className={`dot ${index === 0 ? "active" : ""}`}
+                  key={index}
+                ></span>
+              ))}
+            </div>
         </div>
-      </div>
+      )}
+      {isMobile && (
+        <div className="mobile slides" style={{ display: "flex" }}>  
+          {slideEvents.map((event, index) => (
+            <div
+              className={`slide ${index === 0 ? "active" : ""}`}
+              data-slide={index}
+              key={event.EventName}
+            >
+              <img
+                className="slide-img"
+                src={event.Picture_event}
+                alt={event.EventName}
+                loading="lazy" // Lazy loading images
+              />
+            </div>
+          ))}
 
+          <div className="dot-container">
+            {slideEvents.map((_, index) => (
+              <span
+                className={`dot ${index === 0 ? "active" : ""}`}
+                key={index}
+              ></span>
+            ))}
+          </div>
+        </div>
+      )}
       {Object.entries(groupedEvents).map(([category, events]) => (
         <div key={category}>
           <h1 className="category-header">{category}</h1>
