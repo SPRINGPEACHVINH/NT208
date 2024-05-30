@@ -82,7 +82,7 @@ const TicketInfo = ({ event, user }) => {
     }
 
     const response = await fetch(
-      "http://localhost:8881/api/ticket/payForTicket",
+      "ticketx88.azurewebsites.net/api/ticket/payForTicket",
       {
         method: "POST",
         headers: {

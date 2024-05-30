@@ -95,7 +95,7 @@ const ShowHeader = () => {
 
   const fetchResults = async () => {
     const response = await fetch(
-      `http://localhost:8881/api/event/search?q=${encodeURIComponent(
+      `ticketx88.azurewebsites.net/api/event/search?q=${encodeURIComponent(
         searchTerm
       )}`
     );

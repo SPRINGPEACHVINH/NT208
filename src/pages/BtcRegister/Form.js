@@ -432,7 +432,7 @@ function Form({ isMobile, addEvent }) {
   const handleSave = async () => {
     try {
       const lastEventResponse = await fetch(
-        "http://localhost:8881/api/event/last"
+        "ticketx88.azurewebsites.net/api/event/last"
       );
       if (!lastEventResponse.ok) {
         throw new Error("Failed to fetch last event ID.");
@@ -463,7 +463,7 @@ function Form({ isMobile, addEvent }) {
         eventTicketPrice,
       } = eventData;
 
-      const response = await fetch("http://localhost:8881/api/event/add", {
+      const response = await fetch("ticketx88.azurewebsites.net/api/event/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

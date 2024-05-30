@@ -33,8 +33,7 @@ function Google_Login() {
 
   const onSuccess = async (response) => {
     try {
-
-
+      console.log(response);
       localStorage.setItem("isLoggedIn", "true");
       localStorage.setItem("isGoogle", "true");
       localStorage.setItem("username", response.name);

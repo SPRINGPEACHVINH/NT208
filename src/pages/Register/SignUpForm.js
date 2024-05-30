@@ -38,7 +38,7 @@ function SignUpForm() {
     try {
       const response =  {
         method: "POST",
-        url: "http://localhost:8881/api/user/sign-up",
+        url: "ticketx88.azurewebsites.net/api/user/sign-up",
         headers: {
           "Content-Type": "application/json",
         },
@@ -58,7 +58,7 @@ function SignUpForm() {
 
     const signin = {
       method: "POST",
-      url: "http://localhost:8881/api/user/sign-in",
+      url: "ticketx88.azurewebsites.net/api/user/sign-in",
       headers: {},
       body: JSON.stringify({
         UserName: form.UserName,

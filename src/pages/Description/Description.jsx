@@ -16,7 +16,7 @@ const username = localStorage.getItem("username");
   useEffect(() => {
     const fetchEvent = async () => {
       const response = await fetch(
-        `http://localhost:8881/api/event/${EventId}`
+        `ticketx88.azurewebsites.net/api/event/${EventId}`
       );
       if (!response.ok) {
         console.error(`Failed to fetch event: ${response.statusText}`);
@@ -33,7 +33,7 @@ const username = localStorage.getItem("username");
       }
 
       const response = await fetch(
-        `http://localhost:8881/api/user/get-details/${username}`
+        `ticketx88.azurewebsites.net/api/user/get-details/${username}`
       );
       if (!response.ok) {
         console.error(`Failed to fetch user: ${response.statusText}`);
