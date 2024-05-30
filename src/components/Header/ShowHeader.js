@@ -58,7 +58,7 @@ const ShowHeader = () => {
     localStorage.removeItem("username");
     localStorage.setItem("isGoogle", "false");
     dispatch(logOut())
-    navigate("/SignUp"); // Navigate to the home page after logging out
+    navigate("/SignIn"); // Navigate to the home page after logging out
   };
 
   const handleNormalLogOut = () => {
