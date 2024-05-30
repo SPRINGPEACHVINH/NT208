@@ -1,0 +1,28 @@
+.register-banner {
+    background-color: orangered;
+    max-width: 100vw;
+    margin: auto;
+    position: relative;
+    box-sizing: border-box;
+    line-height: 1.15;
+    text-size-adjust: 100%;
+    height: 15vh;
+    margin-bottom: 15px;
+}
+
+.span-text{
+    position: absolute;
+    top: 50%;
+    left: 5vw;
+    transform: translateY(-50%);
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    color: white;
+}
+
+.logo-link {
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 40px;
+}

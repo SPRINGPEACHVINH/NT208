@@ -1,0 +1,80 @@
+.ticket-info-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    min-width: 600px;
+}
+
+.ticket-info {
+    background-color: #333;
+    color: white;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: max-height 0.3s ease-out;
+}
+
+.ticket-header {
+    background-color: #222;
+    padding: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ticket-details {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease-out;
+}
+
+.detail {
+    background-color: #444;
+    padding: 15px;
+    border-bottom: 1px solid #555;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.detail span {
+    color: #2ecc71;
+    font-weight: bold;
+}
+
+.detail.selected {
+    background-color: #3b5e4a;
+}
+
+.sub-details {
+    background-color: #555;
+    padding: 10px 15px;
+    border-bottom: 1px solid #666;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+}
+
+.buy-button,
+.code-input-button {
+    background-color: orangered;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 8px;
+}
+
+.buy-button:hover,
+.code-input-button:hover {
+    background-color: rgb(69, 69, 69);
+}
