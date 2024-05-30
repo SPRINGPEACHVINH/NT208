@@ -16,7 +16,7 @@ const ShowHome = () => {
     const fetchEvents = async () => {
       try {
         const response = await fetch(
-          "https://https://ticketx88.azurewebsites.net/api/event/all"
+          "https://ticketx88.azurewebsites.net/api/event/all"
         );
         const { data } = await response.json();
         setEvents(data);
