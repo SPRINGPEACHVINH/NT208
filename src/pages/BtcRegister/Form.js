@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 const { TextArea } = Input;
 const { Dragger } = Upload;
 
-function Form({ isMobile, addEvent }) {
+function Form({ username, isMobile }) {
   // Upload logo btc
   const [fileListLogoBTC, setFileListLogoBTC] = useState([]);
   const [uploadErrorLogoBTC, setUploadErrorLogoBTC] = useState(false);
@@ -431,6 +431,16 @@ function Form({ isMobile, addEvent }) {
 
   const handleSave = async () => {
     try {
+      const userResponse = await fetch(
+        "https://ticketx88.azurewebsites.net/api/user/get-details/" + username
+      );
+
+      if (!userResponse.ok) {
+        throw new Error("Failed to fetch user details.");
+      }
+      const userData = await userResponse.json();
+      const userId = userData.data._id;
+
       // Save BTC
       const {
         enterpriseName,
@@ -442,23 +452,26 @@ function Form({ isMobile, addEvent }) {
         btcInformation,
       } = formData;
 
-      const btcResponse = await fetch("http://localhost:8881/api/btc/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          BtcId: enterpriseNumberBusiness,
-          BtcName: btcName,
-          BtcInfo: btcInformation,
-          EnterpriseName: enterpriseName,
-          Email: enterpriseEmail,
-          PhoneNumber: enterprisePhone,
-          Address: enterpriseAddress,
-          Logo_btc: fileListLogoBTC[0].base64,
-          User: "admin",
-        }),
-      });
+      const btcResponse = await fetch(
+        "http://ticketx88.azurewebsites.net/api/btc/add",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            BtcId: enterpriseNumberBusiness,
+            BtcName: btcName,
+            BtcInfo: btcInformation,
+            EnterpriseName: enterpriseName,
+            Email: enterpriseEmail,
+            PhoneNumber: enterprisePhone,
+            BtcAddress: enterpriseAddress,
+            Logo_btc: fileListLogoBTC[0].base64,
+            User: userId,
+          }),
+        }
+      );
 
       if (!btcResponse.ok) {
         const errorData = await btcResponse.json();
@@ -468,7 +481,7 @@ function Form({ isMobile, addEvent }) {
         );
       }
       const btcData = await btcResponse.json();
-      const btcId = btcData.data.BtcId;
+      const btcId = btcData.data._id;
       console.log(btcData);
 
       // Save event
@@ -490,16 +503,6 @@ function Form({ isMobile, addEvent }) {
           newEventId = "EV" + (lastNumber + 1);
         }
       }
-
-      // const coverEventImageBase64 =
-      //   fileListCoverEvent.length > 0
-      //     ? await imageToBase64(fileListCoverEvent[0].originFileObj)
-      //     : null;
-
-      // const logoBtcImageBase64 =
-      //   fileListLogoBTC.length > 0
-      //     ? await imageToBase64(fileListLogoBTC[0].originFileObj)
-      //     : null;
 
       const {
         eventName,
@@ -532,19 +535,17 @@ function Form({ isMobile, addEvent }) {
       );
 
       if (!eventResponse.ok) {
-        throw new Error("Failed to save event data.");
+        const errorData = await eventResponse.json();
+        console.error("Error details:", errorData);
+        throw new Error(
+          `Failed to save event: ${errorData.message || "Unknown error"}`
+        );
       }
       const data = await eventResponse.json();
       console.log(data);
 
       // Save ticket
       setModalVisible(true);
-      const formattedEventData = {
-        ...eventData,
-        coverImage: fileListCoverEvent[0].base64,
-        eventDateTime: eventData.eventDateTime.format("DD-MM-YYYY HH:mm"),
-      };
-      addEvent(formattedEventData);
     } catch (error) {
       console.error("Failed to save event:", error);
     }
