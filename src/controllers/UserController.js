@@ -1,12 +1,15 @@
 const UserService = require("../services/UserService");
 const jwtservice = require("../services/JwtService");
+const User = require("../models/Users");
 
 const CreateUser = async (req, res) => {
   try {
     const { UserName, Email, Password, confirmPassword, PhoneNumber } =
       req.body;
-    const reg = /^[a-zA-Z0-9._%+-]+@(gmail\.com|gm\.uit\.edu\.vn)$/;
-    const isCheckEmail = reg.test(Email);
+    const regEmail = /^[a-zA-Z0-9._%+-]+@(gmail\.com|gm\.uit\.edu\.vn)$/;
+    const isCheckEmail = regEmail.test(Email);
+    const regPhone = /^\d{10}$/;
+    const isCheckPhone = regPhone.test(PhoneNumber);
     if (!UserName || !Email || !Password || !confirmPassword || !PhoneNumber) {
       return res.status(200).json({
         status: "ERROR",
@@ -22,9 +25,35 @@ const CreateUser = async (req, res) => {
         status: "ERROR",
         message: "Email is not valid",
       });
+    } else if (!isCheckPhone) {
+      return res.status(200).json({
+        status: "ERROR",
+        message: "Phone number is not valid",
+      });
     }
-    const response = await UserService.CreateUser(req.body);
-    return res.status(200).json(response);
+
+    const checkEmail = await User.findOne({ Email });
+    if (checkEmail !== null) {
+      return res.status(200).json({
+        status: "ERROR",
+        message: "Email already exists",
+      });
+    }
+
+    const checkPhoneNumber = await User.findOne({ PhoneNumber });
+    if (checkPhoneNumber !== null) {
+      return res.status(200).json({
+        status: "ERROR",
+        message: "PhoneNumber already exists",
+      });
+    }
+
+    const newUser = await UserService.CreateUser(req.body);
+    return res.status(200).json({
+      status: "OK",
+      message: "User created successfully",
+      data: newUser,
+    });
   } catch (e) {
     return res.status(404).json({
       error: e.message,
@@ -41,7 +70,7 @@ const LoginUser = async (req, res) => {
         message: "The input is required",
       });
     }
-    const user = await UserService.FindUserByUserName(UserName);
+    const user = await UserService.FindUserByEmail(Email);
     if (!user) {
       return res.status(200).json({
         status: "ERROR",
@@ -60,6 +89,37 @@ const LoginUser = async (req, res) => {
     }
     const response = await UserService.LoginUser(req.body);
     return res.status(200).json(response);
+  } catch (e) {
+    return res.status(404).json({
+      error: e.message,
+    });
+  }
+};
+
+const GoogleSignIn = async (req, res) => {
+  try {
+    const { UserName, Email, Password } = req.body;
+    if (!UserName || !Email || !Password) {
+      return res.status(200).json({
+        status: "ERROR",
+        message: "The input is required",
+      });
+    }
+
+    const isCheckEmail = await UserService.FindUserByEmail(Email);
+    if (isCheckEmail !== null) {
+      return res.status(200).json({
+        status: "ERROR",
+        message: "Email already exist",
+      });
+    }
+
+    const newUser = await UserService.GoogleSignIn(req.body);
+    return res.status(200).json({
+      status: "OK",
+      message: "User created successfully",
+      data: newUser,
+    });
   } catch (e) {
     return res.status(404).json({
       error: e.message,
@@ -129,15 +189,15 @@ const GetDetailsUser = async (req, res) => {
 
 const RefreshToken = async (req, res) => {
   try {
-    const token = req.headers.token.split(' ')[1]
+    const token = req.headers.token.split(" ")[1];
     if (!token) {
       return req.status(200).json({
         status: "ERROR",
         message: "The token is required",
       });
     }
-    const response = await jwtservice.refreshToken(token)
-    return res.status(200).json(response)
+    const response = await jwtservice.refreshToken(token);
+    return res.status(200).json(response);
   } catch (e) {
     return res.status(404).json({
       error: e.message,
@@ -152,5 +212,6 @@ module.exports = {
   DeleteUser,
   GetAllUser,
   GetDetailsUser,
-  RefreshToken
+  RefreshToken,
+  GoogleSignIn,
 };

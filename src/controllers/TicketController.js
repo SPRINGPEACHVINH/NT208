@@ -56,8 +56,26 @@ function generateTicketCode() {
   return result;
 }
 
+const useTicket = async (req, res) => {
+  try {
+    const { TicketId, UserId } = req.body;
+    const ticketPath = await TicketService.useTicket(TicketId, UserId);
+    return res.status(200).json({
+      status: "OK",
+      message: "Ticket used successfully",
+      TicketPath: ticketPath,
+    });
+  } catch (e) {
+    return res.status(200).json({
+      status: "ERROR",
+      message: e.message,
+    });
+  }
+};
+
 module.exports = {
   payForTicket,
   generateTicketCode,
   addTicketsToEvent,
+  useTicket,
 };

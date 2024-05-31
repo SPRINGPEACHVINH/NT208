@@ -3,40 +3,32 @@ const bcrypt = require("bcrypt");
 const genneralToken = require("./JwtService");
 require("dotenv").config();
 
-const CreateUser = (newUser) => {
-  return new Promise(async (resolve, reject) => {
-    const { UserName, Email, Password, confirmPassword, PhoneNumber } = newUser;
-    try {
-      const checkUser = await User.findOne({
-        Email,
-      });
-      if (checkUser !== null) {
-        resolve({
-          status: "ERROR",
-          message: "Email already exists",
-        });
-      }
-      const bcrypt_salt = `${process.env.BCRYPT_SALT}`;
-      const hash = bcrypt.hashSync(Password, 10);
+const CreateUser = async (newUser) => {
+  const { UserName, Email, Password, PhoneNumber } = newUser;
+  const bcrypt_salt = `${process.env.BCRYPT_SALT}`;
+  const hash = bcrypt.hashSync(Password, 10);
 
-      const createdUser = await User.create({
-        UserName,
-        Email,
-        Password: hash,
-        confirmPassword: hash,
-        PhoneNumber,
-      });
-      if (createdUser) {
-        resolve({
-          status: "OK",
-          message: "User created successfully",
-          data: createdUser,
-        });
-      }
-    } catch (e) {
-      reject(e);
-    }
+  const createdUser = await User.create({
+    UserName,
+    Email,
+    Password: hash,
+    PhoneNumber,
   });
+
+  return createdUser;
+};
+
+const GoogleSignIn = async (newUser) => {
+  const { UserName, Email, Password } = newUser;
+  const hash = bcrypt.hashSync(Password, 10);
+
+  const createdUser = await User.create({
+    UserName,
+    Email,
+    Password: hash,
+    PhoneNumber: "1234"
+  });
+  return createdUser;
 };
 
 const LoginUser = (userLogin) => {
@@ -157,6 +149,21 @@ const FindUserByUserName = (UserName) => {
   });
 };
 
+const FindUserByEmail = (Email) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const user = await User.findOne({ Email: Email });
+      if (!user) {
+        resolve(null);
+      } else {
+        resolve(user);
+      }
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
 const CheckPassword = (inputPassword, userPassword) => {
   return bcrypt.compareSync(inputPassword, userPassword);
 };
@@ -168,5 +175,7 @@ module.exports = {
   GetAllUser,
   GetDetailsUserByUserName,
   FindUserByUserName,
+  FindUserByEmail,
   CheckPassword,
+  GoogleSignIn
 };
