@@ -29,7 +29,7 @@ function SignInForm() {
     e.preventDefault();
     try {
       const response = await fetch("https://ticketx88.azurewebsites.net/api/user/sign-in", {
-      
+        mode: "no-cors",
         method: "POST",
         headers: {
           "Content-Type": "application/json",

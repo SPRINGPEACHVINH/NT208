@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* body {
   margin: 0px;
   font-family: Inter, sans-serif;
@@ -10,6 +11,20 @@
   line-height: 1.15;
   text-size-adjust: 100%;
 } */
+=======
+.logo {
+    margin: 0px;
+    font-family: Inter, sans-serif;
+    font-weight: normal;
+    color: rgb(42, 45, 52);
+    min-height: 100%;
+    font-size: 14px;
+    overflow: auto;
+    scroll-behavior: smooth;
+    line-height: 1.15;
+    text-size-adjust: 100%;
+}
+>>>>>>> dff95d50d0c920c4f75ed3d5533ecb8c6c2ea4b2
 
 .organizer {
   border-radius: 12px;
