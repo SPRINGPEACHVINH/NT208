@@ -5,17 +5,17 @@ const bcrypt = require("bcrypt");
 
 const sendMail = async (req, res) => {
   const { Email, Subject, Content } = req.body;
+  if(!Email || !Subject || !Content){
+    return res.status(200).json({
+      status: "ERROR",
+      message: "The input is required",
+    });
+  }
   const findEmail = await UserService.FindUserByEmail(Email);
   if (findEmail === null) {
     return res.status(200).json({
       status: "ERROR",
       message: "User does not exist",
-    });
-  }
-  if (Subject === "" || Content === "") {
-    return res.status(200).json({
-      status: "ERROR",
-      message: "The input is required",
     });
   }
   const sendMail = await MailService.sendMail(Email, Subject, Content);
