@@ -127,6 +127,8 @@ const GoogleSignIn = async (req, res) => {
   }
 };
 
+const ForgotPassword = async (req, res) => {};
+
 const UpdateUser = async (req, res) => {
   try {
     const userId = req.query.id;
@@ -237,4 +239,5 @@ module.exports = {
   RefreshToken,
   GoogleSignIn,
   GetEvents,
+  ForgotPassword,
 };
