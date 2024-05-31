@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const eventSchema = new mongoose.Schema(
   {
-    EventId: { type: String, required: true},
+    EventId: { type: String, required: true },
     EventName: { type: String, required: true },
     EventTime: { type: Date, required: true },
     EventInfo: { type: String, required: false },
@@ -10,7 +10,6 @@ const eventSchema = new mongoose.Schema(
     VideoPath: { type: String, required: true },
     TicketPrice: { type: Number, required: true },
     Picture_event: { type: String, required: true },
-    Logo_event: { type: String, required: false },
     Btc: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Btc",
