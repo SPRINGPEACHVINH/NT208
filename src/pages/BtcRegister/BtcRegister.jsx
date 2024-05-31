@@ -7,10 +7,11 @@ import "../../styles/BtcRegister.css";
 
 const BtcRegister = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const checkMobile = () => {
-    setIsMobile(window.innerWidth <= 768);
-  };
+
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => {
@@ -52,51 +53,53 @@ const BtcRegister = () => {
   }, []);
 
   return (
-    <div className="row">
+    <div className="container-form">
       <HeaderBtcRegister
         handleSidebar={handleSidebar}
         isSidebarOpen={isSidebarOpen}
       />
-      <div className="row-1">
-        {!isLoading && (
-          <>
-            <div
-              className={`col-md-3-${
-                isMobile
-                  ? isSidebarOpen
-                    ? "mobile"
-                    : "hidden-mobile"
-                  : isSidebarOpen
-                  ? "desktop"
-                  : "hidden-desktop"
-              }`}
-            >
-              <Sidebar
-                isMobile={isMobile}
-                isSidebarOpen={isSidebarOpen}
-                activeTab={activeTab}
-                handleTabChange={handleTabChange}
-              />
-            </div>
-            <div
-              className={`col-md-9-${
-                isMobile
-                  ? isSidebarOpen
-                    ? "hidden-mobile"
-                    : "mobile"
-                  : isSidebarOpen
-                  ? "desktop"
-                  : "hidden-desktop"
-              }`}
-            >
-              {activeTab === "create-event" ? (
-                <Form isMobile={isMobile} addEvent={addEvent} />
-              ) : (
-                <MyEvents isMobile={isMobile} events={events} />
-              )}
-            </div>
-          </>
-        )}
+      <div className="row">
+        <div className="row-1">
+          {!isLoading && (
+            <>
+              <div
+                className={`col-md-3-${
+                  isMobile
+                    ? isSidebarOpen
+                      ? "mobile"
+                      : "hidden-mobile"
+                    : isSidebarOpen
+                    ? "desktop"
+                    : "hidden-desktop"
+                }`}
+              >
+                <Sidebar
+                  isMobile={isMobile}
+                  isSidebarOpen={isSidebarOpen}
+                  activeTab={activeTab}
+                  handleTabChange={handleTabChange}
+                />
+              </div>
+              <div
+                className={`col-md-9-${
+                  isMobile
+                    ? isSidebarOpen
+                      ? "hidden-mobile"
+                      : "mobile"
+                    : isSidebarOpen
+                    ? "desktop"
+                    : "hidden-desktop"
+                }`}
+              >
+                {activeTab === "create-event" ? (
+                  <Form isMobile={isMobile} addEvent={addEvent} />
+                ) : (
+                  <MyEvents isMobile={isMobile} events={events} />
+                )}
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import "../../styles/HeaderBtcRegister.css";
 import React from "react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+
 const SquareMenu = ({ handleSidebar, isSidebarOpen }) => {
   const [Icon, setIcon] = useState(null);
   React.useEffect(() => {
@@ -25,13 +27,16 @@ const SquareMenu = ({ handleSidebar, isSidebarOpen }) => {
   );
 };
 const HeaderBtcRegister = ({ handleSidebar, isSidebarOpen }) => {
+  const username = useSelector((state) => state.user.username);
+
   return (
-    <header className="header-btc-register">
+    <div className="header-btc-register">
       <SquareMenu handleSidebar={handleSidebar} isSidebarOpen={isSidebarOpen} />
       <Link className="title-logo" to="/">
         TicketX88
       </Link>
-    </header>
+      <div className="user-name">{username}</div>
+    </div>
   );
 };
 

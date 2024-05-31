@@ -431,6 +431,47 @@ function Form({ isMobile, addEvent }) {
 
   const handleSave = async () => {
     try {
+      // Save BTC
+      const {
+        enterpriseName,
+        enterpriseNumberBusiness,
+        enterprisePhone,
+        enterpriseEmail,
+        enterpriseAddress,
+        btcName,
+        btcInformation,
+      } = formData;
+
+      const btcResponse = await fetch("http://localhost:8881/api/btc/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          BtcId: enterpriseNumberBusiness,
+          BtcName: btcName,
+          BtcInfo: btcInformation,
+          EnterpriseName: enterpriseName,
+          Email: enterpriseEmail,
+          PhoneNumber: enterprisePhone,
+          Address: enterpriseAddress,
+          Logo_btc: fileListLogoBTC[0].base64,
+          User: "admin",
+        }),
+      });
+
+      if (!btcResponse.ok) {
+        const errorData = await btcResponse.json();
+        console.error("Error details:", errorData);
+        throw new Error(
+          `Failed to save BTC: ${errorData.message || "Unknown error"}`
+        );
+      }
+      const btcData = await btcResponse.json();
+      const btcId = btcData.data.BtcId;
+      console.log(btcData);
+
+      // Save event
       const lastEventResponse = await fetch(
         "http://localhost:8881/api/event/last"
       );
@@ -450,10 +491,15 @@ function Form({ isMobile, addEvent }) {
         }
       }
 
-      const coverImageBase64 =
-        fileListCoverEvent.length > 0
-          ? await imageToBase64(fileListCoverEvent[0].originFileObj)
-          : null;
+      // const coverEventImageBase64 =
+      //   fileListCoverEvent.length > 0
+      //     ? await imageToBase64(fileListCoverEvent[0].originFileObj)
+      //     : null;
+
+      // const logoBtcImageBase64 =
+      //   fileListLogoBTC.length > 0
+      //     ? await imageToBase64(fileListLogoBTC[0].originFileObj)
+      //     : null;
 
       const {
         eventName,
@@ -463,7 +509,7 @@ function Form({ isMobile, addEvent }) {
         eventTicketPrice,
       } = eventData;
 
-      const response = await fetch("http://localhost:8881/api/event/add", {
+      const eventResponse = await fetch("http://localhost:8881/api/event/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -476,21 +522,23 @@ function Form({ isMobile, addEvent }) {
           EventLocation: "TicketX88",
           EventCategory: eventType,
           TicketPrice: eventTicketPrice,
-          Picture_event: coverImageBase64,
+          Picture_event: fileListCoverEvent[0].base64,
           VideoPath: "chuaco",
-          Btc: "60d6c47e53e68c761c3a2a19",
+          Btc: btcId,
         }),
       });
-      const data = await response.json();
-      console.log(data);
-      if (!response.ok) {
-        throw new Error(data.message || "Failed to save event data.");
-      }
 
+      if (!eventResponse.ok) {
+        throw new Error("Failed to save event data.");
+      }
+      const data = await eventResponse.json();
+      console.log(data);
+
+      // Save ticket
       setModalVisible(true);
       const formattedEventData = {
         ...eventData,
-        coverImage: coverImageBase64,
+        coverImage: fileListCoverEvent[0].base64,
         eventDateTime: eventData.eventDateTime.format("DD-MM-YYYY HH:mm"),
       };
       addEvent(formattedEventData);
@@ -910,6 +958,10 @@ function Form({ isMobile, addEvent }) {
                   name="eventType"
                   value={eventData.eventType}
                   onChange={handleInputEventChange}
+                  className="select-event-type"
+                  style={{
+                    color: eventData.eventType ? "black" : "rgb(89,92,95)",
+                  }}
                 >
                   <option value="" disabled selected hidden>
                     Vui lòng chọn
@@ -935,14 +987,17 @@ function Form({ isMobile, addEvent }) {
                 </label>
                 <Datetime
                   timeFormat="HH:mm"
-                  placeholder="Thời gian diễn ra sự kiện"
                   id="event-date-time"
                   name="eventDateTime"
                   value={eventData.eventDateTime}
                   onChange={(value) =>
                     handleInputEventChange(value, "eventDateTime")
                   }
-                  inputProps={{ readOnly: true, style: { boxShadow: "none" } }}
+                  inputProps={{
+                    placeholder: "Thời gian diễn ra sự kiện",
+                    readOnly: true,
+                    style: { boxShadow: "none" },
+                  }}
                 />
                 <span
                   className={`error-message ${
