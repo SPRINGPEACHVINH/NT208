@@ -3,11 +3,6 @@ import "../../styles/GoogleLogin.css";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { GoogleOAuthProvider } from "@react-oauth/google";
-import { set } from "mongoose";
-
-// const CLIENT_ID =
-//   "957778684302-roirdu9se7h2e9f01kedlu82euq54pf2.apps.googleusercontent.com";
 
 function Google_Login() {
   const navigate = useNavigate();
