@@ -1,7 +1,7 @@
 const nodeMailer = require("nodemailer");
 const MailService = require("../services/MailService");
 const UserService = require("../services/UserService");
-const bcrypt = require("bcrypt");
+const bcryptjs = require("bcryptjs");
 
 const sendMail = async (req, res) => {
   const { Email, Subject, Content } = req.body;

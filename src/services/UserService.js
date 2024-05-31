@@ -1,12 +1,12 @@
 const User = require("../models/Users");
-const bcrypt = require("bcrypt");
+const bcryptjs = require("bcryptjs");
 const genneralToken = require("./JwtService");
 require("dotenv").config();
 
 const CreateUser = async (newUser) => {
   const { UserName, Email, Password, PhoneNumber } = newUser;
-  const bcrypt_salt = `${process.env.BCRYPT_SALT}`;
-  const hash = bcrypt.hashSync(Password, 10);
+  const bcryptjs_salt = `${process.env.BCRYPT_SALT}`;
+  const hash = bcryptjs.hashSync(Password, 10);
 
   const createdUser = await User.create({
     UserName,
@@ -20,7 +20,7 @@ const CreateUser = async (newUser) => {
 
 const GoogleSignIn = async (newUser) => {
   const { UserName, Email, Password } = newUser;
-  const hash = bcrypt.hashSync(Password, 10);
+  const hash = bcryptjs.hashSync(Password, 10);
 
   const createdUser = await User.create({
     UserName,
@@ -44,7 +44,7 @@ const LoginUser = (userLogin) => {
           message: "The user does not exist",
         });
       }
-      const comparePassword = bcrypt.compareSync(Password, checkUser.Password);
+      const comparePassword = bcryptjs.compareSync(Password, checkUser.Password);
       console.log("comparePassword", comparePassword);
       if (!comparePassword) {
         resolve({
@@ -165,7 +165,7 @@ const FindUserByEmail = (Email) => {
 };
 
 const CheckPassword = (inputPassword, userPassword) => {
-  return bcrypt.compareSync(inputPassword, userPassword);
+  return bcryptjs.compareSync(inputPassword, userPassword);
 };
 
 module.exports = {
