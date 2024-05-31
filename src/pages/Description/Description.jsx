@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import ShowDescription from "./ShowDescription";
 import TicketInfo from "../../components/TicketInfo";
+import LogoBTC from "../../components/LogoBTC";
 import ShowBanner from "../../components/Banner/ShowBanner";
 import "../../styles/Description.css";
 
@@ -16,7 +17,7 @@ const username = localStorage.getItem("username");
   useEffect(() => {
     const fetchEvent = async () => {
       const response = await fetch(
-        `http://localhost:8881/api/event/${EventId}`
+        `https://ticketx88.azurewebsites.net/api/event/${EventId}`
       );
       if (!response.ok) {
         console.error(`Failed to fetch event: ${response.statusText}`);
@@ -33,7 +34,7 @@ const username = localStorage.getItem("username");
       }
 
       const response = await fetch(
-        `http://localhost:8881/api/user/get-details/${username}`
+        `https://ticketx88.azurewebsites.net/api/user/get-details/${username}`
       );
       if (!response.ok) {
         console.error(`Failed to fetch user: ${response.statusText}`);
@@ -56,6 +57,7 @@ const username = localStorage.getItem("username");
           <div className="contents">
             <ShowDescription event={event} />
             <TicketInfo event={event} user={user} />
+            <LogoBTC/>
           </div>
         </>
       )}

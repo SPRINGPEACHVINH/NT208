@@ -5,6 +5,8 @@ import { logIn, logOut } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import "../../styles/Header.css";
 import moment from "moment";
+import { Avatar } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 import { googleLogout } from "@react-oauth/google";
 
 const ShowHeader = () => {
@@ -52,18 +54,18 @@ const ShowHeader = () => {
 
   const handleGoogleLogOut = () => {
     googleLogout()
-    localStorage.removeItem("isLoggedIn");
+    localStorage.setItem("isLoggedIn", "false");
     localStorage.removeItem("username");
-    localStorage.removeItem("isGoogle");
+    localStorage.setItem("isGoogle", "false");
     dispatch(logOut())
-    navigate("/"); // Navigate to the home page after logging out
+    navigate("/SignIn"); // Navigate to the home page after logging out
   };
 
   const handleNormalLogOut = () => {
     dispatch(logOut());
-    localStorage.removeItem("isLoggedIn");
+    localStorage.setItem("isLoggedIn", "false");
     localStorage.removeItem("username");
-    navigate("/"); // Navigate to the home page after logging out
+    navigate("/SignUp"); // Navigate to the home page after logging out
   };
   const handleSearch = (event) => {
     event.preventDefault();
@@ -95,7 +97,7 @@ const ShowHeader = () => {
 
   const fetchResults = async () => {
     const response = await fetch(
-      `http://localhost:8881/api/event/search?q=${encodeURIComponent(
+      `https://ticketx88.azurewebsites.net/api/event/search?q=${encodeURIComponent(
         searchTerm
       )}`
     );
@@ -221,7 +223,7 @@ const ShowHeader = () => {
                     className="user-button"
                     onClick={() => setDropdownVisible(!dropdownVisible)}
                   >
-                    {username}
+                    <Avatar size="small" icon={<UserOutlined />} />  {username}
                   </button>
                   {dropdownVisible && (
                     <div
@@ -235,7 +237,7 @@ const ShowHeader = () => {
                 </div>
               ) : (
                 <button className="auth-button">
-                  <Link to="/SignUp">Đăng ký | Đăng nhập</Link>
+                  <Link to="/SignIn">Đăng nhập | Đăng ký</Link>
                 </button>
               )}
             </div>
@@ -346,7 +348,7 @@ const ShowHeader = () => {
                   </div>
                 ) : (
                   <button className="auth-button">
-                    <Link to="/SignUp">Đăng nhập</Link>
+                    <Link to="/SignIn">Đăng nhập</Link>
                   </button>
                 )}
               </div>

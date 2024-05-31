@@ -473,7 +473,7 @@ function Form({ isMobile, addEvent }) {
 
       // Save event
       const lastEventResponse = await fetch(
-        "http://localhost:8881/api/event/last"
+        "https://ticketx88.azurewebsites.net/api/event/last"
       );
       if (!lastEventResponse.ok) {
         throw new Error("Failed to fetch last event ID.");
@@ -509,24 +509,27 @@ function Form({ isMobile, addEvent }) {
         eventTicketPrice,
       } = eventData;
 
-      const eventResponse = await fetch("http://localhost:8881/api/event/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          EventId: newEventId,
-          EventName: eventName,
-          EventTime: eventDateTime,
-          EventInfo: eventDescription,
-          EventLocation: "TicketX88",
-          EventCategory: eventType,
-          TicketPrice: eventTicketPrice,
-          Picture_event: fileListCoverEvent[0].base64,
-          VideoPath: "chuaco",
-          Btc: btcId,
-        }),
-      });
+      const eventResponse = await fetch(
+        "https://ticketx88.azurewebsites.net/api/event/add",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            EventId: newEventId,
+            EventName: eventName,
+            EventTime: eventDateTime,
+            EventInfo: eventDescription,
+            EventLocation: "TicketX88",
+            EventCategory: eventType,
+            TicketPrice: eventTicketPrice,
+            Picture_event: fileListCoverEvent[0].base64,
+            VideoPath: "chuaco",
+            Btc: btcId,
+          }),
+        }
+      );
 
       if (!eventResponse.ok) {
         throw new Error("Failed to save event data.");

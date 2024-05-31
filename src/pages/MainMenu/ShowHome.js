@@ -134,7 +134,7 @@ const ShowHome = () => {
   return (
     <div>
       {!isMobile && (
-        <div className="desktop slides" style={{ display: "flex" }}>      
+        <div className="slides" style={{ display: "flex" }}>      
             {slideEvents.map((event, index) => (
               <div
                 className={`slide ${index === 0 ? "active" : ""}`}
@@ -164,7 +164,7 @@ const ShowHome = () => {
         </div>
       )}
       {isMobile && (
-        <div className="mobile slides" style={{ display: "flex" }}>  
+        <div className="mobile" style={{ display: "flex" }}>  
           {slideEvents.map((event, index) => (
             <div
               className={`slide ${index === 0 ? "active" : ""}`}
