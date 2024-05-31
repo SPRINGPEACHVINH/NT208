@@ -33,7 +33,19 @@ function Google_Login() {
 
   const onSuccess = async (response) => {
     try {
-      console.log(response);
+      const config = await fetch("https://ticketx88.azurewebsites.net/api/user/google-sign-in", {
+        mode: "no-cors",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: {
+          UserName: response.name,
+          Email: response.email,
+          Password: response.id,
+        }
+      });
+
       localStorage.setItem("isLoggedIn", "true");
       localStorage.setItem("isGoogle", "true");
       localStorage.setItem("username", response.name);
