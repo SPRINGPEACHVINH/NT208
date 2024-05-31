@@ -11,6 +11,25 @@ const add = async (req, res) => {
   }
 };
 
+const deleteById = async (req, res) => {
+  try {
+    const result = await BtcService.deleteBtc(req.params.id);
+
+    if (!result) {
+      return res
+        .status(404)
+        .json({ status: "ERROR", message: "Btc not found" });
+    }
+
+    return res
+      .status(200)
+      .json({ status: "OK", message: "Btc deleted successfully" });
+  } catch (e) {
+    return res.status(500).json({ status: "ERROR", message: e.message });
+  }
+};
+
 module.exports = {
   add,
+  deleteById,
 };

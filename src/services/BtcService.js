@@ -6,6 +6,11 @@ const addBtc = async (btcData) => {
   return btc.save();
 };
 
+const deleteBtc = async (BtcId) => {
+  return Btc.findOneAndDelete({ BtcId: BtcId });
+};
+
 module.exports = {
   addBtc,
+  deleteBtc,
 };
