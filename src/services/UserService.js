@@ -177,7 +177,8 @@ const GetEventsByUser = async (UserName) => {
   const user = await User.findOne({ UserName: UserName });
   const btcs = await Btc.find({ User: user._id });
   const btcIds = btcs.map((btc) => btc._id);
-  return (events = await Event.find({ Btc: { $in: btcIds } }));
+  const events = await Event.find({ Btc: { $in: btcIds } });
+  return events;
 };
 
 module.exports = {
