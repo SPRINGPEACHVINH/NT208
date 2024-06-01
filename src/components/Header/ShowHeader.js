@@ -147,7 +147,6 @@ const ShowHeader = () => {
   };
 
   const handleInputChange = (event) => {
-    setUserInput(event.target.value);
     setSearchTerm(event.target.value);
     setIsTyping(true);
     setShowAutocomplete(true);
