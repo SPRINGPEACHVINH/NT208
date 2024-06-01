@@ -148,7 +148,8 @@
   z-index: 1000;
 }
 
-.autocomplete-dropdown .active {
+.autocomplete-dropdown .active,
+.autocomplete-dropdown:hover {
   background-color: #3f3f3f;
 }
 

@@ -133,7 +133,7 @@ const ShowHeader = () => {
       }
     }, 1000); // 1000ms delay
 
-    return () => clearTimeout(timer); // Clear the timeout when the component unmounts or when searchTerm or isTyping changes
+    return () => clearTimeout(timer);
   }, [isTyping, searchTerm]);
 
   const fetchResults = async () => {
@@ -148,6 +148,7 @@ const ShowHeader = () => {
   };
 
   const handleInputChange = (event) => {
+    setResults([]);
     setSearchTerm(event.target.value);
     setIsTyping(true);
     setShowAutocomplete(true);
@@ -215,7 +216,12 @@ const ShowHeader = () => {
                 </button>
               </form>
               {isFocused && searchTerm !== "" && (
-                <div className="autocomplete-dropdown">
+                <div
+                  className="autocomplete-dropdown"
+                  onMouseEnter={() => setIsTyping(true)}
+                  clearTimeout={typingTimeout}
+                  onMouseLeave={() => setIsTyping(false)}
+                >
                   <ul>
                     {filteredEventNames.map((name, index) => (
                       <li
