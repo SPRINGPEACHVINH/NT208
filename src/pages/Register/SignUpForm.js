@@ -36,6 +36,7 @@ function SignUpForm() {
 
     try {
       const response = await fetch("http://localhost:8881/api/user/sign-up", {
+        mode: "no-cors",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -63,7 +64,7 @@ function SignUpForm() {
 
     const signin = {
       method: "POST",
-      url: "http://localhost:8881/api/user/sign-in",
+      url: "https://nt208.onrender.com/api/user/sign-in",
       headers: {},
       body: JSON.stringify({
         UserName: form.UserName,
