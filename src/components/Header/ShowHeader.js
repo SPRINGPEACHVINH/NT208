@@ -160,7 +160,7 @@ const ShowHeader = () => {
                   type="text"
                   id="search-input"
                   placeholder="Bạn tìm gì hôm nay?"
-                  autoComplete="off"
+                  autoComplete="on"
                   value={searchTerm}
                   onChange={handleInputChange}
                   onFocus={handleFocus}
