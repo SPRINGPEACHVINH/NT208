@@ -34,14 +34,17 @@ function SignUpForm() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8881/api/user/sign-up", {
-        mode: "no-cors",
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
+      const response = await fetch(
+        "https://nt208.onrender.com/api/user/sign-up",
+        {
+          mode: "no-cors",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(form),
+        }
+      );
 
       const data = await response.json();
 
@@ -56,7 +59,7 @@ function SignUpForm() {
 
     const signin = {
       method: "POST",
-      url: "http://localhost:8881/api/user/sign-in",
+      url: "https://nt208.onrender.com/api/user/sign-in",
       headers: {},
       body: JSON.stringify({
         UserName: form.UserName,

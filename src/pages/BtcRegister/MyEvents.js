@@ -19,7 +19,7 @@ function MyEvents({ username }) {
     const fetchEvents = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8881/api/user/get-events/" + username
+          "https://nt208.onrender.com/api/user/get-events/" + username
         );
         if (!response.ok) {
           throw new Error("Failed to fetch events.");

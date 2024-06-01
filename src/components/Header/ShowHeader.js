@@ -53,11 +53,11 @@ const ShowHeader = () => {
   };
 
   const handleGoogleLogOut = () => {
-    googleLogout()
+    googleLogout();
     localStorage.setItem("isLoggedIn", "false");
     localStorage.removeItem("username");
     localStorage.setItem("isGoogle", "false");
-    dispatch(logOut())
+    dispatch(logOut());
     navigate("/SignIn"); // Navigate to the home page after logging out
   };
 
@@ -97,7 +97,7 @@ const ShowHeader = () => {
 
   const fetchResults = async () => {
     const response = await fetch(
-      `http://localhost:8881/api/event/search?q=${encodeURIComponent(
+      `https://nt208.onrender.com/api/event/search?q=${encodeURIComponent(
         searchTerm
       )}`
     );
@@ -223,7 +223,7 @@ const ShowHeader = () => {
                     className="user-button"
                     onClick={() => setDropdownVisible(!dropdownVisible)}
                   >
-                    <Avatar size="small" icon={<UserOutlined />} />  {username}
+                    <Avatar size="small" icon={<UserOutlined />} /> {username}
                   </button>
                   {dropdownVisible && (
                     <div
