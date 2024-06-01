@@ -364,7 +364,7 @@ function Form({ username, isMobile }) {
   const handleSave = async () => {
     try {
       const userResponse = await fetch(
-        "http://localhost:8881/api/user/get-details/letuan"
+        "http://localhost:8881/api/user/get-details/" + username
       );
 
       if (!userResponse.ok) {
