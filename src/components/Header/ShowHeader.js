@@ -114,21 +114,16 @@ const ShowHeader = () => {
     return () => clearTimeout(timer);
   }, [searchTerm, isTyping]);
 
-  const fetchResults = async (searchTerm) => {
-    if (searchTerm !== "") {
-      const response = await fetch(
-        `https://nt208.onrender.com/api/event/search?q=${encodeURIComponent(
-          searchTerm
-        )}`
-      );
-      const data = await response.json();
-      setResults(data.data);
-      setIsTyping(false);
-      setShowAutocomplete(false);
-    } else {
-      setResults([]);
-      setShowAutocomplete(false);
-    }
+  const fetchResults = async () => {
+    const response = await fetch(
+      `https://nt208.onrender.com/api/event/search?q=${encodeURIComponent(
+        searchTerm
+      )}`
+    );
+    const data = await response.json();
+    setResults(data.data);
+    setIsTyping(false);
+    setShowAutocomplete(false);
   };
 
   const handleInputChange = (event) => {
