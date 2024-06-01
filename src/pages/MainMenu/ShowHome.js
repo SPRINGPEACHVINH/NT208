@@ -16,7 +16,7 @@ const ShowHome = () => {
     const fetchEvents = async () => {
       try {
         const response = await fetch(
-          "https://ticketx88.azurewebsites.net/api/event/all"
+          "https://nt208.onrender.com/api/event/all"
         );
         const { data } = await response.json();
         setEvents(data);
@@ -78,13 +78,13 @@ const ShowHome = () => {
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => {
-        window.removeEventListener("resize", checkMobile);
+      window.removeEventListener("resize", checkMobile);
     };
   });
 
   const [isMobile, setIsMobile] = useState(false);
   const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 992);
+    setIsMobile(window.innerWidth <= 992);
   };
 
   useEffect(() => {
@@ -134,37 +134,37 @@ const ShowHome = () => {
   return (
     <div>
       {!isMobile && (
-        <div className="desktop slides" style={{ display: "flex" }}>      
-            {slideEvents.map((event, index) => (
-              <div
-                className={`slide ${index === 0 ? "active" : ""}`}
-                data-slide={index}
-                key={event.EventName}
-              >
-                <img
-                  className="slide-img"
-                  src={event.Picture_event}
-                  alt={event.EventName}
-                  loading="lazy" // Lazy loading images
-                />
-              </div>
-            ))}
-
-            <a className="prev">&#10094;</a>
-            <a className="next">&#10095;</a>
-
-            <div className="dot-container">
-              {slideEvents.map((_, index) => (
-                <span
-                  className={`dot ${index === 0 ? "active" : ""}`}
-                  key={index}
-                ></span>
-              ))}
+        <div className="slides" style={{ display: "flex" }}>
+          {slideEvents.map((event, index) => (
+            <div
+              className={`slide ${index === 0 ? "active" : ""}`}
+              data-slide={index}
+              key={event.EventName}
+            >
+              <img
+                className="slide-img"
+                src={event.Picture_event}
+                alt={event.EventName}
+                loading="lazy" // Lazy loading images
+              />
             </div>
+          ))}
+
+          <a className="prev">&#10094;</a>
+          <a className="next">&#10095;</a>
+
+          <div className="dot-container">
+            {slideEvents.map((_, index) => (
+              <span
+                className={`dot ${index === 0 ? "active" : ""}`}
+                key={index}
+              ></span>
+            ))}
+          </div>
         </div>
       )}
       {isMobile && (
-        <div className="mobile slides" style={{ display: "flex" }}>  
+        <div className="mobile" style={{ display: "flex" }}>
           {slideEvents.map((event, index) => (
             <div
               className={`slide ${index === 0 ? "active" : ""}`}

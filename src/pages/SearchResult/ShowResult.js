@@ -15,7 +15,9 @@ const ShowResults = () => {
     const fetchEvents = async () => {
       setIsLoading(true);
       const response = await fetch(
-        `https://ticketx88.azurewebsites.net/api/event/search?q=${encodeURIComponent(query)}`
+        `https://nt208.onrender.com/api/event/search?q=${encodeURIComponent(
+          query
+        )}`
       );
       const { data } = await response.json();
       setEvents(data);
@@ -67,9 +69,7 @@ const ShowResults = () => {
               </div>
             ))
           ) : (
-            <p className={styles.noCard}>
-              Không có kết quả cho sự kiện này.
-            </p>
+            <p className={styles.noCard}>Không có kết quả cho sự kiện này.</p>
           )}
         </div>
       )}
