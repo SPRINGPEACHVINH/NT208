@@ -460,6 +460,8 @@ function Form({ username, isMobile }) {
         eventDescription,
         eventType,
         eventTicketPrice,
+        eventLinkVideo,
+        eventNumberTicket,
       } = eventData;
 
       const eventResponse = await fetch(
@@ -477,8 +479,9 @@ function Form({ username, isMobile }) {
             EventLocation: "TicketX88",
             EventCategory: eventType,
             TicketPrice: eventTicketPrice,
+            NumberOfTickets: eventNumberTicket,
             Picture_event: fileListCoverEvent[0].base64,
-            VideoPath: "chuaco",
+            VideoPath: eventLinkVideo,
             Btc: btcId,
           }),
         }
