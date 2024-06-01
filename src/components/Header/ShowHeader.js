@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import "../../styles/Header.css";
 import moment from "moment";
 import { Avatar } from "antd";
+import axios from "axios";
 import { UserOutlined } from "@ant-design/icons";
 import { googleLogout } from "@react-oauth/google";
 
@@ -20,8 +21,25 @@ const ShowHeader = () => {
   const username = useSelector((state) => state.user.username);
   const dispatch = useDispatch();
 
+  const [eventNames, setEventNames] = useState([]);
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const fetchEventNames = async () => {
+      const response = await axios.get(
+        "https://nt208.onrender.com/api/event/all"
+      );
+      const names = response.data.data.map((event) => event.EventName);
+      setEventNames(names);
+    };
+
+    fetchEventNames();
+  }, []);
+
+  const filteredEventNames = eventNames.filter((name) =>
+    name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -160,7 +178,7 @@ const ShowHeader = () => {
                   type="text"
                   id="search-input"
                   placeholder="Bạn tìm gì hôm nay?"
-                  autoComplete="on"
+                  autoComplete="off"
                   value={searchTerm}
                   onChange={handleInputChange}
                   onFocus={handleFocus}
@@ -170,6 +188,17 @@ const ShowHeader = () => {
                   Tìm kiếm
                 </button>
               </form>
+              {isFocused && !isTyping && searchTerm !== "" && (
+                <div className="autocomplete-dropdown">
+                  <ul>
+                    {filteredEventNames.map((name, index) => (
+                      <li key={index} onClick={() => setSearchTerm(name)}>
+                        {name}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
               {isFocused && results.length > 0 && (
                 <div className="dropdown">
                   <ul>
