@@ -25,7 +25,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(cors({
-  origin: "https://ticketx88.vercel.app",
+  origin: "https://ticketx88.vercel.app, http://localhost:8080",
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 }));
