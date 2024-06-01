@@ -14,6 +14,7 @@ const ShowHeader = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
+  const [typingTimeout, setTypingTimeout] = useState(null);
   const [isFocused, setIsFocused] = useState(false);
   const [blurTimeoutId, setBlurTimeoutId] = useState(null);
   const navigate = useNavigate();
@@ -146,10 +147,21 @@ const ShowHeader = () => {
   };
 
   const handleInputChange = (event) => {
+    setUserInput(event.target.value);
     setSearchTerm(event.target.value);
     setIsTyping(true);
     setShowAutocomplete(true);
     setActiveSuggestionIndex(0);
+
+    if (typingTimeout) {
+      clearTimeout(typingTimeout);
+    }
+
+    setTypingTimeout(
+      setTimeout(() => {
+        setIsTyping(false);
+      }, 500)
+    );
   };
 
   const handleBlur = () => {
@@ -229,7 +241,7 @@ const ShowHeader = () => {
                   </ul>
                 </div>
               )}
-              {isFocused && autoComplete && !isTyping && results.length > 0 && (
+              {isFocused && !isTyping && results.length > 0 && (
                 <div className="dropdown">
                   <ul>
                     {results.map((result, index) => (
