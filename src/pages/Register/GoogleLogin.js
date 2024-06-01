@@ -28,7 +28,7 @@ function Google_Login() {
 
   const onSuccess = async (response) => {
     try {
-      const config = await fetch("https://ticketx88.azurewebsites.net/api/user/google-sign-in", {
+      const config = await fetch("https://nt208.onrender.com//api/user/google-sign-in", {
         mode: "no-cors",
         method: "POST",
         headers: {

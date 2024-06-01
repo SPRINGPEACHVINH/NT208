@@ -442,7 +442,7 @@ function Form({ isMobile, addEvent }) {
         btcInformation,
       } = formData;
 
-      const btcResponse = await fetch("http://localhost:8881/api/btc/add", {
+      const btcResponse = await fetch("https://nt208.onrender.com//api/btc/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -473,7 +473,7 @@ function Form({ isMobile, addEvent }) {
 
       // Save event
       const lastEventResponse = await fetch(
-        "https://ticketx88.azurewebsites.net/api/event/last"
+        "https://nt208.onrender.com//api/event/last"
       );
       if (!lastEventResponse.ok) {
         throw new Error("Failed to fetch last event ID.");
@@ -510,7 +510,7 @@ function Form({ isMobile, addEvent }) {
       } = eventData;
 
       const eventResponse = await fetch(
-        "https://ticketx88.azurewebsites.net/api/event/add",
+        "https://nt208.onrender.com//api/event/add",
         {
           method: "POST",
           headers: {
