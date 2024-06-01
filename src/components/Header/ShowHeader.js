@@ -126,6 +126,7 @@ const ShowHeader = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       if (isTyping && searchTerm !== "") {
+        setResults([]);
         fetchResults();
         setIsTyping(false);
       } else if (searchTerm === "") {
