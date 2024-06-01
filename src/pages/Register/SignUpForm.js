@@ -7,6 +7,7 @@ import { message } from "antd";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../redux/actions";
+import Password from "antd/es/input/Password";
 
 function SignUpForm() {
   const [form, setForm] = useState({
@@ -35,12 +36,18 @@ function SignUpForm() {
 
     try {
       const response = await fetch("http://localhost:8881/api/user/sign-up", {
-        mode: "no-cors",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          UserName: form.UserName,
+          Password: form.Password,
+          confirmPassword: form.confirmPassword,
+          Email: form.Email,
+          PhoneNumber: form.PhoneNumber,
+        }
+        ),
       });
 
       const data = await response.json();
