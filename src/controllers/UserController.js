@@ -4,23 +4,19 @@ const User = require("../models/Users");
 
 const CreateUser = async (req, res) => {
   try {
-    const { UserName, Email, Password, confirmPassword, PhoneNumber } =
+    const { UserName, Email, Password, PhoneNumber } =
       req.body;
     const regEmail = /^[a-zA-Z0-9._%+-]+@(gmail\.com|gm\.uit\.edu\.vn)$/;
     const isCheckEmail = regEmail.test(Email);
     const regPhone = /^\d{10}$/;
     const isCheckPhone = regPhone.test(PhoneNumber);
-    if (!UserName || !Email || !Password || !confirmPassword || !PhoneNumber) {
+    if (!UserName || !Email || !Password || !PhoneNumber) {
       return res.status(200).json({
         status: "ERROR",
         message: "The input is required",
       });
-    } else if (Password !== confirmPassword) {
-      return res.status(200).json({
-        status: "ERROR",
-        message: "Password and confirmPassword are not the same",
-      });
-    } else if (!isCheckEmail) {
+    } 
+    else if (!isCheckEmail) {
       return res.status(200).json({
         status: "ERROR",
         message: "Email is not valid",
