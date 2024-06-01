@@ -28,7 +28,7 @@ function Google_Login() {
 
   const onSuccess = async (response) => {
     try {
-      const config = await fetch("https://nt208.onrender.com//api/user/google-sign-in", {
+      const config = await fetch("http://localhost:8881/api/user/google-sign-in", {
         mode: "no-cors",
         method: "POST",
         headers: {

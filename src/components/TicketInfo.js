@@ -83,13 +83,13 @@ const TicketInfo = ({ event, user }) => {
 
     const userName = localStorage.getItem("username");
     const userDetailsResponse = await fetch(
-      `https://nt208.onrender.com//api/user/get-details/${userName}`
+      `http://localhost:8881/api/user/get-details/${userName}`
     );
     const res = await userDetailsResponse.json();
     const userDetails = res.data;
 
     const response = await fetch(
-      "https://nt208.onrender.com//api/ticket/payForTicket",
+      "http://localhost:8881/api/ticket/payForTicket",
       {
         method: "POST",
         headers: {

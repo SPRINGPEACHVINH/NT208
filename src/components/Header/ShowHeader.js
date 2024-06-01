@@ -97,7 +97,7 @@ const ShowHeader = () => {
 
   const fetchResults = async () => {
     const response = await fetch(
-      `https://nt208.onrender.com//api/event/search?q=${encodeURIComponent(
+      `http://localhost:8881/api/event/search?q=${encodeURIComponent(
         searchTerm
       )}`
     );

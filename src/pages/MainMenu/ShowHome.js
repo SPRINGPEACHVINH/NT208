@@ -16,7 +16,7 @@ const ShowHome = () => {
     const fetchEvents = async () => {
       try {
         const response = await fetch(
-          "https://nt208.onrender.com//api/event/all"
+          "http://localhost:8881/api/event/all"
         );
         const { data } = await response.json();
         setEvents(data);
