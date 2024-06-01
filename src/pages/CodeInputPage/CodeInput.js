@@ -24,7 +24,7 @@ function CodeInput() {
 
     try {
       const response = await fetch(
-        "https://ticketx88.azurewebsites.net/api/ticket/use-ticket",
+        "https://nt208.onrender.com/api/ticket/use-ticket",
         {
           method: "POST",
           headers: {

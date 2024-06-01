@@ -16,6 +16,81 @@
   border-radius: 10px;
 }
 
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.ant-pagination {
+  display: inline-block;
+  padding-left: 0;
+  border-radius: 4px;
+}
+
+.ant-pagination-item {
+  display: inline-block;
+  min-width: 32px;
+  height: 32px;
+  margin-right: 8px;
+  text-align: center;
+  line-height: 32px;
+  vertical-align: middle;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.ant-pagination .ant-pagination-item {
+  color: rgb(29, 29, 29);
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+}
+
+.ant-pagination .ant-pagination-item:hover {
+  background-color: #fff !important;
+  border: 1px solid #d9d9d9 !important;
+}
+
+.ant-pagination .ant-pagination-item-active {
+  color: white;
+  border-color: rgb(255, 98, 40);
+  background-color: orangered;
+}
+
+.ant-pagination .ant-pagination-item-active:hover {
+  border-color: rgb(255, 98, 40) !important;
+  background-color: orangered !important;
+}
+
+.ant-pagination .ant-pagination-item-active:hover a {
+  color: white;
+}
+
+.ant-pagination-prev,
+.ant-pagination-next {
+  margin-right: 8px;
+  cursor: pointer;
+  background-color: white;
+}
+
+.ant-pagination-prev,
+.ant-pagination-next,
+.ant-pagination-jump-prev,
+.ant-pagination-jump-next {
+  display: inline-block;
+  min-width: 32px;
+  height: 32px;
+  text-align: center;
+  line-height: 32px;
+  vertical-align: middle;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
 @media screen and (max-width: 768px) {
   .my-events {
     flex-direction: column;

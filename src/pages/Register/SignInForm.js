@@ -28,30 +28,32 @@ function SignInForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("https://ticketx88.azurewebsites.net/api/user/sign-in", {
-        mode: "no-cors",
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
+      const response = await fetch(
+        "https://nt208.onrender.com/api/user/sign-in",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(form),
+        }
+      );
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (data.status === "ERROR") {
-      throw new Error(data.message);
+      if (data.status === "ERROR") {
+        throw new Error(data.message);
+      }
+
+      dispatch(logIn(form.UserName));
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("isGoogle", "false");
+      localStorage.setItem("username", form.UserName);
+      navigate("/");
+    } catch (error) {
+      message.error(error.message);
     }
-
-    dispatch(logIn(form.UserName));
-    localStorage.setItem("isLoggedIn", "true");
-    localStorage.setItem("isGoogle", "false");
-    localStorage.setItem("username", form.UserName);
-    navigate("/");
-  } catch (error) {
-    message.error(error.message);
-  }
-};
+  };
 
   return (
     <form className="signin-form" onSubmit={handleSubmit}>
@@ -93,7 +95,7 @@ function SignInForm() {
       <input className="signin-submit" type="submit" value="Đăng nhập" />
 
       <GoogleLoginButton />
-      
+
       <div className="signup-link">
         Chưa có tài khoản?{" "}
         <a style={{ fontSize: 16 }} href="/SignUp">

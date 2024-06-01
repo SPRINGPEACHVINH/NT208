@@ -12,88 +12,95 @@
 }
 
 .organizer {
-    border-radius: 12px;
-    margin-top: 25px;
-    margin-bottom: 1.75rem;
-    padding: 0px 1rem;
-    background-color: #222;
-    overflow: hidden;
+  border-radius: 12px;
+  margin-top: 25px;
+  margin-bottom: 1.75rem;
+  padding: 0px 1rem;
+  background-color: #222;
+  overflow: hidden;
 }
 
 .organizer #title {
-    padding: 0.75rem 0px;
-    border-bottom: 1px solid rgb(235, 235, 240);
+  padding: 0.75rem 0px;
+  border-bottom: 1px solid rgb(235, 235, 240);
 }
 
-.organizer h4, .organizer div {
-    color: rgb(255, 255, 255);
+.organizer h4,
+.organizer div {
+  color: rgb(255, 255, 255);
 }
 
 .Title {
-    margin-block: 0px;
-    font-weight: 600;
-    font-size: 1.5rem;
+  margin-block: 0px;
+  font-weight: 600;
+  font-size: 1.5rem;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    margin: 0px;
-    font-size: inherit;
-    font-weight: inherit;
-}
+/* h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0px;
+  font-size: inherit;
+  font-weight: inherit;
+} */
 
 .organizer #content {
-    padding: 0.75rem 0px;
-    margin-top: 24px;
+  padding: 0.75rem 0px;
+  margin-top: 24px;
 }
 
-.organizer h4, .organizer div {
-    color: rgb(255, 255, 255);
+.organizer h4,
+.organizer div {
+  color: rgb(255, 255, 255);
 }
 
 .wrapper {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    gap: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 1.5rem;
 }
 
 .wrapper #image {
-    flex: 1 0 0%;
-    width: 100%;
-    border-radius: 0.75rem;
-    overflow: hidden;
+  flex: 1 0 0%;
+  width: 100%;
+  border-radius: 0.75rem;
+  overflow: hidden;
 }
 
 .wrapper #image img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    object-position: center center;
-    transform: scale(1.1);
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center center;
+  transform: scale(1.1);
 }
 
 img {
-    border-style: none;
+  border-style: none;
 }
 
 .wrapper #organizer-content {
-    flex: 5 0 0%;
+  flex: 5 0 0%;
 }
 
 .wrapper #organizer-content .name {
-    font-weight: 700;
-    font-size: 1.125rem;
-    line-height: 150%;
-    color: rgb(255, 255, 255);
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 150%;
+  color: rgb(255, 255, 255);
 }
 
 p {
-    margin: 0px;
+  margin: 0px;
 }
 
 .wrapper #organizer-content .description {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 24px;
-    word-break: break-word;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  word-break: break-word;
 }

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import "../../styles/Header.css";
 import moment from "moment";
 import { Avatar } from "antd";
+import axios from "axios";
 import { UserOutlined } from "@ant-design/icons";
 import { googleLogout } from "@react-oauth/google";
 
@@ -13,6 +14,7 @@ const ShowHeader = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
+  const [typingTimeout, setTypingTimeout] = useState(null);
   const [isFocused, setIsFocused] = useState(false);
   const [blurTimeoutId, setBlurTimeoutId] = useState(null);
   const navigate = useNavigate();
@@ -20,8 +22,46 @@ const ShowHeader = () => {
   const username = useSelector((state) => state.user.username);
   const dispatch = useDispatch();
 
+  const [eventNames, setEventNames] = useState([]);
+  const [showAutocomplete, setShowAutocomplete] = useState(false);
+  const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(0);
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const fetchEventNames = async () => {
+      const response = await axios.get(
+        "https://nt208.onrender.com/api/event/all"
+      );
+      const names = response.data.data.map((event) => event.EventName);
+      setEventNames(names);
+    };
+
+    fetchEventNames();
+  }, []);
+
+  const filteredEventNames = eventNames.filter((name) =>
+    name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const handleKeyDown = (event) => {
+    setShowAutocomplete(true);
+    setIsTyping(true);
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      setActiveSuggestionIndex((prevIndex) =>
+        prevIndex < filteredEventNames.length - 1 ? prevIndex + 1 : prevIndex
+      );
+    } else if (event.key === "ArrowUp") {
+      event.preventDefault();
+      setActiveSuggestionIndex((prevIndex) =>
+        prevIndex > 0 ? prevIndex - 1 : 0
+      );
+    } else if (event.key === "Tab") {
+      event.preventDefault();
+      setSearchTerm(filteredEventNames[activeSuggestionIndex]);
+    }
+  };
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -53,19 +93,19 @@ const ShowHeader = () => {
   };
 
   const handleGoogleLogOut = () => {
-    googleLogout()
+    googleLogout();
     localStorage.setItem("isLoggedIn", "false");
     localStorage.removeItem("username");
     localStorage.setItem("isGoogle", "false");
-    dispatch(logOut())
-    navigate("/SignIn"); // Navigate to the home page after logging out
+    dispatch(logOut());
+    navigate("/"); // Navigate to the home page after logging out
   };
 
   const handleNormalLogOut = () => {
     dispatch(logOut());
     localStorage.setItem("isLoggedIn", "false");
     localStorage.removeItem("username");
-    navigate("/SignUp"); // Navigate to the home page after logging out
+    navigate("/"); // Navigate to the home page after logging out
   };
   const handleSearch = (event) => {
     event.preventDefault();
@@ -86,29 +126,34 @@ const ShowHeader = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       if (isTyping && searchTerm !== "") {
+        setResults([]);
         fetchResults();
+        setIsTyping(false);
       } else if (searchTerm === "") {
         setResults([]);
       }
-    }, 250); // 250ms delay
+    }, 1000); // 1000ms delay
 
     return () => clearTimeout(timer);
-  }, [searchTerm, isTyping]);
+  }, [isTyping, searchTerm]);
 
   const fetchResults = async () => {
     const response = await fetch(
-      `https://ticketx88.azurewebsites.net/api/event/search?q=${encodeURIComponent(
+      `https://nt208.onrender.com/api/event/search?q=${encodeURIComponent(
         searchTerm
       )}`
     );
     const data = await response.json();
     setResults(data.data);
-    setIsTyping(false);
+    setShowAutocomplete(false);
   };
 
   const handleInputChange = (event) => {
+    setResults([]);
     setSearchTerm(event.target.value);
     setIsTyping(true);
+    setShowAutocomplete(true);
+    setActiveSuggestionIndex(0);
   };
 
   const handleBlur = () => {
@@ -163,6 +208,7 @@ const ShowHeader = () => {
                   autoComplete="off"
                   value={searchTerm}
                   onChange={handleInputChange}
+                  onKeyDown={handleKeyDown}
                   onFocus={handleFocus}
                   onBlur={handleBlur}
                 />
@@ -170,7 +216,29 @@ const ShowHeader = () => {
                   Tìm kiếm
                 </button>
               </form>
-              {isFocused && results.length > 0 && (
+              {isFocused && searchTerm !== "" && (
+                <div
+                  className="autocomplete-dropdown"
+                  onMouseEnter={() => setIsTyping(true)}
+                  clearTimeout={typingTimeout}
+                  onMouseLeave={() => setIsTyping(false)}
+                >
+                  <ul>
+                    {filteredEventNames.map((name, index) => (
+                      <li
+                        key={index}
+                        onClick={() => setSearchTerm(name)}
+                        className={
+                          index === activeSuggestionIndex ? "active" : ""
+                        }
+                      >
+                        {name}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {isFocused && !isTyping && results.length > 0 && (
                 <div className="dropdown">
                   <ul>
                     {results.map((result, index) => (
@@ -223,7 +291,7 @@ const ShowHeader = () => {
                     className="user-button"
                     onClick={() => setDropdownVisible(!dropdownVisible)}
                   >
-                    <Avatar size="small" icon={<UserOutlined />} />  {username}
+                    <Avatar size="small" icon={<UserOutlined />} /> {username}
                   </button>
                   {dropdownVisible && (
                     <div

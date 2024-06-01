@@ -7,6 +7,7 @@ import { message } from "antd";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../redux/actions";
+import Password from "antd/es/input/Password";
 
 function SignUpForm() {
   const [form, setForm] = useState({
@@ -34,13 +35,20 @@ function SignUpForm() {
     e.preventDefault();
 
     try {
-      const response = await fetch("https://ticketx88.azurewebsites.net/api/user/sign-up", {
+      const response = await fetch("http://localhost:8881/api/user/sign-up", {
         mode: "no-cors",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          UserName: form.UserName,
+          Password: form.Password,
+          confirmPassword: form.confirmPassword,
+          Email: form.Email,
+          PhoneNumber: form.PhoneNumber,
+        }
+        ),
       });
 
       const data = await response.json();
@@ -56,7 +64,7 @@ function SignUpForm() {
 
     const signin = {
       method: "POST",
-      url: "https://ticketx88.azurewebsites.net/api/user/sign-in",
+      url: "https://nt208.onrender.com/api/user/sign-in",
       headers: {},
       body: JSON.stringify({
         UserName: form.UserName,

@@ -10,36 +10,37 @@ function Google_Login() {
 
   useEffect(() => {
     axios
-    .get(
-      `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
-      {
-        headers: {
-          Authorization: `Bearer ${user.access_token}`,
-          Accept: "application/json",
-        },
-      }
-    )
-    .then((res) => {
-      onSuccess(res.data)
-    })
-    .catch((err) => console.log(err));
-
-  })
+      .get(
+        `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
+        {
+          headers: {
+            Authorization: `Bearer ${user.access_token}`,
+            Accept: "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        onSuccess(res.data);
+      })
+      .catch((err) => console.log(err));
+  });
 
   const onSuccess = async (response) => {
     try {
-      const config = await fetch("https://ticketx88.azurewebsites.net/api/user/google-sign-in", {
-        mode: "no-cors",
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: {
-          UserName: response.name,
-          Email: response.email,
-          Password: response.id,
+      const config = await fetch(
+        "https://nt208.onrender.com/api/user/google-sign-in",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: {
+            UserName: response.name,
+            Email: response.email,
+            Password: response.id,
+          },
         }
-      });
+      );
 
       localStorage.setItem("isLoggedIn", "true");
       localStorage.setItem("isGoogle", "true");
@@ -56,10 +57,9 @@ function Google_Login() {
   });
 
   return (
-      <div className="google-login-container">
-        <button onClick={login}>Login with Google</button>
-      </div>
-
+    <div className="google-login-container">
+      <button onClick={login}>Login with Google</button>
+    </div>
   );
 }
 

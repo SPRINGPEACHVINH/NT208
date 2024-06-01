@@ -4,8 +4,10 @@ import Sidebar from "./Sidebar.js";
 import MyEvents from "./MyEvents.js";
 import HeaderBtcRegister from "./HeaderBtcRegister.js";
 import "../../styles/BtcRegister.css";
+import { useSelector } from "react-redux";
 
 const BtcRegister = () => {
+  const username = useSelector((state) => state.user.username);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -37,11 +39,6 @@ const BtcRegister = () => {
     }
   };
 
-  const [events, setEvents] = useState([]);
-  const addEvent = (newEvent) => {
-    setEvents((events) => [...events, newEvent]);
-  };
-
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -55,6 +52,7 @@ const BtcRegister = () => {
   return (
     <div className="container-form">
       <HeaderBtcRegister
+        username={username}
         handleSidebar={handleSidebar}
         isSidebarOpen={isSidebarOpen}
       />
@@ -92,9 +90,9 @@ const BtcRegister = () => {
                 }`}
               >
                 {activeTab === "create-event" ? (
-                  <Form isMobile={isMobile} addEvent={addEvent} />
+                  <Form username={username} isMobile={isMobile} />
                 ) : (
-                  <MyEvents isMobile={isMobile} events={events} />
+                  <MyEvents username={username} isMobile={isMobile} />
                 )}
               </div>
             </>
