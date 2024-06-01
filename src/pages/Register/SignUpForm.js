@@ -7,6 +7,7 @@ import { message } from "antd";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../redux/actions";
+import Password from "antd/es/input/Password";
 
 function SignUpForm() {
   const [form, setForm] = useState({
@@ -32,15 +33,20 @@ function SignUpForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(form.UserName);
     try {
-      const response = await fetch("http://localhost:8881/api/user/sign-up", {
-        mode: "no-cors",
+      const response = await fetch("https://nt208.onrender.com/api/user/sign-up", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          UserName: form.UserName,
+          Password: form.Password,
+          confirmPassword: form.confirmPassword,
+          Email: form.Email,
+          PhoneNumber: form.PhoneNumber,
+        }),
       });
 
       const data = await response.json();
@@ -48,27 +54,13 @@ function SignUpForm() {
       if (data.status === "ERROR") {
         throw new Error(data.message);
       }
-
-      navigate("/SignIn");
+      dispatch(logIn(form.UserName));
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("username", form.UserName);
+      navigate("/");
     } catch (error) {
       message.error(error.message);
     }
-
-    const signin = {
-      method: "POST",
-      url: "http://localhost:8881/api/user/sign-in",
-      headers: {},
-      body: JSON.stringify({
-        UserName: form.UserName,
-        Password: form.Password,
-      }),
-    };
-    await axios(signin);
-
-    dispatch(logIn(form.UserName));
-    localStorage.setItem("isLoggedIn", "true");
-    localStorage.setItem("username", form.UserName);
-    navigate("/");
   };
 
   return (
