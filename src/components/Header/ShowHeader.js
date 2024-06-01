@@ -224,7 +224,7 @@ const ShowHeader = () => {
                   Tìm kiếm
                 </button>
               </form>
-              {isFocused && showAutocomplete && searchTerm !== "" && (
+              {isFocused && searchTerm !== "" && (
                 <div className="autocomplete-dropdown">
                   <ul>
                     {filteredEventNames.map((name, index) => (
