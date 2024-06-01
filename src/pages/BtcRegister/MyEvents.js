@@ -29,6 +29,7 @@ function MyEvents({ username }) {
         setLoading(false);
       } catch (error) {
         console.error("Error fetching events:", error);
+        setLoading(false);
       }
     };
 
@@ -63,7 +64,7 @@ function MyEvents({ username }) {
   return (
     <div>
       {events.length === 0 ? (
-        <div>Không có sự kiện</div>
+        <div className="my-events">Không có sự kiện</div>
       ) : (
         paginatedEvents.map((event) => (
           <div key={event.id} className="my-events">
