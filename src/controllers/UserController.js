@@ -70,7 +70,7 @@ const LoginUser = async (req, res) => {
         message: "The input is required",
       });
     }
-    const user = await UserService.FindUserByEmail(Email);
+    const user = await UserService.FindUserByUserName(UserName);
     if (!user) {
       return res.status(200).json({
         status: "ERROR",
