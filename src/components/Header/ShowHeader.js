@@ -98,14 +98,14 @@ const ShowHeader = () => {
     localStorage.removeItem("username");
     localStorage.setItem("isGoogle", "false");
     dispatch(logOut());
-    navigate("/SignIn"); // Navigate to the home page after logging out
+    navigate("/"); // Navigate to the home page after logging out
   };
 
   const handleNormalLogOut = () => {
     dispatch(logOut());
     localStorage.setItem("isLoggedIn", "false");
     localStorage.removeItem("username");
-    navigate("/SignUp"); // Navigate to the home page after logging out
+    navigate("/"); // Navigate to the home page after logging out
   };
   const handleSearch = (event) => {
     event.preventDefault();
@@ -126,6 +126,7 @@ const ShowHeader = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       if (isTyping && searchTerm !== "") {
+        setResults([]);
         fetchResults();
         setIsTyping(false);
       } else if (searchTerm === "") {
