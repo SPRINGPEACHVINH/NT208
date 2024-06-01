@@ -35,21 +35,23 @@ function SignUpForm() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8881/api/user/sign-up", {
-        mode: "no-cors",
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          UserName: form.UserName,
-          Password: form.Password,
-          confirmPassword: form.confirmPassword,
-          Email: form.Email,
-          PhoneNumber: form.PhoneNumber,
+      const response = await fetch(
+        "https://nt208.onrender.com/api/user/sign-up",
+        {
+          mode: "no-cors",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            UserName: form.UserName,
+            Password: form.Password,
+            confirmPassword: form.confirmPassword,
+            Email: form.Email,
+            PhoneNumber: form.PhoneNumber,
+          }),
         }
-        ),
-      });
+      );
 
       const data = await response.json();
 
