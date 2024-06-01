@@ -22,6 +22,7 @@ const ShowHeader = () => {
   const dispatch = useDispatch();
 
   const [eventNames, setEventNames] = useState([]);
+  const [showAutocomplete, setShowAutocomplete] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -113,20 +114,27 @@ const ShowHeader = () => {
     return () => clearTimeout(timer);
   }, [searchTerm, isTyping]);
 
-  const fetchResults = async () => {
-    const response = await fetch(
-      `https://nt208.onrender.com/api/event/search?q=${encodeURIComponent(
-        searchTerm
-      )}`
-    );
-    const data = await response.json();
-    setResults(data.data);
-    setIsTyping(false);
+  const fetchResults = async (searchTerm) => {
+    if (searchTerm !== "") {
+      const response = await fetch(
+        `https://nt208.onrender.com/api/event/search?q=${encodeURIComponent(
+          searchTerm
+        )}`
+      );
+      const data = await response.json();
+      setResults(data.data);
+      setIsTyping(false);
+      setShowAutocomplete(false);
+    } else {
+      setResults([]);
+      setShowAutocomplete(false);
+    }
   };
 
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
     setIsTyping(true);
+    setShowAutocomplete(true);
   };
 
   const handleBlur = () => {
@@ -188,7 +196,7 @@ const ShowHeader = () => {
                   Tìm kiếm
                 </button>
               </form>
-              {isFocused && !isTyping && searchTerm !== "" && (
+              {isFocused && showAutocomplete && searchTerm !== "" && (
                 <div className="autocomplete-dropdown">
                   <ul>
                     {filteredEventNames.map((name, index) => (
@@ -199,7 +207,7 @@ const ShowHeader = () => {
                   </ul>
                 </div>
               )}
-              {isFocused && results.length > 0 && (
+              {isFocused && !isTyping && results.length > 0 && (
                 <div className="dropdown">
                   <ul>
                     {results.map((result, index) => (
