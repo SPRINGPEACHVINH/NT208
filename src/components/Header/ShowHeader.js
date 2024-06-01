@@ -44,6 +44,8 @@ const ShowHeader = () => {
   );
 
   const handleKeyDown = (event) => {
+    setShowAutocomplete(true);
+    setIsTyping(true);
     if (event.key === "ArrowDown") {
       event.preventDefault();
       setActiveSuggestionIndex((prevIndex) =>
