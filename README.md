@@ -1,81 +1,72 @@
-# Getting Started with Create React App
+# Đồ án môn học NT208
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Tên trang web: TicketX88
+### Nội dung: Đây là trang web bán vé và xem concert
 
-## Available Scripts
+## 1. Sơ đồ website
+![Sơ đồ](/Sơ%20đồ%20website-1.png)
+![UserFlow](/Sơ%20đồ%20website-2.png)
 
-In the project directory, you can run:
+## 2. Các tính năng trang web
+### Tính năng cơ bản
+* Đăng ký / Đăng nhập
+    - Nhập thông tin người dùng
+* Đăng nhập bằng Google
+* Tạo sự kiện
+    - Nhập thông tin sự kiện
+        - Banner
+        - Logo BTC
+        - Thông tin cơ bản
+        - Miêu tả sự kiện
+        - Giá vé
+* Mua vé sự kiện
+    - Giao diện mua vé bao gồm những thông tin BTC nhập khi tạo sự kiện và tính năng nhập code nếu đã mua vé
+    - Cung cấp mã vé cho người dùng
+* Xem video sự kiện
+    - Nhập mã vé đã mua để xem
+    - Mỗi mã vé chỉ có thể sử dụng bởi account đã mua vé đó
+    - Mã vé của mỗi account là duy nhất
+* Tìm kiếm sự kiện
+    - Đề xuất kết quả khi tìm kiếm
+    - Hiển thị danh sách các sự kiện có chứa nội dung tìm kiếm
+### Tính năng nâng cao
+- AJAX (Tại trang chủ)
+- Auto Complete (Tại thanh tìm kiếm)
+- Không thể đăng nhập 1 account ở 2 thiết bị
 
-### `npm start`
+## 3. Hình ảnh trang web
+### Trang chủ
+![alt text](image.png)
+![alt text](image-2.png)
+### Thông tin chi tiết sự kiện
+![alt text](image-1.png)
+### Trang đăng nhập/đăng kí
+![alt text](image-3.png)
+![alt text](image-4.png)
+### Nhập mã vé và xem sự kiện
+![alt text](image-5.png)
+![alt text](image-6.png)
+### Đăng kí tạo sự kiện
+![alt text](image-7.png)
+![alt text](image-8.png)
+## 4. Hướng dẫn cài đặt:
+### Cài đặt Nodejs và npm
+#### Truy cập đường link [Nodejs](https://nodejs.org/en/) để cài Nodejs
 
-Runs the app in the development mode.\
-Open [http://localhost:8080](http://localhost:8080) to view it in your browser.
+### Clone Reposistory:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+#### `git clone https://github.com/SPRINGPEACHVINH/NT208.git`
 
-### `npm test`
+### Check out sang branch frontend để chạy các lệnh sau
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Tải các packages cần thiết:
 
-### `npm run build`
+#### `npm i react-scripts`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Lệnh launch project local:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### `npm start`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Mở [http://localhost:8080](http://localhost:8080) để xem trên trình duyệt.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-=======
-### 1. Sơ đồ website
-![Sơ đồ](https://github.com/SPRINGPEACHVINH/NT208/blob/main/S%C6%A1%20%C4%91%E1%BB%93%20website-1.png)
-![UserFlow](https://github.com/SPRINGPEACHVINH/NT208/blob/main/S%C6%A1%20%C4%91%E1%BB%93%20website-2.png)
-
-### [2. Cách sử dụng git để làm việc](https://viblo.asia/p/quy-trinh-lam-viec-chuan-chi-voi-git-eW65G10RZDO)
-
-### 3. Vai trò:
-- Frontend: HTML, CSS, JavaScript, ReactJS: updating...
-- Backend: JavaScript, Nodejs: updating...
-
+Trang sẽ tự reload khi sửa code.
