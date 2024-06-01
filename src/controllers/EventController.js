@@ -76,11 +76,22 @@ const getLast = async (req, res) => {
   }
 };
 
+const getBtc = async (req, res) => {
+  try {
+    const btc = await EventService.getBtcByEventId(req.params.id);
+
+    return res.status(200).json({ status: "OK", data: btc });
+  } catch (e) {
+    return res.status(500).json({ status: "ERROR", message: e.message });
+  }
+};
+
 module.exports = {
   search,
   add,
   getAll,
   deleteById,
   getById,
+  getBtc,
   getLast,
 };
