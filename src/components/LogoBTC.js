@@ -3,7 +3,7 @@ import "../styles/LogoBTC.css";
 
 const LogoBTC = () => {
     return (
-    <div class="logo">
+    <div class="logoBTC">
         <div class="organizer">
             <h4 id="title" class="Title">Ban tổ chức</h4>
             <div id="content">
