@@ -142,7 +142,6 @@ const ShowHeader = () => {
     );
     const data = await response.json();
     setResults(data.data);
-    setIsTyping(false);
     setShowAutocomplete(false);
   };
 
@@ -230,7 +229,7 @@ const ShowHeader = () => {
                   </ul>
                 </div>
               )}
-              {isFocused && !isTyping && results.length > 0 && (
+              {isFocused && autoComplete && !isTyping && results.length > 0 && (
                 <div className="dropdown">
                   <ul>
                     {results.map((result, index) => (
