@@ -46,6 +46,9 @@
 ### Nhập mã vé và xem sự kiện
 ![alt text](image-5.png)
 ![alt text](image-6.png)
+### Đăng kí tạo sự kiện
+![alt text](image-7.png)
+![alt text](image-8.png)
 ## 4. Hướng dẫn cài đặt:
 ### Cài đặt Nodejs và npm
 #### Truy cập đường link [Nodejs](https://nodejs.org/en/) để cài Nodejs
