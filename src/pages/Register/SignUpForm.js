@@ -34,7 +34,7 @@ function SignUpForm() {
     e.preventDefault();
 
     try {
-      const response = await fetch("https://ticketx88.azurewebsites.net/api/user/sign-up", {
+      const response = await fetch("http://localhost:8881/api/user/sign-up", {
         mode: "no-cors",
         method: "POST",
         headers: {
@@ -56,7 +56,7 @@ function SignUpForm() {
 
     const signin = {
       method: "POST",
-      url: "https://ticketx88.azurewebsites.net/api/user/sign-in",
+      url: "http://localhost:8881/api/user/sign-in",
       headers: {},
       body: JSON.stringify({
         UserName: form.UserName,

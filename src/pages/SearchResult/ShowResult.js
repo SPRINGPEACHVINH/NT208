@@ -15,7 +15,7 @@ const ShowResults = () => {
     const fetchEvents = async () => {
       setIsLoading(true);
       const response = await fetch(
-        `https://ticketx88.azurewebsites.net/api/event/search?q=${encodeURIComponent(query)}`
+        `http://localhost:8881/api/event/search?q=${encodeURIComponent(query)}`
       );
       const { data } = await response.json();
       setEvents(data);
