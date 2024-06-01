@@ -43,6 +43,7 @@ function SignUpForm() {
         body: JSON.stringify({
           UserName: form.UserName,
           Password: form.Password,
+          confirmPassword: form.confirmPassword,
           Email: form.Email,
           PhoneNumber: form.PhoneNumber,
         }),
