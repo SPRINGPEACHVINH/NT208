@@ -127,9 +127,7 @@ const GoogleSignIn = async (req, res) => {
   }
 };
 
-const ForgotPassword = async (req, res) => {
-  
-}
+const ForgotPassword = async (req, res) => {};
 
 const UpdateUser = async (req, res) => {
   try {
@@ -209,6 +207,28 @@ const RefreshToken = async (req, res) => {
   }
 };
 
+const GetEvents = async (req, res) => {
+  try {
+    const result = await UserService.GetEventsByUser(req.params.UserName);
+    if (!result) {
+      return res.status(404).json({
+        status: "ERROR",
+        message: "UserName not found",
+      });
+    }
+
+    return res.status(200).json({
+      status: "OK",
+      data: result,
+    });
+  } catch (e) {
+    return res.status(500).json({
+      status: "ERROR",
+      message: e.message,
+    });
+  }
+};
+
 module.exports = {
   CreateUser,
   LoginUser,
@@ -218,5 +238,6 @@ module.exports = {
   GetDetailsUser,
   RefreshToken,
   GoogleSignIn,
+  GetEvents,
   ForgotPassword,
 };

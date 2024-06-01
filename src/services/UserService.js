@@ -1,4 +1,6 @@
 const User = require("../models/Users");
+const Btc = require("../models/Btc");
+const Event = require("../models/Events");
 const bcryptjs = require("bcryptjs");
 const genneralToken = require("./JwtService");
 require("dotenv").config();
@@ -26,7 +28,7 @@ const GoogleSignIn = async (newUser) => {
     UserName,
     Email,
     Password: hash,
-    PhoneNumber: "1234"
+    PhoneNumber: "1234",
   });
   return createdUser;
 };
@@ -44,7 +46,10 @@ const LoginUser = (userLogin) => {
           message: "The user does not exist",
         });
       }
-      const comparePassword = bcryptjs.compareSync(Password, checkUser.Password);
+      const comparePassword = bcryptjs.compareSync(
+        Password,
+        checkUser.Password
+      );
       console.log("comparePassword", comparePassword);
       if (!comparePassword) {
         resolve({
@@ -168,6 +173,13 @@ const CheckPassword = (inputPassword, userPassword) => {
   return bcryptjs.compareSync(inputPassword, userPassword);
 };
 
+const GetEventsByUser = async (UserName) => {
+  const user = await User.findOne({ UserName: UserName });
+  const btcs = await Btc.find({ User: user._id });
+  const btcIds = btcs.map((btc) => btc._id);
+  return (events = await Event.find({ Btc: { $in: btcIds } }));
+};
+
 module.exports = {
   CreateUser,
   LoginUser,
@@ -177,5 +189,6 @@ module.exports = {
   FindUserByUserName,
   FindUserByEmail,
   CheckPassword,
-  GoogleSignIn
+  GoogleSignIn,
+  GetEventsByUser,
 };
