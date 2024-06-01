@@ -19,7 +19,7 @@ function MyEvents({ username }) {
     const fetchEvents = async () => {
       try {
         const response = await fetch(
-          `http://ticketx88.azurewebsites.net/api/user/get-events/${username}`
+          "http://localhost:8881/api/user/get-events/letuan"
         );
         if (!response.ok) {
           throw new Error("Failed to fetch events.");
@@ -62,50 +62,58 @@ function MyEvents({ username }) {
 
   return (
     <div>
-      {paginatedEvents.map((event) => (
-        <div key={event.id} className="my-events">
-          {event.Picture_event && (
-            <div className="event-cover">
-              <img
-                src={event.Picture_event}
-                alt="CoverEvent"
-                className="event-cover-image"
-              />
-            </div>
-          )}
-          <div>
-            <h4>{event.EventName}</h4>
-            <div style={{ display: "flex" }}>
-              <div style={{ marginRight: "10px" }}>
-                <AppstoreOutlined />
+      {events.length === 0 ? (
+        <div>Không có sự kiện</div>
+      ) : (
+        paginatedEvents.map((event) => (
+          <div key={event.id} className="my-events">
+            {event.Picture_event && (
+              <div className="event-cover">
+                <img
+                  src={event.Picture_event}
+                  alt="CoverEvent"
+                  className="event-cover-image"
+                />
               </div>
-              <span className="color-info">{event.EventCategory}</span>
-            </div>
-            <div style={{ display: "flex" }}>
-              <div style={{ marginRight: "10px" }}>
-                <CalendarOutlined />
+            )}
+            <div>
+              <h4>{event.EventName}</h4>
+              <div style={{ display: "flex" }}>
+                <div style={{ marginRight: "10px" }}>
+                  <AppstoreOutlined />
+                </div>
+                <span className="color-info">{event.EventCategory}</span>
               </div>
-              <div className="color-info">
-                {moment(event.EventTime).format("DD/MM/YYYY - HH:mm")}
+              <div style={{ display: "flex" }}>
+                <div style={{ marginRight: "10px" }}>
+                  <CalendarOutlined />
+                </div>
+                <div className="color-info">
+                  {moment(event.EventTime).format("DD/MM/YYYY - HH:mm")}
+                </div>
               </div>
-            </div>
-            <div style={{ display: "flex" }}>
-              <div style={{ marginRight: "10px" }}>
-                <DollarCircleOutlined />
+              <div style={{ display: "flex" }}>
+                <div style={{ marginRight: "10px" }}>
+                  <DollarCircleOutlined />
+                </div>
+                <div className="color-info">
+                  {formatPrice(event.TicketPrice)}
+                </div>
               </div>
-              <div className="color-info">{formatPrice(event.TicketPrice)}</div>
             </div>
           </div>
+        ))
+      )}
+      {events.length > 0 && (
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <Pagination
+            current={currentPage}
+            total={events.length}
+            pageSize={pageSize}
+            onChange={handlePageChange}
+          />
         </div>
-      ))}
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <Pagination
-          current={currentPage}
-          total={events.length}
-          pageSize={pageSize}
-          onChange={handlePageChange}
-        />
-      </div>
+      )}
     </div>
   );
 }

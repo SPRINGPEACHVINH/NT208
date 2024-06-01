@@ -137,66 +137,6 @@ function Form({ username, isMobile }) {
       });
   };
 
-  // Upload logo event
-  const [fileListLogoEvent, setFileListLogoEvent] = useState([]);
-  const [uploadErrorLogoEvent, setUploadErrorLogoEvent] = useState(false);
-
-  const handleChangeLogoEvent = ({ fileList }) => {
-    const uploadedFile = fileList.find(
-      (file) => !fileListLogoEvent.some((item) => item.uid === file.uid)
-    );
-    if (uploadedFile) {
-      message.success("Tải ảnh lên thành công");
-      setUploadErrorLogoEvent(false);
-    }
-
-    Promise.all(
-      fileList.map(async (file) => {
-        const base64 = await imageToBase64(file.originFileObj);
-        return { ...file, base64 };
-      })
-    ).then((fileListBase64) => {
-      setFileListLogoEvent(fileListBase64);
-    });
-  };
-
-  const checkImageSizeLogoEvent = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const img = new Image();
-        img.src = event.target.result;
-        img.onload = () => {
-          const width = img.width;
-          const height = img.height;
-          if (width === 720 && height === 958) {
-            resolve();
-          } else {
-            reject("Vui lòng tải ảnh ở kích thước 720x958");
-            message.error("Vui lòng tải ảnh ở kích thước 720x958");
-          }
-        };
-      };
-      reader.readAsDataURL(file);
-    });
-  };
-
-  const beforeUploadLogoEvent = (file) => {
-    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
-    if (!isJpgOrPng) {
-      message.error(
-        "Định dạng không phù hợp. Định dạng cho phép: jpeg, jpg, png."
-      );
-      return Upload.LIST_IGNORE;
-    }
-
-    return checkImageSizeLogoEvent(file)
-      .then(() => file)
-      .catch(() => {
-        return Upload.LIST_IGNORE;
-      });
-  };
-
   // Hàm chuyển đổi ảnh sang base64
   const imageToBase64 = (file) => {
     return new Promise((resolve, reject) => {
@@ -382,15 +322,11 @@ function Form({ username, isMobile }) {
     if (
       hasError ||
       Object.values(eventData).every((value) => value.trim() === "") ||
-      fileListCoverEvent.length === 0 ||
-      fileListLogoEvent.length === 0
+      fileListCoverEvent.length === 0
     ) {
       if (canShowMessage) {
         if (fileListCoverEvent.length === 0) {
           setUploadErrorCoverEvent(true);
-        }
-        if (fileListLogoEvent.length === 0) {
-          setUploadErrorLogoEvent(true);
         }
         setCanShowMessage(false);
         message.error("Vui lòng nhập đầy đủ thông tin");
@@ -398,11 +334,7 @@ function Form({ username, isMobile }) {
       }
     }
 
-    if (
-      !hasError &&
-      fileListCoverEvent.length > 0 &&
-      fileListLogoEvent.length > 0
-    ) {
+    if (!hasError && fileListCoverEvent.length > 0) {
       setActiveStep(activeStep + 1);
     }
   };
@@ -432,7 +364,7 @@ function Form({ username, isMobile }) {
   const handleSave = async () => {
     try {
       const userResponse = await fetch(
-        "https://ticketx88.azurewebsites.net/api/user/get-details/" + username
+        "http://localhost:8881/api/user/get-details/letuan"
       );
 
       if (!userResponse.ok) {
@@ -452,26 +384,23 @@ function Form({ username, isMobile }) {
         btcInformation,
       } = formData;
 
-      const btcResponse = await fetch(
-        "http://ticketx88.azurewebsites.net/api/btc/add",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            BtcId: enterpriseNumberBusiness,
-            BtcName: btcName,
-            BtcInfo: btcInformation,
-            EnterpriseName: enterpriseName,
-            Email: enterpriseEmail,
-            PhoneNumber: enterprisePhone,
-            BtcAddress: enterpriseAddress,
-            Logo_btc: fileListLogoBTC[0].base64,
-            User: userId,
-          }),
-        }
-      );
+      const btcResponse = await fetch("http://localhost:8881/api/btc/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          BtcId: enterpriseNumberBusiness,
+          BtcName: btcName,
+          BtcInfo: btcInformation,
+          EnterpriseName: enterpriseName,
+          Email: enterpriseEmail,
+          PhoneNumber: enterprisePhone,
+          BtcAddress: enterpriseAddress,
+          Logo_btc: fileListLogoBTC[0].base64,
+          User: userId,
+        }),
+      });
 
       if (!btcResponse.ok) {
         const errorData = await btcResponse.json();
@@ -486,7 +415,7 @@ function Form({ username, isMobile }) {
 
       // Save event
       const lastEventResponse = await fetch(
-        "https://ticketx88.azurewebsites.net/api/event/last"
+        "http://localhost:8881/api/event/last"
       );
       if (!lastEventResponse.ok) {
         throw new Error("Failed to fetch last event ID.");
@@ -512,27 +441,24 @@ function Form({ username, isMobile }) {
         eventTicketPrice,
       } = eventData;
 
-      const eventResponse = await fetch(
-        "https://ticketx88.azurewebsites.net/api/event/add",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            EventId: newEventId,
-            EventName: eventName,
-            EventTime: eventDateTime,
-            EventInfo: eventDescription,
-            EventLocation: "TicketX88",
-            EventCategory: eventType,
-            TicketPrice: eventTicketPrice,
-            Picture_event: fileListCoverEvent[0].base64,
-            VideoPath: "chuaco",
-            Btc: btcId,
-          }),
-        }
-      );
+      const eventResponse = await fetch("http://localhost:8881/api/event/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          EventId: newEventId,
+          EventName: eventName,
+          EventTime: eventDateTime,
+          EventInfo: eventDescription,
+          EventLocation: "TicketX88",
+          EventCategory: eventType,
+          TicketPrice: eventTicketPrice,
+          Picture_event: fileListCoverEvent[0].base64,
+          VideoPath: "chuaco",
+          Btc: btcId,
+        }),
+      });
 
       if (!eventResponse.ok) {
         const errorData = await eventResponse.json();
@@ -900,148 +826,155 @@ function Form({ username, isMobile }) {
               Vui lòng tải ảnh nền sự kiện
             </span>
           </Dragger>
-          <div className="container-form-event">
-            <Dragger
-              maxCount={1}
-              listType="picture-card"
-              className="ant-container-drag-upload-logo-event"
-              fileList={fileListLogoEvent}
-              onChange={handleChangeLogoEvent}
-              beforeUpload={beforeUploadLogoEvent}
-              itemRender={renderItem}
-            >
-              {fileListLogoEvent.length === 0 && (
-                <div>
-                  <p className="ant-upload-icon">
-                    <InboxOutlined />
-                  </p>
-                  <p className="ant-upload-text">Thêm logo sự kiện</p>
-                  <p className="ant-upload-hint">(720x958)</p>
-                </div>
-              )}
+          <div className="form-group">
+            <div className="form-item">
+              <label>
+                Tên sự kiện<span style={{ color: "red" }}>*</span>
+              </label>
+              <input
+                type="text"
+                id="event-name"
+                name="eventName"
+                placeholder="Tên sự kiện"
+                value={eventData.eventName}
+                onChange={handleInputEventChange}
+              />
               <span
-                style={{
-                  position: "absolute",
-                  left: "0",
-                  bottom: "-25px",
-                }}
                 className={`error-message ${
-                  uploadErrorLogoEvent ? "show" : ""
+                  eventErrors.eventName ? "show" : ""
                 }`}
               >
-                Vui lòng tải ảnh logo sự kiện
+                Vui lòng nhập tên sự kiện
               </span>
-            </Dragger>
-            <div className="form-group-event">
-              <div className="form-item event-item">
-                <label>
-                  Tên sự kiện<span style={{ color: "red" }}>*</span>
-                </label>
+            </div>
+            <div className="form-item">
+              <label>
+                Thể loại sự kiện<span style={{ color: "red" }}>*</span>
+              </label>
+              <select
+                id="event-type"
+                name="eventType"
+                value={eventData.eventType}
+                onChange={handleInputEventChange}
+                className="select-event-type"
+                style={{
+                  color: eventData.eventType ? "black" : "rgb(89,92,95)",
+                }}
+              >
+                <option value="" disabled selected hidden>
+                  Vui lòng chọn
+                </option>
+                <option value="Nhạc sống">Nhạc sống</option>
+                <option value="Sân khấu & Nghệ thuật">
+                  Sân khấu & Nghệ thuật
+                </option>
+                <option value="Thể thao">Thể thao</option>
+              </select>
+              <span
+                className={`error-message ${
+                  eventErrors.eventType ? "show" : ""
+                }`}
+              >
+                Vui lòng chọn thể loại sự kiện
+              </span>
+            </div>
+          </div>
+          <div className="form-group">
+            <div className="form-item">
+              <label>
+                Thời gian diễn ra sự kiện
+                <span style={{ color: "red" }}>*</span>
+              </label>
+              <Datetime
+                timeFormat="HH:mm"
+                id="event-date-time"
+                name="eventDateTime"
+                value={eventData.eventDateTime}
+                onChange={(value) =>
+                  handleInputEventChange(value, "eventDateTime")
+                }
+                inputProps={{
+                  placeholder: "Thời gian diễn ra sự kiện",
+                  readOnly: true,
+                  style: { boxShadow: "none" },
+                }}
+              />
+              <span
+                className={`error-message ${
+                  eventErrors.eventDateTime ? "show" : ""
+                }`}
+              >
+                Vui lòng chọn thời gian diễn ra sự kiện
+              </span>
+            </div>
+            <div className="form-item">
+              <label>
+                Giá vé<span style={{ color: "red" }}>*</span>
+              </label>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  position: "relative",
+                }}
+              >
                 <input
                   type="text"
-                  id="event-name"
-                  name="eventName"
-                  placeholder="Tên sự kiện"
-                  value={eventData.eventName}
-                  onChange={handleInputEventChange}
-                />
-                <span
-                  className={`error-message ${
-                    eventErrors.eventName ? "show" : ""
-                  }`}
-                >
-                  Vui lòng nhập tên sự kiện
-                </span>
-              </div>
-              <div className="form-item event-item">
-                <label>
-                  Thể loại sự kiện<span style={{ color: "red" }}>*</span>
-                </label>
-                <select
-                  id="event-type"
-                  name="eventType"
-                  value={eventData.eventType}
-                  onChange={handleInputEventChange}
-                  className="select-event-type"
-                  style={{
-                    color: eventData.eventType ? "black" : "rgb(89,92,95)",
-                  }}
-                >
-                  <option value="" disabled selected hidden>
-                    Vui lòng chọn
-                  </option>
-                  <option value="Nhạc sống">Nhạc sống</option>
-                  <option value="Sân khấu & Nghệ thuật">
-                    Sân khấu & Nghệ thuật
-                  </option>
-                  <option value="Thể thao">Thể thao</option>
-                </select>
-                <span
-                  className={`error-message ${
-                    eventErrors.eventType ? "show" : ""
-                  }`}
-                >
-                  Vui lòng chọn thể loại sự kiện
-                </span>
-              </div>
-              <div className="form-item event-item">
-                <label>
-                  Thời gian diễn ra sự kiện
-                  <span style={{ color: "red" }}>*</span>
-                </label>
-                <Datetime
-                  timeFormat="HH:mm"
-                  id="event-date-time"
-                  name="eventDateTime"
-                  value={eventData.eventDateTime}
-                  onChange={(value) =>
-                    handleInputEventChange(value, "eventDateTime")
+                  id="event-ticket-price"
+                  name="eventTicketPrice"
+                  placeholder="Giá vé"
+                  value={eventData.eventTicketPrice}
+                  onChange={(e) =>
+                    handleInputEventChange(e, "eventTicketPrice")
                   }
-                  inputProps={{
-                    placeholder: "Thời gian diễn ra sự kiện",
-                    readOnly: true,
-                    style: { boxShadow: "none" },
-                  }}
                 />
-                <span
-                  className={`error-message ${
-                    eventErrors.eventDateTime ? "show" : ""
-                  }`}
-                >
-                  Vui lòng chọn thời gian diễn ra sự kiện
-                </span>
+                <span className="currency">VNĐ</span>
               </div>
-              <div className="form-item event-item">
-                <label>
-                  Giá vé<span style={{ color: "red" }}>*</span>
-                </label>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    position: "relative",
-                  }}
-                >
-                  <input
-                    type="text"
-                    id="event-ticket-price"
-                    name="eventTicketPrice"
-                    placeholder="Giá vé"
-                    value={eventData.eventTicketPrice}
-                    onChange={(e) =>
-                      handleInputEventChange(e, "eventTicketPrice")
-                    }
-                  />
-                  <span className="currency">VNĐ</span>
-                </div>
-                <span
-                  className={`error-message ${
-                    eventErrors.eventTicketPrice ? "show" : ""
-                  }`}
-                >
-                  Vui lòng nhập giá vé
-                </span>
-              </div>
+              <span
+                className={`error-message ${
+                  eventErrors.eventTicketPrice ? "show" : ""
+                }`}
+              >
+                Vui lòng nhập giá vé
+              </span>
+            </div>
+          </div>
+          <div className="form-group">
+            <div className="form-item">
+              <label>
+                Số lượng vé<span style={{ color: "red" }}>*</span>
+              </label>
+              <input
+                type="number"
+                id="event-number-ticket"
+                name="eventNumberTicket"
+                placeholder="Số lượng vé"
+              />
+              {/* <span
+                className={`error-message ${
+                  eventErrors.eventName ? "show" : ""
+                }`}
+              >
+                Vui lòng nhập số lượng vé
+              </span> */}
+            </div>
+            <div className="form-item">
+              <label>
+                Link youtube<span style={{ color: "red" }}>*</span>
+              </label>
+              <input
+                type="text"
+                id="event-link-youtube"
+                name="eventLinkYoutube"
+                placeholder="Link youtube"
+              />
+              {/* <span
+                className={`error-message ${
+                  eventErrors.eventType ? "show" : ""
+                }`}
+              >
+                Vui lòng nhập link youtube
+              </span> */}
             </div>
           </div>
           <TextArea
