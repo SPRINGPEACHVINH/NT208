@@ -30,12 +30,6 @@ app.use(cors({
   credentials: true,
 }));
 
-app.use(cors({
-  origin: 'http://localhost:8080',
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true,
-}));
-
 app.use("/auth", authRoutes);
 
 app.use(bodyParser.json());
