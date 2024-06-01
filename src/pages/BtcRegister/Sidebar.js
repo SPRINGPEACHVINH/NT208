@@ -48,7 +48,7 @@ function Sidebar({ isMobile, isSidebarOpen, activeTab, handleTabChange }) {
         </symbol>
       </svg>
       {isSidebarOpen && (
-        <ul className="nav nav-pills flex-column mb-auto">
+        <ul className="nav nav-pills flex-column mb-auto sidebar-open">
           <li className="nav-item-open">
             <Link
               to="/Events"
@@ -81,7 +81,7 @@ function Sidebar({ isMobile, isSidebarOpen, activeTab, handleTabChange }) {
         </ul>
       )}
       {!isSidebarOpen && (
-        <ul className="nav nav-pills flex-column mb-auto">
+        <ul className="nav nav-pills flex-column mb-auto sidebar-close">
           <li className="nav-item-close">
             <Link
               to="/Events"
