@@ -127,13 +127,14 @@ const ShowHeader = () => {
     const timer = setTimeout(() => {
       if (isTyping && searchTerm !== "") {
         fetchResults();
+        setIsTyping(false);
       } else if (searchTerm === "") {
         setResults([]);
       }
     }, 1000); // 1000ms delay
 
-    return () => clearTimeout(timer);
-  }, [searchTerm, isTyping]);
+    return () => clearTimeout(timer); // Clear the timeout when the component unmounts or when searchTerm or isTyping changes
+  }, [isTyping, searchTerm]);
 
   const fetchResults = async () => {
     const response = await fetch(
@@ -151,16 +152,6 @@ const ShowHeader = () => {
     setIsTyping(true);
     setShowAutocomplete(true);
     setActiveSuggestionIndex(0);
-
-    if (typingTimeout) {
-      clearTimeout(typingTimeout);
-    }
-
-    setTypingTimeout(
-      setTimeout(() => {
-        setIsTyping(false);
-      }, 500)
-    );
   };
 
   const handleBlur = () => {
