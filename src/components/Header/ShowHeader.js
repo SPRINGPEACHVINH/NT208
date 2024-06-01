@@ -23,6 +23,7 @@ const ShowHeader = () => {
 
   const [eventNames, setEventNames] = useState([]);
   const [showAutocomplete, setShowAutocomplete] = useState(false);
+  const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(0);
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -41,6 +42,23 @@ const ShowHeader = () => {
   const filteredEventNames = eventNames.filter((name) =>
     name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const handleKeyDown = (event) => {
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      setActiveSuggestionIndex((prevIndex) =>
+        prevIndex < filteredEventNames.length - 1 ? prevIndex + 1 : prevIndex
+      );
+    } else if (event.key === "ArrowUp") {
+      event.preventDefault();
+      setActiveSuggestionIndex((prevIndex) =>
+        prevIndex > 0 ? prevIndex - 1 : 0
+      );
+    } else if (event.key === "Tab") {
+      event.preventDefault();
+      setSearchTerm(filteredEventNames[activeSuggestionIndex]);
+    }
+  };
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -109,7 +127,7 @@ const ShowHeader = () => {
       } else if (searchTerm === "") {
         setResults([]);
       }
-    }, 250); // 250ms delay
+    }, 1000); // 1000ms delay
 
     return () => clearTimeout(timer);
   }, [searchTerm, isTyping]);
@@ -130,6 +148,7 @@ const ShowHeader = () => {
     setSearchTerm(event.target.value);
     setIsTyping(true);
     setShowAutocomplete(true);
+    setActiveSuggestionIndex(0);
   };
 
   const handleBlur = () => {
@@ -184,6 +203,7 @@ const ShowHeader = () => {
                   autoComplete="off"
                   value={searchTerm}
                   onChange={handleInputChange}
+                  onKeyDown={handleKeyDown}
                   onFocus={handleFocus}
                   onBlur={handleBlur}
                 />
@@ -195,7 +215,13 @@ const ShowHeader = () => {
                 <div className="autocomplete-dropdown">
                   <ul>
                     {filteredEventNames.map((name, index) => (
-                      <li key={index} onClick={() => setSearchTerm(name)}>
+                      <li
+                        key={index}
+                        onClick={() => setSearchTerm(name)}
+                        className={
+                          index === activeSuggestionIndex ? "active" : ""
+                        }
+                      >
                         {name}
                       </li>
                     ))}
