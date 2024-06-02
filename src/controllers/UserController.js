@@ -133,7 +133,6 @@ const ForgotPassword = async (req, res) => {};
 const UpdateUser = async (req, res) => {
   try {
     const userId = req.query.id;
-    console.log("userId", userId);
     const response = await UserService.LoginUser(req.body);
     return res.status(200).json(response);
   } catch (e) {
