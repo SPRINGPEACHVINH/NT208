@@ -7,6 +7,18 @@
   height: 100%;
   width: 100%;
   position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+.d-flex.sidebar-close {
+  height: 100%;
+  width: 100%;
+}
+
+.sidebar-open {
+  height: 100%;
+  width: 100%;
 }
 
 .nav-item-close {

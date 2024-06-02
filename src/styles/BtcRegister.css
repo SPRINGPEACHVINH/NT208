@@ -38,7 +38,7 @@
 
 .col-md-3-hidden-desktop {
   padding: 0;
-  width: 6%;
+  width: 5%;
   height: 100%;
   position: fixed;
 }
@@ -65,7 +65,7 @@
   flex: 1;
   padding: 10px;
   height: 100%;
-  margin-left: 6%;
+  margin-left: 5%;
 }
 
 .col-md-9-hidden-mobile {

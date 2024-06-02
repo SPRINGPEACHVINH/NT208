@@ -210,6 +210,8 @@ function Form({ username, isMobile }) {
     eventDateTime: "",
     eventTicketPrice: "",
     eventDescription: "",
+    eventNumberTicket: "",
+    eventLinkVideo: "",
   });
 
   const [eventErrors, setEventErrors] = useState({
@@ -218,6 +220,8 @@ function Form({ username, isMobile }) {
     eventDateTime: false,
     eventTicketPrice: false,
     eventDescription: false,
+    eventNumberTicket: false,
+    eventLinkVideo: false,
   });
 
   const handleInputEventChange = (e, name) => {
@@ -229,6 +233,13 @@ function Form({ username, isMobile }) {
     } else {
       targetName = name;
       targetValue = e;
+    }
+
+    if (
+      targetName === "eventNumberTicket" ||
+      targetName === "eventTicketPrice"
+    ) {
+      targetValue = targetValue.replace(/[^0-9]/g, "");
     }
 
     setEventData((prevEventData) => ({
@@ -315,6 +326,13 @@ function Form({ username, isMobile }) {
           newErrors[key] = false;
         }
       }
+    }
+
+    const embedLinkPattern =
+      /^(https:\/\/www\.youtube\.com\/embed\/|https:\/\/player\.vimeo\.com\/video\/)/;
+    if (!embedLinkPattern.test(eventData.eventLinkVideo)) {
+      newErrors.eventLinkVideo = true;
+      hasError = true;
     }
 
     setEventErrors(newErrors);
@@ -442,6 +460,8 @@ function Form({ username, isMobile }) {
         eventDescription,
         eventType,
         eventTicketPrice,
+        eventLinkVideo,
+        eventNumberTicket,
       } = eventData;
 
       const eventResponse = await fetch(
@@ -459,8 +479,9 @@ function Form({ username, isMobile }) {
             EventLocation: "TicketX88",
             EventCategory: eventType,
             TicketPrice: eventTicketPrice,
+            NumberOfTickets: eventNumberTicket,
             Picture_event: fileListCoverEvent[0].base64,
-            VideoPath: "chuaco",
+            VideoPath: eventLinkVideo,
             Btc: btcId,
           }),
         }
@@ -476,7 +497,6 @@ function Form({ username, isMobile }) {
       const data = await eventResponse.json();
       console.log(data);
 
-      // Save ticket
       setModalVisible(true);
     } catch (error) {
       console.error("Failed to save event:", error);
@@ -487,6 +507,11 @@ function Form({ username, isMobile }) {
   const handleModalOk = () => {
     setModalVisible(false);
     navigate("/Events");
+  };
+
+  // Hàm kiểm tra ngày hợp lệ
+  const isValidDate = (current) => {
+    return current.isAfter(Datetime.moment().subtract(1, "day"));
   };
 
   return (
@@ -893,6 +918,7 @@ function Form({ username, isMobile }) {
               </label>
               <Datetime
                 timeFormat="HH:mm"
+                dateFormat="DD/MM/YYYY"
                 id="event-date-time"
                 name="eventDateTime"
                 value={eventData.eventDateTime}
@@ -904,6 +930,7 @@ function Form({ username, isMobile }) {
                   readOnly: true,
                   style: { boxShadow: "none" },
                 }}
+                isValidDate={isValidDate}
               />
               <span
                 className={`error-message ${
@@ -951,36 +978,44 @@ function Form({ username, isMobile }) {
                 Số lượng vé<span style={{ color: "red" }}>*</span>
               </label>
               <input
-                type="number"
+                type="text"
                 id="event-number-ticket"
                 name="eventNumberTicket"
                 placeholder="Số lượng vé"
+                value={eventData.eventNumberTicket}
+                onChange={handleInputEventChange}
               />
-              {/* <span
+              <span
                 className={`error-message ${
-                  eventErrors.eventName ? "show" : ""
+                  eventErrors.eventNumberTicket ? "show" : ""
                 }`}
               >
                 Vui lòng nhập số lượng vé
-              </span> */}
+              </span>
             </div>
             <div className="form-item">
               <label>
-                Link youtube<span style={{ color: "red" }}>*</span>
+                Link video<span style={{ color: "red" }}>*</span>
               </label>
               <input
                 type="text"
-                id="event-link-youtube"
-                name="eventLinkYoutube"
-                placeholder="Link youtube"
+                id="event-link-video"
+                name="eventLinkVideo"
+                placeholder="Link video"
+                value={eventData.eventLinkVideo}
+                onChange={handleInputEventChange}
               />
-              {/* <span
+              <span
                 className={`error-message ${
-                  eventErrors.eventType ? "show" : ""
+                  eventErrors.eventLinkVideo ? "show" : ""
                 }`}
               >
-                Vui lòng nhập link youtube
-              </span> */}
+                {eventData.eventLinkVideo.trim() === ""
+                  ? "Vui lòng nhập link video"
+                  : eventErrors.eventLinkVideo
+                  ? "Vui lòng nhập link video dạng embed"
+                  : ""}
+              </span>
             </div>
           </div>
           <TextArea
@@ -993,7 +1028,7 @@ function Form({ username, isMobile }) {
           />
           <span
             className={`error-message ${
-              eventErrors.eventDecsription ? "show" : ""
+              eventErrors.eventDescription ? "show" : ""
             }`}
           >
             Vui lòng nhập thông tin sự kiện

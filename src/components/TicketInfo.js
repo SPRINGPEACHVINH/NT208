@@ -9,6 +9,7 @@ const TicketInfo = ({ event, user }) => {
   const [selectedDetail, setSelectedDetail] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [ticket, setTicket] = useState(null);
+  const [email, setEmail] = useState(null);
 
   const navigate = useNavigate();
 
@@ -85,8 +86,10 @@ const TicketInfo = ({ event, user }) => {
     const userDetailsResponse = await fetch(
       `https://nt208.onrender.com/api/user/get-details/${userName}`
     );
+
     const res = await userDetailsResponse.json();
     const userDetails = res.data;
+    setEmail(userDetails.Email);
 
     const response = await fetch(
       "https://nt208.onrender.com/api/ticket/payForTicket",
@@ -103,6 +106,7 @@ const TicketInfo = ({ event, user }) => {
     );
 
     if (!response.ok) {
+      console.error("Failed to buy ticket: ", response);
       message.error("Failed to buy ticket");
       return;
     }
@@ -111,6 +115,21 @@ const TicketInfo = ({ event, user }) => {
     setTicket(data.ticket);
     message.success("Ticket purchased successfully!");
     setModalOpen(true);
+
+    const sendMail = await fetch("https://nt208.onrender.com/api/mail/send", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        Email: userDetails.Email,
+        Subject: "Ticket purchase for TicketX88",
+        Content: `You have purchased a ticket for the event ${event.EventName}, your ticket code is: ${data.ticket}`,
+      }),
+    });
+    if(!sendMail.ok) {
+      message.error("Failed to send email");
+    }
   };
 
   return (
@@ -231,15 +250,15 @@ const TicketInfo = ({ event, user }) => {
         visible={modalOpen}
         onOk={async () => {
           setModalOpen(false);
-          try {
-            await navigator.clipboard.writeText(ticket);
-            message.success("Ticket copied to clipboard");
-          } catch (err) {
-            console.error("Failed to copy ticket: ", err);
-          }
+          // try {
+          //   await navigator.clipboard.writeText(ticket);
+          //   message.success("Ticket copied to clipboard");
+          // } catch (err) {
+          //   console.error("Failed to copy ticket: ", err);
+          // }
         }}
       >
-        <p>Mã vé là: {ticket}</p>
+        <p>Mã vé đã được gửi về email: {email}</p>
       </Modal>
     </div>
   );
