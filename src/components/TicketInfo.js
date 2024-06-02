@@ -87,7 +87,8 @@ const TicketInfo = ({ event, user }) => {
     );
     const res = await userDetailsResponse.json();
     const userDetails = res.data;
-
+    console.log(userDetails.Email);
+    console.log(event.EventName)
     const sendMail = await fetch("https://nt208.onrender.com/api/mail/send", {
       method: "POST",
       headers: {
