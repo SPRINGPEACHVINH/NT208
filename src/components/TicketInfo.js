@@ -113,6 +113,7 @@ const TicketInfo = ({ event, user }) => {
 
     const data = await response.json();
     setTicket(data.ticket);
+    console.log("ticket: ", ticket);
     message.success("Ticket purchased successfully!");
     setModalOpen(true);
 
