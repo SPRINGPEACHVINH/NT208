@@ -89,7 +89,7 @@ const TicketInfo = ({ event, user }) => {
     const userDetails = res.data;
 
     const sendMail = await fetch("https://nt208.onrender.com/api/mail/send", {
-      method: "GET",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
