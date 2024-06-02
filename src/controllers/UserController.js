@@ -128,7 +128,16 @@ const GoogleSignIn = async (req, res) => {
   }
 };
 
-const ForgotPassword = async (req, res) => {};
+const ForgotPassword = async (req, res) => {
+  try {
+    
+  }
+  catch (e) {
+    return res.status(404).json({
+      error: e.message,
+    });
+  }
+};
 
 const UpdateUser = async (req, res) => {
   try {
