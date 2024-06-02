@@ -87,23 +87,8 @@ const TicketInfo = ({ event, user }) => {
     );
     const res = await userDetailsResponse.json();
     const userDetails = res.data;
-    console.log(userDetails.Email);
-    console.log(event.EventName)
-    const sendMail = await fetch("https://nt208.onrender.com/api/mail/send", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        Email: userDetails.Email,
-        Subject: "Ticket purchase",
-        Content: `You have purchased a ticket for the event ${event.EventName}, your ticket code is: ${ticket}`,
-      }),
-    });
-    if(!sendMail.ok) {
-      message.error("Failed to send email");
-    }
 
+    
     const response = await fetch(
       "https://nt208.onrender.com/api/ticket/payForTicket",
       {
@@ -127,6 +112,23 @@ const TicketInfo = ({ event, user }) => {
     setTicket(data.ticket);
     message.success("Ticket purchased successfully!");
     setModalOpen(true);
+    
+    console.log(userDetails.Email);
+    console.log(event.EventName)
+    const sendMail = await fetch("https://nt208.onrender.com/api/mail/send", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        Email: userDetails.Email,
+        Subject: "Ticket purchase",
+        Content: `You have purchased a ticket for the event ${event.EventName}, your ticket code is: ${ticket}`,
+      }),
+    });
+    if(!sendMail.ok) {
+      message.error("Failed to send email");
+    }
   };
 
   return (
