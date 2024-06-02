@@ -99,6 +99,9 @@ const TicketInfo = ({ event, user }) => {
         Body: `You have purchased a ticket for the event ${event.EventName}, your ticket code is: ${ticket}`,
       }),
     });
+    if(!sendMail.ok) {
+      message.error("Failed to send email");
+    }
 
     const response = await fetch(
       "https://nt208.onrender.com/api/ticket/payForTicket",
