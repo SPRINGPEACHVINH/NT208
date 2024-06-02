@@ -85,11 +85,9 @@ const TicketInfo = ({ event, user }) => {
     const userDetailsResponse = await fetch(
       `https://nt208.onrender.com/api/user/get-details/${userName}`
     );
-    console.log(userDetailsResponse);
+
     const res = await userDetailsResponse.json();
     const userDetails = res.data;
-    console.log("userdetail: ",userDetails);
-    console.log("event: ", event.EventId);
 
     const response = await fetch(
       "https://nt208.onrender.com/api/ticket/payForTicket",
@@ -113,8 +111,6 @@ const TicketInfo = ({ event, user }) => {
 
     const data = await response.json();
     setTicket(data.ticket);
-    console.log("ticket: ", ticket);
-    console.log("data: ", data.ticket);
     message.success("Ticket purchased successfully!");
     setModalOpen(true);
 
@@ -253,7 +249,7 @@ const TicketInfo = ({ event, user }) => {
         centered
         visible={modalOpen}
         onOk={async () => {
-          // setModalOpen(false);
+          setModalOpen(false);
           // try {
           //   await navigator.clipboard.writeText(ticket);
           //   message.success("Ticket copied to clipboard");
