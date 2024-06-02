@@ -9,6 +9,7 @@ const TicketInfo = ({ event, user }) => {
   const [selectedDetail, setSelectedDetail] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [ticket, setTicket] = useState(null);
+  const [email, setEmail] = useState(null);
 
   const navigate = useNavigate();
 
@@ -88,6 +89,7 @@ const TicketInfo = ({ event, user }) => {
 
     const res = await userDetailsResponse.json();
     const userDetails = res.data;
+    setEmail(userDetails.Email);
 
     const response = await fetch(
       "https://nt208.onrender.com/api/ticket/payForTicket",
@@ -114,8 +116,6 @@ const TicketInfo = ({ event, user }) => {
     message.success("Ticket purchased successfully!");
     setModalOpen(true);
 
-    console.log(userDetails.Email);
-    console.log(event.EventName)
     const sendMail = await fetch("https://nt208.onrender.com/api/mail/send", {
       method: "POST",
       headers: {
