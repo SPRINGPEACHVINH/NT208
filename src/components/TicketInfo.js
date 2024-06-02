@@ -258,7 +258,7 @@ const TicketInfo = ({ event, user }) => {
           // }
         }}
       >
-        <p>Mã vé đã được gửi về email của bạn</p>
+        <p>Mã vé đã được gửi về email: {email}</p>
       </Modal>
     </div>
   );
