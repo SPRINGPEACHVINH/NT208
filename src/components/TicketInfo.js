@@ -88,7 +88,6 @@ const TicketInfo = ({ event, user }) => {
     const res = await userDetailsResponse.json();
     const userDetails = res.data;
 
-    
     const response = await fetch(
       "https://nt208.onrender.com/api/ticket/payForTicket",
       {
@@ -104,6 +103,7 @@ const TicketInfo = ({ event, user }) => {
     );
 
     if (!response.ok) {
+      console.error("Failed to buy ticket: ", response);
       message.error("Failed to buy ticket");
       return;
     }
