@@ -114,6 +114,7 @@ const TicketInfo = ({ event, user }) => {
     const data = await response.json();
     setTicket(data.ticket);
     console.log("ticket: ", ticket);
+    console.log("data: ", data.ticket);
     message.success("Ticket purchased successfully!");
     setModalOpen(true);
 
@@ -127,7 +128,7 @@ const TicketInfo = ({ event, user }) => {
       body: JSON.stringify({
         Email: userDetails.Email,
         Subject: "Ticket purchase for TicketX88",
-        Content: `You have purchased a ticket for the event ${event.EventName}, your ticket code is: ${ticket}`,
+        Content: `You have purchased a ticket for the event ${event.EventName}, your ticket code is: ${data.ticket}`,
       }),
     });
     if(!sendMail.ok) {
