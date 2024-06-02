@@ -112,7 +112,7 @@ const TicketInfo = ({ event, user }) => {
     setTicket(data.ticket);
     message.success("Ticket purchased successfully!");
     setModalOpen(true);
-    
+
     console.log(userDetails.Email);
     console.log(event.EventName)
     const sendMail = await fetch("https://nt208.onrender.com/api/mail/send", {
@@ -122,7 +122,7 @@ const TicketInfo = ({ event, user }) => {
       },
       body: JSON.stringify({
         Email: userDetails.Email,
-        Subject: "Ticket purchase",
+        Subject: "Ticket purchase for TicketX88",
         Content: `You have purchased a ticket for the event ${event.EventName}, your ticket code is: ${ticket}`,
       }),
     });
