@@ -1,5 +1,6 @@
 const { get } = require("mongoose");
 const Event = require("../models/Events");
+const Btc = require("../models/Btc");
 
 const searchEvents = async (query) => {
   return Event.find({
@@ -38,6 +39,13 @@ const deleteEvent = async (EventId) => {
   return Event.findOneAndDelete({ EventId: EventId });
 };
 
+const getBtcByEventId = async (EventId) => {
+  const event = await Event.findOne({ EventId: EventId });
+  const btcId = event.Btc._id;
+  const btc = await Btc.findOne({ _id: btcId });
+  return btc;
+};
+
 module.exports = {
   searchEvents,
   addEvent,
@@ -45,4 +53,5 @@ module.exports = {
   deleteEvent,
   getEventById,
   getLastEvent,
+  getBtcByEventId,
 };

@@ -6,7 +6,7 @@ const btcSchema = new mongoose.Schema(
     BtcName: { type: String, required: true },
     BtcInfo: { type: String, required: true },
     EnterpriseName: { type: String, required: true },
-    Email: { type: String, required: true, unique: true },
+    Email: { type: String, required: true },
     PhoneNumber: { type: String, required: true },
     BtcAddress: { type: String, required: true },
     Logo_btc: { type: String, required: true },
