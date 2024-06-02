@@ -130,7 +130,11 @@ const GetDetailsUserByUserName = (UserName) => {
         resolve({
           status: "OK",
           message: "User fetched successfully",
-          data: user,
+          data: {
+            UserName: user.UserName,
+            Email: user.Email,
+            PhoneNumber: user.PhoneNumber,
+          },
         });
       }
     } catch (e) {
@@ -144,9 +148,21 @@ const FindUserByUserName = (UserName) => {
     try {
       const user = await User.findOne({ UserName: UserName });
       if (!user) {
-        resolve(null);
+        resolve({
+          status: "ERROR",
+          message: "User does not exist",
+        
+        });
       } else {
-        resolve(user);
+        resolve({
+          status: "OK",
+          message: "User fetched successfully",
+          data: {
+            UserName: user.UserName,
+            Email: user.Email,
+            PhoneNumber: user.PhoneNumber,
+          },
+        });
       }
     } catch (e) {
       reject(e);

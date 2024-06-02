@@ -18,9 +18,10 @@ const CreateUser = async (req, res) => {
     } else if (Password !== confirmPassword) {
       return res.status(200).json({
         status: "ERROR",
-        message: "Password and confirmPassword are not the same",
+        message: "The password and confirm password are not the same",
       });
-    } else if (!isCheckEmail) {
+    }
+    else if (!isCheckEmail) {
       return res.status(200).json({
         status: "ERROR",
         message: "Email is not valid",
@@ -127,12 +128,20 @@ const GoogleSignIn = async (req, res) => {
   }
 };
 
-const ForgotPassword = async (req, res) => {};
+const ForgotPassword = async (req, res) => {
+  try {
+    
+  }
+  catch (e) {
+    return res.status(404).json({
+      error: e.message,
+    });
+  }
+};
 
 const UpdateUser = async (req, res) => {
   try {
     const userId = req.query.id;
-    console.log("userId", userId);
     const response = await UserService.LoginUser(req.body);
     return res.status(200).json(response);
   } catch (e) {

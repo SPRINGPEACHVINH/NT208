@@ -12,6 +12,7 @@ router.post("/add", EventController.add);
 router.get("/all", EventController.getAll);
 router.delete("/delete/:id", EventController.deleteById);
 router.get("/last", EventController.getLast);
+router.get("/btc/:id", EventController.getBtc);
 router.get("/:id", EventController.getById);
 
 module.exports = router;
