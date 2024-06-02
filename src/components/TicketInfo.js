@@ -242,16 +242,16 @@ const TicketInfo = ({ event, user }) => {
         centered
         visible={modalOpen}
         onOk={async () => {
-          setModalOpen(false);
-          try {
-            await navigator.clipboard.writeText(ticket);
-            message.success("Ticket copied to clipboard");
-          } catch (err) {
-            console.error("Failed to copy ticket: ", err);
-          }
+          // setModalOpen(false);
+          // try {
+          //   await navigator.clipboard.writeText(ticket);
+          //   message.success("Ticket copied to clipboard");
+          // } catch (err) {
+          //   console.error("Failed to copy ticket: ", err);
+          // }
         }}
       >
-        <p>Mã vé là: {ticket}</p>
+        <p>Mã vé đã được gửi về email của bạn</p>
       </Modal>
     </div>
   );
