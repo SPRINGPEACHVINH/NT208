@@ -28,7 +28,7 @@ function App() {
               : Fragment;
             const FooterLayout = route.isShowFooter
               ? DefaultComponentFooter
-              : Fragment;
+              : Fragment; 
             return (
               <Route
                 path={route.path}
