@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/ShowHome.css";
 import loadingGif from "../../assets/images/loading.gif";
 
-const ShowHome = () => {
+const  ShowHome = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [events, setEvents] = useState([]);
   const [slideEvents, setSlideEvents] = useState([]);

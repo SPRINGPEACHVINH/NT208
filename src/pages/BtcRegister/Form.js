@@ -382,7 +382,7 @@ function Form({ username, isMobile }) {
   const handleSave = async () => {
     try {
       const userResponse = await fetch(
-        "https://nt208.onrender.com/api/user/get-details/" + username
+        "https://nt208.onrender.com/api/user/get-id/" + username
       );
 
       if (!userResponse.ok) {
