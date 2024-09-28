@@ -20,8 +20,7 @@ const CreateUser = async (req, res) => {
         status: "ERROR",
         message: "The password and confirm password are not the same",
       });
-    }
-    else if (!isCheckEmail) {
+    } else if (!isCheckEmail) {
       return res.status(200).json({
         status: "ERROR",
         message: "Email is not valid",
@@ -130,9 +129,7 @@ const GoogleSignIn = async (req, res) => {
 
 const ForgotPassword = async (req, res) => {
   try {
-    
-  }
-  catch (e) {
+  } catch (e) {
     return res.status(404).json({
       error: e.message,
     });
@@ -198,6 +195,24 @@ const GetDetailsUser = async (req, res) => {
   }
 };
 
+const GetIdUser = async (req, res) => {
+  try {
+    const userName = req.params.UserName;
+    if (!userName) {
+      return req.status(200).json({
+        status: "ERROR",
+        message: "The UserName is required",
+      });
+    }
+    const response = await UserService.GetIdUser(userName);
+    return res.status(200).json(response);
+  } catch (e) {
+    return res.status(404).json({
+      error: e.message,
+    });
+  }
+};
+
 const RefreshToken = async (req, res) => {
   try {
     const token = req.headers.token.split(" ")[1];
@@ -244,6 +259,7 @@ module.exports = {
   UpdateUser,
   DeleteUser,
   GetAllUser,
+  GetIdUser,
   GetDetailsUser,
   RefreshToken,
   GoogleSignIn,

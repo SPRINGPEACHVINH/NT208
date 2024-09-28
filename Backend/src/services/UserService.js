@@ -143,6 +143,31 @@ const GetDetailsUserByUserName = (UserName) => {
   });
 };
 
+const GetIdUser = (UserName) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const user = await User.findOne({ UserName: UserName });
+      if (!user) {
+        resolve({
+          status: "ERROR",
+          message: "User does not exist",
+        });
+      } else {
+        resolve({
+          status: "OK",
+          message: "User fetched successfully",
+          data: {
+            _id: user._id,
+            UserName: user.UserName,
+          },
+        });
+      }
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
 const FindUserByUserName = (UserName) => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -151,7 +176,6 @@ const FindUserByUserName = (UserName) => {
         resolve({
           status: "ERROR",
           message: "User does not exist",
-        
         });
       } else {
         resolve({
@@ -203,6 +227,7 @@ module.exports = {
   DeleteUser,
   GetAllUser,
   GetDetailsUserByUserName,
+  GetIdUser,
   FindUserByUserName,
   FindUserByEmail,
   CheckPassword,
